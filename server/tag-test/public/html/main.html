@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quill Test</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <button class="btn btn-outline-primary" onclick="loadData()">Load All Data </button>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-12">
+                        <label for="tags">Enter space separated tags to use for search</label>
+                        <input type="text" id="tags">
+                    </div>
+                </div>
+                <div class="row my-3">
+                    <div class="col-12">
+                        <button class="btn btn-outline-success" onclick="query()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-6">
+                <div id="all-data">
+                </div>
+            </div>
+            <div class="col-6">
+                <div id="output">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script>
+    function loadData() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("all-data").innerHTML = JSON.stringify(JSON.parse(this.responseText),null,4);
+            }
+        };
+        xhttp.open("GET", "/loadData", true);
+        xhttp.send();
+    }
+    function query() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("output").innerHTML = JSON.stringify(JSON.parse(this.responseText),null,4);
+            }
+        };
+
+        xhttp.open("POST", "/query", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send(JSON.stringify({ data: document.getElementById("tags").value }));
+    }
+</script>
+
+</html>

@@ -1,0 +1,7 @@
+{"_id":{"$oid":"5a9c58951215c5d556ce2209"},"tags":["red","tall","cheap"]}
+{"_id":{"$oid":"5a9c58961215c5d556ce220a"},"tags":["blue","tall","expensive"]}
+{"_id":{"$oid":"5a9c58971215c5d556ce220b"},"tags":["blue","little","cheap"]}
+{"_id":{"$oid":"5a9c615f1215c5d556ce220c"},"tags":["yellow","little","cheap"]}
+{"_id":{"$oid":"5a9c61641215c5d556ce220d"},"tags":["yellow","big","cheap"]}
+{"_id":{"$oid":"5a9c616a1215c5d556ce220e"},"tags":["yellow","big","cheap","2017"]}
+{"_id":{"$oid":"5a9c61701215c5d556ce220f"},"tags":["census","big","cheap","2017"]}
