@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "electron": "electron ."
   },
   "author": "Kevin Sijo Puthusseri",
   "license": "ISC"
