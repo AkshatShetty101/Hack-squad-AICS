@@ -18,6 +18,6 @@ This directory checks for cross-compatibility between **Electron** and **Angular
 
     `const dist_to_be_used = 'dist:css' //Tests CSS Grid compatibility`
 
-3. Nagivate to the *electron-dryun* folder and run:
+3. From within the *electron-dryun* folder and run:
 
     `npm run electron`
