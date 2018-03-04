@@ -14,9 +14,9 @@ This directory checks for cross-compatibility between **Electron** and **Angular
 
     `npm install -g electron`
 
-2. Modify *line 7*  within `main.js` to use the dist (either '*dist:css*', '*dist:sw*' or '*dist:push*') appropriate for the test you want to run, for example:
+2. Modify *line 7*  within `main.js` to use the dist (either '*dist-css*', '*dist-sw*' or '*dist-push*') appropriate for the test you want to run, for example:
 
-    `const dist_to_be_used = 'dist:css' //Tests CSS Grid compatibility`
+    `const dist_to_be_used = 'dist-css' //Tests CSS Grid compatibility`
 
 3. From within the *electron-dryun* folder and run:
 
