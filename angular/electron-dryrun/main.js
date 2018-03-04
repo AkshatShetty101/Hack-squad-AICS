@@ -4,12 +4,14 @@ const url = require('url')
 
 let win
 
+const dist_to_be_used = 'dist:css'
+
 function createWindow() {
     win = new BrowserWindow({ width: 800, height: 600 })
 
     // load the dist folder from Angular
     win.loadURL(url.format({
-        pathname: path.join(__dirname, 'dist/index.html'),
+        pathname: path.join(__dirname, dist_to_be_used+'/index.html'),
         protocol: 'file:',
         slashes: true
     }))
