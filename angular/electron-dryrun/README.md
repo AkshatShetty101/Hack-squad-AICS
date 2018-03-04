@@ -1,22 +1,23 @@
 # Angular-Electron Compatibility
 
-## This directory checks for cross-compatibility between **Electron** and **Angular** on three fronts:
+## Details
 
-    1. CSS Grid
-    2. Service Workers
-    3. HTTP2 *Push*
+This directory checks for cross-compatibility between **Electron** and **Angular** on three fronts:
 
-## How to run demo?
-    1. Install Electron globally using npm:
+1. CSS Grid
+2. Service Workers
+3. HTTP2 *Push*
 
-        `npm install -g electron`
+## How to run the tests?
 
-    2. Modify *line 7*  within `main.js` to use the dist (either '*dist:css*', '*dist:sw*' or '*dist:push*') appropriate for the test you want to run, for example:
+1. Install Electron globally using npm:
 
-        `const dist_to_be_used = 'dist:css' //Tests CSS Grid compatibility`
+    `npm install -g electron`
 
-    3. Nagivate to *electron-dryun* and run:
+2. Modify *line 7*  within `main.js` to use the dist (either '*dist:css*', '*dist:sw*' or '*dist:push*') appropriate for the test you want to run, for example:
 
-        `npm run electron`
+    `const dist_to_be_used = 'dist:css' //Tests CSS Grid compatibility`
 
+3. Nagivate to the *electron-dryun* folder and run:
 
+    `npm run electron`
