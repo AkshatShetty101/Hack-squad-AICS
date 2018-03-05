@@ -140,9 +140,11 @@ func main() {
 	broker := NewServer()
 
 	go func() {
+		count := 0
 		for {
 			time.Sleep(time.Second * 2)
-			eventString := fmt.Sprintf("the time is %v", time.Now())
+			eventString := fmt.Sprintf("%v. Time is %v", count, time.Now())
+			count++
 			log.Println("Receiving event")
 			broker.Notifier <- []byte(eventString)
 		}

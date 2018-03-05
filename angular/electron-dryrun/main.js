@@ -4,7 +4,7 @@ const url = require('url')
 
 let win
 
-const dist_to_be_used = 'dist:css'
+const dist_to_be_used = 'dist-sse'
 
 function createWindow() {
     win = new BrowserWindow({ width: 800, height: 600 })
