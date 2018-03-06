@@ -1,3 +1,4 @@
+const notifier = require('node-notifier');
 module.exports = (req, res, next) => {
 	res.sseSetup = () => {
 		res.writeHead(200, {
@@ -10,6 +11,7 @@ module.exports = (req, res, next) => {
 
 	res.sseSend = (data) => {
 		res.write("data: " + JSON.stringify(data) + "\n\n");
+		notifier.notify(JSON.stringify(data));
 	};
 
 	next();
