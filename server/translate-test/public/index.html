@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <textarea id="source" cols="30" rows="10"></textarea>
+    <button onclick="query()">Translate</button>
+    <textarea id="output" cols="30" rows="10"></textarea>
+</body>
+<script>
+    function query() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                // console.log(JSON.stringify(JSON.parse(this.responseText), null, 4));
+                document.getElementById("output").value = JSON.stringify(JSON.parse(this.responseText), null, 4);
+            }
+        };
+
+        xhttp.open("POST", "/translate", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        console.log(document.getElementById("source").value);
+        xhttp.send(JSON.stringify({ data: document.getElementById("source").value }));
+    }
+
+</script>
+
+</html>
