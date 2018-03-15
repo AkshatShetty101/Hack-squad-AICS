@@ -1,0 +1,11 @@
+{
+  "name": "electron-dryrun",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "electron": "electron ."
+  },
+  "author": "Kevin Sijo Puthusseri",
+  "license": "ISC"
+}
