@@ -1,0 +1,39 @@
+{
+  "name": "aics",
+  "version": "1.0.0",
+  "description": "Backend for AICS",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha ./tests/*.test.js"
+  },
+  "author": "Nisheet Sinvhal<nisheet1.sinvhal@gmail.com>, Akshat Shetty<akshatshetty2908@gmail.com>",
+  "license": "ISC",
+  "engines": {
+    "node": "8.9.4"
+  },
+  "homepage": "https://github.com/AkshatShetty101/Hack-squad-AICS",
+  "bugs": {
+    "url": "https://github.com/AkshatShetty101/Hack-squad-AICS/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AkshatShetty101/Hack-squad-AICS.git"
+  },
+  "keywords": [
+    "SIH2018",
+    "AICS",
+    "node"
+  ],
+  "dependencies": {
+    "async": "^2.6.0",
+    "body-parser": "^1.18.2",
+    "dotenv-safe": "^5.0.1",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^5.0.4"
+  }
+}
