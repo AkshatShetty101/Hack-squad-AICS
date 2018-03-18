@@ -66,3 +66,6 @@ typings/
 
 # .sh files
 push-all.sh
+
+# all dists
+dist/
