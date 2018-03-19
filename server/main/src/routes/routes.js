@@ -10,5 +10,6 @@ router.all('/', function(req, res) {
 router.post('/users/registerPerson', require('./users/registerPerson'), require('./blockchain/addPerson'));
 router.post('/divisions/addDivision', require('./divisions/addDivision'));
 router.post('/forms/addForm', require('./blockchain/addForm'));
+router.post('/forms/deleteForm', require('./forms/deleteForm'),require('./blockchain/deleteForm'));
 
 module.exports = router;
