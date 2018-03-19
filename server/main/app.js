@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(require('morgan')('dev'));
 
 // Routes
-app.use('/', require(path.join(__dirname, 'src', 'routes', 'routes.js')));
+app.use('/api', require(path.join(__dirname, 'src', 'routes', 'routes.js')));
 
 app.listen(process.env.PORT, () => {
     console.log(`Application running on port ${process.env.PORT}`);

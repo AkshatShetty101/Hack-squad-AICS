@@ -10,7 +10,7 @@ this.NS = config.get('NS');
 this.NS_F = config.get('NS_F');
 this.NS_P = config.get('NS_P');
 
-module.exports = (req, res, next) => {
+module.exports = (req, res) => {
     // Establishing connection
     this.bizNetworkConnection.connect(this.cardName)
         .then((result) => {
@@ -33,42 +33,48 @@ module.exports = (req, res, next) => {
                                 form.assigneeId = [asignee];
                                 form.isValid = true;
                                 // Adding form to form registry
+                                console.log("Reached here!");
                                 formRegistry.add(form).then((data) => {
                                     // Creating the transaction
+                                    console.log("Reached here!");
                                     let transaction = factory.newTransaction(this.NS, 'Event');
-                                    transaction.person = ob;
+                                    console.log("Reached here!");
+                                    transaction.person = asignee;
                                     transaction.type = "template_created";
                                     if (req.body.metadata)
                                         transaction.metadata = JSON.stringify(req.body.metadata);
                                     else
                                         transaction.metadata = "{}";
+                                    console.log("Reached here!");
                                     transaction.form = factory.newRelationship(this.NS, 'Form', req.body.formId);
                                     // Submitting the transaction
+                                    console.log("Reached here!");
                                     this.bizNetworkConnection.submitTransaction(transaction).then((result) => {
                                         console.log(result);
                                         // Returning response
-                                        res.json({ "status": 1, "message": "Form Added successfully" });
+                                        console.log("Reached here!");
+                                        res.json({ "success": true, "message": "Form Added successfully" });
                                     });
                                 }).catch((err) => {
                                     // Catching errors
                                     console.log(err.message);
-                                    res.send({ "status": -1, "message": err.message });
+                                    res.send({ "success": false, "message": err.message });
                                 });
                             }).catch((err) => {
                                 // Catching errors
                                 console.log(err.message);
-                                res.send({ "status": -1, "message": err.message });
+                                res.send({ "success": false, "message": err.message });
                             });
                     }).catch((err) => {
                         // Catching errors
                         console.log(err.message);
-                        res.send({ "status": -1, "message": err.message });
+                        res.send({ "success": false, "message": err.message });
                     });
                 });
         })
         .catch(err => {
             // Catching errors
             console.log(err);
-            res.send({ "status": -1, "message": err.message });
+            res.send({ "success": false, "message": err.message });
         });
 }

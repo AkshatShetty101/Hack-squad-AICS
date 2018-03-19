@@ -7,7 +7,7 @@ this.bizNetworkConnection = new BusinessNetworkConnection();
 this.cardName = config.get('cardName');
 this.businessNetworkIdentifier = config.get('bna');;
 
-module.exports = (req, res, next) => {
+module.exports = (req, res) => {
     // Establishing connection
     this.bizNetworkConnection.connect(this.cardName)
         .then((result) => {
