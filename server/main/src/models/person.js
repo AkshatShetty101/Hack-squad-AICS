@@ -30,10 +30,7 @@ const personSchema = new Schema({
 		type: [Schema.Types.ObjectId],
 		ref: 'form'
 	},
-	password: {
-		salt: String,
-		hash: String
-	},
+	password: String,
 	email: {
 		type: String,
 		unique: true,

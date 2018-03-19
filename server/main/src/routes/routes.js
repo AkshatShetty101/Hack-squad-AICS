@@ -7,7 +7,7 @@ router.all('/', function(req, res) {
 });
 
 
-router.post('/addPerson', require('./blockchain/addPerson'))
-router.post('/addForm', require('./blockchain/addForm'))
+router.post('/addPerson', require('./blockchain/addPerson'));
+router.post('/addForm', require('./blockchain/addForm'));
 
 module.exports = router;

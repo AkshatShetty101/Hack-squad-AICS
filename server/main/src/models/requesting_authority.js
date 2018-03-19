@@ -12,10 +12,7 @@ const requestingAuthoritySchema = new Schema({
 		unique: true,
 		required: [true, 'Email is required']
 	},
-	password: {
-		salt: String,
-		hash: String
-	},
+	password: String,
 	form_id: [Schema.Types.ObjectId]
 },
 {
