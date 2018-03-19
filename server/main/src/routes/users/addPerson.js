@@ -35,4 +35,4 @@ module.exports = (req, res, next) => {
 			res.send({ success: false, message: 'No such Division/Group/Organization' });
 		}
 	});
-}
+};

@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const issueTrackerSchema = new Schema({
-	tracker_id: {
-		type: String,
-		unique: true,
-		required: [true, 'tracker_id is required']
-	},
 	heading: {
 		title: {
 			type: String,
