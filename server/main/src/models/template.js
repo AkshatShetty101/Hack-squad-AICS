@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const templateSchema = new Schema({
-	template_id: {
-		type: Schema.Types.ObjectId,
-		ref: 'template',
-		required: [true, 'template_id is required']
-	},
 	created_by: {
 		type: Schema.Types.ObjectId,
 		ref: 'person',
