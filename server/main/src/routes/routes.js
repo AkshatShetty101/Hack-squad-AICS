@@ -7,7 +7,7 @@ router.all('/', function(req, res) {
 });
 
 
-router.post('/users/addPerson', require('./users/addPerson'), require('./blockchain/addPerson'));
+router.post('/users/registerPerson', require('./users/registerPerson'), require('./blockchain/addPerson'));
 router.post('/divisions/addDivision', require('./divisions/addDivision'));
 router.post('/forms/addForm', require('./blockchain/addForm'));
 

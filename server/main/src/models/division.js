@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const divisionSchema = new Schema({
-	division_id: {
-		type: String,
-		unique: true,
-		required: [true, 'division_id is required']
-	},
 	name: {
 		type: String,
 		required: [true, 'Name of division is required'],
