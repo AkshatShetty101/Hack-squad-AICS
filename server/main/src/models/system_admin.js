@@ -13,7 +13,10 @@ const systemAdminSchema = new Schema({
 		trim: true,
 		required: [true, 'username is required']
 	},
-	password: String
+	password: {
+		type: String,
+		required: [true, 'password is required']
+	},
 });
 
 module.exports = mongoose.model('systemAdmin', systemAdminSchema);

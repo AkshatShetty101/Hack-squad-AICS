@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-/**
- * This Schema is for a Person
- */
 const personSchema = new Schema({
 	user_id: {
 		type: String,
@@ -30,12 +27,15 @@ const personSchema = new Schema({
 		type: [Schema.Types.ObjectId],
 		ref: 'form'
 	},
-	password: String,
+	password: {
+		type: String,
+		required: [true, 'password is required']
+	},
 	email: {
 		type: String,
 		unique: true,
 		trim: true,
-		required: [true, 'Email Id is required']
+		required: [true, 'email_id is required']
 	},
 	division_id: {
 		type: Schema.Types.ObjectId,
@@ -45,6 +45,7 @@ const personSchema = new Schema({
 	designation: {
 		type: String,
 		enum: ['admin', 'gc', 'user'],
+		trim: true,
 		required: [true, 'designation is required']
 	}
 },

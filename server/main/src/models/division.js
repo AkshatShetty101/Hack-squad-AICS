@@ -9,7 +9,7 @@ const divisionSchema = new Schema({
 	},
 	name: {
 		type: String,
-		required: [true, 'name of division is required'],
+		required: [true, 'Name of division is required'],
 		trim: true
 	},
 	gc_id: {
@@ -18,13 +18,14 @@ const divisionSchema = new Schema({
 	user_id: [Schema.Types.ObjectId],
 	tags: {
 		type: [String],
-		trim: true
+		default: []
 	},
 	type: {
 		type: String,
 		lowercase: true,
 		trim: true,
-		enum: ['division', 'organization', 'group']
+		enum: ['division', 'organization', 'group'],
+		required: [true, 'division type is required']
 	}
 });
 

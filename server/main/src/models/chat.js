@@ -20,6 +20,7 @@ const chatSchema = new Schema({
 		},
 		message: {
 			type: String,
+			trim: true,
 			required: [true, 'message is required']
 		}
 	},
@@ -36,6 +37,7 @@ const chatSchema = new Schema({
 		},
 		message: {
 			type: String,
+			trim: true,
 			required: [true, 'message is required']
 		}
 	}
