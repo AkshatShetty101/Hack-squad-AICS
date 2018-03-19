@@ -9,6 +9,7 @@ this.cardName = config.get('cardName');
 this.businessNetworkIdentifier = 'tutorial-network.bna';
 
 require('dotenv-safe').config(); // automatically configure environment variables from .env
+require('./config/mongoDatabase')(); // Connection to Database
 
 // global configs
 global.async = require('async');
