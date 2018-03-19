@@ -1,0 +1,7 @@
+{
+    "cardName":"admin@aics",
+    "NS":"org.acme.aics",
+    "NS_F":"org.acme.aics.Form",
+    "NS_P":"org.acme.aics.Person",
+    "bna":"aics.bna"
+}
