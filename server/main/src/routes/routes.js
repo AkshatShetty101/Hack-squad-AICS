@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 router.all('/', function (req, res) {
-	console.log(res.body);
 	res.json({ success: true });
 });
 
@@ -38,5 +37,11 @@ router.post('/templates/editTemplate',
 router.post('/forms/deleteForm',
 	require('./forms/deleteForm'),
 	require('./blockchain/deleteForm'));
+
+/**
+ * Admin Routes
+ */
+router.post('/systemAdmin/add',
+	require('./systemAdmin/addSystemAdmin'));
 
 module.exports = router;
