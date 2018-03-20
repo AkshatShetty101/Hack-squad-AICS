@@ -15,6 +15,9 @@ router.post('/users/register',
 	require('./person/registerPerson'),
 	require('./blockchain/addPerson'));
 
+router.post('/users/login',
+	require('./person/loginPerson'));
+
 router.post('/users/getId',
 	verifyMiddleware.verifyPerson,
 	require('./person/getId'));
@@ -67,6 +70,9 @@ router.post('./reqAuth/edit',
  */
 router.post('/systemAdmin/add',
 	require('./systemAdmin/addSystemAdmin'));
+
+router.post('/systemAdmin/login',
+	require('./systemAdmin/loginSystemAdmin'));
 
 router.post('/users/delete',
 	verifyMiddleware.verifySystemAdmin,
