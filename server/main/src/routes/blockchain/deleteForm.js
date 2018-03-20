@@ -30,8 +30,8 @@ module.exports = (req, res) => {
 						formRegistry.update(data).then(() => {
 							this.bizNetworkConnection.getParticipantRegistry(this.NS_P)
 								.then((personRegistry) => {
-									let asignee = factory.newRelationship(this.NS, 'Person', req.body.personId);
-									let transaction = factory.newTransaction(this.NS, 'Event');
+									let asignee = factory.newRelationship(this.NS, 'Person', res.locals.user._id);
+									let transaction = factory.newTransaction(this.NS, 'FormEvent');
 									transaction.person = asignee;
 									transaction.type = "deleted";
 									if (req.body.metadata)

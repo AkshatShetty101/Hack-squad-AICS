@@ -46,10 +46,16 @@ router.post('/templates/edit',
 	require('./templates/editTemplate'));
 // require('./blockchain/editTempalte'));
 
+router.post('/templates/delete',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyAdmin,
+	require('./templates/deleteTemplate'),
+	require('./blockchain/deleteTemplate'));
 /**
  * Form Routes
  */
 router.post('/forms/delete',
+	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyAdmin,
 	require('./forms/deleteForm'),
 	require('./blockchain/deleteForm'));
