@@ -10,7 +10,7 @@ router.all('/', function (req, res) {
 /**
  * Person Routes
  */
-router.post('/users/registerPerson',
+router.post('/users/register',
 	verifyMiddleware.verifySystemAdmin,
 	require('./person/registerPerson'),
 	require('./blockchain/addPerson'));
@@ -28,24 +28,39 @@ router.post('/users/getPeopleByDesignation',
 	require('./person/getPeopleByDesignation'));
 
 /**
- * Admin Routes
+ * Template Routes
  */
-
-router.post('/templates/addTemplateAndForm',
+router.post('/templates/add',
 	verifyMiddleware.verifyAdmin,
 	require('./templates/addTemplate'),
 	require('./forms/addForm'),
 	require('./blockchain/addForm'));
 
-router.post('/templates/editTemplate',
+router.post('/templates/edit',
 	verifyMiddleware.verifyAdmin,
 	require('./templates/editTemplate'));
 // require('./blockchain/editTempalte'));
 
-router.post('/forms/deleteForm',
+/**
+ * Form Routes
+ */
+router.post('/forms/delete',
 	verifyMiddleware.verifyAdmin,
 	require('./forms/deleteForm'),
 	require('./blockchain/deleteForm'));
+
+/**
+ * Requesting Authority Routes
+ */
+router.post('/reqAuth/add',
+	verifyMiddleware.verifySystemAdmin,
+	require('./requestingAuth/addReqestingAuth'));
+router.post('/reqAuth/remove',
+	verifyMiddleware.verifySystemAdmin,
+	require('./requestingAuth/removeRequestingAuth'));
+router.post('./reqAuth/edit',
+	verifyMiddleware.verifyRequestingAuthority,
+	require('./requestingAuth/editRequestingAuthForm'));
 
 /**
  * System Admin Routes
@@ -53,12 +68,12 @@ router.post('/forms/deleteForm',
 router.post('/systemAdmin/add',
 	require('./systemAdmin/addSystemAdmin'));
 
-router.post('/users/deletePerson',
+router.post('/users/delete',
 	verifyMiddleware.verifySystemAdmin,
 	require('./person/deletePerson'),
 	require('./blockchain/deletePerson'));
 
-router.post('/divisions/addDivision',
+router.post('/divisions/add',
 	verifyMiddleware.verifySystemAdmin,
 	require('./divisions/addDivision'));
 
