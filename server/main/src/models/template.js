@@ -5,7 +5,6 @@ const templateSchema = new Schema({
 	created_by: {
 		type: Schema.Types.ObjectId,
 		ref: 'person',
-		unique: true,
 		required: [true, 'created_by user_id is required']
 	},
 	tags: {
