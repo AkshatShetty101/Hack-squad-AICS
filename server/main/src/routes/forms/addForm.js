@@ -1,8 +1,8 @@
 // Declaring constants
-form = require('../../models/form');
-module.exports = (req, res) => {
+const form = require('../../models/form');
+module.exports = (req, res, next) => {
 	// Setting new form data
-	formData = new form({
+	let formData = new form({
 		template_id: res.locals.templateId,
 		created_by: req.body.personId,
 		assigned_to: req.body.asignedToId,
@@ -12,15 +12,14 @@ module.exports = (req, res) => {
 	// Saving form data
 	formData.save(function (err, result) {
 		if (err) {
-			res.send({ success: true, message: err });
+			res.status(400).send({ success: false, message: err });
 		} else {
 			// Adding required parameters
 			res.locals = req.body;
-			res.locals.formId = result._id;
+			console.log(result._id);
+			res.locals.formId = result._id.toString();
 			// Passing contorl to addForm to block-chain
 			next();
 		}
 	});
-	// }
-	// });
-}
+};

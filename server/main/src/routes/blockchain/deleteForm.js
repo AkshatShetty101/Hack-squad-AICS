@@ -1,3 +1,7 @@
+/**
+ * eslint disable
+*/
+
 // Declaring constants
 const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 const config = require('config');
@@ -23,14 +27,6 @@ module.exports = (req, res) => {
 				.then((formRegistry) => {
 					formRegistry.get(req.body.formId).then((data) => {
 						data.isValid = false;
-						// formRegistry.remove(data).then(() => {
-						// 	console.log("In!");
-						// 	res.send({ success: true, message: "Deleted Successfully" });
-						// }).catch((err) => {
-						// 	// Catching errors
-						// 	console.log(err.message);
-						// 	res.send({ 'success': false, 'message': err.message });
-						// });
 						formRegistry.update(data).then(() => {
 							this.bizNetworkConnection.getParticipantRegistry(this.NS_P)
 								.then((personRegistry) => {
