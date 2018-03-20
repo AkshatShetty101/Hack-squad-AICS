@@ -6,7 +6,7 @@ module.exports = (req, res) => {
 	// Setting data for new template
 	templateData = new template({
 		created_by: req.body.personId,
-		tags = req.body.tags,
+		tags : req.body.tags,
 		format: req.body.format
 	});
 	// Saving template to DB

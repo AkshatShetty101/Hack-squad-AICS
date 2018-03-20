@@ -3,7 +3,7 @@ form = require('../../models/form');
 module.exports = (req, res) => {
 	// Setting new form data
 	formData = new form({
-		template_id = res.locals.templateId,
+		template_id: res.locals.templateId,
 		created_by: req.body.personId,
 		assigned_to: req.body.asignedToId,
 		data: req.body.data,
