@@ -12,7 +12,18 @@ const requestingAuthoritySchema = new Schema({
 		type: String,
 		required: [true, 'password is required']
 	},
-	form_id: [Schema.Types.ObjectId]
+	access_form: [{
+		form_id: {
+			type: Schema.Types.ObjectId,
+			unique: true,
+			trim: true,
+			required: [true, 'Form id is required']
+		},
+		metadata: {
+			type: Schema.Types.Mixed,
+			default: {}
+		}
+	}]
 },
 {
 	timestamps: true
