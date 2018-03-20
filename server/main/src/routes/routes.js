@@ -5,6 +5,11 @@ router.all('/', function (req, res) {
 	res.json({ success: true });
 });
 
+/**
+ * User routes
+ */
+router.post('/users/loginPerson',
+	require('./person/loginPerson'));
 
 router.post('/users/registerPerson',
 	require('./person/registerPerson'),
@@ -39,7 +44,7 @@ router.post('/forms/deleteForm',
 	require('./blockchain/deleteForm'));
 
 /**
- * Admin Routes
+ * System Admin Routes
  */
 router.post('/systemAdmin/add',
 	require('./systemAdmin/addSystemAdmin'));
