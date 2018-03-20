@@ -29,6 +29,6 @@ function md5(string) {
 }
 
 module.exports = {
-	'hash': createHash,
-	'validate': validateHash
+	hash: createHash,
+	validate: validateHash
 };
