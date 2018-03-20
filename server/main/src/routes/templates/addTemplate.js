@@ -3,19 +3,19 @@ const template = require('../../models/template');
 
 module.exports = (req, res, next) => {
 	// Setting data for new template
-	if (req.body.personId && req.body.tags && req.body.format && req.body.asignedToId && req.body.data) {
+	if (res.locals.user._id && req.body.tags && req.body.format && req.body.assignedToId && req.body.data) {
 		let templateData = new template({
-			created_by: req.body.personId,
+			created_by: res.locals.user._id,
 			tags: req.body.tags,
 			format: req.body.format
 		});
 		// Saving template to DB
-		templateData.save(function (err, result) {
+		templateData.save((err, result) => {
 			if (err) {
 				res.status(400).send({ success: false, message: err });
 			} else {
+				console.log('Added Template to DB');
 				// Adding required parameters
-				res.locals = req.body;
 				res.locals.templateId = result._id;
 				// Passing contorl to addForm to DB
 				next();

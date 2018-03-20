@@ -34,8 +34,10 @@ router.post('/users/getPeopleByDesignation',
  * Template Routes
  */
 router.post('/templates/add',
+	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyAdmin,
 	require('./templates/addTemplate'),
+	require('./blockchain/addTemplate'),
 	require('./forms/addForm'),
 	require('./blockchain/addForm'));
 

@@ -21,44 +21,33 @@ module.exports = (req, res, next) => {
 			// Loading participant registry
 			this.bizNetworkConnection.getParticipantRegistry(this.NS_P)
 				.then((personRegistry) => {
-					console.log(res.locals);
 					// Verifying if person exists
-					personRegistry.exists(req.body.personId).then(() => {
+					personRegistry.exists(res.locals.user._id.toString()).then(() => {
 						// Loading the form registry
 						this.bizNetworkConnection.getAssetRegistry(this.NS_T)
 							.then((templateRegistry) => {
-								console.log('Here!');
 								// Creating relationship for person
-								let assignee = factory.newRelationship(this.NS, 'Person', req.body.personId);
+								let creator = factory.newRelationship(this.NS, 'Person', res.locals.user._id.toString());
 								// Creating a new form asset
-								form = factory.newResource(this.NS, 'Template', res.locals.templateId);
-								console.log(assignee);
-								form.assigneeId = [];
-								form.assigneeId.push(assignee);
-								console.log(form.assigneeId.length);
-								form.isValid = true;
+								template = factory.newResource(this.NS, 'Template', res.locals.templateId.toString());
+								template.createdBy = creator;
 								// Adding form to form registry
-								console.log("Reached here!");
-								templateRegistry.add(form).then((data) => {
+								templateRegistry.add(template).then((data) => {
 									// Creating the transaction
-									console.log("Reached here!");
 									let transaction = factory.newTransaction(this.NS, 'TemplateEvent');
-									console.log("Reached here!");
-									transaction.person = assignee;
+									transaction.person = creator;
 									transaction.type = "template_create";
 									if (req.body.metadata)
 										transaction.metadata = JSON.stringify(req.body.metadata);
 									else
 										transaction.metadata = "{}";
-									console.log("Reached here!");
-									transaction.form = factory.newRelationship(this.NS, 'Template', res.locals.TemplateId);
+									transaction.template = factory.newRelationship(this.NS, 'Template', res.locals.templateId.toString());
 									// Submitting the transaction
-									console.log("Reached here!");
 									this.bizNetworkConnection.submitTransaction(transaction).then((result) => {
-										console.log(result);
 										// Returning response
-										console.log("Reached here!");
-										res.json({ 'success': true, 'message': 'Form Added successfully' });
+										console.log("Template Added successfully to block-chain");
+										next();
+										// res.json({ 'success': true, 'message': 'Template Added successfully' });
 									});
 								}).catch((err) => {
 									// Catching errors
@@ -74,7 +63,6 @@ module.exports = (req, res, next) => {
 						// Catching errors
 						console.log(err.message);
 						next();
-						// res.send({ 'success': false, 'message': err.message });
 					});
 				});
 		})

@@ -9,6 +9,7 @@ this.cardName = config.get('cardName');
 this.businessNetworkIdentifier = config.get('bna');
 this.NS = config.get('NS');
 this.NS_F = config.get('NS_F');
+this.NS_T = config.get('NS_T');
 this.NS_P = config.get('NS_P');
 
 module.exports = (req, res) => {
@@ -21,50 +22,49 @@ module.exports = (req, res) => {
 			// Loading participant registry
 			this.bizNetworkConnection.getParticipantRegistry(this.NS_P)
 				.then((personRegistry) => {
-					console.log(res.locals);
 					// Verifying if person exists
-					personRegistry.exists(req.body.personId).then(() => {
+					personRegistry.exists(res.locals.user._id.toString()).then(() => {
 						// Loading the form registry
 						this.bizNetworkConnection.getAssetRegistry(this.NS_F)
 							.then((formRegistry) => {
-								console.log('Here!');
-								// Creating relationship for person
-								let assignee = factory.newRelationship(this.NS, 'Person', req.body.personId);
-								// Creating a new form asset
-								form = factory.newResource(this.NS, 'Form', res.locals.formId);
-								console.log(assignee);
-								form.assigneeId = [];
-								form.assigneeId.push(assignee);
-								console.log(form.assigneeId.length);
-								form.isValid = true;
-								// Adding form to form registry
-								console.log("Reached here!");
-								formRegistry.add(form).then((data) => {
-									// Creating the transaction
-									console.log("Reached here!");
-									let transaction = factory.newTransaction(this.NS, 'FormEvent');
-									console.log("Reached here!");
-									transaction.person = assignee;
-									transaction.type = "create";
-									if (req.body.metadata)
-										transaction.metadata = JSON.stringify(req.body.metadata);
-									else
-										transaction.metadata = "{}";
-									console.log("Reached here!");
-									transaction.form = factory.newRelationship(this.NS, 'Form', res.locals.formId);
-									// Submitting the transaction
-									console.log("Reached here!");
-									this.bizNetworkConnection.submitTransaction(transaction).then((result) => {
-										console.log(result);
-										// Returning response
-										console.log("Reached here!");
-										res.json({ 'success': true, 'message': 'Form Added successfully' });
+								this.bizNetworkConnection.getAssetRegistry(this.NS_T)
+									.then((templateRegistry) => {
+										// Creating relationship for person
+										let assignee = factory.newRelationship(this.NS, 'Person', res.locals.user._id.toString());
+										let template = factory.newRelationship(this.NS, 'Template', res.locals.templateId.toString());
+										// Creating a new form asset
+										form = factory.newResource(this.NS, 'Form', res.locals.formId);
+										form.assigneeId = [];
+										form.template = template;
+										form.assigneeId.push(assignee);
+										form.isValid = true;
+										// Adding form to form registry
+										formRegistry.add(form).then((data) => {
+											// Creating the transaction
+											let transaction = factory.newTransaction(this.NS, 'FormEvent');
+											transaction.person = assignee;
+											transaction.type = "create";
+											if (req.body.metadata)
+												transaction.metadata = JSON.stringify(req.body.metadata);
+											else
+												transaction.metadata = "{}";
+											transaction.form = factory.newRelationship(this.NS, 'Form', res.locals.formId);
+											// Submitting the transaction
+											this.bizNetworkConnection.submitTransaction(transaction).then((result) => {
+												// Returning response
+												console.log('Form Added successfully to block-chain');
+												res.status(200).json({ 'success': true, 'message': 'Form Added successfully' });
+											});
+										}).catch((err) => {
+											// Catching errors
+											console.log(err.message);
+											res.send({ 'success': false, 'message': err.message });
+										});
+									}).catch((err) => {
+										// Catching errors
+										console.log(err.message);
+										res.send({ 'success': false, 'message': err.message });
 									});
-								}).catch((err) => {
-									// Catching errors
-									console.log(err.message);
-									res.send({ 'success': false, 'message': err.message });
-								});
 							}).catch((err) => {
 								// Catching errors
 								console.log(err.message);

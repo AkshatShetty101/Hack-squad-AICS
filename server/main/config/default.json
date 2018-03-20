@@ -3,5 +3,6 @@
     "NS":"org.acme.aics",
     "NS_F":"org.acme.aics.Form",
     "NS_P":"org.acme.aics.Person",
+    "NS_T":"org.acme.aics.Template",
     "bna":"aics.bna"
 }

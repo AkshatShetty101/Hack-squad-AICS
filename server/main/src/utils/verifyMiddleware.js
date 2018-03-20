@@ -39,7 +39,7 @@ exports.verifyAdmin = (req, res, next) => {
 	}
 	else {
 		res.status(400).json({ success: false, message: 'Not an Admin' });
-	}	
+	}
 };
 
 exports.verifyGC = (req, res, next) => {
