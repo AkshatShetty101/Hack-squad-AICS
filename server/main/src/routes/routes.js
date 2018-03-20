@@ -55,6 +55,12 @@ router.post('/templates/delete',
 /**
  * Form Routes
  */
+router.post('/forms/edit',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyAdmin,
+	require('./forms/editForm'),
+	require('./blockchain/editForm'));
+
 router.post('/forms/delete',
 	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyAdmin,

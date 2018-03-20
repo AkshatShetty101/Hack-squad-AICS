@@ -3,20 +3,29 @@ module.exports = (req, res, next) => {
 	// let newForm = {
 	// 	data: req.body.data
 	// };
-	let newData={};
-	if(req.body.tags){
-		newData.tags=req.body.tags;
+	let newData = {};
+	if (req.body.tags) {
+		newData.tags = req.body.tags;
 	}
-	if(req.body.format){
-		newData.format=req.body.format;
+	if (req.body.format) {
+		newData.format = req.body.format;
 	}
 	console.log(newData);
-	template.findByIdAndUpdate(req.body.templateId, { $set: newData }, function (err,result) {
-		if (err) {
-			res.status(500).send({ success: false, message: err });
-		} else {
-			console.log('Updated in DB');
-			next();
-		}
-	});
+	if (newData.format || newData.tags) {
+		template.findByIdAndUpdate(req.body.templateId, { $set: newData }, function (err, result) {
+			if (err) {
+				res.status(500).send({ success: false, message: err });
+			} else {
+				if (result) {
+					console.log('Updated template in DB');
+					next();
+				} else {
+					res.status(400).send({ success: false, message: 'No such template to edit' });
+				}
+			}
+		});
+	} else {
+		res.status(400).send({ success: false, message: 'Insufficient Parameters' });
+	}
+
 };
