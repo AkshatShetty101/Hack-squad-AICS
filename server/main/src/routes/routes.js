@@ -21,7 +21,8 @@ router.post('/users/getPeopleByDesignation',
 	require('./person/getPeopleByDesignation'));
 
 router.post('/users/deletePerson',
-	require('./person/deletePerson'));
+	require('./person/deletePerson'),
+	require('./blockchain/deletePerson'));
 
 router.post('/divisions/addDivision',
 	require('./divisions/addDivision'));
@@ -33,7 +34,7 @@ router.post('/templates/addTemplateAndForm',
 
 router.post('/templates/editTemplate',
 	require('./templates/editTemplate'));
-	// require('./blockchain/editTempalte'));
+// require('./blockchain/editTempalte'));
 
 router.post('/forms/deleteForm',
 	require('./forms/deleteForm'),
