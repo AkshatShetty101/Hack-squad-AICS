@@ -11,7 +11,7 @@ this.bizNetworkConnection = new BusinessNetworkConnection();
 this.cardName = config.get('cardName');
 this.businessNetworkIdentifier = config.get('bna');
 this.NS = config.get('NS');
-this.NS_F = config.get('NS_F');
+this.NS_T = config.get('NS_T');
 this.NS_P = config.get('NS_P');
 
 module.exports = (req, res) => {
@@ -23,27 +23,27 @@ module.exports = (req, res) => {
 			// Getting factory definitions
 			let factory = this.businessNetworkDefinition.getFactory();
 			// Loading form registry
-			this.bizNetworkConnection.getAssetRegistry(this.NS_F)
-				.then((formRegistry) => {
-					formRegistry.get(req.body.formId).then((data) => {
+			this.bizNetworkConnection.getAssetRegistry(this.NS_T)
+				.then((templateRegistry) => {
+					templateRegistry.get(req.body.templateId).then((data) => {
 						data.isValid = false;
-						formRegistry.update(data).then(() => {
+						templateRegistry.update(data).then(() => {
 							this.bizNetworkConnection.getParticipantRegistry(this.NS_P)
 								.then((personRegistry) => {
-									let asignee = factory.newRelationship(this.NS, 'Person', req.body.personId);
-									let transaction = factory.newTransaction(this.NS, 'Event');
+									let asignee = factory.newRelationship(this.NS, 'Person', res.locals.user._id.toString());
+									let transaction = factory.newTransaction(this.NS, 'TemplateEvent');
 									transaction.person = asignee;
-									transaction.type = "deleted";
+									transaction.type = "template_delete";
 									if (req.body.metadata)
 										transaction.metadata = JSON.stringify(req.body.metadata);
 									else
 										transaction.metadata = "{}";
-									transaction.form = factory.newRelationship(this.NS, 'Form', req.body.formId);
+									transaction.template = factory.newRelationship(this.NS, 'Template', req.body.templateId);
 									// Submitting the transaction
 									this.bizNetworkConnection.submitTransaction(transaction).then((result) => {
 										console.log(result);
 										// Returning response
-										res.json({ 'success': true, 'message': 'Form Deleted successfully' });
+										res.json({ 'success': true, 'message': 'Template Deleted successfully' });
 									});
 								});
 						}).catch((err) => {

@@ -42,9 +42,10 @@ router.post('/templates/add',
 	require('./blockchain/addForm'));
 
 router.post('/templates/edit',
+	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyAdmin,
-	require('./templates/editTemplate'));
-// require('./blockchain/editTempalte'));
+	require('./templates/editTemplate'),
+	require('./blockchain/editTemplate'));
 
 router.post('/templates/delete',
 	verifyMiddleware.verifyPerson,

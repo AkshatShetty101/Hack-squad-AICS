@@ -1,4 +1,4 @@
-const template = require('../../models/form');
+const template = require('../../models/template');
 module.exports = (req, res, next) => {
 	// let newForm = {
 	// 	data: req.body.data
@@ -10,12 +10,13 @@ module.exports = (req, res, next) => {
 	if(req.body.format){
 		newData.format=req.body.format;
 	}
-	template.findOneAndUpdate({ _id: req.body.templateId }, { $set: newData }, function (err,result) {
+	console.log(newData);
+	template.findByIdAndUpdate(req.body.templateId, { $set: newData }, function (err,result) {
 		if (err) {
-			res.send({ success: false, message: err });
+			res.status(500).send({ success: false, message: err });
 		} else {
-			console.log(result);
-			// next();
+			console.log('Updated in DB');
+			next();
 		}
 	});
 };
