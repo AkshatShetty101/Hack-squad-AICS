@@ -29,7 +29,7 @@ module.exports = (req, res) => {
 								// Creating relationship for person
 								let asignee = factory.newRelationship(this.NS, 'Person', req.body.personId);
 								// Creating a new form asset
-								form = factory.newResource(this.NS, 'Form', req.body.formId);
+								form = factory.newResource(this.NS, 'Form', res.locals.formId);
 								form.assigneeId = [asignee];
 								form.isValid = true;
 								// Adding form to form registry
@@ -46,7 +46,7 @@ module.exports = (req, res) => {
 									else
 										transaction.metadata = "{}";
 									console.log("Reached here!");
-									transaction.form = factory.newRelationship(this.NS, 'Form', req.body.formId);
+									transaction.form = factory.newRelationship(this.NS, 'Form', res.locals.formId);
 									// Submitting the transaction
 									console.log("Reached here!");
 									this.bizNetworkConnection.submitTransaction(transaction).then((result) => {

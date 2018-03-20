@@ -17,7 +17,7 @@ const formSchema = new Schema({
 		default: false
 	},
 	assigned_to: {
-		type: Schema.Types.ObjectId,
+		type: [Schema.Types.ObjectId],
 		ref: 'person',
 		required: [true, 'assigned_to is required']
 	},
