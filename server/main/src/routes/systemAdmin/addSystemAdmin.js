@@ -10,7 +10,7 @@ module.exports = (req, res) => {
 		newAdmin.save((err) => {
 			if (err) {
 				console.error(err);
-				res.status(500).json({ success: false, message: 'Error saving data' });
+				res.status(500).json({ success: false, message: 'User already exists' });
 			} else {
 				res.status(200).json({ success: true, message: 'Add System Admin Successful' });
 			}

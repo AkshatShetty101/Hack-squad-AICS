@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const divisionSchema = new Schema({
 	name: {
 		type: String,
+		unique: true,
 		required: [true, 'Name of division is required'],
 		trim: true
 	},

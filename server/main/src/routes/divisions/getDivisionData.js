@@ -1,19 +1,18 @@
-const divison = require('../../models/division');
-const uuidv4 = require('uuid/v4');
-module.exports = (req, res, next) => {
-    //Some db related work
-    let division_id = uuidv4();
-        let divisionData = new divison({
-            name: req.body.name,
-            division_id:division_id,
-            type:req.body.type
-        });
-        divisionData.save(function(err,result){
-            if(err){
-               res.send({success:false,message:err}); 
-            }
-            else{
-                res.send({successs:true,message:"Added Division/Group/Organization successfully"});
-            }
-        })
-}
+const Division = require('../../models/division');
+
+module.exports = (req, res) => {
+	if(req.body.name) {
+		Division.findOne({ name: req.body.name }, (err, data) => {
+			if (err) {
+				console.error(err);
+				res.status(500).json({ success: false, message: 'Error fetching data' });
+			} else if (!data) {
+				res.status(200).json({ success: true, message: 'User does not exist' });
+			} else {
+				res.status(200).json({ success: true, data });
+			}
+		});
+	} else {
+		res.status(400).json({ success: false, message: 'Invalid parameters' });
+	}
+};

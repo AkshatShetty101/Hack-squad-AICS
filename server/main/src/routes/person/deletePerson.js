@@ -6,7 +6,8 @@ module.exports = (req, res, next) => {
 	console.log('here!');
 	person.findByIdAndRemove(req.body.personId, function (err) {
 		if (err) {
-			res.json({ success: false, message: err });
+			console.error(err);
+			res.json({ success: false, message: 'Invalid Id' });
 		} else {
 			console.log('here!');
 			next();

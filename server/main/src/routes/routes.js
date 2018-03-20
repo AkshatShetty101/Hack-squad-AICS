@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const verifyMiddleware = require('../utils/verifyMiddleware');
 
 router.all('/', function (req, res) {
 	res.json({ success: true });
@@ -12,8 +13,9 @@ router.post('/users/loginPerson',
 	require('./person/loginPerson'));
 
 router.post('/users/registerPerson',
-	require('./person/registerPerson'),
-	require('./blockchain/addPerson'));
+	verifyMiddleware.verifySystemAdmin,
+	require('./person/registerPerson'));
+	// require('./blockchain/addPerson'));
 
 router.post('/users/getId',
 	require('./person/getId'));
@@ -49,5 +51,7 @@ router.post('/forms/deleteForm',
  */
 router.post('/systemAdmin/add',
 	require('./systemAdmin/addSystemAdmin'));
+router.post('/systemAdmin/login',
+	require('./systemAdmin/loginSystemAdmin'));
 
 module.exports = router;

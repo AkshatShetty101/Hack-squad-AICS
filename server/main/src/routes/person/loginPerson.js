@@ -10,7 +10,7 @@ module.exports = (req, res) => {
 				res.status(500).json({ success: false, message: 'Error fetching division' });
 			} else {
 				console.log(data);
-				res.status(200).json({success: true, token: tokenGenerator()});
+				res.status(200).json({success: true, token: tokenGenerator(data._id.toString())});
 			}
 		});
 	} else {

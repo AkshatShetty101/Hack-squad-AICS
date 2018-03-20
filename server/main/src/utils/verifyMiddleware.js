@@ -17,7 +17,7 @@ exports.verifyPerson = (req, res, next) => {
 			}
 			else {
 				// Get user data and save it for use in other routes
-				User.findOne({ _id: decoded.user._id }, (err, data) => {
+				User.findOne({ _id: decoded.data }, (err, data) => {
 					if (data) {
 						res.locals.user = data;
 						next();
@@ -61,7 +61,7 @@ exports.verifyRequestingAuthority = (req, res, next) => {
 			}
 			else {
 				// Get user data and save it for use in other routes
-				ReqAuth.findOne({ _id: decoded.user._id }, (err, data) => {
+				ReqAuth.findOne({ _id: decoded.data }, (err, data) => {
 					if (data) {
 						res.locals.user = data;
 						next();
@@ -87,7 +87,7 @@ exports.verifySystemAdmin = (req, res, next) => {
 			}
 			else {
 				// Get user data and save it for use in other routes
-				SysAdmin.findOne({ _id: decoded.user._id }, (err, data) => {
+				SysAdmin.findOne({ _id: decoded.data }, (err, data) => {
 					if (data) {
 						res.locals.user = data;
 						next();

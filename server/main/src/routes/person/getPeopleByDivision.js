@@ -1,14 +1,14 @@
 // Declaring constants
-person = require('../../models/person');
+const Person = require('../../models/person');
 
 module.exports = (req, res) => {
 	//Finding all people with the same divison as provided
-	person.find({ division_id: req.body.divisionId }, { _id: 1, name: 1, division: 1 }, function (err, result) {
+	Person.find({ division_id: req.body.divisionId }, { _id: 1, name: 1, division: 1 }, function (err, data) {
 		if (err) {
-			res.json({ success: false, message: err });
+			console.error(err);
+			res.status(500).json({ success: false, message: 'Error fetching data' });
 		} else {
-			// Returning with data of people 
-			res.json({ success: true, message: result });
+			res.status(200).json({ success: true, data });
 		}
 	});
 };

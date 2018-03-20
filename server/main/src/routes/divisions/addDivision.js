@@ -1,28 +1,33 @@
-// Declaring constants
-const division = require('../../models/division');
+const Division = require('../../models/division');
+
 module.exports = (req, res) => {
 	// Checking if division is already registered
-	division.findOne({ name: req.body.name }, function (err, result) {
-		if (err) {
-			res.json({ success: false, message: err });
-		} else if (result) {
-			res.json({ success: false, message: 'Division/Group/Organization already exists' });
-		} else {
-			// Adding division to DB
-			let divisionData = new division({
-				name: req.body.name,
-				type: req.body.type
-			});
-			divisionData.save(function (err) {
-				if (err) {
-					// Error handling
-					res.send({ success: false, message: err });
-				}
-				else {
-					// Responding with success status
-					res.send({ successs: true, message: 'Added Division/Group/Organization successfully' });
-				}
-			});
-		}
-	});
-}
+	if (req.body.name && req.body.name.length > 0 && req.body.type && ['division', 'organization', 'group'].indexOf(req.body.type) > -1) {
+		Division.findOne({ name: req.body.name }, function (err, result) {
+			if (err) {
+				console.error(err);
+				res.status(400).json({ success: false, message: 'Invalid name' });
+			} else if (result) {
+				res.status(400).json({ success: false, message: 'Division/Group/Organization already exists' });
+			} else {
+				// Adding division to DB
+				let divisionData = new Division({
+					name: req.body.name,
+					type: req.body.type
+				});
+				divisionData.save(function (err) {
+					if (err) {
+						console.error(err);
+						res.status(500).json({ success: false, message: 'Error saving division' });
+					}
+					else {
+						// Responding with success status
+						res.status(200).json({ successs: true, message: 'Added Division/Group/Organization successfully' });
+					}
+				});
+			}
+		});
+	} else {
+		res.status(400).json({ success: false, message: 'Invalid parameters' });
+	}
+};
