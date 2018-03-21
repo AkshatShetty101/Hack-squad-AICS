@@ -20,20 +20,21 @@ module.exports = (req, res) => {
 			let factory = this.businessNetworkDefinition.getFactory();
 			// Loading form registry
 			let asignee = factory.newRelationship(this.NS, 'Person', res.locals.user._id.toString());
+			let ra = factory.newRelationship(this.NS, 'Person', res.locals.ra_id.toString());
 			let transaction = factory.newTransaction(this.NS, 'TemplateEvent');
 			transaction.person = asignee;
-			transaction.newHolder = asignee;
-			transaction.type = 'template_edit';
+			transaction.newHolder = ra;
+			transaction.type = 'template_submit';
 			if (req.body.metadata)
 				transaction.metadata = JSON.stringify(req.body.metadata);
 			else
 				transaction.metadata = '{}';
 			transaction.template = factory.newRelationship(this.NS, 'Template', req.body.templateId);
 			// Submitting the transaction
-			this.bizNetworkConnection.submitTransaction(transaction).then((result) => {
-				console.log(result);
-				// Returning response
-				res.json({ 'success': true, 'message': 'Template Edited successfully' });
+			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
+                // Returning response
+                console.log('Template submit transaction added to blockchain');
+				res.json({ 'success': true, 'message': 'Template submitted for RA successfully' });
 			}).catch((err) => {
 				// Catching errors
 				console.log(err.message);

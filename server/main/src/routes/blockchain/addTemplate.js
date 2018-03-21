@@ -31,6 +31,7 @@ module.exports = (req, res, next) => {
 								// Creating a new form asset
 								template = factory.newResource(this.NS, 'Template', res.locals.templateId.toString());
 								template.createdBy = creator;
+								template.requestId = req.body.requestId.toString();
 								// Adding form to form registry
 								templateRegistry.add(template).then((data) => {
 									// Creating the transaction

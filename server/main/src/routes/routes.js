@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const graphQLHTTP = require('express-graphql');
 const verifyMiddleware = require('../utils/verifyMiddleware');
+const queryMiddleware = require('./blockchain/query');
 // const queryMiddleware = require('../routes/blockchain/query');
 
 router.all('/', function (req, res) {
@@ -64,6 +65,13 @@ router.post('/templates/delete',
 	verifyMiddleware.verifyAdmin,
 	require('./templates/deleteTemplate'),
 	require('./blockchain/deleteTemplate'));
+
+router.post('/templates/submit',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyAdmin,
+	queryMiddleware.getTemplateRequestId,
+	require('./templates/submitTemplate'),
+	require('./blockchain/submitTemplate'));
 
 router.all('/templates',
 	verifyMiddleware.verifyPerson,
@@ -162,8 +170,14 @@ router.post('/systemAdmin/add',
 router.post('/systemAdmin/login',
 	require('./systemAdmin/loginSystemAdmin'));
 
-// router.post('/query/getMyForms',
-// 	verifyMiddleware.verifyPerson,
-// 	queryMiddleware.getMyForms);
+/**
+ * Blockchain Query Routes
+ */
+router.post('/query/getMyForms',
+	verifyMiddleware.verifyPerson,
+	queryMiddleware.getMyForms);
 
+router.post('/query/getTemplateRequestId',
+	verifyMiddleware.verifyPerson,
+	queryMiddleware.getTemplateRequestId);
 module.exports = router;

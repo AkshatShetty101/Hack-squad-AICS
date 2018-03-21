@@ -1,6 +1,8 @@
 const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 const config = require('config');
+const NS = config.get('NS');
 const NS_F = config.get('NS_F');
+const NS_T = config.get('NS_T');
 module.exports = exports = {};
 
 exports.getMyForms = (req, res) => {
@@ -34,4 +36,31 @@ exports.getMyForms = (req, res) => {
 			res.status(400).send({ success: false, message: error });
 			// Add optional error handling here.
 		});
+};
+
+exports.getTemplateRequestId = (req, res, next) => {
+	this.bizNetworkConnection = new BusinessNetworkConnection();
+	this.cardName = config.get('cardName');
+	if (req.body.templateId) {
+		return this.bizNetworkConnection.connect(this.cardName)
+			.then((result) => {
+				this.businessNetworkDefinition = result;
+				// Getting factory definitions
+				console.log(req.body.templateId);
+				var query = this.bizNetworkConnection.buildQuery(
+					'SELECT ' + NS_T + ' WHERE (templateId == _$inputValue)');
+				return this.bizNetworkConnection.query(query, { inputValue: req.body.templateId.toString() });
+			})
+			.then((asset) => {
+				res.locals.requestId = asset[0].requestId;
+				next();
+			})
+			.catch((error) => {
+				console.log(error);
+				res.status(400).send({ success: false, message: 'No such template exists' });
+				// Add optional error handling here.
+			});
+	} else {
+		res.status(400).send({ success: false, message: 'Invalid Parameters' });
+	}
 };
