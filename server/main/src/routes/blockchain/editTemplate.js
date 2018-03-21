@@ -25,6 +25,7 @@ module.exports = (req, res) => {
 			let asignee = factory.newRelationship(this.NS, 'Person', res.locals.user._id.toString());
 			let transaction = factory.newTransaction(this.NS, 'TemplateEvent');
 			transaction.person = asignee;
+			transaction.newHolder = asignee;
 			transaction.type = 'template_edit';
 			if (req.body.metadata)
 				transaction.metadata = JSON.stringify(req.body.metadata);
