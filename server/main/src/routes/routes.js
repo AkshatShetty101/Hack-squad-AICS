@@ -73,6 +73,13 @@ router.post('/templates/submit',
 	require('./templates/submitTemplate'),
 	require('./blockchain/submitTemplate'));
 
+router.post('/templates/approve',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyAdmin,
+	queryMiddleware.getTemplateRequestId,
+	require('./templates/approveTemplate'),
+	require('./blockchain/approveTemplate'));
+
 router.all('/templates',
 	verifyMiddleware.verifyPerson,
 	graphQLHTTP((req, res) => ({ // to be replaced by router.post
