@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const graphQLHTTP = require('express-graphql');
 const verifyMiddleware = require('../utils/verifyMiddleware');
-const queryMiddleware = require('../routes/blockchain/query');
+// const queryMiddleware = require('../routes/blockchain/query');
 
 router.all('/', function (req, res) {
 	res.json({ success: true });
@@ -19,8 +19,22 @@ router.post('/users/register',
 router.post('/users/login',
 	require('./person/loginPerson'));
 
+router.post('/users/delete',
+	verifyMiddleware.verifySystemAdmin,
+	require('./person/deletePerson'),
+	require('./blockchain/deletePerson'));
+
 router.all('/users', graphQLHTTP((req, res) => ({ // to be replaced by router.post
 	schema: require('./graphql/schemas/person'),
+	context: { req, res },
+	graphiql: process.env.NODE_ENV !== 'production'
+})));
+
+/**
+ * Request Form Routes
+ */
+router.all('/reqForm', graphQLHTTP((req, res) => ({ // to be replaced by router.post
+	schema: require('./graphql/schemas/request_form'),
 	context: { req, res },
 	graphiql: process.env.NODE_ENV !== 'production'
 })));
@@ -47,6 +61,13 @@ router.post('/templates/delete',
 	verifyMiddleware.verifyAdmin,
 	require('./templates/deleteTemplate'),
 	require('./blockchain/deleteTemplate'));
+
+router.all('/templates', graphQLHTTP((req, res) => ({ // to be replaced by router.post
+	schema: require('./graphql/schemas/template'),
+	context: { req, res },
+	graphiql: process.env.NODE_ENV !== 'production'
+})));
+
 /**
  * Form Routes
  */
@@ -61,6 +82,12 @@ router.post('/forms/delete',
 	verifyMiddleware.verifyAdmin,
 	require('./forms/deleteForm'),
 	require('./blockchain/deleteForm'));
+
+router.all('/forms', graphQLHTTP((req, res) => ({ // to be replaced by router.post
+	schema: require('./graphql/schemas/form'),
+	context: { req, res },
+	graphiql: process.env.NODE_ENV !== 'production'
+})));
 
 /**
  * Requesting Authority Routes
@@ -89,6 +116,33 @@ router.all('/reqAuth',
 	})));
 
 /**
+ * Issue Tracker Routes
+ */
+router.all('/issueTracker',
+	verifyMiddleware.verifyPerson,
+	graphQLHTTP((req, res) => ({ // to be replaced by router.post
+		schema: require('./graphql/schemas/issue_tracker'),
+		context: { req, res },
+		graphiql: process.env.NODE_ENV !== 'production'
+	})));
+
+/**
+ * Division Routes
+ */
+
+router.post('/division/add',
+	verifyMiddleware.verifySystemAdmin,
+	require('./divisions/addDivision'));
+
+router.all('/division',
+	verifyMiddleware.verifyPerson,
+	graphQLHTTP((req, res) => ({ // to be replaced by router.post
+		schema: require('./graphql/schemas/division'),
+		context: { req, res },
+		graphiql: process.env.NODE_ENV !== 'production'
+	})));
+
+/**
  * System Admin Routes
  */
 router.post('/systemAdmin/add',
@@ -97,17 +151,8 @@ router.post('/systemAdmin/add',
 router.post('/systemAdmin/login',
 	require('./systemAdmin/loginSystemAdmin'));
 
-router.post('/users/delete',
-	verifyMiddleware.verifySystemAdmin,
-	require('./person/deletePerson'),
-	require('./blockchain/deletePerson'));
-
-router.post('/divisions/add',
-	verifyMiddleware.verifySystemAdmin,
-	require('./divisions/addDivision'));
-
-router.post('/query/getMyForms',
-	verifyMiddleware.verifyPerson,
-	queryMiddleware.getMyForms);
+// router.post('/query/getMyForms',
+// 	verifyMiddleware.verifyPerson,
+// 	queryMiddleware.getMyForms);
 
 module.exports = router;
