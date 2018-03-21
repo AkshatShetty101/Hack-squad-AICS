@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const jwtSecretKey = require('../../config/jwtSecretKey');
 const User = require('../models/person');
-const ReqAuth = require('../models/requesting_authority');
+const ReqAuth = require('../models/requesting_authority').default;
 const SysAdmin = require('../models/system_admin');
 
 module.exports = exports = {};
