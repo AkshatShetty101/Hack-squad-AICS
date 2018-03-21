@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const graphQLHTTP = require('express-graphql');
 const verifyMiddleware = require('../utils/verifyMiddleware');
+const queryMiddleware = require('../routes/blockchain/query');
 
 router.all('/', function (req, res) {
 	res.json({ success: true });
 });
-
 
 /**
  * Person Routes
@@ -106,13 +106,8 @@ router.post('/divisions/add',
 	verifyMiddleware.verifySystemAdmin,
 	require('./divisions/addDivision'));
 
-/**
- * Chat Routes
- */
-router.all('/graphql/chat', graphQLHTTP((req, res) => ({ // to be replaced by router.post
-	schema: require('./graphql/schemas/chat'),
-	context: { req, res },
-	graphiql: process.env.NODE_ENV !== 'production'
-})));
+router.post('/query/getMyForms',
+	verifyMiddleware.verifyPerson,
+	queryMiddleware.getMyForms);
 
 module.exports = router;
