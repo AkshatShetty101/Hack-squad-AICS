@@ -1,4 +1,4 @@
-const ReqAuth = require('../../models/requesting_authority');
+const ReqAuth = require('../../models/requesting_authority').default;
 const passwordGenerator = require('../../utils/passwordGenerator').hash;
 
 module.exports = (req, res) => {

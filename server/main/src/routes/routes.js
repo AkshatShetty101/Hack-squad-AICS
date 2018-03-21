@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const graphQLHTTP = require('express-graphql');
 const verifyMiddleware = require('../utils/verifyMiddleware');
 const queryMiddleware = require('../routes/blockchain/query');
 
@@ -105,4 +106,14 @@ router.post('/divisions/add',
 router.post('/query/getMyForms',
 	verifyMiddleware.verifyPerson,
 	queryMiddleware.getMyForms);
+
+/**
+*  * GraphQL Query
+*/
+router.all('/api/graphql', graphQLHTTP((req, res) => ({ // to be replaced by router.post
+	schema: require('./src/graphql/index'),
+	context: { req, res },
+	graphiql: process.env.NODE_ENV !== 'production'
+})));
+
 module.exports = router;
