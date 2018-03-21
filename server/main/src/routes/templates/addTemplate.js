@@ -3,7 +3,7 @@ const template = require('../../models/template');
 
 module.exports = (req, res, next) => {
 	// Setting data for new template
-	if (res.locals.user._id && req.body.tags && req.body.format && req.body.assignedToId && req.body.data) {
+	if (res.locals.user._id && req.body.tags && req.body.format) {
 		let templateData = new template({
 			created_by: res.locals.user._id,
 			tags: req.body.tags,
@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
 				console.log('Added Template to DB');
 				// Adding required parameters
 				res.locals.templateId = result._id;
-				// Passing contorl to addForm to DB
+				// Passing control to addForm to DB
 				next();
 			}
 		});

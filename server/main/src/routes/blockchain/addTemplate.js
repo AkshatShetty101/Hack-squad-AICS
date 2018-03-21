@@ -36,6 +36,7 @@ module.exports = (req, res, next) => {
 									// Creating the transaction
 									let transaction = factory.newTransaction(this.NS, 'TemplateEvent');
 									transaction.person = creator;
+									transaction.newHolder = creator;
 									transaction.type = "template_create";
 									if (req.body.metadata)
 										transaction.metadata = JSON.stringify(req.body.metadata);
@@ -46,8 +47,8 @@ module.exports = (req, res, next) => {
 									this.bizNetworkConnection.submitTransaction(transaction).then((result) => {
 										// Returning response
 										console.log("Template Added successfully to block-chain");
-										next();
-										// res.json({ 'success': true, 'message': 'Template Added successfully' });
+										// next();
+										res.json({ 'success': true, 'message': 'Template Added successfully' });
 									});
 								}).catch((err) => {
 									// Catching errors
