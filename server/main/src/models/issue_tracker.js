@@ -19,21 +19,14 @@ const issueTrackerSchema = new Schema({
 		ref: 'person',
 		required: [true, 'created_by user_id is required']
 	},
-	form_id: {
-		type: Schema.Types.ObjectId,
-		ref: 'form',
-		required: [true, 'form_id is required']
-	},
 	is_open: {
 		type: Boolean,
 		default: true
 	},
 	tags: {
-		type: [String]
-	},
-	participant_user_id: {
-		type: Schema.Types.ObjectId,
-		ref: 'person'
+		type: [String],
+		enum: ['doubt', 'incorrect template', 'insufficient data'],
+		default: []
 	},
 	data: {
 		by: {

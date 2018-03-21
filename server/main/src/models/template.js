@@ -13,7 +13,7 @@ const templateSchema = new Schema({
 	},
 	format: {
 		type: Schema.Types.Mixed,
-		trim: true
+		required: [true, 'format is required']
 	}
 },
 {

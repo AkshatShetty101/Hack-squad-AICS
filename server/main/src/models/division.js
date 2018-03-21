@@ -9,9 +9,14 @@ const divisionSchema = new Schema({
 		trim: true
 	},
 	gc_id: {
-		type: Schema.Types.ObjectId
+		type: Schema.Types.ObjectId,
+		ref: 'person'
 	},
-	user_id: [Schema.Types.ObjectId],
+	user_id: {
+		type: [Schema.Types.ObjectId],
+		ref: 'person',
+		default: []
+	},
 	tags: {
 		type: [String],
 		default: []

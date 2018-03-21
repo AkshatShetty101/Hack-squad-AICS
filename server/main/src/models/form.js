@@ -7,6 +7,10 @@ const formSchema = new Schema({
 		ref: 'template',
 		required: [true, 'template_id is required']
 	},
+	title: {
+		type: String,
+		required: [true, 'title is required']
+	},
 	created_by: {
 		type: Schema.Types.ObjectId,
 		ref: 'person',
@@ -24,6 +28,15 @@ const formSchema = new Schema({
 	data: {
 		type: Schema.Types.Mixed,
 		trim: true
+	},
+	issue_id: {
+		type: [Schema.Types.ObjectId],
+		ref: 'issuetracker',
+		default: []
+	},
+	deadline: {
+		type: Date,
+		required: [true, 'deadline is required']
 	}
 },
 {
