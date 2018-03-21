@@ -1,4 +1,4 @@
-const ReqAuth = require('../../models/requesting_authority');
+const ReqAuth = require('../../models/requesting_authority').default;
 
 module.exports = (req, res) => {
 	if (req.body.ra_id && req.body.access_form.form_id && req.body.access_form.metadata ) {
