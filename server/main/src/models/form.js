@@ -37,6 +37,10 @@ const formSchema = new Schema({
 	deadline: {
 		type: Date,
 		required: [true, 'deadline is required']
+	},
+	files: {
+		type: [String],
+		default: []
 	}
 },
 {
