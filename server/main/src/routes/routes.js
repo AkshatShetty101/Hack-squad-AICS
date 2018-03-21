@@ -75,10 +75,25 @@ router.post('/templates/submit',
 
 router.post('/templates/approve',
 	verifyMiddleware.verifyPerson,
-	verifyMiddleware.verifyAdmin,
+	verifyMiddleware.verifyRequestingAuthority,
 	queryMiddleware.getTemplateRequestId,
 	require('./templates/approveTemplate'),
 	require('./blockchain/approveTemplate'));
+
+router.post('/templates/rejectAndImprove',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyRequestingAuthority,
+	queryMiddleware.getTemplateRequestId,
+	require('./templates/rejectTemplateAndImprove'),
+	require('./blockchain/rejectTemplate'));
+
+router.post('/templates/rejectAndDelete',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyAdmin,
+	queryMiddleware.getTemplateRequestId,
+	require('./templates/rejectTemplateAndDelete'),
+	require('./blockchain/rejectTemplate'),
+	require('./blockchain/deleteTemplate'));
 
 router.all('/templates',
 	verifyMiddleware.verifyPerson,
