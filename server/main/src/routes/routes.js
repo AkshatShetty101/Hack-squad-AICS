@@ -24,20 +24,25 @@ router.post('/users/delete',
 	require('./person/deletePerson'),
 	require('./blockchain/deletePerson'));
 
-router.all('/users', graphQLHTTP((req, res) => ({ // to be replaced by router.post
-	schema: require('./graphql/schemas/person'),
-	context: { req, res },
-	graphiql: process.env.NODE_ENV !== 'production'
-})));
+router.all('/users',
+	verifyMiddleware.verifyPerson,
+	graphQLHTTP((req, res) => ({ // to be replaced by router.post
+		schema: require('./graphql/schemas/person'),
+		context: { req, res },
+		graphiql: process.env.NODE_ENV !== 'production'
+	})));
 
 /**
  * Request Form Routes
  */
-router.all('/reqForm', graphQLHTTP((req, res) => ({ // to be replaced by router.post
-	schema: require('./graphql/schemas/request_form'),
-	context: { req, res },
-	graphiql: process.env.NODE_ENV !== 'production'
-})));
+router.all('/reqForm',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyAdminOrGC,
+	graphQLHTTP((req, res) => ({ // to be replaced by router.post
+		schema: require('./graphql/schemas/request_form'),
+		context: { req, res },
+		graphiql: process.env.NODE_ENV !== 'production'
+	})));
 
 /**
  * Template Routes
@@ -62,11 +67,13 @@ router.post('/templates/delete',
 	require('./templates/deleteTemplate'),
 	require('./blockchain/deleteTemplate'));
 
-router.all('/templates', graphQLHTTP((req, res) => ({ // to be replaced by router.post
-	schema: require('./graphql/schemas/template'),
-	context: { req, res },
-	graphiql: process.env.NODE_ENV !== 'production'
-})));
+router.all('/templates',
+	verifyMiddleware.verifyPerson,
+	graphQLHTTP((req, res) => ({ // to be replaced by router.post
+		schema: require('./graphql/schemas/template'),
+		context: { req, res },
+		graphiql: process.env.NODE_ENV !== 'production'
+	})));
 
 /**
  * Form Routes
@@ -83,11 +90,13 @@ router.post('/forms/delete',
 	require('./forms/deleteForm'),
 	require('./blockchain/deleteForm'));
 
-router.all('/forms', graphQLHTTP((req, res) => ({ // to be replaced by router.post
-	schema: require('./graphql/schemas/form'),
-	context: { req, res },
-	graphiql: process.env.NODE_ENV !== 'production'
-})));
+router.all('/forms',
+	verifyMiddleware.verifyPerson,
+	graphQLHTTP((req, res) => ({ // to be replaced by router.post
+		schema: require('./graphql/schemas/form'),
+		context: { req, res },
+		graphiql: process.env.NODE_ENV !== 'production'
+	})));
 
 /**
  * Requesting Authority Routes
