@@ -19,17 +19,11 @@ router.post('/users/register',
 router.post('/users/login',
 	require('./person/loginPerson'));
 
-router.post('/users/getId',
-	verifyMiddleware.verifyPerson,
-	require('./person/getId'));
-
-router.post('/users/getPeopleByDivision',
-	verifyMiddleware.verifyPerson,
-	require('./person/getPeopleByDivision'));
-
-router.post('/users/getPeopleByDesignation',
-	verifyMiddleware.verifyPerson,
-	require('./person/getPeopleByDesignation'));
+router.all('/users', graphQLHTTP((req, res) => ({ // to be replaced by router.post
+	schema: require('./graphql/schemas/person'),
+	context: { req, res },
+	graphiql: process.env.NODE_ENV !== 'production'
+})));
 
 /**
  * Template Routes
@@ -74,12 +68,25 @@ router.post('/forms/delete',
 router.post('/reqAuth/add',
 	verifyMiddleware.verifySystemAdmin,
 	require('./requestingAuth/addReqestingAuth'));
+
 router.post('/reqAuth/remove',
 	verifyMiddleware.verifySystemAdmin,
 	require('./requestingAuth/removeRequestingAuth'));
-router.post('./reqAuth/edit',
+
+router.post('/reqAuth/edit',
 	verifyMiddleware.verifyRequestingAuthority,
 	require('./requestingAuth/editRequestingAuthForm'));
+
+router.post('/reqAuth/login',
+	require('./requestingAuth/loginRequestingAuth'));
+
+router.all('/reqAuth',
+	verifyMiddleware.verifyRequestingAuthority,
+	graphQLHTTP((req, res) => ({ // to be replaced by router.post
+		schema: require('./graphql/schemas/requesting_authority'),
+		context: { req, res },
+		graphiql: process.env.NODE_ENV !== 'production'
+	})));
 
 /**
  * System Admin Routes
@@ -100,10 +107,10 @@ router.post('/divisions/add',
 	require('./divisions/addDivision'));
 
 /**
- * GraphQL Query
+ * Chat Routes
  */
-router.all('/api/graphql', graphQLHTTP((req, res) => ({ // to be replaced by router.post
-	schema: require('./src/graphql/index'),
+router.all('/graphql/chat', graphQLHTTP((req, res) => ({ // to be replaced by router.post
+	schema: require('./graphql/schemas/chat'),
 	context: { req, res },
 	graphiql: process.env.NODE_ENV !== 'production'
 })));
