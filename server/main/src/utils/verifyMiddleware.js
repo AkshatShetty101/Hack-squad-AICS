@@ -50,6 +50,14 @@ exports.verifyGC = (req, res, next) => {
 	}
 };
 
+exports.verifyAdminOrGC = (req, res, next) => {
+	if (res.locals.user.designation === 'admin' || res.locals.user.designation === 'gc') {
+		next(); // token is verified and is Admin or GC
+	} else {
+		res.status(400).json({ success: false, message: 'Not a GC' });
+	}
+};
+
 exports.verifyRequestingAuthority = (req, res, next) => {
 	// check header or url parameters or post parameters for token
 	const token = req.body.token || req.query.token || req.headers['x-access-token'];
