@@ -24,7 +24,7 @@ const requestFormSchema = new Schema({
 		template_id: {
 			type: Schema.Types.ObjectId,
 			ref: 'template',
-			required: [true, 'template id is required']
+			// required: [true, 'template id is required']
 		},
 		is_approved: {
 			type: Boolean,
@@ -35,7 +35,7 @@ const requestFormSchema = new Schema({
 		form_id: {
 			type: Schema.Types.ObjectId,
 			ref: 'form',
-			required: [true, 'form id is required']
+			// required: [true, 'form id is required']
 		},
 		is_approved: {
 			type: Boolean,

@@ -5,8 +5,7 @@ module.exports = (req, res) => {
 	if (req.body.email && req.body.email.length > 0 && req.body.password && req.body.password.length > 0) {
 		const newReqAuth = new ReqAuth({
 			email: req.body.email,
-			password: passwordGenerator(req.body.password),
-			access_form: []
+			password: passwordGenerator(req.body.password)
 		});
 		newReqAuth.save((err) => {
 			if (err) {

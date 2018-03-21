@@ -113,6 +113,10 @@ router.post('/reqAuth/edit',
 	verifyMiddleware.verifyRequestingAuthority,
 	require('./requestingAuth/editRequestingAuthForm'));
 
+router.post('/reqAuth/makeRequest',
+	verifyMiddleware.verifyRequestingAuthority,
+	require('./requestingAuth/makeRequest'));
+
 router.post('/reqAuth/login',
 	require('./requestingAuth/loginRequestingAuth'));
 
