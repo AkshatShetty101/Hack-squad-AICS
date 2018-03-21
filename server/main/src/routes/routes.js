@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const verifyMiddleware = require('../utils/verifyMiddleware');
+const queryMiddleware = require('../routes/blockchain/query');
 
 router.all('/', function (req, res) {
 	res.json({ success: true });
@@ -98,4 +99,10 @@ router.post('/divisions/add',
 	verifyMiddleware.verifySystemAdmin,
 	require('./divisions/addDivision'));
 
+/**
+ * System Admin Routes
+ */
+router.post('/query/getMyForms',
+	verifyMiddleware.verifyPerson,
+	queryMiddleware.getMyForms);
 module.exports = router;
