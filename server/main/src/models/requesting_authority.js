@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const accessFormSchema = new Schema({
+	metadata: {
+		type: Schema.Types.Mixed,
+		default: {}
+	}
+});
+
 const requestingAuthoritySchema = new Schema({
 	email: {
 		type: String,
@@ -12,21 +19,13 @@ const requestingAuthoritySchema = new Schema({
 		type: String,
 		required: [true, 'password is required']
 	},
-	access_form: [{
-		form_id: {
-			type: Schema.Types.ObjectId,
-			unique: true,
-			trim: true,
-			required: [true, 'Form id is required']
-		},
-		metadata: {
-			type: Schema.Types.Mixed,
-			default: {}
-		}
-	}]
+	access_form: [accessFormSchema]
 },
 {
 	timestamps: true
 });
 
-module.exports = mongoose.model('requestingAuthority', requestingAuthoritySchema);
+module.exports = {
+	default: mongoose.model('requestingAuthority', requestingAuthoritySchema),
+	secondary: accessFormSchema
+};

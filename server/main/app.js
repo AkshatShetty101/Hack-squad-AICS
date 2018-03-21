@@ -24,7 +24,7 @@ app.use(require('morgan')('dev'));
 app.use('/api', require(path.join(__dirname, 'src', 'routes', 'routes.js')));
 
 app.listen(process.env.PORT, () => {
-    console.log(`Application running on port ${process.env.PORT}`);
+	console.log(`Application running on port ${process.env.PORT}`);
 });
 
 module.exports = app;
