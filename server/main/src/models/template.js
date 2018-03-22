@@ -7,6 +7,10 @@ const templateSchema = new Schema({
 		ref: 'person',
 		required: [true, 'created_by user_id is required']
 	},
+	title:{
+		type:String,
+		required: [true, 'title is required']
+	},
 	tags: {
 		type: [String],
 		default: []

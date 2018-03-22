@@ -78,7 +78,10 @@ router.post('/templates/approve',
 	verifyMiddleware.verifyRequestingAuthority,
 	queryMiddleware.getTemplateRequestId,
 	require('./templates/approveTemplate'),
-	require('./blockchain/approveTemplate'));
+	require('./blockchain/approveTemplate'),
+	require('./forms/addForm'),
+	require('./blockchain/addForm'));
+
 
 router.post('/templates/rejectAndImprove',
 	verifyMiddleware.verifyPerson,
@@ -106,10 +109,11 @@ router.all('/templates',
 /**
  * Form Routes
  */
+
 router.post('/forms/edit',
 	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyAdmin,
-	require('./forms/editForm'),
+	// require('./forms/editForm'),
 	require('./blockchain/editForm'));
 
 router.post('/forms/delete',
@@ -117,6 +121,12 @@ router.post('/forms/delete',
 	verifyMiddleware.verifyAdmin,
 	require('./forms/deleteForm'),
 	require('./blockchain/deleteForm'));
+
+router.post('/forms/assign',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyAdmin,
+	require('./forms/assignUserAndDeadline'),
+	require('./blockchain/assignForm'));
 
 router.all('/forms',
 	verifyMiddleware.verifyPerson,

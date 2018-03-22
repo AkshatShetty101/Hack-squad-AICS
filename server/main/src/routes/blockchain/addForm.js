@@ -31,18 +31,20 @@ module.exports = (req, res) => {
 									.then((templateRegistry) => {
 										// Creating relationship for person
 										let assignee = factory.newRelationship(this.NS, 'Person', res.locals.user._id.toString());
-										let template = factory.newRelationship(this.NS, 'Template', res.locals.templateId.toString());
+										let template = factory.newRelationship(this.NS, 'Template', req.body.templateId.toString());
 										// Creating a new form asset
 										form = factory.newResource(this.NS, 'Form', res.locals.formId);
-										form.assigneeId = [];
+										form.createdBy = assignee;
+										form.currentHolder = assignee;
 										form.template = template;
-										form.assigneeId.push(assignee);
+										form.requestId = res.locals.requestId.toString();
 										form.isValid = true;
 										// Adding form to form registry
 										formRegistry.add(form).then((data) => {
 											// Creating the transaction
 											let transaction = factory.newTransaction(this.NS, 'FormEvent');
 											transaction.person = assignee;
+											transaction.newHolder = assignee;
 											transaction.type = "create";
 											if (req.body.metadata)
 												transaction.metadata = JSON.stringify(req.body.metadata);

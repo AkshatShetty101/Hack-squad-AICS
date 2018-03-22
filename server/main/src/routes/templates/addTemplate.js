@@ -3,11 +3,12 @@ const template = require('../../models/template');
 
 module.exports = (req, res, next) => {
 	// Setting data for new template
-	if (res.locals.user._id && req.body.tags && req.body.format && req.body.requestId) {
+	if (res.locals.user._id && req.body.tags && req.body.format && res.locals.requestId && req.body.title) {
 		let templateData = new template({
 			created_by: res.locals.user._id,
 			tags: req.body.tags,
-			format: req.body.format
+			format: req.body.format,
+			title: req.body.title
 		});
 		// Saving template to DB
 		templateData.save((err, result) => {
