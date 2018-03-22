@@ -113,7 +113,7 @@ router.all('/templates',
 router.post('/forms/edit',
 	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyAdmin,
-	require('./forms/editForm'),
+	// require('./forms/editForm'),
 	require('./blockchain/editForm'));
 
 router.post('/forms/delete',
@@ -121,6 +121,12 @@ router.post('/forms/delete',
 	verifyMiddleware.verifyAdmin,
 	require('./forms/deleteForm'),
 	require('./blockchain/deleteForm'));
+
+router.post('/forms/assign',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyAdmin,
+	require('./forms/assignUserAndDeadline'),
+	require('./blockchain/assignForm'));
 
 router.all('/forms',
 	verifyMiddleware.verifyPerson,

@@ -23,10 +23,11 @@ module.exports = (req, res) => {
 			let factory = this.businessNetworkDefinition.getFactory();
 			// Loading form registry
 			let asignee = factory.newRelationship(this.NS, 'Person', res.locals.user._id.toString());
+			let newHolder = factory.newRelationship(this.NS, 'Person', req.body.assigneeId.toString());
 			let transaction = factory.newTransaction(this.NS, 'FormEvent');
 			transaction.person = asignee;
-			transaction.newHolder = asignee;
-			transaction.type = 'edit';
+			transaction.newHolder = newHolder;
+			transaction.type = 'assign';
 			if (req.body.metadata)
 				transaction.metadata = JSON.stringify(req.body.metadata);
 			else
@@ -35,8 +36,8 @@ module.exports = (req, res) => {
 			// Submitting the transaction
 			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
 				// Returning response
-				console.log('Form Edited successfully');
-				res.json({ 'success': true, 'message': 'Form Edited successfully' });
+				console.log('Form Assigned successfully');
+				res.json({ 'success': true, 'message': 'Form Assigned successfully' });
 			}).catch((err) => {
 				// Catching errors
 				console.log(err.message);
