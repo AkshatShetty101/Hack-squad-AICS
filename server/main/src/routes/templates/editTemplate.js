@@ -4,6 +4,9 @@ module.exports = (req, res, next) => {
 	// 	data: req.body.data
 	// };
 	let newData = {};
+	if (req.body.title) {
+		newData.title = req.body.title;
+	}
 	if (req.body.tags) {
 		newData.tags = req.body.tags;
 	}
@@ -11,7 +14,7 @@ module.exports = (req, res, next) => {
 		newData.format = req.body.format;
 	}
 	console.log(newData);
-	if (req.body.templateId && (newData.format || newData.tags)) {
+	if (req.body.templateId && (newData.title || newData.format || newData.tags)) {
 		template.findByIdAndUpdate(req.body.templateId, { $set: newData }, function (err, result) {
 			if (err) {
 				res.status(500).send({ success: false, message: err });

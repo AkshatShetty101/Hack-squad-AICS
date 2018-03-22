@@ -78,7 +78,10 @@ router.post('/templates/approve',
 	verifyMiddleware.verifyRequestingAuthority,
 	queryMiddleware.getTemplateRequestId,
 	require('./templates/approveTemplate'),
-	require('./blockchain/approveTemplate'));
+	require('./blockchain/approveTemplate'),
+	require('./forms/addForm'),
+	require('./blockchain/addForm'));
+
 
 router.post('/templates/rejectAndImprove',
 	verifyMiddleware.verifyPerson,
@@ -106,6 +109,7 @@ router.all('/templates',
 /**
  * Form Routes
  */
+
 router.post('/forms/edit',
 	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyAdmin,

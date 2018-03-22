@@ -1,23 +1,44 @@
 // Declaring constants
-const form = require('../../models/form');
+var Template = require('../../models/template');
+const Form = require('../../models/form');
 module.exports = (req, res, next) => {
 	// Setting new form data
-	let formData = new form({
-		template_id: res.locals.templateId,
-		created_by: res.locals.user._id,
-		assigned_to: req.body.asignedToId,
-		data: req.body.data
-	});
-	// Saving form data
-	formData.save(function (err, result) {
-		if (err) {
-			res.status(400).send({ success: false, message: err });
-		} else {
-			// Adding required parameters
-			console.log('Added Form to DB');
-			res.locals.formId = result._id.toString();
-			// Passing contorl to addForm to block-chain
-			next();
-		}
-	});
+	//Hack for requestId
+	res.locals.requestId = '123';
+	if (res.locals.user._id && req.body.templateId && req.body.deadline && res.locals.requestId) {
+		Template.findOne({ _id: req.body.templateId }, { title: 1 }, function (err, result) {
+			if (err) {
+				res.status(400).send({ success: false, message: err });
+			} else {
+				console.log(result);
+				if (result.title) {
+					let formData = new Form({
+						template_id: req.body.templateId,
+						created_by: res.locals.user._id,
+						assigned_to: [],
+						data: req.body.data,
+						files: [],
+						deadline: req.body.deadline,
+						title: result.title
+					});
+					// Saving form data
+					formData.save(function (err, result) {
+						if (err) {
+							res.status(400).send({ success: false, message: err });
+						} else {
+							// Adding required parameters
+							console.log('Added Form to DB');
+							res.locals.formId = result._id.toString();
+							// Passing contorl to addForm to block-chain
+							next();
+						}
+					});
+				} else {
+					res.status(400).send({ success: false, message: 'No such template' });
+				}
+			}
+		});
+	} else {
+		res.status(400).send({ success: false, message: 'Invalid Parameters' });
+	}
 };
