@@ -14,16 +14,16 @@ router.all('/', function (req, res) {
  */
 router.post('/users/register',
 	verifyMiddleware.verifySystemAdmin,
-	require('./person/registerPerson'),
-	require('./blockchain/addPerson'));
+	require('./person/registerPerson'));
+	// require('./blockchain/addPerson'));
 
 router.post('/users/login',
 	require('./person/loginPerson'));
 
 router.post('/users/delete',
 	verifyMiddleware.verifySystemAdmin,
-	require('./person/deletePerson'),
-	require('./blockchain/deletePerson'));
+	require('./person/deletePerson'));
+	// require('./blockchain/deletePerson'));
 
 router.all('/users',
 	verifyMiddleware.verifyPerson,
@@ -202,4 +202,13 @@ router.post('/query/getMyForms',
 router.post('/query/getTemplateRequestId',
 	verifyMiddleware.verifyPerson,
 	queryMiddleware.getTemplateRequestId);
+
+/**
+ * Notification Route
+ */
+router.get('/notification',
+	verifyMiddleware.verifyPerson,
+	require('../utils/sseHelper'),
+	require('./notifications/notifications'));
+
 module.exports = router;
