@@ -5,12 +5,28 @@ const Form = require('../../../models/form');
 const customOptions = {};
 const formTC = composeWithMongoose(Form, customOptions);
 
+formTC.addResolver({
+	kind: 'query',
+	name: 'findOwn',
+	type: [formTC],
+	args: {
+		limit: {
+			type: 'Int',
+			default: 20
+		},
+		_id: {
+			type: 'Boolean',
+			default: false
+		}
+	},
+	resolve: require('../resolvers/form/findOwn')
+});
+
 schemaComposer.rootQuery().addFields({
 	formById: formTC.getResolver('findById'),
-	formByIds: formTC.getResolver('findByIds'),
 	formOne: formTC.getResolver('findOne'),
 	formMany: formTC.getResolver('findMany'),
-	formCount: formTC.getResolver('count')
+	formOwn: formTC.getResolver('findOwn')
 });
 
 module.exports = schemaComposer.buildSchema();
