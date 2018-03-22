@@ -122,11 +122,31 @@ router.post('/forms/delete',
 	require('./forms/deleteForm'),
 	require('./blockchain/deleteForm'));
 
-router.post('/forms/assign',
+router.post('/forms/assignUser',
 	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyAdmin,
-	require('./forms/assignUserAndDeadline'),
+	require('./forms/assignUser'),
 	require('./blockchain/assignForm'));
+
+router.post('/forms/assignGC',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyAdmin,
+	require('./forms/assignGCAndDeadline'),
+	require('./blockchain/assignForm'));
+
+router.post('/forms/forfeit',
+	verifyMiddleware.verifyPerson,
+	require('./blockchain/forfeitForm'));
+
+router.post('/forms/submitToGC',
+	verifyMiddleware.verifyPerson,
+	require('./forms/submitToGC'),
+	require('./blockchain/submitForm'));
+
+router.post('/forms/submitToAdmin',
+	verifyMiddleware.verifyPerson,
+	require('./forms/submitToAdmin'),
+	require('./blockchain/submitForm'));
 
 router.all('/forms',
 	verifyMiddleware.verifyPerson,
