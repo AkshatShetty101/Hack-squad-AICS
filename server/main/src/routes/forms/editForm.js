@@ -1,57 +1,33 @@
 const Form = require('../../models/form');
-const fs = require('fs');
+const fs = require('fs-extra');
+const formidable = require('formidable');
 const path = require('path');
+
 module.exports = (req, res, next) => {
-	var p = path.join(__dirname, '../../../db/fileStore', req.body.formId.toString());
-	if (fs.existsSync(p)) {
-		// Do something
-		console.log('Exists!');
-	} else {
-		console.log('Does not exists!');
-		fs.mkdirSync(p);
-		console.log('folder created!');
-	}
-	var promise = new Promise((resolve, reject) => {
-		var fileNames = [];
-		for (let file in require.body.files) {
-			file.mv(path.join(p, file.name), function (err) {
+	var pathToUploadTo = path.join(__dirname, '../../../uploads', req.body.formId.toString());
+
+	fs.ensureDirSync(pathToUploadTo); //ensures that the path exists
+	console.log(req.files);
+
+	const form = new formidable.IncomingForm();
+	form.parse(req, (err, fields, files) => {
+		console.log('fields:', fields, 'files:', files);
+		let fileNames = '';
+		Form.findByIdAndUpdate(req.body.formId,
+			{ $set: { data: req.body.data, files: fileNames } },
+			{ new: true },
+			(err, data) => {
 				if (err) {
-					console.log(err);
-					reject(err);
-				}
-				else {
-					fileNames.push(file.name);
-					console.log("File Uploaded!");
+					res.status(400).send({ success: false, message: 'Error updating forms' });
+				} else {
+					console.log(data);
+					if (data) {
+						console.log('Form updated');
+						next();
+					} else {
+						res.status(400).send({ success: false, message: 'No such form' });
+					}
 				}
 			});
-		}
-		resolve(fileNames);
 	});
-	// 		if (req.body.data) {
-	// 			newData.data = req.body.data;
-	// 		}
-	// 		if (req.body.title) {
-	// 			newData.title = req.body.title;
-	// 		}
-	// 	console.log(newData);
-	// 	if (newData.data) {
-	// 		Form.findByIdAndUpdate(req.body.formId, { $set: newData }, function (err, result) {
-	// 			if (err) {
-	// 				res.status(500).send({ success: false, message: err });
-	// 			} else {
-	// 				if (result) {
-	// 					console.log('Updated form in DB');
-	// 					next();
-	// 				} else {
-	// 					res.status(400).send({ success: false, message: 'No such form to edit' });
-	// 				}
-	// 			}
-	// 		});
-	// 	} else {
-	// 		res.status(400).send({ success: false, message: 'Insufficient Parameters' });
-	// 	}
-	// }
-}).catch ((err) => {
-	res.status(500).send({ success: false, message: err });
-});
 };

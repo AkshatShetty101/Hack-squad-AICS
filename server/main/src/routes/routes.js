@@ -22,8 +22,8 @@ router.post('/users/login',
 
 router.post('/users/delete',
 	verifyMiddleware.verifySystemAdmin,
-	require('./person/deletePerson'));
-	// require('./blockchain/deletePerson'));
+	require('./person/deletePerson'),
+	require('./blockchain/deletePerson'));
 
 router.all('/users',
 	verifyMiddleware.verifyPerson,
@@ -109,11 +109,10 @@ router.all('/templates',
 /**
  * Form Routes
  */
-
 router.post('/forms/edit',
 	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyAdmin,
-	// require('./forms/editForm'),
+	require('./forms/editForm'),
 	require('./blockchain/editForm'));
 
 router.post('/forms/delete',
@@ -200,7 +199,6 @@ router.all('/issueTracker',
 /**
  * Division Routes
  */
-
 router.post('/division/add',
 	verifyMiddleware.verifySystemAdmin,
 	require('./divisions/addDivision'));

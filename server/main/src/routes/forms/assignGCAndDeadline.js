@@ -7,7 +7,8 @@ module.exports = (req, res, next) => {
 		Form.findByIdAndUpdate({ _id: req.body.formId },
 			{ $set: { deadline: req.body.deadline }, $push: { assigned_to: req.body.assigneeId } }, { new: true }, function (err, result) {
 				if (err) {
-					res.status(400).send({ success: false, message: err });
+					console.error(err);
+					res.status(400).send({ success: false, message: 'Error updating forms' });
 				} else {
 					console.log(result);
 					if (result) {
