@@ -186,9 +186,6 @@ router.post('/reqAuth/makeRequest',
 	verifyMiddleware.verifyRequestingAuthority,
 	require('./requestingAuth/makeRequest'));
 
-router.post('/reqAuth/login',
-	require('./requestingAuth/loginRequestingAuth'));
-
 router.all('/reqAuth',
 	verifyMiddleware.verifyRequestingAuthority,
 	graphQLHTTP((req, res) => ({ // to be replaced by router.post
