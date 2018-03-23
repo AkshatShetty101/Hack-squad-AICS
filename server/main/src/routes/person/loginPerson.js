@@ -16,14 +16,14 @@ module.exports = (req, res) => {
 						messageToSend.token = tokenGenerator(data._id.toString());
 						res.status(200).json(messageToSend);
 					} else {
-						res.status(400).json({ success: false, message: 'Credentials do not match' });
+						res.status(400).json(responseMessage.FAIL.INVALID_CRED);
 					}
 				} else {
-					res.status(400).json({ success: false, message: 'No such user' });
+					res.status(400).json(responseMessage.FAIL.USER.NOT_EXISTS);
 				}
 			}
 		});
 	} else {
-		res.status(400).json({ success: false, message: 'Invalid parameters' });
+		res.status(400).json(responseMessage.FAIL.INC_INV_DATA);
 	}
 };
