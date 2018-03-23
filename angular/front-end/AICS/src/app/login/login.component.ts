@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../shared/services/http.service';
+import { AuthService } from '../shared/services/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,7 +12,9 @@ export class LoginComponent implements OnInit {
   myForm: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private http: HttpService
+    private http: HttpService,
+    private auth: AuthService,
+    private router: Router
   ) {
     this.myForm = fb.group({
       'username': ['', [Validators.required]],
@@ -23,16 +27,30 @@ export class LoginComponent implements OnInit {
   submitCredentials(data) {
     let request: any;
     request = {
-      username: data.username,
+      email: data.username,
       password: data.password
     };
-    console.log(request);
+    // console.log(request);
     this.myForm.reset();
+    this.auth.empty();
     this.http.verifyUser(request)
       .subscribe(
-      (result) => {
-        console.log(result);
-      });
+      (response) => {
+        console.log(response);
+        if(response.status === 'LOGIN'){
+          console.log('Here!');
+          this.auth.storeStatus(response.token);
+          this.auth.storeRole(response.designation);
+          this.router.navigateByUrl('');
+        }
+      },
+      (error) => {
+        error = error.json();
+        console.log(error);
+        if(error.status === 'INVALID_CRED'){
+          alert('Wrong username or password');
+        }
+    });
   }
 
 }
