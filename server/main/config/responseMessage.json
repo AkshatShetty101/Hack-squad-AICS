@@ -1,0 +1,120 @@
+{
+	"FAIL": {
+		"UNAUTHORISED": {
+			"success": false,
+			"message": "User not authorised",
+			"status": "UNAUTHORISED"
+		},
+		"INVALID_TOKEN": {
+			"success": false,
+			"message": "No valid Auth Token",
+			"status": "INVALID_TOKEN"
+		},
+		"SOMETHING_WRONG": {
+			"success": false,
+			"message": "Sorry, Something went wrong",
+			"status": "SOMETHING_WRONG"
+		},
+		"INC_INV_DATA": {
+			"success": false,
+			"message": "Incomplete or invalid data passed",
+			"status": "INC_INV_DATA"
+		},
+		"USER": {
+			"EXISTS": {
+				"success": false,
+				"message": "User Already exists",
+				"status": "USER_EXISTS"
+			},
+			"NOT_EXISTS": {
+				"success": false,
+				"message": "User does not exists",
+				"status": "USER_NOT_EXISTS"
+			}
+		},
+		"DIVISION": {
+			"EXISTS": {
+				"success": false,
+				"message": "Divsion Already exists",
+				"status": "DIVISION_EXISTS"
+			},
+			"NOT_EXISTS": {
+				"success": false,
+				"message": "Division does not exists",
+				"status": "DIVISION_NOT_EXISTS"
+			}
+		},
+		"FORM": {
+			"EXISTS": {
+				"success": false,
+				"message": "Form Already exists",
+				"status": "FORM_EXISTS"
+			},
+			"NOT_EXISTS": {
+				"success": false,
+				"message": "Form does not exists",
+				"status": "FORM_NOT_EXISTS"
+			},
+			"CANNOT_DELETE": {
+				"success": false,
+				"message": "Form cannot be deleted",
+				"status": "FORM_CANNOT_DELETE"
+			}
+		},
+		"TEMPLATE": {
+			"EXISTS": {
+				"success": false,
+				"message": "Template Already exists",
+				"status": "TEMPLATE_EXISTS"
+			},
+			"NOT_EXISTS": {
+				"success": false,
+				"message": "Template does not exists",
+				"status": "TEMPLATE_NOT_EXISTS"
+			}
+		},
+		"RA": {
+			"EXISTS": {
+				"success": false,
+				"message": "Requesting Authority Already exists",
+				"status": "RA_EXISTS"
+			},
+			"NOT_EXISTS": {
+				"success": false,
+				"message": "Requesting Authority does not exists",
+				"status": "RA_NOT_EXISTS"
+			}
+		},
+		"INVALID_CRED": {
+			"success": false,
+        	"message": "Wrong Username or Password",
+        	"status": "INVALID_CRED"
+		},
+		"NOT_FOUND": {
+			"success": false,
+			"message": "Requested Resource Not Found",
+			"status": "NOT_FOUND"
+		}
+	},
+	"SUCCESS": {
+		"SUCESS": {
+			"success": true,
+			"status": "SUCCESS"
+		},
+		"LOGIN": {
+			"success": true,
+			"message": "Welcome!",
+			"status": "LOGIN"
+		},
+		"REGISTER": {
+			"success": true,
+        	"message": "User Added",
+        	"status": "REGISTER"
+		},
+		"IT_WORKS": {
+			"success": true,
+			"message": "Connected to server",
+			"status": "IT_WORKS"
+		}
+	}
+}

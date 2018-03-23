@@ -26,14 +26,17 @@ exports.getMyForms = (req, res) => {
 				resolve(list);
 			});
 			promise.then((data) => {
-				res.status(200).send({success:true,data:data});
+				let messageToSend = responseMessage.SUCCESS.SUCCESS;
+				messageToSend.data = data;
+				res.status(200).json(messageToSend);
 			}).catch((err) => {
-				res.status(400).send({ success: false, message: err });
+				console.error(err.message);
+				res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 			});
 		})
-		.catch((error) => {
-			console.log(error);
-			res.status(400).send({ success: false, message: error });
+		.catch((err) => {
+			console.error(err.message);
+			res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 			// Add optional error handling here.
 		});
 };
@@ -56,12 +59,13 @@ exports.getTemplateRequestId = (req, res, next) => {
 				next();
 			})
 			.catch((error) => {
-				console.log(error);
-				res.status(400).send({ success: false, message: 'No such template exists' });
+				console.error(err.message);
+				res.status(500).json(responseMessage.FAIL.TEMPLATE.NOT_EXISTS);
 				// Add optional error handling here.
 			});
 	} else {
-		res.status(400).send({ success: false, message: 'Invalid Parameters' });
+		console.error(err.message);
+		res.status(500).json(responseMessage.FAIL.INC_INV_DATA);
 	}
 };
 
@@ -82,12 +86,13 @@ exports.getFormRequestId = (req, res, next) => {
 				res.locals.requestId = asset[0].requestId;
 				next();
 			})
-			.catch((error) => {
-				console.log(error);
-				res.status(400).send({ success: false, message: 'No such form exists' });
+			.catch((err) => {
+				console.error(err.message);
+				res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 				// Add optional error handling here.
 			});
 	} else {
-		res.status(400).send({ success: false, message: 'Invalid Parameters' });
+		console.error(err.message);
+		res.status(500).json(responseMessage.FAIL.INC_INV_DATA);
 	}
 };

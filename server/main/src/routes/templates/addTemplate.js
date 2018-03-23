@@ -1,19 +1,20 @@
 // Declaring constants
-const template = require('../../models/template');
+const Template = require('../../models/template');
 
 module.exports = (req, res, next) => {
 	// Setting data for new template
-	if (res.locals.user._id && req.body.tags && req.body.format && res.locals.requestId && req.body.title) {
-		let templateData = new template({
+	if (req.body.format && req.body.title) {
+		const templateData = new Template({
 			created_by: res.locals.user._id,
-			tags: req.body.tags,
+			tags: req.body.tags ? req.body.tags : [],
 			format: req.body.format,
 			title: req.body.title
 		});
 		// Saving template to DB
 		templateData.save((err, result) => {
 			if (err) {
-				res.status(400).send({ success: false, message: err });
+				console.error(err);
+				res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
 			} else {
 				console.log('Added Template to DB');
 				// Adding required parameters
@@ -23,6 +24,6 @@ module.exports = (req, res, next) => {
 			}
 		});
 	} else {
-		res.status(400).send({ success: false, message: 'Insufficient parameters' });
+		res.status(400).json(responseMessage.FAIL.INC_INV_DATA);
 	}
 };

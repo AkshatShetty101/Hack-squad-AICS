@@ -7,13 +7,13 @@ module.exports = (req, res) => {
 			{ $set: { 'access_form.$.metadata': req.body.access_form.metadata } }, (err, data) => {
 				if (err) {
 					console.error(err);
-					res.status(500).json({ success: false, message: 'Error fetching data' });
+					res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 				} else {
 					console.log(data);
-					res.status(200).json({ success: true, message: 'Access form updated successfully' });
+					res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 				}
 			});
 	} else {
-		res.status(400).json({ success: false, message: 'Invalid parameters' });
+		res.status(400).json(responseMessage.FAIL.INC_INV_DATA);
 	}
 };

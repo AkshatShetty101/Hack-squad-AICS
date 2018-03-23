@@ -14,16 +14,16 @@ router.all('/', function (req, res) {
  */
 router.post('/users/register',
 	verifyMiddleware.verifySystemAdmin,
-	require('./person/registerPerson'));
-// require('./blockchain/addPerson'));
+	require('./person/registerPerson'),
+	require('./blockchain/addPerson'));
 
 router.post('/users/login',
 	require('./person/loginPerson'));
 
 router.post('/users/delete',
 	verifyMiddleware.verifySystemAdmin,
-	require('./person/deletePerson'));
-// require('./blockchain/deletePerson'));
+	require('./person/deletePerson'),
+	require('./blockchain/deletePerson'));
 
 router.all('/users',
 	verifyMiddleware.verifyPerson,
@@ -109,11 +109,10 @@ router.all('/templates',
 /**
  * Form Routes
  */
-
 router.post('/forms/edit',
 	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyAdmin,
-	// require('./forms/editForm'),
+	require('./forms/editForm'),
 	require('./blockchain/editForm'));
 
 router.post('/forms/delete',
@@ -187,9 +186,6 @@ router.post('/reqAuth/makeRequest',
 	verifyMiddleware.verifyRequestingAuthority,
 	require('./requestingAuth/makeRequest'));
 
-router.post('/reqAuth/login',
-	require('./requestingAuth/loginRequestingAuth'));
-
 router.all('/reqAuth',
 	verifyMiddleware.verifyRequestingAuthority,
 	graphQLHTTP((req, res) => ({ // to be replaced by router.post
@@ -212,7 +208,6 @@ router.all('/issueTracker',
 /**
  * Division Routes
  */
-
 router.post('/division/add',
 	verifyMiddleware.verifySystemAdmin,
 	require('./divisions/addDivision'));

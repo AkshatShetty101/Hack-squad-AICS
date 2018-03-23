@@ -10,12 +10,12 @@ module.exports = (req, res) => {
 		newAdmin.save((err) => {
 			if (err) {
 				console.error(err);
-				res.status(500).json({ success: false, message: 'User already exists' });
+				res.status(400).json(responseMessage.FAIL.USER.EXISTS);
 			} else {
-				res.status(200).json({ success: true, message: 'Add System Admin Successful' });
+				res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 			}
 		});
 	} else {
-		res.status(400).json({ success: false, message: 'Invalid parameters' });
+		res.status(400).json(responseMessage.FAIL.INC_INV_DATA);
 	}
 };

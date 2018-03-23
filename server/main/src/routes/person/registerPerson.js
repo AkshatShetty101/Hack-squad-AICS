@@ -1,6 +1,6 @@
 // Declaring constants
 const Person = require('../../models/person');
-const Divison = require('../../models/division');
+const Division = require('../../models/division');
 const passwordGenerator = require('../../utils/passwordGenerator').hash;
 
 module.exports = (req, res, next) => {
@@ -10,10 +10,10 @@ module.exports = (req, res, next) => {
 		&& req.body.name.lastName && req.body.name.lastName.length > 0 && req.body.designation
 		&& req.body.designation.length > 0 && req.body.divisionName && req.body.divisionName.length > 0) {
 		// console.log("Here");
-		Divison.findOne({ name: req.body.divisionName }, { _id: 1 }, (err, data) => {
+		Division.findOne({ name: req.body.divisionName }, { _id: 1 }, (err, data) => {
 			if (err) {
 				console.error(err);
-				res.status(500).json({ success: false, message: 'Division does not exist' });
+				res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 			} else if (data) {
 				// If department exists add person to DB
 				let password = passwordGenerator(req.body.password);
@@ -28,20 +28,27 @@ module.exports = (req, res, next) => {
 				userData.save((err, result) => {
 					if (err) {
 						console.error(err);
-						res.status(500).json({ success: false, message: 'User already exists' });
+						res.status(400).json(responseMessage.FAIL.USER.EXISTS);
 					} else {
 						// Adding parameters before passing to block-chain
 						res.locals = req.body;
 						res.locals.personId = result._id;
 						// Passing control to block-chain
-						next();
+						let updateQuery = { $push: { user_id: result._id } };
+						if (req.body.designation === 'gc') {
+							updateQuery = { $set: { gc_id: result._id } };
+						}
+						Division.findOneAndUpdate({ _id: data._id }, updateQuery, (err, doc) => {
+							err ? res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG)
+								: next();
+						});
 					}
 				});
 			} else {
-				res.status(400).json({ success: false, message: 'No such Division/Group/Organization' });
+				res.status(400).json(responseMessage.FAIL.DIVISION.NOT_EXISTS);
 			}
 		});
 	} else {
-		res.status(400).json({ success: false, message: 'Invalid parameters' });
+		res.status(400).json(responseMessage.FAIL.INC_INV_DATA);
 	}
 };

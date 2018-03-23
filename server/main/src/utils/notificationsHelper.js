@@ -1,14 +1,6 @@
 /* eslint-disable */
 module.exports = exports = {};
 
-exports.addSubscriber = (id) => {
-	activeNotificationSubscribers.add(id);
-};
-
-exports.removeSubscriber = (id) => {
-	activeNotificationSubscribers.delete(id);
-};
-
 exports.addNotificationToQueue = (id, message) => {
 	console.log('notification added');
 	redisClient.RPUSH(id, JSON.stringify(message), (err, reply) => { //add to end of queue

@@ -30,13 +30,15 @@ module.exports = (req, res) => {
 			transaction.newHolder = asignee;
 			console.log('Established!4');
 			transaction.type = 'approve';
-			if (req.body.metadata)
+			if (req.body.metadata) {
 				transaction.metadata = JSON.stringify(req.body.metadata);
-			else
+			} else {
 				transaction.metadata = '{}';
+			}
 			transaction.form = factory.newRelationship(this.NS, 'Form', req.body.formId);
 			console.log('Established!5');
 			// Submitting the transaction
+<<<<<<< HEAD
 			try {
 				this.bizNetworkConnection.submitTransaction(transaction).then(() => {
 					console.log('Established!6');
@@ -52,10 +54,21 @@ module.exports = (req, res) => {
 			} catch(e){
 				console.log(e);
 			}
+=======
+			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
+				// Returning response
+				console.log('Form Submitted successfully');
+				res.status(200).json(responseMessage.SUCCESS.SUCCESS);
+			}).catch((err) => {
+				// Catching errors
+				console.error(err.message);
+				res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
+			});
+>>>>>>> 60c5560552359730f40bf26e16cbec4994c5b4a1
 		})
 		.catch(err => {
 			// Catching errors
-			console.log(err);
-			res.send({ 'success': false, 'message': err.message });
+			console.error(err.message);
+			res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 		});
 };

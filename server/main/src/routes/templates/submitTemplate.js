@@ -2,16 +2,17 @@ const Template = require('../../models/template');
 const ReqForm = require('../../models/request_form');
 
 module.exports = (req, res, next) => {
-	let data = {
+	const data = {
 		template:{
 			template_id: req.body.templateId,
 			is_approved: false
 		}
 	};
 	console.log(res.locals.requestId);
-	ReqForm.findByIdAndUpdate(res.locals.requestId, { $set: data },{new:true}, (err, result) => {
+	ReqForm.findByIdAndUpdate(res.locals.requestId, { $set: data },{ new:true }, (err, result) => {
 		if (err) {
-			res.status(400).send({ success: false, message: err });
+			console.error(err);
+			res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
 		} else {
 			// Added to DB successfully
 			// Now passing control to blockchain

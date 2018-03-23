@@ -15,20 +15,20 @@ module.exports = (req, res, next) => {
 	}
 	console.log(newData);
 	if (req.body.templateId && (newData.title || newData.format || newData.tags)) {
-		template.findByIdAndUpdate(req.body.templateId, { $set: newData }, function (err, result) {
+		template.findByIdAndUpdate(req.body.templateId, { $set: newData }, (err, result) => {
 			if (err) {
-				res.status(500).send({ success: false, message: err });
+				console.error(err);
+				res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
 			} else {
 				if (result) {
 					console.log('Updated template in DB');
 					next();
 				} else {
-					res.status(400).send({ success: false, message: 'No such template to edit' });
+					res.status(400).json(responseMessage.FAIL.TEMPLATE.NOT_EXISTS);
 				}
 			}
 		});
 	} else {
-		res.status(400).send({ success: false, message: 'Insufficient Parameters' });
+		res.status(400).json(responseMessage.FAIL.INC_INV_DATA);
 	}
-
 };

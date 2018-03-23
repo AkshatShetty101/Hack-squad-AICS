@@ -1,9 +1,9 @@
 const notificationsHelper = require('../../utils/notificationsHelper');
 
 module.exports = (req, res) => {
-	console.log('her1e');
 	let notifInterval;
 	res.sseSetup();
+	console.log('Notifications Set');
 	activeNotificationSubscribersResponse[res.locals.user._id] = res;
 	if (notifInterval) {
 		clearInterval(notifInterval);
@@ -11,11 +11,11 @@ module.exports = (req, res) => {
 
 	console.log(res.locals.user._id);
 	notifInterval = setInterval(() => {
-		console.log('here');
 		notificationsHelper.getNotificationFromQueue(res.locals.user._id.toString())
 			.then((notif) => {
 				console.log(notif);
 				if (notif) {
+					console.log('Sending Notification');
 					res.sseSend(notif);
 				}
 			})
