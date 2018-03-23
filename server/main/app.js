@@ -1,9 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const config = require('config');
 require('composer-connector-hlfv1');
-// const redis = require('redis');
+const redis = require('redis');
 
 
 require('dotenv-safe').config(); // automatically configure environment variables from .env
@@ -13,19 +12,19 @@ require('./config/Array_remove_polyfill')(); // polyfill for Array remove by val
 // global configs
 global.BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 global.async = require('async');
-// global.redisClient = redis.createClient();
+global.redisClient = redis.createClient();
 // global.activeNotificationSubscribers = new Set();
 global.notificationMessage = require('./config/notification');
 global.responseMessage = require('./config/responseMessage.json');
 // global.activeNotificationSubscribersResponse = {};
 
-// redisClient
-// 	.on('connect', () => {
-// 		console.log('[REDIS] Connected to Redis Store');
-// 	})
-// 	.on('error', (err) => {
-// 		console.error('[REDIS] Error:', err); // log errors from redis store
-// 	});
+redisClient
+	.on('connect', () => {
+		console.log('[REDIS] Connected to Redis Store');
+	})
+	.on('error', (err) => {
+		console.error('[REDIS] Error:', err); // log errors from redis store
+	});
 
 const app = express();
 
@@ -35,7 +34,6 @@ app.use(require('morgan')('dev'));
 app.use(require('cors')());
 
 // Routes
-app.use('/', (req, res) => res.status(200).json(responseMessage.SUCCESS.IT_WORKS));
 app.use('/api', require(path.join(__dirname, 'src', 'routes', 'routes.js')));
 
 app.listen(process.env.PORT, () => {
