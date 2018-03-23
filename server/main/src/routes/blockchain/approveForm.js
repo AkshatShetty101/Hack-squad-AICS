@@ -38,23 +38,6 @@ module.exports = (req, res) => {
 			transaction.form = factory.newRelationship(this.NS, 'Form', req.body.formId);
 			console.log('Established!5');
 			// Submitting the transaction
-<<<<<<< HEAD
-			try {
-				this.bizNetworkConnection.submitTransaction(transaction).then(() => {
-					console.log('Established!6');
-					// Returning response
-					console.log('Form Approved successfully');
-					res.json({ 'success': true, 'message': 'Form Submitted successfully' });
-				}).catch((err) => {
-					// Catching errors
-					console.log(err.message);
-					res.send({ 'success': false, 'message': err.message });
-				});
-
-			} catch(e){
-				console.log(e);
-			}
-=======
 			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
 				// Returning response
 				console.log('Form Submitted successfully');
@@ -64,7 +47,6 @@ module.exports = (req, res) => {
 				console.error(err.message);
 				res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 			});
->>>>>>> 60c5560552359730f40bf26e16cbec4994c5b4a1
 		})
 		.catch(err => {
 			// Catching errors
