@@ -1,6 +1,6 @@
 {
     "name": "aics",
-    "type": "hlfv1",
+    "type": "hlfv1.1",
     "mspID": "Org1MSP",
     "peers": [
         {

@@ -64,3 +64,30 @@ exports.getTemplateRequestId = (req, res, next) => {
 		res.status(400).send({ success: false, message: 'Invalid Parameters' });
 	}
 };
+
+exports.getFormRequestId = (req, res, next) => {
+	this.bizNetworkConnection = new BusinessNetworkConnection();
+	this.cardName = config.get('cardName');
+	if (req.body.formId) {
+		return this.bizNetworkConnection.connect(this.cardName)
+			.then((result) => {
+				this.businessNetworkDefinition = result;
+				// Getting factory definitions
+				console.log(req.body.formId);
+				var query = this.bizNetworkConnection.buildQuery(
+					'SELECT ' + NS_F + ' WHERE (formId == _$inputValue)');
+				return this.bizNetworkConnection.query(query, { inputValue: req.body.formId.toString() });
+			})
+			.then((asset) => {
+				res.locals.requestId = asset[0].requestId;
+				next();
+			})
+			.catch((error) => {
+				console.log(error);
+				res.status(400).send({ success: false, message: 'No such form exists' });
+				// Add optional error handling here.
+			});
+	} else {
+		res.status(400).send({ success: false, message: 'Invalid Parameters' });
+	}
+};

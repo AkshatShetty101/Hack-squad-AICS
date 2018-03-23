@@ -3,12 +3,11 @@ var Template = require('../../models/template');
 const Form = require('../../models/form');
 module.exports = (req, res, next) => {
 	// Setting new form data
-	//Hack for requestId
-	res.locals.requestId = '123';
-	if (res.locals.user._id && req.body.templateId && req.body.deadline && res.locals.requestId) {
+	if (req.body.templateId && req.body.deadline) {
 		Template.findOne({ _id: req.body.templateId }, { title: 1 }, function (err, result) {
 			if (err) {
-				res.status(400).send({ success: false, message: err });
+				console.error(err);
+				res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 			} else {
 				console.log(result);
 				if (result.title) {
@@ -22,9 +21,9 @@ module.exports = (req, res, next) => {
 						title: result.title
 					});
 					// Saving form data
-					formData.save(function (err, result) {
+					formData.save((err, result) => {
 						if (err) {
-							res.status(400).send({ success: false, message: err });
+							res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
 						} else {
 							// Adding required parameters
 							console.log('Added Form to DB');
@@ -34,11 +33,11 @@ module.exports = (req, res, next) => {
 						}
 					});
 				} else {
-					res.status(400).send({ success: false, message: 'No such template' });
+					res.status(400).json(responseMessage.FAIL.TEMPLATE.NOT_EXISTS);
 				}
 			}
 		});
 	} else {
-		res.status(400).send({ success: false, message: 'Invalid Parameters' });
+		res.status(400).json(responseMessage.FAIL.INC_INV_DATA);
 	}
 };

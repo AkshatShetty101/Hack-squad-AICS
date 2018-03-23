@@ -54,6 +54,11 @@
 				"success": false,
 				"message": "Form does not exists",
 				"status": "FORM_NOT_EXISTS"
+			},
+			"CANNOT_DELETE": {
+				"success": false,
+				"message": "Form cannot be deleted",
+				"status": "FORM_CANNOT_DELETE"
 			}
 		},
 		"TEMPLATE": {

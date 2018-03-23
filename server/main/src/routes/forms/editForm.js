@@ -18,14 +18,14 @@ module.exports = (req, res, next) => {
 			{ new: true },
 			(err, data) => {
 				if (err) {
-					res.status(400).send({ success: false, message: 'Error updating forms' });
+					res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
 				} else {
 					console.log(data);
 					if (data) {
 						console.log('Form updated');
 						next();
 					} else {
-						res.status(400).send({ success: false, message: 'No such form' });
+						res.status(400).json(responseMessage.FAIL.FORM.NOT_EXISTS);
 					}
 				}
 			});

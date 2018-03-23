@@ -142,9 +142,21 @@ router.post('/forms/submitToGC',
 	require('./forms/submitToGC'),
 	require('./blockchain/submitForm'));
 
-router.post('/forms/submitToAdmin',
+// router.post('/forms/submitToAdmin',
+// 	verifyMiddleware.verifyPerson,
+// 	require('./forms/submitToAdmin'),
+// 	require('./blockchain/submitForm'));
+
+router.post('/forms/approveGC',
 	verifyMiddleware.verifyPerson,
-	require('./forms/submitToAdmin'),
+	require('./forms/approveGCAndSubmitToAdmin'),
+	require('./blockchain/approveForm'),
+	require('./blockchain/submitForm'));
+
+router.post('/forms/approveAdmin',
+	verifyMiddleware.verifyPerson,
+	require('./forms/approveAdminAndSubmitToRA'),
+	require('./blockchain/approveForm'),
 	require('./blockchain/submitForm'));
 
 router.all('/forms',
@@ -231,6 +243,9 @@ router.post('/query/getTemplateRequestId',
 	verifyMiddleware.verifyPerson,
 	queryMiddleware.getTemplateRequestId);
 
+router.post('/query/getFormRequestId',
+	verifyMiddleware.verifyPerson,
+	queryMiddleware.getFormRequestId);
 /**
  * Notification Route
  */
