@@ -22,7 +22,15 @@ exports.verifyPerson = (req, res, next) => {
 						res.locals.user = data;
 						next();
 					} else {
-						res.status(400).json(responseMessage.FAIL.USER_NOT_EXIST);
+						// If not user, possibly Requesting Authority
+						ReqAuth.findOne({ _id: decoded.data }, (err, data) => {
+							if (data) {
+								res.locals.user = { designation: 'ra' };
+								next();
+							} else {
+								res.status(400).json(responseMessage.FAIL.USER_NOT_EXIST);
+							}
+						});
 					}
 				});
 			}
@@ -62,29 +70,11 @@ exports.verifyAdminOrGC = (req, res, next) => {
 };
 
 exports.verifyRequestingAuthority = (req, res, next) => {
-	// check header or url parameters or post parameters for token
-	const token = req.body.token || req.query.token || req.headers['x-access-token'];
-	if (token) {
-		jwt.verify(token, jwtSecretKey, (err, decoded) => {
-			if (err || !decoded) { //decoded undefined means key is wrong
-				console.error(err);
-				res.status(500).json(responseMessage.FAIL.INVALID_TOKEN);
-			}
-			else {
-				// Get user data and save it for use in other routes
-				ReqAuth.findOne({ _id: decoded.data }, (err, data) => {
-					if (data) {
-						res.locals.user = data;
-						next();
-					} else {
-						res.status(400).json(responseMessage.FAIL.USER_NOT_EXIST);
-					}
-				});
-			}
-		});
+	if (res.locals.user.designation === 'ra') {
+		next(); // token is verified and is ra
 	} else {
-		// if there is no token return error
-		res.status(401).json(responseMessage.FAIL.INVALID_TOKEN);
+		console.log('\n=================Not RA====================\n');
+		res.status(401).json(responseMessage.FAIL.UNAUTHORISED);
 	}
 };
 
