@@ -1,0 +1,1 @@
+{ "_id" : { "$oid" : "5ab4db3564373602401be8e7" }, "email" : "somera", "password" : "yHjFDj5h48QVUyXluZYU0ibz2VvlU2iRzEL3FGe3LOHXUy9xojPXKwNw7ApFW2xwc11bdab7ba4be1a8bc442f06b89ad978", "createdAt" : { "$date" : "2018-03-23T10:47:17.616+0000" }, "updatedAt" : { "$date" : "2018-03-23T10:47:17.616+0000" }, "__v" : 0 }
