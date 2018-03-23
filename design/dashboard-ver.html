@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Dashboard</title>
+        <title>Dashboard - Verify</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Fira Sans' rel='stylesheet'>
+        <!-- <link href='bootstrap.min.css' rel='stylesheet'> -->
         <style>
         body {
             margin: 0;
@@ -77,19 +78,19 @@
         .due_req{
             grid-row: 2;
             grid-column:2;            
-            background-color:#38393A; 
+            background-color:#979797; 
             padding: 15px;
-            color:#979797;
-            box-shadow: 0.5px 0.5px 5px #38393a;
+            color:#38393a;
+            box-shadow: 0px 0.5px 5px #38393a;
             
         }
         .due_ver{
             grid-row: 2;
             grid-column:3;  
-            background-color: #979797;
-            color:#38393A;
+            background-color: #38393a;
+            color:#979797;
             padding: 15px;
-            box-shadow: 0px 0.5px 5px #38393A;
+            box-shadow: 0.8px 0.5px 5px #38393A;
         }
         .add_rep{
             grid-row: 2;
@@ -99,7 +100,6 @@
             padding: 15px;
             box-shadow: 0px 0.5px 5px #38393A;
         }
-        
         .offsetbg{
             grid-row:3;
             grid-column:2/5;
@@ -116,102 +116,121 @@
             grid-row:3;
             grid-column:2/5;
             background-color: #38393A;
+            box-shadow: 1px 3px 5px #38393a;
         }
         /* styling for the actual data grid */
         .main_data{
             display:grid;
             grid-template-columns: 50% 50%;
-            grid-template-rows: 45% 55%;
+            grid-template-rows: 40% 2% 58%;
             align-items: center;            
         }
+        
         .diag{
             grid-column: 1;
             grid-row: 1;
+
         }
         .depts{
             grid-row: 1;
             grid-column: 2;
         }
-        .reqs{
-            grid-row: 2;
+        .vers{
+            grid-row: 3;
             grid-column: 1;
-            align-self:stretch;
-            /* padding-left:5%; */
+            align-items:center;
+            /* width:100%; */
             justify-self:left;
             padding-left: 10%;
         }
         .actions{
-            grid-row: 2;
+            grid-row: 3;
             grid-column: 2;
+        }
+        .line{
+            grid-row:2;
+            grid-column:1/3;
+        }
+        hr{
+            box-shadow: 0 0.08px 2px #38393A;
+            width:98%;
+            height:0.08px;
         }
 
         .sub_grid{
             display:grid;
             grid-template-columns: 10% 40% 40% 10%;
             grid-template-rows: 2vh 40% 40% 2vh;
-            height: 60%;           
-            width: 75%;
-            justify-self:center;            
-        }          
+            height: 100%;           
+            width: 100%;
+            align-items:center;
+        } 
+
+        /* center aligning  */
+        .cen{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            height:100%;
+        }
+        a{
+            text-decoration: none;
+            font-size:inherit;
+        }
 
         /* defining positions  */
         .dept_1{
             grid-row: 2;
-            grid-column: 2;           
+            grid-column: 2; 
             background-color: #49a8f7;
-            padding-top:10px;
         }
         .dept_2{
             grid-row: 2;
             grid-column: 3;
             background-color: #6fbcfc;
-            padding-top:10px;
         }
 
         .dept_3{
             grid-row: 3;
             grid-column: 2;
             background-color: #90cdff;
-            padding-top:10px;
         }
 
         .dept_4{
             grid-row: 3;
             grid-column: 3;
             background-color: #afd8fa;
-            padding-top:10px;
         } 
+        .tab{
+            color:inherit;
+            text-decoration: none;
+        }
+        
+        
 
         .btn1{
-            grid-row: 2;
+            grid-row: 2/4;
             grid-column: 2;
         }    
         .btn2{
-            grid-row: 2;
+            grid-row: 2/4;
             grid-column: 3;
         }    
-        .btn3{
-            grid-row: 3;
-            grid-column: 2;
-        }    
-        .btn4{
-            grid-row: 3;
-            grid-column: 3;
-        }
+        
         .btn {
             padding: 2px;
-            font-size: 12px;
+            font-size: 15px;
             justify-self:center;
             align-self:center;
             text-transform: uppercase;
             transition: 0.5s;
             color: #474747;
+            background-color:#ececec;
             font-family: 'fira sans';
-            border-radius: 12px !important;
-            background-color: gray;
-            border: 6px solid rgba(168, 168, 168, 0.7) !important;
-            width: 90%;
-            height:60%;
+            border-radius: 12px;
+            border: 6px solid rgba(168, 168, 168, 0.7);
+            width: 80%;
+            height:30%;
         }    
         
         ul{
@@ -243,47 +262,38 @@
             </nav>
         </header>
         <div class="container">
-            <div class="due_req">Due Requests</div>
-            <div class="due_ver">Due Verifications</div>
-            <div class="add_rep">Add To Repository</div>
+            <div class="due_req"><a class="tab" href="dashboard-req.html">DUE REQUESTS</a></div>
+            <div class="due_ver"><a class="tab" href="dashboard-ver.html">DUE VERIFICATIONS</a></div>
+            <div class="add_rep"><a class="tab" href="dashboard-repo.html">ADD TO REPOSITORY</a></div>
             <div class="bgbody"></div>
             <div class="offsetbg main_data">
                 <div class="diag">   <!--Analysed data goes here -->
                     <button style="height:20%;border-radius:50%;background-color:aqua;font-size:14px">data</button>
                 </div>
+                <div class="line "><hr></div>
                 <div class="depts sub_grid">
-                    <div class="dept_1"><span>Dept A</span></div>
-                    <div class="dept_2"><span>Dept B</span></div>
-                    <div class="dept_3"><span>Dept C</span></div>
-                    <div class="dept_4"><span>Dept D</span></div>
+                    <div class="dept_1 cen"><span>Dept A</span></div>
+                    <div class="dept_2 cen"><span>Dept B</span></div>
+                    <div class="dept_3 cen"><span>Dept C</span></div>
+                    <div class="dept_4 cen"><span>Dept D</span></div>
                 </div>
-                <hr>
-                <div class="reqs">
+                
+                <div class="vers">
                     <ul>
-                        <li><a href="#">Request from User 1 to Create a form</a></li>
-                        <li><a href="#">Request from User 2 to Create a form</a></li>
-                        <li><a href="#">Request from User 3 to Create a form</a></li>                        
-                        <li><a href="#">Request from User 4 to Create a form</a></li>
-                        <li><a href="#">Request from User 5 to Create a form</a></li>
-                        <li><a href="#">Request from User 6 to Create a form</a></li>
+                        <li><a href="#">Verification from Group Coordinator</a></li>
+                        <li><a href="#">Verification from Group Coordinator</a></li>
+                        <li><a href="#">Verification from Group Coordinator</a></li>                        
+                        <li><a href="#">Verification from Requesting Authority</a></li>
+                        <li><a href="#">Verification from Group Coordinator</a></li>
+                        <li><a href="#">Verification from Group Coordinator</a></li>
                     </ul>
                 </div>
                 <div class="actions sub_grid">
-                    <button class="btn btn1"><i class="fa fa-eye">&nbsp; Read</i></button>
-                    <button class="btn btn2"><i class="fa fa-search">&nbsp; Find</i></button>
-                    <button class="btn btn3"><i class="fa fa-code-fork">&nbsp; Merge</i></button>
-                    <button class="btn btn4"><i class="fa fa-plus">&nbsp; Create</i></button>
-
+                    <button class="btn btn1"><i class="fa fa-eye">&nbsp; Preview</i></button>
+                    <button class="btn btn2"><i class="fa fa-check-square">&nbsp; Authorise</i></button>
+                    
                 </div>
-
-          
-
-
-
             </div>
-            
-            
-
         </div>
     </body>
 </html>
