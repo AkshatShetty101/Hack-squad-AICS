@@ -25,25 +25,26 @@ module.exports = (req, res) => {
 			transaction.person = asignee;
 			transaction.newHolder = admin;
 			transaction.type = 'template_approve';
-			if (req.body.metadata)
+			if (req.body.metadata) {
 				transaction.metadata = JSON.stringify(req.body.metadata);
-			else
+			} else {
 				transaction.metadata = '{}';
+			}
 			transaction.template = factory.newRelationship(this.NS, 'Template', req.body.templateId);
 			// Submitting the transaction
 			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
                 // Returning response
                 console.log('Template approve transaction added to blockchain');
-				res.json({ 'success': true, 'message': 'Template approved by RA successfully' });
+				res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 			}).catch((err) => {
 				// Catching errors
-				console.log(err.message);
-				res.send({ 'success': false, 'message': err.message });
+				console.error(err.message);
+				res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 			});
 		})
 		.catch(err => {
 			// Catching errors
-			console.log(err);
-			res.send({ 'success': false, 'message': err.message });
+			console.error(err.message);
+			res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 		});
 };

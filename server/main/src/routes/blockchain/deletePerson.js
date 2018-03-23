@@ -26,22 +26,22 @@ module.exports = (req, res) => {
 							personRegistry.remove(data)
 								.then(() => {
 									console.log("In!");
-									res.send({ success: true, message: "Deleted Person Successfully" });
+									res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 								}).catch((err) => {
 									// Catching errors
-									console.log(err.message);
-									res.send({ 'success': false, 'message': err.message });
+									console.error(err.message);
+									res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 								});
 						}).catch(err => {
 							// Catching errors
-							console.log(err);
-							res.send({ 'success': false, 'message': err.message });
+							console.error(err.message);
+							res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 						});
 				});
 		})
 		.catch(err => {
 			// Catching errors
-			console.log(err);
-			res.send({ 'success': false, 'message': err.message });
+			console.error(err.message);
+			res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 		});
 };
