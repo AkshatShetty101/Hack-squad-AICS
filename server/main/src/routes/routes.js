@@ -6,7 +6,7 @@ const queryMiddleware = require('./blockchain/query');
 // const queryMiddleware = require('../routes/blockchain/query');
 
 router.all('/', function (req, res) {
-	res.json({ success: true });
+	res.json(responseMessage.SUCCESS.IT_WORKS);
 });
 
 /**
@@ -250,5 +250,12 @@ router.get('/notification',
 	verifyMiddleware.verifyPerson,
 	require('../utils/sseHelper'),
 	require('./notifications/notifications'));
+
+/**
+ * Translate Route
+ */
+router.post('/translate',
+	verifyMiddleware.verifyPerson,
+	require('./translate/translate'));
 
 module.exports = router;

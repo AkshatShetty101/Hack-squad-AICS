@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const config = require('config');
 require('composer-connector-hlfv1');
 const redis = require('redis');
 
