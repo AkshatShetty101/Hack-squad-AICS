@@ -13,7 +13,7 @@ exports.getMyForms = (req, res) => {
 			console.log('in1');
 			var query = this.bizNetworkConnection.buildQuery(
 				'SELECT ' + NS_F + ' WHERE (assigneeId CONTAINS _$inputValue)');
-			return this.bizNetworkConnection.query(query, { inputValue: req.body._id });
+			return this.bizNetworkConnection.query(query, { inputValue: res.locals.user._id });
 		})
 
 		.then((assets) => {
@@ -26,7 +26,7 @@ exports.getMyForms = (req, res) => {
 				resolve(list);
 			});
 			promise.then((data) => {
-				res.status(200).send(data);
+				res.status(200).send({success:true,data:data});
 			}).catch((err) => {
 				res.status(400).send({ success: false, message: err });
 			});

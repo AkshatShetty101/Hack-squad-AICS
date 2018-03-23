@@ -2,18 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const config = require('config');
-const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
+require('composer-connector-hlfv1');
 // const redis = require('redis');
 
-this.bizNetworkConnection = new BusinessNetworkConnection();
-this.cardName = config.get('cardName');
-this.businessNetworkIdentifier = 'tutorial-network.bna';
 
 require('dotenv-safe').config(); // automatically configure environment variables from .env
 require('./config/mongoDatabase')(); // Connection to Database
 require('./config/Array_remove_polyfill')(); // polyfill for Array remove by value -> arr.remove('value')
 
 // global configs
+global.BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 global.async = require('async');
 // global.redisClient = redis.createClient();
 // global.activeNotificationSubscribers = new Set();

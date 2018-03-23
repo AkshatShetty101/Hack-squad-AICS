@@ -16,6 +16,7 @@ exports.verifyPerson = (req, res, next) => {
 				res.status(500).json({ success: false, message: 'Error decoding token' });
 			}
 			else {
+				console.log(decoded.data);
 				// Get user data and save it for use in other routes
 				User.findOne({ _id: decoded.data }, (err, data) => {
 					if (data) {

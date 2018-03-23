@@ -3,7 +3,6 @@
 */
 
 // Declaring constants
-const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 const config = require('config');
 
 // Declaring block-chain related information
@@ -18,30 +17,41 @@ module.exports = (req, res) => {
 	// Establishing connection
 	this.bizNetworkConnection.connect(this.cardName)
 		.then((result) => {
+			console.log('Established!1');
 			this.businessNetworkDefinition = result;
 			// Getting factory definitions
 			let factory = this.businessNetworkDefinition.getFactory();
+			console.log('Established!2');
 			// Loading form registry
 			let asignee = factory.newRelationship(this.NS, 'Person', res.locals.user._id.toString());
 			let transaction = factory.newTransaction(this.NS, 'FormEvent');
+			console.log('Established!3');
 			transaction.person = asignee;
 			transaction.newHolder = asignee;
+			console.log('Established!4');
 			transaction.type = 'approve';
 			if (req.body.metadata)
 				transaction.metadata = JSON.stringify(req.body.metadata);
 			else
 				transaction.metadata = '{}';
 			transaction.form = factory.newRelationship(this.NS, 'Form', req.body.formId);
+			console.log('Established!5');
 			// Submitting the transaction
-			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
-				// Returning response
-				console.log('Form Submitted successfully');
-				res.json({ 'success': true, 'message': 'Form Submitted successfully' });
-			}).catch((err) => {
-				// Catching errors
-				console.log(err.message);
-				res.send({ 'success': false, 'message': err.message });
-			});
+			try {
+				this.bizNetworkConnection.submitTransaction(transaction).then(() => {
+					console.log('Established!6');
+					// Returning response
+					console.log('Form Approved successfully');
+					res.json({ 'success': true, 'message': 'Form Submitted successfully' });
+				}).catch((err) => {
+					// Catching errors
+					console.log(err.message);
+					res.send({ 'success': false, 'message': err.message });
+				});
+
+			} catch(e){
+				console.log(e);
+			}
 		})
 		.catch(err => {
 			// Catching errors

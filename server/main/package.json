@@ -34,6 +34,7 @@
     "dotenv-safe": "^5.0.1",
     "express": "^4.16.3",
     "express-graphql": "^0.6.12",
+    "fabric-client": "^1.1.0",
     "graphql": "^0.13.2",
     "graphql-compose": "^3.0.6",
     "graphql-compose-mongoose": "^3.1.1",
