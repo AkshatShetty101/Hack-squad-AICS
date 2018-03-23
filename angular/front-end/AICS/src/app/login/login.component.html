@@ -56,7 +56,7 @@
     <div class="fieldmargin">
       <form [formGroup]="myForm" (ngSubmit)="submitCredentials(myForm.value)">
         <span class="form_num">
-          <input formControlName="username" type="text" placeholder="&#xf2bd;   Email">
+          <input formControlName="username" autocomplete="true" type="text" placeholder="&#xf2bd;   Email">
         </span>
         <span class="form_num">
           <input formControlName="password" type="password" placeholder=" &#xf023;    Password">
