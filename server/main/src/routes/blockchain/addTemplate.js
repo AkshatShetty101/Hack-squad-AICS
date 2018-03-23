@@ -39,31 +39,32 @@ module.exports = (req, res, next) => {
 									transaction.person = creator;
 									transaction.newHolder = creator;
 									transaction.type = "template_create";
-									if (req.body.metadata)
+									if (req.body.metadata) {
 										transaction.metadata = JSON.stringify(req.body.metadata);
-									else
+									} else {
 										transaction.metadata = "{}";
+									}
 									transaction.template = factory.newRelationship(this.NS, 'Template', res.locals.templateId.toString());
 									// Submitting the transaction
 									this.bizNetworkConnection.submitTransaction(transaction).then((result) => {
 										// Returning response
 										console.log("Template Added successfully to block-chain");
 										// next();
-										res.json({ 'success': true, 'message': 'Template Added successfully' });
+										res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 									});
 								}).catch((err) => {
 									// Catching errors
-									console.log(err.message);
-									res.send({ 'success': false, 'message': err.message });
+									console.error(err.message);
+									res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 								});
 							}).catch((err) => {
 								// Catching errors
-								console.log(err.message);
-								res.send({ 'success': false, 'message': err.message });
+								console.error(err.message);
+								res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 							});
 					}).catch((err) => {
 						// Catching errors
-						console.log(err.message);
+						console.error(err.message);
 						next();
 					});
 				});

@@ -29,21 +29,22 @@ module.exports = (req, res) => {
 					// Adding form to form registry
 					PersonRegistry.add(person).then(() => {
 						// Returning response
-						res.send({ 'status': 1, 'message': res.locals.designation + ' added successfully' });
+						console.log(res.locals.designation + ' added successfully');
+						res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 					}).catch((err) => {
 						// Catching errors
-						console.log(err.message);
-						res.send({ 'status': -1, 'message': err.message });
+						console.error(err.message);
+						res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 					});
 				}).catch(err => {
 					// Catching errors
-					console.log(err);
-					res.send({ 'status': -1, 'message': err.message });
+					console.error(err.message);
+					res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 				});
 		})
 		.catch(err => {
 			// Catching errors
-			console.log(err);
-			res.send({ 'status': -1, 'message': err.message });
+			console.error(err.message);
+			res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 		});
 };

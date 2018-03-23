@@ -24,25 +24,26 @@ module.exports = (req, res) => {
 			transaction.person = asignee;
 			transaction.newHolder = asignee;
 			transaction.type = 'template_edit';
-			if (req.body.metadata)
+			if (req.body.metadata) {
 				transaction.metadata = JSON.stringify(req.body.metadata);
-			else
+			} else {
 				transaction.metadata = '{}';
+			}
 			transaction.template = factory.newRelationship(this.NS, 'Template', req.body.templateId);
 			// Submitting the transaction
 			this.bizNetworkConnection.submitTransaction(transaction).then((result) => {
 				console.log(result);
 				// Returning response
-				res.json({ 'success': true, 'message': 'Template Edited successfully' });
+				res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 			}).catch((err) => {
 				// Catching errors
-				console.log(err.message);
-				res.send({ 'success': false, 'message': err.message });
+				console.error(err.message);
+				res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 			});
 		})
 		.catch(err => {
 			// Catching errors
-			console.log(err);
-			res.send({ 'success': false, 'message': err.message });
+			console.error(err.message);
+			res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 		});
 };
