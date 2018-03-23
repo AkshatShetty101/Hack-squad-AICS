@@ -14,17 +14,16 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from './shared/services/http.service';
 import { HttpModule } from '@angular/http';
+import { FormBoxComponent } from './tracking/form-box/form-box.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-<<<<<<< HEAD
     DashboardComponent,
     TrackingComponent,
-    NavbarComponent
-=======
-    LoginComponent
->>>>>>> 4f40a28c23fe9e69d9d5aa4bf0010c6d392134d4
+    NavbarComponent,
+    LoginComponent,
+    FormBoxComponent
   ],
   imports: [
     BrowserModule,
