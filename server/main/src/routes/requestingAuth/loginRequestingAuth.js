@@ -7,21 +7,23 @@ module.exports = (req, res) => {
 		ReqAuth.findOne({ email: req.body.email }, { _id:1, password:1 }, (err, data) => {
 			if (err) {
 				console.error(err);
-				res.status(500).json({ success: false, message: 'Error fetching requesting authority' });
+				res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
 			} else {
 				if (data) {
 					if (passwordValidator(data.password, req.body.password)) {
 						console.log(data);
-						res.status(200).json({ success: true, token: tokenGenerator(data._id.toString()) });
+						let messageToSend = responseMessage.SUCCESS.LOGIN;
+						messageToSend.token = tokenGenerator(data._id.toString());
+						res.status(200).json(messageToSend);
 					} else {
-						res.status(400).json({ success: false, message: 'Credentials do not match' });
+						res.status(400).json(responseMessage.FAIL.INVALID_CRED);
 					}
 				} else {
-					res.status(400).json({ success: false, message: 'No such user' });
+					res.status(400).json(responseMessage.FAIL.USER.NOT_EXISTS);
 				}
 			}
 		});
 	} else {
-		res.status(400).json({ success: false, message: 'Invalid parameters' });
+		res.status(400).json(responseMessage.FAIL.INC_INV_DATA);
 	}
 };

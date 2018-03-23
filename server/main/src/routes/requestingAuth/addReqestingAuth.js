@@ -9,12 +9,13 @@ module.exports = (req, res) => {
 		});
 		newReqAuth.save((err) => {
 			if (err) {
-				res.status(400).json({ success: false, message: 'Authority already exists' });
+				console.error(err);
+				res.status(400).json(responseMessage.FAIL.RA.EXISTS);
 			} else {
-				res.status(200).json({ success: true, message: 'Authority added successfully' });
+				res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 			}
 		});
 	} else {
-		res.status(400).json({ success: false, message: 'Invalid parameters' });
+		res.status(400).json(responseMessage.FAIL.INC_INV_DATA);
 	}
 };

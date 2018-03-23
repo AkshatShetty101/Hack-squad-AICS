@@ -7,18 +7,20 @@ module.exports = (req, res) => {
 		SysAdmin.findOne({ username: req.body.username }, (err, data) => {
 			if (err) {
 				console.error(err);
-				res.status(500).json({ success: false, message: 'Error fetching data' });
+				res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
 			} else if (!data) {
-				res.status(400).json({ success: false, message: 'User does not exist' });
+				res.status(400).json(responseMessage.FAIL.USER.NOT_EXISTS);
 			} else {
 				if(passwordValidator(data.password, req.body.password)) {
-					res.status(200).json({ success: true, token: tokenGenerator(data._id.toString())});
+					let messageToSend = responseMessage.SUCCESS.LOGIN;
+					messageToSend.token = tokenGenerator(data._id.toString());
+					res.status(200).json(messageToSend);
 				} else {
-					res.status(200).json({ success: false, message: 'Incorrect username or password' });
+					res.status(400).json(responseMessage.FAIL.INVALID_CRED);
 				}
 			}
 		});
 	} else {
-		res.status(400).json({ success: false, message: 'Invalid parameters' });
+		res.status(400).json(responseMessage.FAIL.INC_INV_DATA);
 	}
 };

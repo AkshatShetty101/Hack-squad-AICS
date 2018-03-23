@@ -14,8 +14,8 @@ router.all('/', function (req, res) {
  */
 router.post('/users/register',
 	verifyMiddleware.verifySystemAdmin,
-	require('./person/registerPerson'));
-	// require('./blockchain/addPerson'));
+	require('./person/registerPerson'),
+	require('./blockchain/addPerson'));
 
 router.post('/users/login',
 	require('./person/loginPerson'));

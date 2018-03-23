@@ -1,28 +1,27 @@
 const ReqForm = require('../../models/request_form');
 const Person = require('../../models/person');
-const EventEmitter = require('events');
-class MyEmitter extends EventEmitter { }
-const myEmitter = new MyEmitter();
+const notificationsHelper = require('../../utils/notificationsHelper');
 
 module.exports = (req, res) => {
 	Person.find({ designation: 'admin' }, { _id: 1 }, (err, result) => {
 		if (err) {
-			res.status(400).send({ success: false, message: err });
+			console.error(err);
+			res.status(400).send(responseMessage.FAIL.SOMETHING_WRONG);
 		} else {
 			console.log('here!');
 			let promise = new Promise((resolve, reject) => {
 				console.log('here!');
-				var ct = -1;
-				var adminId = '';
+				let ct = -1;
+				let adminId = '';
 				for (let admin of result) {
 					console.log('here!' + admin._id);
 					ReqForm.count({ admin_id: admin._id, is_closed: false }, (err, data) => {
 						if (err) {
-							console.log(err);
+							console.error(err);
 							reject(err);
 						} else {
 							console.log(data);
-							if (ct == -1) {
+							if (ct === -1) {
 								adminId = admin._id;
 								ct = data;
 							} else if (ct > data) {
@@ -45,15 +44,16 @@ module.exports = (req, res) => {
 				});
 				formData.save((err) => {
 					if (err) {
-						res.status(400).send({ success: false, message: err });
+						console.error(err);
+						res.status(400).send(responseMessage.FAIL.SOMETHING_WRONG);
 					} else {
-						//Make event
-						myEmitter.emit('RA-REQ-ADMIN', id);
-						res.status(200).send({ success: true, message: 'Request added successfully' });
+						notificationsHelper.addNotificationToQueue(res.locals.user._id.toString(), notificationMessage.ADMIN.RA_MAKE_REQ);
+						res.status(200).send(responseMessage.SUCCESS.SUCCESS);
 					}
 				});
 			}).catch((err) => {
-				res.status(400).send({ success: false, message: err });
+				console.error(err);
+				res.status(400).send(responseMessage.FAIL.SOMETHING_WRONG);
 			});
 		}
 	});

@@ -1,13 +1,14 @@
 const ReqForm = require('../../models/request_form');
+
 module.exports = (req, res, next) => {
 	if (req.body.templateId && res.locals.requestId) {
-		let data = {
-			template: {
-			}
+		const data = {
+			template: {}
 		};
 		ReqForm.findByIdAndUpdate(res.locals.requestId, { $set: data }, { new: true }, (err, result) => {
 			if (err) {
-				res.status(400).send({ success: false, message: err });
+				console.error(err);
+				res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
 			} else {
 				// Modified to DB successfully
 				// Now passing control to blockchain
@@ -17,7 +18,6 @@ module.exports = (req, res, next) => {
 			}
 		});
 	} else {
-		res.status(400).send({ success: false, message: 'Insufficient Parameters' });
+		res.status(400).json(responseMessage.FAIL.INC_INV_DATA);
 	}
-
 };

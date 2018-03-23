@@ -30,6 +30,7 @@
     "body-parser": "^1.18.2",
     "composer-client": "^0.16.6",
     "config": "^1.30.0",
+    "cors": "^2.8.4",
     "dotenv-safe": "^5.0.1",
     "express": "^4.16.3",
     "express-graphql": "^0.6.12",

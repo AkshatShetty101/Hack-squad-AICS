@@ -3,19 +3,20 @@ const template = require('../../models/template');
 
 module.exports = (req, res, next) => {
 	if (req.body.templateId) {
-		template.findByIdAndRemove(req.body.templateId, function (err, result) {
+		template.findByIdAndRemove(req.body.templateId, (err, result) => {
 			if (err) {
-				res.status(400).json({ success: false, message: err });
+				console.error(err);
+				res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
 			} else {
 				if (result) {
 					console.log('Template Deleted from DB');
 					next();
 				} else {
-					res.status(400).json({ success: false, message: 'Template not present in DB' });
+					res.status(400).json(responseMessage.FAIL.TEMPLATE.NOT_EXISTS);
 				}
 			}
 		});
 	} else {
-		res.status(400).json({ success: false, message: 'Insufficient Parameters' });
+		res.status(400).json(responseMessage.FAIL.INC_INV_DATA);
 	}
 };

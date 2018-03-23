@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
 		Division.findOne({ name: req.body.divisionName }, { _id: 1 }, (err, data) => {
 			if (err) {
 				console.error(err);
-				res.status(500).json({ success: false, message: 'Division does not exist' });
+				res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 			} else if (data) {
 				// If department exists add person to DB
 				let password = passwordGenerator(req.body.password);
@@ -28,7 +28,7 @@ module.exports = (req, res, next) => {
 				userData.save((err, result) => {
 					if (err) {
 						console.error(err);
-						res.status(400).json({ success: false, message: 'User already exists' });
+						res.status(400).json(responseMessage.FAIL.USER.EXISTS);
 					} else {
 						// Adding parameters before passing to block-chain
 						res.locals = req.body;
@@ -39,16 +39,16 @@ module.exports = (req, res, next) => {
 							updateQuery = { $set: { gc_id: result._id } };
 						}
 						Division.findOneAndUpdate({ _id: data._id }, updateQuery, (err, doc) => {
-							err ? res.status(500).json({ success: false, message: 'Error pushing user to division' })
+							err ? res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG)
 								: next();
 						});
 					}
 				});
 			} else {
-				res.status(400).json({ success: false, message: 'No such Division/Group/Organization' });
+				res.status(400).json(responseMessage.FAIL.DIVISION.NOT_EXISTS);
 			}
 		});
 	} else {
-		res.status(400).json({ success: false, message: 'Invalid parameters' });
+		res.status(400).json(responseMessage.FAIL.INC_INV_DATA);
 	}
 };

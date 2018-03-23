@@ -1,0 +1,58 @@
+{
+	"ADMIN": {
+		"RA_MAKE_REQ": {
+			"status": "RA_MAKE_REQ",
+			"message": "RA has made request"
+		},
+		"RA_APP_TEMP": {
+			"status": "RA_APP_TEMP",
+			"message": "RA has approved template"
+		},
+		"GC_REJ_FORM": {
+			"status": "GC_REJ_FORM",
+			"message": "GC rejected form"
+		},
+		"GC_APP_FORM": {
+			"status": "GC_APP_FORM",
+			"message": "GC approves form"
+		}
+	},
+	"GC": {
+		"ADMIN_ASS_FORM": {
+			"status": "ADMIN_ASS_FORM",
+			"message": "Admin assigned form" 
+		},
+		"USER_SUB_FORM": {
+			"status": "USER_SUB_FORM",
+			"message": "User submitted form"
+		},
+		"ADMIN_REA_FORM": {
+			"status": "ADMIN_REA_FORM",
+			"message": "Admin re-assigned form"
+		}
+	},
+	"USER": {
+		"GC_ASS_FORM": {
+			"status": "GC_ASS_FORM",
+			"message": "GC assigned form"
+		},
+		"GC_REA_FORM": {
+			"status": "GC_REA_FORM",
+			"message": "GC re-assigned form"
+		}
+	},
+	"RA": {
+		"ADMIN_SUB_TEMP": {
+			"status": "ADMIN_SUB_TEMP",
+			"message": "Admin submitted template for approval"
+		},
+		"ADMIN_REJ_FORM": {
+			"status": "ADMIN_REJ_FORM",
+			"message": "Admin rejected (filled) form"
+		},
+		"ADMIN_APP_FORM": {
+			"status": "",
+			"message": "Admin approved form"
+		}
+	}
+}

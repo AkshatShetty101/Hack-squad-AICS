@@ -17,7 +17,9 @@ require('./config/Array_remove_polyfill')(); // polyfill for Array remove by val
 global.async = require('async');
 global.redisClient = redis.createClient();
 // global.activeNotificationSubscribers = new Set();
-global.activeNotificationSubscribersResponse = {};
+global.notificationMessage = require('./config/notification');
+global.responseMessage = require('./config/responseMessage.json');
+// global.activeNotificationSubscribersResponse = {};
 
 redisClient
 	.on('connect', () => {
@@ -32,8 +34,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(require('morgan')('dev'));
+app.use(require('cors')());
 
 // Routes
+app.use('/', (req, res) => res.status(200).json(responseMessage.SUCCESS.IT_WORKS));
 app.use('/api', require(path.join(__dirname, 'src', 'routes', 'routes.js')));
 
 app.listen(process.env.PORT, () => {
