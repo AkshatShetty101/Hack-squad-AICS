@@ -1,3 +1,36 @@
-<p>
-  dashboard works!
-</p>
+<div class="container">
+  <div class="due_req" [routerLink]="'./request'" routerLinkActive="active">
+    <a class="tab">DUE REQUESTS</a>
+  </div>
+  <div class="due_ver" [routerLink]="'./verification'" routerLinkActive="active">
+    <a class="tab">DUE VERIFICATIONS</a>
+  </div>
+  <div class="add_rep" [routerLink]="'./repository'" routerLinkActive="active">
+    <a class="tab">ADD TO REPOSITORY</a>
+  </div>
+  <div class="bgbody"></div>
+  <div class="offsetbg main_data">
+    <div class="diag">
+      <!--Analysed data goes here -->
+      <button style="height:20%;border-radius:50%;background-color:aqua;font-size:14px">data</button>
+    </div>
+    <div class="line ">
+      <hr>
+    </div>
+    <div class="depts sub_grid">
+      <div class="dept_1 cen">
+        <span>Dept A</span>
+      </div>
+      <div class="dept_2 cen">
+        <span>Dept B</span>
+      </div>
+      <div class="dept_3 cen">
+        <span>Dept C</span>
+      </div>
+      <div class="dept_4 cen">
+        <span>Dept D</span>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>
