@@ -35,7 +35,7 @@ module.exports = (req, res,next) => {
 			// Submitting the transaction
 			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
 				// Returning response
-				console.log('Form Submitted successfully');
+				console.log('Form Approved successfully');
 				next();
 				// res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 			}).catch((err) => {

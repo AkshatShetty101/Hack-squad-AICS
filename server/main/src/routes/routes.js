@@ -151,7 +151,7 @@ router.post('/forms/approveGC',
 	verifyMiddleware.verifyPerson,
 	require('./forms/approveGCAndSubmitToAdmin'),
 	require('./blockchain/approveForm'));
-	// require('./blockchain/submitForm'));
+// require('./blockchain/submitForm'));
 
 router.post('/forms/approveAdmin',
 	verifyMiddleware.verifyPerson,
@@ -164,7 +164,9 @@ router.post('/forms/approveRA',
 	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyRequestingAuthority,
 	queryMiddleware.getFormRequestId,
-	require('./forms/approveRA'));
+	require('./forms/approveRA'),
+	require('./blockchain/approveForm'),
+	require('./blockchain/submitForm'));
 
 router.all('/forms',
 	verifyMiddleware.verifyPerson,

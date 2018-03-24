@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
 	if (req.body.formId && res.locals.requestId) {
 		const data = {
 			form:{
-				form_id: req.body.templateId,
+				form_id: req.body.formId,
 				is_approved: false
 			}
 		};
