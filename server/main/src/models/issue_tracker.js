@@ -51,4 +51,7 @@ const issueTrackerSchema = new Schema({
 	timestamps: true
 });
 
-module.exports = mongoose.model('issueTracker', issueTrackerSchema);
+module.exports = {
+	default: mongoose.model('issueTracker', issueTrackerSchema),
+	secondary: bySchema
+};

@@ -7,26 +7,31 @@ const formTC = composeWithMongoose(Form, customOptions);
 
 formTC.addResolver({
 	kind: 'query',
-	name: 'findOwn',
+	name: 'findOwnQuery',
 	type: [formTC],
 	args: {
 		limit: {
 			type: 'Int',
 			default: 20
 		},
-		_id: {
-			type: 'Boolean',
-			default: false
-		}
+		sortBy: {
+			type: 'String',
+			enum: ['updatedAt', 'createdAt']
+		},
+		sort: {
+			type: 'String',
+			enum: ['ASC', 'DESC']
+		},
+		filter: formTC.getInputType()
 	},
-	resolve: require('../resolvers/form/findOwn')
+	resolve: require('../resolvers/form/findOwnQuery')
 });
 
 schemaComposer.rootQuery().addFields({
 	formById: formTC.getResolver('findById'),
 	formOne: formTC.getResolver('findOne'),
 	formMany: formTC.getResolver('findMany'),
-	formOwn: formTC.getResolver('findOwn')
+	formOwn: formTC.getResolver('findOwnQuery')
 });
 
 module.exports = schemaComposer.buildSchema();

@@ -1,6 +1,6 @@
 const { schemaComposer } = require('graphql-compose');
 const { composeWithMongoose } = require('graphql-compose-mongoose');
-const IssueTracker = require('../../../models/issue_tracker');
+const IssueTracker = require('../../../models/issue_tracker').default;
 
 const customOptions = {};
 const issueTrackerTC = composeWithMongoose(IssueTracker, customOptions);
@@ -9,7 +9,9 @@ issueTrackerTC.addResolver({
 	kind: 'mutation',
 	name: 'createOwn',
 	type: issueTrackerTC.getType(),
-	args: issueTrackerTC.getArgs(),
+	args: {
+		record: issueTrackerTC.getInputType()
+	},
 	resolve: require('../resolvers/issueTracker/createOwn')
 });
 
