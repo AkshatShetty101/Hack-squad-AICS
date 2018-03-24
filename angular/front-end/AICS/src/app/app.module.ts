@@ -18,6 +18,7 @@ import { AuthService } from './shared/services/auth.service';
 import { DashboardRequestsComponent } from './dashboard/dashboard-requests/dashboard-requests.component';
 import { DashboardVerificationsComponent } from './dashboard/dashboard-verifications/dashboard-verifications.component';
 import { DashboardRepositoryComponent } from './dashboard/dashboard-repository/dashboard-repository.component';
+import { FormBoxComponent } from './tracking/form-box/form-box.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DashboardRepositoryComponent } from './dashboard/dashboard-repository/d
     LoginComponent,
     DashboardRequestsComponent,
     DashboardVerificationsComponent,
-    DashboardRepositoryComponent
+    DashboardRepositoryComponent,
+    FormBoxComponent
   ],
   imports: [
     BrowserModule,
