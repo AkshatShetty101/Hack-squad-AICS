@@ -5,12 +5,23 @@ const IssueTracker = require('../../../models/issue_tracker');
 const customOptions = {};
 const issueTrackerTC = composeWithMongoose(IssueTracker, customOptions);
 
+issueTrackerTC.addResolver({
+	kind: 'mutation',
+	name: 'createOwn',
+	type: issueTrackerTC.getType(),
+	args: issueTrackerTC.getArgs(),
+	resolve: require('../resolvers/issueTracker/createOwn')
+});
+
 schemaComposer.rootQuery().addFields({
 	issueTrackerById: issueTrackerTC.getResolver('findById'),
-	issueTrackerByIds: issueTrackerTC.getResolver('findByIds'),
 	issueTrackerOne: issueTrackerTC.getResolver('findOne'),
-	issueTrackerMany: issueTrackerTC.getResolver('findMany'),
 	issueTrackerCount: issueTrackerTC.getResolver('count')
+});
+
+schemaComposer.rootMutation().addFields({
+	issueTrackerCreate: issueTrackerTC.getResolver('createOwn'),
+	issueTrackerUpdate: issueTrackerTC.getResolver('updateOwn')
 });
 
 module.exports = schemaComposer.buildSchema();

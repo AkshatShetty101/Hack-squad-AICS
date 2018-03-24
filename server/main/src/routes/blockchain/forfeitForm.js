@@ -16,8 +16,10 @@ this.NS_P = config.get('NS_P');
 
 module.exports = (req, res) => {
 	// Establishing connection
+	res.locals.user._id = '123';
 	this.bizNetworkConnection.connect(this.cardName)
 		.then((result) => {
+			console.log('Connected');
 			this.businessNetworkDefinition = result;
 			// Getting factory definitions
 			let factory = this.businessNetworkDefinition.getFactory();

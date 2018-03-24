@@ -10,7 +10,8 @@ schemaComposer.rootQuery().addFields({
 	reqFormByIds: reqFormTC.getResolver('findByIds'),
 	reqFormOne: reqFormTC.getResolver('findOne'),
 	reqFormMany: reqFormTC.getResolver('findMany'),
-	reqFormCount: reqFormTC.getResolver('count')
+	reqFormCount: reqFormTC.getResolver('count'),
+	reqFormRA: reqFormTC.getResolver('findByRA')
 });
 
 module.exports = schemaComposer.buildSchema();
