@@ -13,7 +13,7 @@ this.NS = config.get('NS');
 this.NS_F = config.get('NS_F');
 this.NS_P = config.get('NS_P');
 
-module.exports = (req, res) => {
+module.exports = (req, res,next) => {
 	// Establishing connection
 	this.bizNetworkConnection.connect(this.cardName)
 		.then((result) => {
@@ -31,13 +31,13 @@ module.exports = (req, res) => {
 			} else {
 				transaction.metadata = '{}';
 			}
-			console.log(asignee);
 			transaction.form = factory.newRelationship(this.NS, 'Form', req.body.formId);
 			// Submitting the transaction
 			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
 				// Returning response
-				console.log('Form Submitted successfully');
-				res.status(200).json(responseMessage.SUCCESS.SUCCESS);
+				console.log('Form Approved successfully');
+				next();
+				// res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 			}).catch((err) => {
 				console.log(err);
 				// Catching errors
