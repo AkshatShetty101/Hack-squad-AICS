@@ -12,9 +12,9 @@ const IssueTracker = require('../../models/issue_tracker').default;
 module.exports = (req, res) => {
 	if (req.body.issueId && req.body.update) {
 		if (req.body.type === 'ISSUE') {
-			if (req.body.update.heading.title || req.body.update.created_by) {
-				console.log('Should not update title or created_by');
-				res.status(400).json(responseMessage.FAIL.UNAUTHORISED);
+			if (req.body.update.created_by) {
+				console.log('Should not update created_by');
+				res.status(401).json(responseMessage.FAIL.UNAUTHORISED);
 			} else {
 				IssueTracker.findById(req.body.issueId, { created_by: 1, data: 1 }, (err, result) => {
 					if (err) {
@@ -22,10 +22,8 @@ module.exports = (req, res) => {
 						res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 					} else {
 						if (result) {
-							console.log(data);
-							let updateFields = { $set: {}, $push: {} };
 							let flag = false;
-							if (data.created_by === res.locals.user._id) {
+							if (result.created_by.toString() === res.locals.user._id.toString()) {
 								flag = true;
 							} else {
 								// checking if user is in by list
@@ -35,20 +33,18 @@ module.exports = (req, res) => {
 									}
 								});
 							}
-							if (req.body.update.heading.subtitle) {
-								updateFields.$set.subtitle = req.body.update.heading.subtitle;
-							}
-							if (req.body.update.heading.description) {
-								updateFields.$set.description = req.body.update.heading.description;
-							}
-							if (req.body.update.tags) {
-								updateFields.$set.tags = req.body.update.heading.tags;
-							}
-							if (req.body.update.message) {
-								const byData = { by: res.locals.user._id, message: req.body.update.message };
-								updateFields.$push.data = byData;
-							}
+							// console.log(flag);
 							if (flag) {
+								let updateFields = req.body.update.heading ? { $set: { heading: req.body.update.heading } } : { };
+								if (req.body.update.tags) {
+									updateFields.$set = {};
+									updateFields.$set.tags = req.body.update.tags;
+								}
+								if (req.body.update.message) {
+									updateFields.$push = {};
+									const byData = { by: res.locals.user._id, message: req.body.update.message };
+									updateFields.$push.data = byData;
+								}
 								IssueTracker.updateOne({ _id: req.body.issueId }, updateFields, (err, raw) => {
 									if (err) {
 										console.error(err);
@@ -58,6 +54,8 @@ module.exports = (req, res) => {
 										res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 									}
 								});
+							} else {
+								res.status(401).json(responseMessage.FAIL.UNAUTHORISED);
 							}
 						} else {
 							res.status(400).json(responseMessage.FAIL.NOT_FOUND);
@@ -67,10 +65,11 @@ module.exports = (req, res) => {
 			}
 		} else if (req.body.type === 'COMMENT') {
 			if (req.body.commentId) {
-				IssueTracker.findOne({ _id: res.body.issueId, 'data.by': res.body.commentId, is_deleted: false }, // If not work then try 'data.$.by'
+				IssueTracker.updateOne({ _id: req.body.issueId, 'data._id': req.body.commentId, 'data.by': res.locals.user._id },
 					{ $set: { 'data.$.message': req.body.update.message, 'data.$.timestamp': Date.now() } },
 					(err, raw) => {
 						if (err) {
+							console.error(err);
 							res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 						} else {
 							console.log('issue updated', raw);
