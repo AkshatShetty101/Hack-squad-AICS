@@ -168,7 +168,7 @@ router.post('/forms/approveRA',
 	require('./blockchain/approveForm'),
 	require('./blockchain/submitForm'));
 
-	router.post('/forms/rejectRA',
+router.post('/forms/rejectRA',
 	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyRequestingAuthority,
 	require('./forms/rejectFormRA'),

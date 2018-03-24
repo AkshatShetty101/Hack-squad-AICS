@@ -1,15 +1,16 @@
-const Form = require('../../../../models/form');
+const reqForm = require('../../../../models/request_form');
 
-// if args has _id, query Form by _id otherwise query by the forms he owns
+// if args has _id, query reqForm by _id otherwise query by the forms he owns
 module.exports = ({ args, context }) => {
 	const { req, res } = context;
-	console.log(args);
-	let query = args._id ? { ...args.filter  } : { assigned_to: res.locals.user._id, ...args.filter };
+	let query = res.locals.user._id === 'ra' ? { ra_id: res.locals.user._id } : { admin_id: res.locals.user._id };
+	query = { ...query, ...args.filter };
 	let sort = args.sort === 'ASC' ? 1 : -1;
 	let sortBy = args.sortBy ? args.sortBy === 'createdAt' ? { createdAt: sort } : { updatedAt: sort } : {};
-	console.log(query);
+	console.log(query, projections);
 	return new Promise((resolve, reject) => {
-		Form.find(query)
+		reqForm
+			.find(query)
 			.skip(args.skip || 0)
 			.limit(args.limit || 20)
 			.sort(sortBy)
@@ -18,7 +19,7 @@ module.exports = ({ args, context }) => {
 					console.error(err);
 					reject(err);
 				} else {
-					// console.log(data);
+					console.log(data);
 					resolve(data);
 				}
 			});

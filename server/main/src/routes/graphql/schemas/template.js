@@ -7,7 +7,7 @@ const templateTC = composeWithMongoose(Template, customOptions);
 
 templateTC.addResolver({
 	kind: 'query',
-	name: 'findOwn',
+	name: 'findOwnQuery',
 	type: [templateTC],
 	args: {
 		limit: {
@@ -19,7 +19,7 @@ templateTC.addResolver({
 			default: false
 		}
 	},
-	resolve: require('../resolvers/form/findOwn')
+	resolve: require('../resolvers/template/findOwnQuery')
 });
 
 schemaComposer.rootQuery().addFields({
@@ -28,7 +28,7 @@ schemaComposer.rootQuery().addFields({
 	templateOne: templateTC.getResolver('findOne'),
 	templateMany: templateTC.getResolver('findMany'),
 	templateCount: templateTC.getResolver('count'),
-	templateOwn: templateTC.getResolver('findOwn')
+	templateOwn: templateTC.getResolver('findOwnQuery')
 });
 
 module.exports = schemaComposer.buildSchema();
