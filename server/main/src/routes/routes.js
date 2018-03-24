@@ -215,6 +215,18 @@ router.all('/reqAuth',
 /**
  * Issue Tracker Routes
  */
+router.post('/issueTracker/add',
+	verifyMiddleware.verifyPerson,
+	require('./issueTracker/createIssue'));
+
+router.post('/issueTracker/update',
+	verifyMiddleware.verifyPerson,
+	require('./issueTracker/updateIssueOrComment'));
+
+router.post('/issueTracker/delete',
+	verifyMiddleware.verifyPerson,
+	require('./issueTracker/deleteIssueOrComment'));
+
 router.all('/issueTracker',
 	verifyMiddleware.verifyPerson,
 	graphQLHTTP((req, res) => ({ // to be replaced by router.post
