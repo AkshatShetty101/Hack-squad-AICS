@@ -150,8 +150,8 @@ router.post('/forms/submitToGC',
 router.post('/forms/approveGC',
 	verifyMiddleware.verifyPerson,
 	require('./forms/approveGCAndSubmitToAdmin'),
-	require('./blockchain/approveForm'),
-	require('./blockchain/submitForm'));
+	require('./blockchain/approveForm'));
+	// require('./blockchain/submitForm'));
 
 router.post('/forms/approveAdmin',
 	verifyMiddleware.verifyPerson,

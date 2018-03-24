@@ -9,6 +9,9 @@
         body {
             margin: 0;
             font-family: 'fira sans';
+            width:100%;
+            height:100%;
+            background: linear-gradient(to bottom right, #375E8B, #407CAD, #3F7DAD, #318BA5,#3983AA, #94989C,#9C9A9B) no-repeat;
         }
         /*styling for the nav bar*/
         .navigation{
@@ -71,7 +74,7 @@
         .container{
             display:grid;
             grid-template-columns: 12% repeat(3,minmax(26%,1fr)) 10%;
-            grid-template-rows: 5vh 8% 75vh 8%;            
+            grid-template-rows: 4vh 8vh 75vh 8vh;            
             text-align:center;            
         }
 
@@ -80,7 +83,6 @@
             grid-column:2;            
             background-color:#979797;             
             color:#38393a;
-            padding: 15px;
             box-shadow: 0px 0.5px 5px #38393a;
             
         }
@@ -89,27 +91,24 @@
             grid-column:3;  
             background-color:#979797;             
             color:#38393a;
-            padding: 15px;
             box-shadow: 0.8px 0.5px 5px #38393A;
         }
         .add_rep{
             grid-row: 2;
             grid-column:4; 
-            background-color: #38393a;
+            background-color: #323334;
             color:#979797;
-            padding: 15px;
             box-shadow: 0px 0.5px 5px #38393A;
         }
         .offsetbg{
             grid-row:3;
             grid-column:2/5;
             background-color: rgb(255, 255, 255);
-            border: 2px solid rgb(67, 147, 228);
             height: 95%;
             z-index:2;
             margin-left: -5%;
             margin-right: 5%;
-            box-shadow: 0px 0.5px 5px rgb(67, 147, 228);            
+            box-shadow: 0.8px 0.5px 5px black;          
         }
         
         .bgbody{
@@ -150,6 +149,15 @@
         .line{
             grid-row:2;
             grid-column:1/3;
+            width:90%;
+        }
+        .bar{
+            display:flex;
+            border:0.5px solid silver;
+            line-height: 1em;
+            justify-self: center;
+            align-self: end;
+            
         }
         hr{
             box-shadow: 0 0.08px 2px #38393A;
@@ -161,7 +169,7 @@
             display:grid;
             grid-template-columns: 10% 40% 40% 10%;
             grid-template-rows: 2vh 40% 40% 2vh;
-            height: 100%;           
+            height:90%;           
             width: 100%;
             align-items:center;
         } 
@@ -183,29 +191,33 @@
             grid-row: 2;
             grid-column: 2; 
             background-color: #49a8f7;
+            box-shadow: 0 0.08px 2px #38393A;
         }
         .dept_2{
             grid-row: 2;
             grid-column: 3;
             background-color: #6fbcfc;
+            box-shadow: 0 0.08px 2px #38393A;
         }
 
         .dept_3{
             grid-row: 3;
             grid-column: 2;
             background-color: #90cdff;
+            box-shadow: 0 0.08px 2px #38393A;
         }
 
         .dept_4{
             grid-row: 3;
             grid-column: 3;
             background-color: #afd8fa;
+            box-shadow: 0 0.08px 2px #38393A;
         } 
         .tab{
             color:inherit;
             text-decoration: none;
         }
-                
+
 
         .btn1{
             grid-row: 2/4;
@@ -225,12 +237,14 @@
             transition: 0.5s;
             color: #474747;
             background-color:#ececec;
-            font-family: 'fira sans';
-            border-radius: 12px;
-            border: 6px solid rgba(168, 168, 168, 0.7);
+            border-radius: 18px;
+            border: 12px solid rgba(168, 168, 168, 0.7);
             width: 80%;
             height:30%;
         }    
+        .text_decoration{
+            font-family: 'fira sans' !important;
+        }
         
         ul{
             padding:10px;
@@ -261,15 +275,15 @@
             </nav>
         </header>
         <div class="container">
-            <div class="due_req"><a class="tab" href="dashboard-req.html">DUE REQUESTS</a></div>
-            <div class="due_ver"><a class="tab" href="dashboard-ver.html">DUE VERIFICATIONS</a></div>
-            <div class="add_rep"><a class="tab" href="dashboard-repo.html">ADD TO REPOSITORY</a></div>
+            <div class="due_req cen"><a class="tab" href="dashboard-req.html">DUE REQUESTS</a></div>
+            <div class="due_ver cen"><a class="tab" href="dashboard-ver.html">DUE VERIFICATIONS</a></div>
+            <div class="add_rep cen"><a class="tab" href="dashboard-repo.html">ADD TO REPOSITORY</a></div>
             <div class="bgbody"></div>
             <div class="offsetbg main_data">
                 <div class="diag">   <!--Analysed data goes here -->
                     <button style="height:20%;border-radius:50%;background-color:aqua;font-size:14px">data</button>
                 </div>
-                <div class="line "><hr></div>
+                <div class="line bar"></div>
                 <div class="depts sub_grid">
                     <div class="dept_1 cen"><span>Dept A</span></div>
                     <div class="dept_2 cen"><span>Dept B</span></div>
@@ -286,8 +300,8 @@
                     </ul>
                 </div>
                 <div class="actions sub_grid">
-                    <button class="btn btn1"><i class="fa fa-eye">&nbsp; Preview</i></button>
-                    <button class="btn btn2"><i class="fa fa-plus">&nbsp;Add to repository</i></button>
+                    <button class="btn btn1 "><i class="fa fa-eye ">&nbsp; <span class="text_decoration">Preview</span></i></button>
+                    <button class="btn btn2"><i class="fa fa-plus">&nbsp; <span class="text_decoration">Add to repository</span></i></button>
                     
                 </div>
             </div>

@@ -1,4 +1,3 @@
-const Template = require('../../models/template');
 const ReqForm = require('../../models/request_form');
 
 module.exports = (req, res, next) => {
