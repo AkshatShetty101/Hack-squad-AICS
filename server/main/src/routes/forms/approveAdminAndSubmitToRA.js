@@ -1,25 +1,31 @@
 // Declaring constants
 const Form = require('../../models/form');
+const ReqForm = require('../../models/request_form');
 
 module.exports = (req, res, next) => {
 	// Setting new form data
-	if (req.body.formId) {
-		Form.findById(req.body.formId, { created_by: 1 }, (err, result) => {
+
+	if (req.body.formId && res.locals.requestId) {
+		const data = {
+			form:{
+				form_id: req.body.templateId,
+				is_approved: false
+			}
+		};
+		console.log(res.locals.requestId);
+		ReqForm.findByIdAndUpdate(res.locals.requestId, { $set: data },{ new:true }, (err, result) => {
 			if (err) {
 				console.error(err);
 				res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
 			} else {
-				console.log(result);
-				if (result) {
-					res.locals.other_id = result.created_by;
-					console.log('Loaded Admin ID from db');
-					next();
-				} else {
-					res.status(400).json(responseMessage.FAIL.FORM.NOT_EXISTS);
-				}
+				// Added to DB successfully
+				// Now passing control to blockchain
+				console.log('Added formId to requestForm');
+				res.locals.other_id = result.ra_id;
+				next();
 			}
 		});
-	} else {
+		} else {
 		res.status(400).json(responseMessage.FAIL.INC_INV_DATA);
 	}
 };

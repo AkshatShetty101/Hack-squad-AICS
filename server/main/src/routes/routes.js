@@ -155,9 +155,16 @@ router.post('/forms/approveGC',
 
 router.post('/forms/approveAdmin',
 	verifyMiddleware.verifyPerson,
+	queryMiddleware.getFormRequestId,
 	require('./forms/approveAdminAndSubmitToRA'),
 	require('./blockchain/approveForm'),
 	require('./blockchain/submitForm'));
+
+router.post('/forms/approveRA',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyRequestingAuthority,
+	queryMiddleware.getFormRequestId,
+	require('./forms/approveRA'));
 
 router.all('/forms',
 	verifyMiddleware.verifyPerson,
@@ -183,6 +190,7 @@ router.post('/reqAuth/edit',
 	require('./requestingAuth/editRequestingAuthForm'));
 
 router.post('/reqAuth/makeRequest',
+	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyRequestingAuthority,
 	require('./requestingAuth/makeRequest'));
 

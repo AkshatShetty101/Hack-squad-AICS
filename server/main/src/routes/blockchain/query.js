@@ -83,6 +83,7 @@ exports.getFormRequestId = (req, res, next) => {
 				return this.bizNetworkConnection.query(query, { inputValue: req.body.formId.toString() });
 			})
 			.then((asset) => {
+				console.log(asset[0]);
 				res.locals.requestId = asset[0].requestId;
 				next();
 			})
