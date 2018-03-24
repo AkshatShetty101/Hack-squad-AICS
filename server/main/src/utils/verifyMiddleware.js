@@ -10,30 +10,25 @@ exports.verifyPerson = (req, res, next) => {
 	// check header or url parameters or post parameters for token
 	const token = req.body.token || req.query.token || req.headers['x-access-token'];
 	if (token) {
-		console.log(token);
 		jwt.verify(token, jwtSecretKey, (err, decoded) => {
 			if (err || !decoded) {
 				 //decoded undefined means key is wrong
-				console.log('her!');
 				 console.error(err);
 				res.status(500).json(responseMessage.FAIL.INVALID_TOKEN);
 			}
 			else {
-				console.log(decoded.data);
 				// Get user data and save it for use in other routes
 				User.findOne({ _id: decoded.data }, (err, data) => {
-					console.log(data);
 					if (data) {
-						console.log('121');
 						res.locals.user = data;
 						
 						next();
 					} else {
 						// If not user, possibly Requesting Authority
-						ReqAuth.findOne({ _id: decoded.data }, (err, data) => {
-							console.log('111');
+						ReqAuth.findOne({ _id: decoded.data },{_id:1}, (err, data) => {
 							if (data) {
-								res.locals.user = { designation: 'ra' };
+								console.log(data);
+								res.locals.user = { _id:data._id, designation: 'ra' };
 								next();
 							} else {
 								res.status(400).json(responseMessage.FAIL.USER_NOT_EXIST);
