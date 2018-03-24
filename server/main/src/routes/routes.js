@@ -67,19 +67,19 @@ router.post('/templates/delete',
 	require('./blockchain/deleteTemplate'));
 
 router.post('/templates/submit',
-	verifyMiddleware.verifyPerson,
-	verifyMiddleware.verifyAdmin,
-	queryMiddleware.getTemplateRequestId,
+	// verifyMiddleware.verifyPerson,
+	// verifyMiddleware.verifyAdmin,
+	// queryMiddleware.getTemplateRequestId,
 	require('./templates/submitTemplate'),
 	require('./blockchain/submitTemplate'));
 
 router.post('/templates/approve',
-	verifyMiddleware.verifyPerson,
-	verifyMiddleware.verifyRequestingAuthority,
-	queryMiddleware.getTemplateRequestId,
-	require('./templates/approveTemplate'),
-	require('./blockchain/approveTemplate'),
-	require('./forms/addForm'),
+	// verifyMiddleware.verifyPerson,
+	// verifyMiddleware.verifyRequestingAuthority,
+	// queryMiddleware.getTemplateRequestId,
+	// require('./templates/approveTemplate'),
+	// require('./blockchain/approveTemplate'),
+	// require('./forms/addForm'),
 	require('./blockchain/addForm'));
 
 
@@ -150,8 +150,8 @@ router.post('/forms/submitToGC',
 router.post('/forms/approveGC',
 	verifyMiddleware.verifyPerson,
 	require('./forms/approveGCAndSubmitToAdmin'),
-	require('./blockchain/approveForm'),
-	require('./blockchain/submitForm'));
+	require('./blockchain/approveForm'));
+	// require('./blockchain/submitForm'));
 
 router.post('/forms/approveAdmin',
 	verifyMiddleware.verifyPerson,

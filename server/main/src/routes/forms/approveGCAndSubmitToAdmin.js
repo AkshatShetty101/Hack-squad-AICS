@@ -3,7 +3,7 @@ const Form = require('../../models/form');
 
 module.exports = (req, res, next) => {
 	// Setting new form data
-	if (res.body.formId) {
+	if (req.body.formId) {
 		Form.findById(req.body.formId, { created_by: 1 }, (err, result) => {
 			if (err) {
 				console.error(err);
