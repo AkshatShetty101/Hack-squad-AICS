@@ -33,6 +33,8 @@ module.exports = (req, res) => {
 									let asignee = factory.newRelationship(this.NS, 'Person', res.locals.user._id);
 									let transaction = factory.newTransaction(this.NS, 'FormEvent');
 									transaction.person = asignee;
+									let newHolder = factory.newRelationship(this.NS, 'Person', res.locals.admin_id.toString());
+									transaction.newHolder = newHolder;
 									transaction.type = "deleted";
 									if (req.body.metadata) {
 										transaction.metadata = JSON.stringify(req.body.metadata);

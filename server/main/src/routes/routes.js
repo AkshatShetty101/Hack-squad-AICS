@@ -168,6 +168,14 @@ router.post('/forms/approveRA',
 	require('./blockchain/approveForm'),
 	require('./blockchain/submitForm'));
 
+	router.post('/forms/rejectRA',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyRequestingAuthority,
+	require('./forms/rejectFormRA'),
+	require('./blockchain/rejectFormRA'),
+	require('./blockchain/deleteForm'));
+
+
 router.all('/forms',
 	verifyMiddleware.verifyPerson,
 	graphQLHTTP((req, res) => ({ // to be replaced by router.post
