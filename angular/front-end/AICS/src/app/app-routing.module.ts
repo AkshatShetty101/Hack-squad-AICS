@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './admin/dashboard/dashboard.component';
-import { DashboardRepositoryComponent } from './admin/dashboard/dashboard-repository/dashboard-repository.component';
-import { DashboardVerificationsComponent } from './admin/dashboard/dashboard-verifications/dashboard-verifications.component';
-import { DashboardRequestsComponent } from './admin/dashboard/dashboard-requests/dashboard-requests.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { DashboardRepositoryComponent } from './admin/admin-dashboard/dashboard-repository/dashboard-repository.component';
+import { DashboardVerificationsComponent } from './admin/admin-dashboard/dashboard-verifications/dashboard-verifications.component';
+import { DashboardRequestsComponent } from './admin/admin-dashboard/dashboard-requests/dashboard-requests.component';
 import { AdminComponent } from './admin/admin.component';
 import { TrackingComponent } from './admin/tracking/tracking.component';
 import { GcComponent } from './gc/gc.component';
@@ -14,7 +14,7 @@ import { UserComponent } from './user/user.component';
 const routes: Routes = [
   { path: '', component: AppComponent},
   { path: 'admin', component: AdminComponent, children: [
-    { path: 'dashboard', component: DashboardComponent, children: [
+    { path: 'dashboard', component: AdminDashboardComponent, children: [
       { path: 'request', component: DashboardRequestsComponent },
       { path: 'verification', component: DashboardVerificationsComponent },
       { path: 'repository', component: DashboardRepositoryComponent },
