@@ -1,4 +1,4 @@
-const Person = require('../../../models/person');
+const Person = require('../../../../models/person');
 
 module.exports = ({ args, context }) => {
 	const { req, res } = context;
