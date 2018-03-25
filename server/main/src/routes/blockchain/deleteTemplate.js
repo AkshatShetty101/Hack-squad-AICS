@@ -43,7 +43,7 @@ module.exports = (req, res) => {
 										console.log(result);
 										// Returning response
 										const notifToSend = notificationMessage.RA.ADMIN_DEL_TEMP;
-										notifToSend.data = { templateId: req.body.templateId };
+										notifToSend.data = { templateId: req.body.templateId, causerId: res.locals.user._id.toString() };
 										notificationsHelper.addNotificationToQueue(res.locals.ra_id.toString(), notifToSend);
 										res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 									});

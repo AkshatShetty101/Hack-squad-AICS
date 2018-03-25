@@ -51,7 +51,7 @@ module.exports = (req, res) => {
 						res.status(400).send(responseMessage.FAIL.SOMETHING_WRONG);
 					} else {
 						const notifToSend = notificationMessage.ADMIN.RA_MAKE_REQ;
-						notifToSend.data = { reqFormId: data._id };
+						notifToSend.data = { reqFormId: data._id, causerId: res.locals.user._id.toString() };
 						notificationsHelper.addNotificationToQueue(id, notifToSend);
 						res.status(200).send(responseMessage.SUCCESS.SUCCESS);
 					}

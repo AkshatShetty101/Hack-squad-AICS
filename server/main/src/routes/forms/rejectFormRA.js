@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
 			if (result) {
 				res.locals.admin_id = result.created_by;
 				const notifToSend = notificationMessage.ADMIN.RA_REJ_FORM;
-				notifToSend.data = { templateId: req.body.templateId };
+				notifToSend.data = { templateId: req.body.templateId, causerId: res.locals.user._id.toString() };
 				notificationsHelper.addNotificationToQueue(res.locals.admin_id.toString(), notifToSend);
 				next();
 			} else {
