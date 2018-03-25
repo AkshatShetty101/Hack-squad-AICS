@@ -14,6 +14,9 @@ module.exports = (req, res, next) => {
 				// Now passing control to blockchain
 				console.log('Cleared the template data');
 				res.locals.admin_id = result.admin_id;
+				const notifToSend = notificationMessage.ADMIN.RA_REJ_TEMP;
+				notifToSend.data = { templateId: req.body.templateId };
+				notificationsHelper.addNotificationToQueue(res.locals.admin_id.toString(), notifToSend);
 				next();
 			}
 		});

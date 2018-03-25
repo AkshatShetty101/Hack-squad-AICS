@@ -14,18 +14,18 @@ export class AppComponent implements OnInit {
     private auth: AuthService,
     private router: Router
   ){
-    auth.statusEmitted$.subscribe(
-      (status) => {
-       this.logged = status;
-       console.log('Logged-', this.logged);
-        if(!this.logged){
-          this.router.navigateByUrl('/login');
-        }
-        else{
-          this.router.navigateByUrl('/home');
-        }
-      }
-    );
+    // auth.statusEmitted$.subscribe(
+    //   (status) => {
+    //    this.logged = status;
+    //    console.log('Logged-', this.logged);
+    //     if(!this.logged){
+    //       this.router.navigateByUrl('/admin');
+    //     }
+    //     else{
+    //       this.router.navigateByUrl('/admin');
+    //     }
+    //   }
+    // );
   }
   ngOnInit(){
     this.auth.checkStatus();

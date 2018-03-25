@@ -37,19 +37,19 @@ export class LoginComponent implements OnInit {
       .subscribe(
       (response) => {
         console.log(response);
-        if(response.status === 'LOGIN'){
-          console.log('Here!');
-          this.auth.storeStatus(response.token);
-          this.auth.storeRole(response.designation);
-          this.router.navigateByUrl('');
-        }
+        // if(response.status === 'LOGIN'){
+        //   console.log('Here!');
+        //   this.auth.storeStatus(response.token);
+        //   this.auth.storeRole(response.designation);
+        //   this.router.navigateByUrl('');
+        // }
       },
       (error) => {
-        error = error.json();
         console.log(error);
-        if(error.status === 'INVALID_CRED'){
-          alert('Wrong username or password');
-        }
+        // if(error.status === 'INVALID_CRED'){
+        //   alert('Wrong username or password');
+        // }
+        // this.router.navigateByUrl('');
     });
   }
 

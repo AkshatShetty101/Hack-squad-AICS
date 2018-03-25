@@ -4,7 +4,7 @@ module.exports = (req, res) => {
 	let notifInterval;
 	res.sseSetup();
 	console.log('Notifications Set');
-	activeNotificationSubscribersResponse[res.locals.user._id] = res;
+	activeNotificationSubscribersResponse[res.locals.user._id.toString()] = res;
 
 	if (notifInterval) {
 		clearInterval(notifInterval);
@@ -17,7 +17,7 @@ module.exports = (req, res) => {
 				console.log(notif);
 				if (notif) {
 					console.log('Sending Notification');
-					activeNotificationSubscribersResponse[res.locals.user._id].sseSend(notif);
+					activeNotificationSubscribersResponse[res.locals.user._id.toString()].sseSend(notif);
 				}
 			})
 			.catch((err) => {

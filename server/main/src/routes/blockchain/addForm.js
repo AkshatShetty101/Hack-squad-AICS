@@ -56,6 +56,9 @@ module.exports = (req, res) => {
 											this.bizNetworkConnection.submitTransaction(transaction).then((result) => {
 												// Returning response
 												console.log('Form Added successfully to block-chain');
+												const notifToSend = notificationMessage.ADMIN.RA_APP_TEMP;
+												notifToSend.data = { formId: res.locals.formId };
+												notificationsHelper.addNotificationToQueue(res.locals.admin_id, notifToSend);
 												res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 											});
 										}).catch((err) => {

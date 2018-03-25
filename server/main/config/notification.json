@@ -8,6 +8,10 @@
 			"status": "RA_APP_TEMP",
 			"message": "RA has approved template"
 		},
+		"RA_REJ_TEMP": {
+			"status": "RA_REJ_TEMP",
+			"message": "RA has rejected template"
+		},
 		"GC_REJ_FORM": {
 			"status": "GC_REJ_FORM",
 			"message": "GC rejected form"
@@ -15,6 +19,10 @@
 		"GC_APP_FORM": {
 			"status": "GC_APP_FORM",
 			"message": "GC approves form"
+		},
+		"RA_REJ_FORM": {
+			"status": "RA_REJ_FORM",
+			"message": "RA rejects (filled) form"
 		}
 	},
 	"GC": {
@@ -25,6 +33,10 @@
 		"USER_SUB_FORM": {
 			"status": "USER_SUB_FORM",
 			"message": "User submitted form"
+		},
+		"USER_FOR_FORM": {
+			"status": "USER_FOR_FORM",
+			"message": "User forfeits form"
 		},
 		"ADMIN_REA_FORM": {
 			"status": "ADMIN_REA_FORM",
@@ -45,6 +57,10 @@
 		"ADMIN_SUB_TEMP": {
 			"status": "ADMIN_SUB_TEMP",
 			"message": "Admin submitted template for approval"
+		},
+		"ADMIN_DEL_TEMP": {
+			"status": "ADMIN_DEL_TEMP",
+			"message": "Admin deleted template"
 		},
 		"ADMIN_REJ_FORM": {
 			"status": "ADMIN_REJ_FORM",

@@ -12,6 +12,9 @@ module.exports = (req, res, next) => {
 					console.log(result);
 					if (result) {
 						console.log('Assigned form and set deadline');
+						const notifToSend = notificationMessage.GC.ADMIN_ASS_FORM;
+						notifToSend.data = { templateId: req.body.formId };
+						notificationsHelper.addNotificationToQueue(req.body.assigneeId.toString(), notifToSend);
 						next();
 					} else {
 						res.status(400).json(responseMessage.FAIL.FORM.NOT_EXISTS);
