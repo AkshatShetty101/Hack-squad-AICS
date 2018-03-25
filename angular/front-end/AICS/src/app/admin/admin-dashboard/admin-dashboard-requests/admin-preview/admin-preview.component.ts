@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-admin-preview',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-preview.component.scss']
 })
 export class AdminPreviewComponent implements OnInit {
-
+  @Input() data :{id:string,title:string,data:string}={id:"default",data:"default",title:"default"};
   constructor() { }
 
   ngOnInit() {
