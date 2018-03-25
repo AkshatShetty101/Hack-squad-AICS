@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
 				res.locals.other_id = result.gc_id;
 				console.log('Loaded GC ID from db');
 				const notifToSend = notificationMessage.GC.USER_SUB_FORM;
-				notifToSend.data = { templateId: req.body.formId };
+				notifToSend.data = { templateId: req.body.formId,causerId: res.locals.user._id.toString() };
 				notificationsHelper.addNotificationToQueue(result.gc_id.toString(), notifToSend);
 				next();
 			} else {

@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
 				console.log('Cleared the template data');
 				res.locals.admin_id = result.admin_id;
 				const notifToSend = notificationMessage.ADMIN.RA_REJ_TEMP;
-				notifToSend.data = { templateId: req.body.templateId };
+				notifToSend.data = { templateId: req.body.templateId, causerId: res.locals.user._id.toString() };
 				notificationsHelper.addNotificationToQueue(res.locals.admin_id.toString(), notifToSend);
 				next();
 			}

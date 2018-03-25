@@ -4,7 +4,7 @@
 
 // Declaring constants
 const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
-const connecthlfv1 = require('composer-connector-hlfv1'); 
+const connecthlfv1 = require('composer-connector-hlfv1');
 const config = require('config');
 
 // Declaring block-chain related information
@@ -15,7 +15,7 @@ this.NS = config.get('NS');
 this.NS_F = config.get('NS_F');
 this.NS_P = config.get('NS_P');
 
-module.exports = (req, res,next) => {
+module.exports = (req, res, next) => {
 	// Establishing connection
 	this.bizNetworkConnection.connect(this.cardName)
 		.then((result) => {
@@ -39,8 +39,8 @@ module.exports = (req, res,next) => {
 			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
 				// Returning response
 				console.log('Form Rejected successfully');
-                next();
-                // res.status(200).json(responseMessage.SUCCESS.SUCCESS);
+				next();
+				// res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 			}).catch((err) => {
 				// Catching errors
 				console.error(err.message);

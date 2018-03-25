@@ -16,11 +16,7 @@ personTC.addResolver({
 	kind: 'query',
 	name: 'findOneQuery',
 	args: {
-		skip: 'Int',
-		self: {
-			type: 'Boolean',
-			default: true
-		}
+		_id: 'String'
 	},
 	type: personTC,
 	resolve: require('../resolvers/person/findOneQuery')

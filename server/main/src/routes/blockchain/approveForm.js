@@ -37,7 +37,7 @@ module.exports = (req, res,next) => {
 				// Returning response
 				console.log('Form Approved successfully');
 				const notifToSend = notificationMessage.ADMIN.GC_APP_FORM;
-				notifToSend.data = { templateId: req.body.formId };
+				notifToSend.data = { templateId: req.body.formId, causerId: res.locals.user._id.toString() };
 				notificationsHelper.addNotificationToQueue(res.locals.admin_id.toString(), notifToSend);
 				// next();
 				res.status(200).json(responseMessage.SUCCESS.SUCCESS);
