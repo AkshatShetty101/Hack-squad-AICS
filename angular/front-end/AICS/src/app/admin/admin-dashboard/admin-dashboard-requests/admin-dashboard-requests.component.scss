@@ -11,6 +11,15 @@
 	box-shadow: 0px 0.5px 5px rgb(67, 147, 228);            
 }
 
+.holder{
+    grid-row: 1/ span 3;
+    grid-column: 1;
+    align-items:center;
+    justify-self:left;
+    padding-left: 10%;
+    max-height: 95%;
+    width:100%;
+}
 .main_data{
 	display:grid;
 	grid-template-columns: 36% 34% 30%;
@@ -36,14 +45,15 @@ li{
     margin: .5em .5em .5em 0;
     padding: .4em .4em .4em 1.8em;
   }
-.reqs{
+
+  .reqs{
     overflow-y: auto;
+    margin-top: 15px;
     grid-row: 1/ span 3;
     grid-column: 1;
     align-items:center;
     justify-self:left;
-    max-height: 95%;
-    // padding-right: 20px;
+    min-height: 95%;
     width:100%;
 }
 ::-webkit-scrollbar {
