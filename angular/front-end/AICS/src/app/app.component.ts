@@ -10,10 +10,11 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   logged: boolean;
+
   constructor(
     private auth: AuthService,
     private router: Router
-  ){
+  ) {
     // auth.statusEmitted$.subscribe(
     //   (status) => {
     //    this.logged = status;
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit {
     //   }
     // );
   }
-  ngOnInit(){
-    this.auth.checkStatus();
+  ngOnInit() {
+    // this.auth.checkStatus();
   }
 }
