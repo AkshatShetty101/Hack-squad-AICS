@@ -167,7 +167,7 @@ router.post('/forms/approveAdmin',
 // 	require('./forms/rejectFormAdmin'),
 // 	require('./blockchain/rejectForm'),
 // 	require('./forms/assignGCAndDeadline'),
-// 	require('./blockchain/assignForm'))
+// 	require('./blockchain/assignForm'));
 
 router.post('/forms/approveRA',
 	verifyMiddleware.verifyPerson,
