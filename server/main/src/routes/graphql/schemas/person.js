@@ -15,13 +15,6 @@ const personTC = composeWithMongoose(Person, customOptions).removeField('passwor
 personTC.addResolver({
 	kind: 'query',
 	name: 'findOneQuery',
-	args: {
-		skip: 'Int',
-		self: {
-			type: 'Boolean',
-			default: true
-		}
-	},
 	type: personTC,
 	resolve: require('../resolvers/person/findOneQuery')
 });
