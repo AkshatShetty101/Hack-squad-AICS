@@ -49,7 +49,7 @@ module.exports = (req, res) => {
 					} else {
 						const notifToSend = notificationMessage.ADMIN.RA_MAKE_REQ;
 						notifToSend.data = { admin_id: id };
-						notificationsHelper.addNotificationToQueue(res.locals.user._id.toString(), );
+						notificationsHelper.addNotificationToQueue(res.locals.user._id.toString());
 						res.status(200).send(responseMessage.SUCCESS.SUCCESS);
 					}
 				});
