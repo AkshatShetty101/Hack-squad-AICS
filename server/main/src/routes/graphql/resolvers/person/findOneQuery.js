@@ -3,7 +3,7 @@ const Person = require('../../../models/person');
 module.exports = ({ args, context }) => {
 	const { req, res } = context;
 	let query = {};
-	if (args.self) {
+	if (args.self || args.hasOwnProperty('self')) {
 		query = { _id: res.locals.user._id };
 		return new Promise((resolve, reject) => {
 			Person.findOne(query, (err, data) => {

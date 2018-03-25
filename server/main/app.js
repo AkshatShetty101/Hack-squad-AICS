@@ -1,22 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-require('composer-connector-hlfv1');
 const redis = require('redis');
-
 
 require('dotenv-safe').config(); // automatically configure environment variables from .env
 require('./config/mongoDatabase')(); // Connection to Database
-require('./config/Array_remove_polyfill')(); // polyfill for Array remove by value -> arr.remove('value')
 
 // global configs
 global.BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
+global.BusinessNetworkDefinition = require('composer-common').BusinessNetworkDefinition;
 global.async = require('async');
 global.redisClient = redis.createClient();
 // global.activeNotificationSubscribers = new Set();
 global.notificationMessage = require('./config/notification');
 global.responseMessage = require('./config/responseMessage.json');
-// global.activeNotificationSubscribersResponse = {};
+global.activeNotificationSubscribersResponse = {};
 
 redisClient
 	.on('connect', () => {

@@ -5,6 +5,7 @@ module.exports = (req, res) => {
 	res.sseSetup();
 	console.log('Notifications Set');
 	activeNotificationSubscribersResponse[res.locals.user._id] = res;
+
 	if (notifInterval) {
 		clearInterval(notifInterval);
 	}
@@ -16,10 +17,11 @@ module.exports = (req, res) => {
 				console.log(notif);
 				if (notif) {
 					console.log('Sending Notification');
-					res.sseSend(notif);
+					activeNotificationSubscribersResponse[res.locals.user._id].sseSend(notif);
 				}
 			})
 			.catch((err) => {
+				console.log('Notification Error');
 				console.error(err);
 			});
 	}, 10000);

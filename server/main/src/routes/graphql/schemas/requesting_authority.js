@@ -1,11 +1,11 @@
 const { schemaComposer } = require('graphql-compose');
 const { composeWithMongoose } = require('graphql-compose-mongoose');
-const { default: ReqAuth } = require('../../../models/requesting_authority');
+const ReqForm = require('../../../models/request_form');
 
 const customOptions = {};
-const reqAuthTC = composeWithMongoose(ReqAuth, customOptions).removeField('password');
+const reqFormTC = composeWithMongoose(ReqForm, customOptions);
 
-reqAuthTC.addResolver({
+reqFormTC.addResolver({
 	kind: 'query',
 	name: 'requestForm',
 	args: {
@@ -13,14 +13,23 @@ reqAuthTC.addResolver({
 			type: 'Int',
 			default: 20
 		},
-		skip: 'Int'
+		skip: 'Int',
+		sortBy: {
+			type: 'String',
+			enum: ['updatedAt', 'createdAt']
+		},
+		sort: {
+			type: 'String',
+			enum: ['ASC', 'DESC']
+		},
+		filter: reqFormTC.getInputType()
 	},
-	type: [reqAuthTC],
-	resolve: require('../resolvers/requesting_authority/requestForm')
+	type: [reqFormTC],
+	resolve: require('../resolvers/requestForm/requestFormQuery')
 });
 
 schemaComposer.rootQuery().addFields({
-	raRequestForm: reqAuthTC.getResolver('requestForm')
+	requestForm: reqFormTC.getResolver('requestForm')
 });
 
 module.exports = schemaComposer.buildSchema();

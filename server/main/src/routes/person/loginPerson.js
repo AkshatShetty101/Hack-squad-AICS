@@ -10,7 +10,6 @@ module.exports = (req, res) => {
 				console.error(err);
 				res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
 			} else {
-				console.log('here1');
 				if (data) {
 					if (passwordValidator(data.password, req.body.password)) {
 						console.log(data);
