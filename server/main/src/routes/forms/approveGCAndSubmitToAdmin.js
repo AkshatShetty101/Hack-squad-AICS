@@ -14,7 +14,7 @@ module.exports = (req, res, next) => {
 					res.locals.admin_id = result.created_by;
 					console.log('Loaded Admin ID from db');
 					const notifToSend = notificationMessage.ADMIN.GC_APP_FORM;
-					notifToSend.data = { templateId: req.body.formId };
+					notifToSend.data = { templateId: req.body.formId, causerId: res.locals.user._id.toString() };
 					notificationsHelper.addNotificationToQueue(result.created_by.toString(), notifToSend);
 					next();
 				} else {
