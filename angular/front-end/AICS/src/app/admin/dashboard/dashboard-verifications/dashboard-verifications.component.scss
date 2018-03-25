@@ -58,3 +58,9 @@ ul{
     padding:10px;
     line-height:25px;            
 }
+.main_data{
+    display:grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 40% 2% 58%;
+    align-items: center;            
+}
