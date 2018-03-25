@@ -50,7 +50,7 @@ import { AdminRequestComponent } from './admin/admin-dashboard/admin-dashboard-r
     HttpClientModule,
     HttpModule,
     LocalStorageModule.withConfig({
-      prefix: '-app',
+      prefix: 'app',
       storageType: 'localStorage'
     })
   ],
