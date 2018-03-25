@@ -36,8 +36,11 @@ module.exports = (req, res,next) => {
 			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
 				// Returning response
 				console.log('Form Approved successfully');
-				next();
-				// res.status(200).json(responseMessage.SUCCESS.SUCCESS);
+				const notifToSend = notificationMessage.ADMIN.GC_APP_FORM;
+				notifToSend.data = { templateId: req.body.formId };
+				notificationsHelper.addNotificationToQueue(res.locals.admin_id.toString(), notifToSend);
+				// next();
+				res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 			}).catch((err) => {
 				console.log(err);
 				// Catching errors

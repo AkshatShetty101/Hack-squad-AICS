@@ -32,9 +32,9 @@ module.exports = (req, res) => {
 						}
 					});
 				}, (err) => {
-						console.log(ct,adminId);
-						resolve(adminId);
-					});
+					console.log(ct,adminId);
+					err ? reject(err) : resolve(adminId);
+				});
 			});
 			promise.then((id) => {
 				console.log('in then!');
@@ -45,14 +45,14 @@ module.exports = (req, res) => {
 					admin_id: id,
 					data: req.body.data
 				});
-				formData.save((err) => {
+				formData.save((err, data) => {
 					if (err) {
 						console.error(err);
 						res.status(400).send(responseMessage.FAIL.SOMETHING_WRONG);
 					} else {
 						const notifToSend = notificationMessage.ADMIN.RA_MAKE_REQ;
-						notifToSend.data = { admin_id: id };
-						// notificationsHelper.addNotificationToQueue(res.locals.user._id.toString(),{""});
+						notifToSend.data = { reqFormId: data._id };
+						notificationsHelper.addNotificationToQueue(id, notifToSend);
 						res.status(200).send(responseMessage.SUCCESS.SUCCESS);
 					}
 				});

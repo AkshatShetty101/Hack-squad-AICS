@@ -33,8 +33,8 @@ module.exports = (req, res) => {
 			// Submitting the transaction
 			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
                 // Returning response
-                console.log('Template reject transaction added to blockchain');
-				res.status(200).json(responseMessage.SUCCESS.SUCCESS);
+				console.log('Template reject transaction added to blockchain');
+				next();
 			}).catch((err) => {
 				// Catching errors
 				console.error(err.message);
