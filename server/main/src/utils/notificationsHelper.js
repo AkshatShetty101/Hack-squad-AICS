@@ -3,6 +3,7 @@ module.exports = exports = {};
 
 exports.addNotificationToQueue = (id, message) => {
 	console.log('notification added');
+	message.timestamp = Date.now();
 	redisClient.RPUSH(id, JSON.stringify(message), (err, reply) => { //add to end of queue
 		if (err) {
 			console.error(err);

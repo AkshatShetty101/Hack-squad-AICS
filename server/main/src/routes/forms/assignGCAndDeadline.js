@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
 					if (result) {
 						console.log('Assigned form and set deadline');
 						const notifToSend = notificationMessage.GC.ADMIN_ASS_FORM;
-						notifToSend.data = { templateId: req.body.formId };
+						notifToSend.data = { templateId: req.body.formId, causerId: res.locals.user._id.toString() };
 						notificationsHelper.addNotificationToQueue(req.body.assigneeId.toString(), notifToSend);
 						next();
 					} else {

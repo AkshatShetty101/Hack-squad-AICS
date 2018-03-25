@@ -39,7 +39,7 @@ module.exports = (req, res) => {
 				// Returning response
 				console.log('Form Forfeited successfully');
 				const notifToSend = notificationMessage.GC.USER_FOR_FORM;
-				notifToSend.data = { templateId: req.body.formId };
+				notifToSend.data = { templateId: req.body.formId, causerId: res.locals.user._id.toString() };
 				notificationsHelper.addNotificationToQueue(res.locals.assigneeId.toString(), notifToSend);
 				res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 			}).catch((err) => {

@@ -161,13 +161,13 @@ router.post('/forms/approveAdmin',
 	require('./blockchain/approveForm'),
 	require('./blockchain/submitForm'));
 
-router.post('/forms/rejectAdminAndImprove',
-	verifyMiddleware.verifyPerson,
-	verifyMiddleware.verifyAdmin,
-	require('./forms/rejectFormAdmin'),
-	require('./blockchain/rejectForm'),
-	require('./forms/assignGCAndDeadline'),
-	require('./blockchain/assignForm'))
+// router.post('/forms/rejectAdminAndImprove',
+// 	verifyMiddleware.verifyPerson,
+// 	verifyMiddleware.verifyAdmin,
+// 	require('./forms/rejectFormAdmin'),
+// 	require('./blockchain/rejectForm'),
+// 	require('./forms/assignGCAndDeadline'),
+// 	require('./blockchain/assignForm'));
 
 router.post('/forms/approveRA',
 	verifyMiddleware.verifyPerson,

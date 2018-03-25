@@ -22,7 +22,7 @@ module.exports = (req, res, next) => {
 				console.log('Added formId to requestForm');
 				res.locals.other_id = result.ra_id;
 				const notifToSend = notificationMessage.RA.ADMIN_APP_FORM;
-				notifToSend.data = { templateId: req.body.formId };
+				notifToSend.data = { templateId: req.body.formId, causerId: res.locals.user._id.toString() };
 				notificationsHelper.addNotificationToQueue(result.ra_id.toString(), notifToSend);
 				next();
 			}

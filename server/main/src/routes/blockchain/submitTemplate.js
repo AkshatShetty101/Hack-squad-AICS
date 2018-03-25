@@ -20,7 +20,7 @@ module.exports = (req, res) => {
 				// Getting factory definitions
 				let factory = this.businessNetworkDefinition.getFactory();
 				// Loading form registry
-				let asignee = factory.newRelationship(this.NS, 'Person', res.locals.user._id);
+				let asignee = factory.newRelationship(this.NS, 'Person', res.locals.user._id.toString());
 				let ra = factory.newRelationship(this.NS, 'Person', res.locals.ra_id.toString());
 				let template = factory.newRelationship(this.NS, 'Template', req.body.templateId);
 				let transaction = factory.newTransaction(this.NS, 'TemplateEvent');
@@ -37,7 +37,7 @@ module.exports = (req, res) => {
 					// Returning response
 					console.log('Template submit transaction added to blockchain');
 					const notifToSend = notificationMessage.RA.ADMIN_SUB_TEMP;
-					notifToSend.data = { templateId: req.body.templateId };
+					notifToSend.data = { templateId: req.body.templateId, causerId: res.locals.user._id.toString() };
 					notificationsHelper.addNotificationToQueue(ra.locals.ra_id.toString(), notifToSend);
 					res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 				}).catch((err) => {
