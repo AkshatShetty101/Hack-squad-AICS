@@ -2,14 +2,14 @@
 <html>
 
 <head>
-    <title>Forms</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {
             margin: 0;
-            background: linear-gradient(to bottom right, #afd8fa, #aed9fa, #c6e4fb, #deeffd, #c9dce2, #dae7eb) no-repeat;
+            background: linear-gradient(to bottom right, #375E8B, #407CAD, #3F7DAD, #318BA5,#3983AA, #94989C,#9C9A9B) no-repeat;
             font-family: 'fira sans';
         }
         /*styling for the nav bar*/
@@ -70,20 +70,22 @@
         }
         @media (max-width:1300px) {
             .profile_image{
-    grid-column:1;
-    grid-row:3/5;
-    font-size:70%;
-    color:#B3B3B3;
-    justify-self: center;
-    align-self:center;
-}   
+                grid-column:1;
+                grid-row:3/5;
+                font-size:70%;
+                color:#B3B3B3;
+                justify-self: center;
+                align-self:center;
+            }   
         }
 .main_grid{
     display:grid;
     grid-template-columns: 10vw 80vw 10vw;
-    grid-template-rows:7vh 80vh 10vh;
+    grid-template-rows:4% 85% 4%;
     width:100vw;
     height:100vh;
+    max-width:100%;
+    max-height:100%;
 }
 .page{
     display:grid;
@@ -93,18 +95,27 @@
     box-shadow: 0px 2px 10px #b3b3b3; 
 }
 .line{
-    grid-row:1/8;
+    grid-row:1/9;
     grid-column:1;
     justify-self:end;
     height:90%;
     align-self:center;
-    border-right:0.4px solid #b3b3b3;
+    border-right:1px solid #b3b3b3;
+}
+.logout{
+    grid-row:7;
+    grid-column:1;
+    display:flex;
+    justify-content:center;
+    align-self:start;
+    width:100%;
+    
 }
 
 .inside_grid{
     display:grid;
     grid-template-columns:30% 70%;
-    grid-template-rows:repeat(7,minmax(10vh,1fr));
+    grid-template-rows:repeat(8,minmax(10vh,1fr));
 }
 .user_profile{
     grid-column:1;
@@ -114,9 +125,9 @@
     text-decoration: underline;
     justify-content:center;
     justify-items:center;
-    align-content:center;
+    /* align-content:end; */
     justify-self: center;
-    align-self: center;
+    align-self: end;
 }
 .title{
             font-family:'fira sans';
@@ -136,7 +147,8 @@
         }
 .profile_image{
     grid-column:1;
-    grid-row:3/5;
+    display:flex;
+    grid-row:4;
     font-size:100px;
     color:#B3B3B3;
     justify-self: center;
@@ -147,36 +159,40 @@
     grid-row:1;
   
 }
+.user_id{
+    grid-column:2;
+    grid-row:2;
+}
 .details{
     color:#38393A;
-    justify-self:start;
+    justify-self:start  ;
     align-self:end;
     font-size:25px;
-    padding-left:2%;
+    padding-left:4%;
 }
 .username{
-    grid-column: 2;
-    grid-row:2;
-
-}
-.email{
     grid-column: 2;
     grid-row:3;
 
 }
-.contact{
+.email{
     grid-column: 2;
     grid-row:4;
 
 }
-.department{
+.contact{
     grid-column: 2;
     grid-row:5;
 
 }
-.role{
+.department{
     grid-column: 2;
     grid-row:6;
+
+}
+.role{
+    grid-column: 2;
+    grid-row:7;
 
 }
 .name_details{
@@ -186,43 +202,60 @@
     align-self:center;
     justify-self:end;
 }
-.username_details{
+.user_id_details{
     grid-column:2;
     grid-row:2;
     width:70%;
     align-self:center;
     justify-self:end;
 }
-.email_details{
+.username_details{
     grid-column:2;
     grid-row:3;
     width:70%;
     align-self:center;
     justify-self:end;
 }
-.contact_details{
+.email_details{
     grid-column:2;
     grid-row:4;
     width:70%;
     align-self:center;
     justify-self:end;
 }
-.department_details{
+.contact_details{
     grid-column:2;
     grid-row:5;
     width:70%;
     align-self:center;
     justify-self:end;
 }
-.role_details{
+.department_details{
     grid-column:2;
     grid-row:6;
     width:70%;
     align-self:center;
     justify-self:end;
 }
+.role_details{
+    grid-column:2;
+    grid-row:7;
+    width:70%;
+    align-self:center;
+    justify-self:end;
+}
+.update_det{
+    grid-row:8;
+    grid-column:2;
+    display:flex;    
+    align-self:center;
+    justify-self:center;
+    width:50%;
+    height:60%;
+}
+
 .btn-1 {
-            background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+            background-image: linear-gradient(to bottom, #008cff ,#52b0fd  );
 
             }
 
@@ -232,23 +265,33 @@
         }
 
         .btn {
-            padding: 10px;
+            padding: 5px;
             font-size: 20px;
             letter-spacing: 2px;
             text-align: center;
-            text-transform: uppercase;
             transition: 0.5s;
             background-size: 200% auto;
-            color: black;
+            color: white;
             font-family: 'fira sans';
-            /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
-            box-shadow: 0 0 20px #F7A666;
             border-radius: 10px;
             grid-column: 3;
             border: 2px;
             width: 70%;
-            margin-top: 10%;
+            align-self:center;
+        }
+        input{
+            border:0.5px solid #B3B3B3;
+            background-color: rgb(238, 236, 236);
+            border-radius:4px;
+            padding:10px;
+            width:70%;
+            margin-top:10%;
             margin-left:4%;
+
+            /* text-align:start; */ 
+        }
+        .fonts{
+            font-size:20px;
         }
      
     </style>
@@ -321,19 +364,23 @@
     </g>
 </svg>
                 </div>
+                <div class="logout"><button class="btn btn-1">Logout</button></div>
                 <div class="line"></div>
-                <div class="name details">NAME</div>
-                <div class="name_details"><span><input type="text" value="Anonymous Username" class="btn btn-1"></span></div>
-                <div class="username details">USERNAME</div>
-                <div class="username_details"><span><input type="text" value="Anonuser" class="btn btn-1"></span></div>
-                <div class="email details">EMAIL</div>
-                <div class="email_details"><span><input type="text" value="email@gmail.com" class="btn btn-1"></span></div>
-                <div class="contact details">CONTACT</div>
-                <div class="contact_details"><span><input type="text" value="9475638954" class="btn btn-1"></span></div>
-                <div class="department details">DEPARTMENT</div>
-                <div class="department_details"><span><input type="text" value="Ministry of HRD" class="btn btn-1"></span></div>
-                <div class="role details">ROLE</div>
-                <div class="role_details"><span><input type="text" value="Group Coordinator" class="btn btn-1"></span></div>
+                <div class="name details fonts">Name</div>
+                <div class="name_details"><span><input type="text" value="Anonymous Username" ></span></div>
+                <div class="username details fonts">Username</div>
+                <div class="username_details"><span><input type="text" value="Anonuser" ></span></div>
+                <div class="user_id details fonts">User ID</div>
+                <div class="user_id_details"><span><input type="text" value="abc352" ></span></div>
+                <div class="email details fonts">Email</div>
+                <div class="email_details"><span><input type="text" value="email@gmail.com" ></span></div>
+                <div class="contact details fonts">Contact</div>
+                <div class="contact_details"><span><input type="text" value="9475638954"></span></div>
+                <div class="department details fonts">Department</div>
+                <div class="department_details"><span><input type="text" value="Ministry of HRD" ></span></div>
+                <div class="role details fonts">Role</div>
+                <div class="role_details"><span><input type="text" value="Group Coordinator" ></span></div>
+                <div class="update_det"><button class="btn btn-1">Update Details</button></div>
             </div>
            
         </div>

@@ -150,14 +150,31 @@ router.post('/forms/submitToGC',
 router.post('/forms/approveGC',
 	verifyMiddleware.verifyPerson,
 	require('./forms/approveGCAndSubmitToAdmin'),
-	require('./blockchain/approveForm'),
-	require('./blockchain/submitForm'));
+	require('./blockchain/approveForm'));
+// require('./blockchain/submitForm'));
 
 router.post('/forms/approveAdmin',
 	verifyMiddleware.verifyPerson,
+	queryMiddleware.getFormRequestId,
 	require('./forms/approveAdminAndSubmitToRA'),
 	require('./blockchain/approveForm'),
 	require('./blockchain/submitForm'));
+
+router.post('/forms/approveRA',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyRequestingAuthority,
+	queryMiddleware.getFormRequestId,
+	require('./forms/approveRA'),
+	require('./blockchain/approveForm'),
+	require('./blockchain/submitForm'));
+
+router.post('/forms/rejectRA',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyRequestingAuthority,
+	require('./forms/rejectFormRA'),
+	require('./blockchain/rejectFormRA'),
+	require('./blockchain/deleteForm'));
+
 
 router.all('/forms',
 	verifyMiddleware.verifyPerson,
@@ -183,6 +200,7 @@ router.post('/reqAuth/edit',
 	require('./requestingAuth/editRequestingAuthForm'));
 
 router.post('/reqAuth/makeRequest',
+	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyRequestingAuthority,
 	require('./requestingAuth/makeRequest'));
 
@@ -197,6 +215,18 @@ router.all('/reqAuth',
 /**
  * Issue Tracker Routes
  */
+router.post('/issueTracker/add',
+	verifyMiddleware.verifyPerson,
+	require('./issueTracker/createIssue'));
+
+router.post('/issueTracker/update',
+	verifyMiddleware.verifyPerson,
+	require('./issueTracker/updateIssueOrComment'));
+
+router.post('/issueTracker/delete',
+	verifyMiddleware.verifyPerson,
+	require('./issueTracker/deleteIssueOrComment'));
+
 router.all('/issueTracker',
 	verifyMiddleware.verifyPerson,
 	graphQLHTTP((req, res) => ({ // to be replaced by router.post
@@ -243,6 +273,7 @@ router.post('/query/getTemplateRequestId',
 router.post('/query/getFormRequestId',
 	verifyMiddleware.verifyPerson,
 	queryMiddleware.getFormRequestId);
+
 /**
  * Notification Route
  */
