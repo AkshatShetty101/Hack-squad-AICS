@@ -3,6 +3,8 @@
 */
 
 // Declaring constants
+const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
+const connecthlfv1 = require('composer-connector-hlfv1'); 
 const config = require('config');
 
 // Declaring block-chain related information
@@ -22,10 +24,11 @@ module.exports = (req, res,next) => {
 			let factory = this.businessNetworkDefinition.getFactory();
 			// Loading form registry
 			let asignee = factory.newRelationship(this.NS, 'Person', res.locals.user._id.toString());
+			let newHolder = factory.newRelationship(this.NS, 'Person', res.locals.admin_id.toString());
 			let transaction = factory.newTransaction(this.NS, 'FormEvent');
 			transaction.person = asignee;
-			transaction.newHolder = asignee;
-			transaction.type = 'approve';
+			transaction.newHolder = newHolder;
+			transaction.type = 'reject';
 			if (req.body.metadata) {
 				transaction.metadata = JSON.stringify(req.body.metadata);
 			} else {
@@ -35,11 +38,10 @@ module.exports = (req, res,next) => {
 			// Submitting the transaction
 			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
 				// Returning response
-				console.log('Form Approved successfully');
-				next();
-				// res.status(200).json(responseMessage.SUCCESS.SUCCESS);
+				console.log('Form Rejected successfully');
+                next();
+                // res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 			}).catch((err) => {
-				console.log(err);
 				// Catching errors
 				console.error(err.message);
 				res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);

@@ -13,7 +13,7 @@ module.exports = (req, res) => {
 				console.log('here!');
 				let ct = -1;
 				let adminId = '';
-				for (let admin of result) {
+				async.each(result, (admin, callback) => {
 					console.log('here!' + admin._id);
 					ReqForm.count({ admin_id: admin._id, is_closed: false }, (err, data) => {
 						if (err) {
@@ -21,22 +21,25 @@ module.exports = (req, res) => {
 							reject(err);
 						} else {
 							console.log(data);
-							if (ct === -1) {
+							if (ct == -1) {
 								adminId = admin._id;
 								ct = data;
 							} else if (ct > data) {
 								ct = data;
 								adminId = admin._id;
 							}
+							callback();
 						}
-					}).then(()=>{
+					});
+				}, (err) => {
+						console.log(ct,adminId);
 						resolve(adminId);
 					});
-
-				}
 			});
 			promise.then((id) => {
 				console.log('in then!');
+				console.log(id);
+				console.log(res.locals.user._id);
 				var formData = new ReqForm({
 					ra_id: res.locals.user._id,
 					admin_id: id,
@@ -49,7 +52,7 @@ module.exports = (req, res) => {
 					} else {
 						const notifToSend = notificationMessage.ADMIN.RA_MAKE_REQ;
 						notifToSend.data = { admin_id: id };
-						notificationsHelper.addNotificationToQueue(res.locals.user._id.toString(), );
+						// notificationsHelper.addNotificationToQueue(res.locals.user._id.toString(),{""});
 						res.status(200).send(responseMessage.SUCCESS.SUCCESS);
 					}
 				});
