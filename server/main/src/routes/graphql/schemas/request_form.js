@@ -13,4 +13,8 @@ schemaComposer.rootQuery().addFields({
 	reqFormCount: reqFormTC.getResolver('count')
 });
 
+schemaComposer.rootMutation().addFields({
+	rejectRequest: reqFormTC.getResolver('removeById')
+});
+
 module.exports = schemaComposer.buildSchema();

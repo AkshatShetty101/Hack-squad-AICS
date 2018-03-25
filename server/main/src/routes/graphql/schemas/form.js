@@ -14,6 +14,10 @@ formTC.addResolver({
 			type: 'Int',
 			default: 20
 		},
+		skip: {
+			type: 'Int',
+			default: 0
+		},
 		sortBy: {
 			type: 'String',
 			enum: ['updatedAt', 'createdAt']

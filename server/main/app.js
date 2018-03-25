@@ -14,7 +14,7 @@ global.redisClient = redis.createClient();
 // global.activeNotificationSubscribers = new Set();
 global.notificationMessage = require('./config/notification');
 global.responseMessage = require('./config/responseMessage.json');
-// global.activeNotificationSubscribersResponse = {};
+global.activeNotificationSubscribersResponse = {};
 
 redisClient
 	.on('connect', () => {
