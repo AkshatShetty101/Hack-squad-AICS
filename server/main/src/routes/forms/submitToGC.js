@@ -11,6 +11,9 @@ module.exports = (req, res, next) => {
 			if (result) {
 				res.locals.other_id = result.gc_id;
 				console.log('Loaded GC ID from db');
+				const notifToSend = notificationMessage.GC.USER_SUB_FORM;
+				notifToSend.data = { templateId: req.body.formId };
+				notificationsHelper.addNotificationToQueue(result.gc_id.toString(), notifToSend);
 				next();
 			} else {
 				res.status(400).json(responseMessage.FAIL.DIVISION.NOT_EXISTS);

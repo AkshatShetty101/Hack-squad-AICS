@@ -88,7 +88,8 @@ router.post('/templates/rejectAndImprove',
 	verifyMiddleware.verifyRequestingAuthority,
 	queryMiddleware.getTemplateRequestId,
 	require('./templates/rejectTemplateAndImprove'),
-	require('./blockchain/rejectTemplate'));
+	require('./blockchain/rejectTemplate'),
+	require('../utils/sendSuccess'));
 
 router.post('/templates/rejectAndDelete',
 	verifyMiddleware.verifyPerson,
@@ -204,6 +205,7 @@ router.post('/reqAuth/remove',
 	require('./requestingAuth/removeRequestingAuth'));
 
 router.post('/reqAuth/edit',
+	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyRequestingAuthority,
 	require('./requestingAuth/editRequestingAuthForm'));
 

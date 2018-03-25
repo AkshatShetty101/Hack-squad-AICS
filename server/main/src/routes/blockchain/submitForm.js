@@ -4,7 +4,6 @@
 
 // Declaring constants
 const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
-const connecthlfv1 = require('composer-connector-hlfv1'); 
 const config = require('config');
 
 // Declaring block-chain related information

@@ -36,6 +36,9 @@ module.exports = (req, res) => {
 				this.bizNetworkConnection.submitTransaction(transaction).then(() => {
 					// Returning response
 					console.log('Template submit transaction added to blockchain');
+					const notifToSend = notificationMessage.RA.ADMIN_SUB_TEMP;
+					notifToSend.data = { templateId: req.body.templateId };
+					notificationsHelper.addNotificationToQueue(ra.locals.ra_id.toString(), notifToSend);
 					res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 				}).catch((err) => {
 					// Catching errors

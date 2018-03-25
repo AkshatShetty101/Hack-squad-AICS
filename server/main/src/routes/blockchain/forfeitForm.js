@@ -38,6 +38,9 @@ module.exports = (req, res) => {
 			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
 				// Returning response
 				console.log('Form Forfeited successfully');
+				const notifToSend = notificationMessage.GC.USER_FOR_FORM;
+				notifToSend.data = { templateId: req.body.formId };
+				notificationsHelper.addNotificationToQueue(res.locals.assigneeId.toString(), notifToSend);
 				res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 			}).catch((err) => {
 				// Catching errors

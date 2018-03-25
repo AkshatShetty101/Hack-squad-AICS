@@ -3,7 +3,7 @@ const Template = require('../../models/template');
 
 module.exports = (req, res, next) => {
 	if (req.body.templateId && res.locals.requestId) {
-		ReqForm.findOneAndRemove({ _id: res.locals.requestId }, { select: 'admin_id' },(err, result) => {
+		ReqForm.findOneAndRemove({ _id: res.locals.requestId }, { select: ['admin_id', 'ra_id'] },(err, result) => {
 			if(err) {
 				console.error(err);
 				res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
@@ -18,6 +18,7 @@ module.exports = (req, res, next) => {
 					} else {
 						console.log('Removed request of RA and delteted template form DB');
 						res.locals.admin_id = result.admin_id;
+						res.locals.ra_id = result.ra_id; // to notify ra I need his id
 						next();
 					}
 				});
