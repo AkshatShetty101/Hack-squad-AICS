@@ -25,17 +25,14 @@ import { UserComponent } from './user/user.component';
 import { AdminRequestListComponent } from './admin/admin-dashboard/admin-dashboard-requests/admin-request-list/admin-request-list.component';
 import { AdminPreviewComponent } from './admin/admin-dashboard/admin-dashboard-requests/admin-preview/admin-preview.component';
 import { AdminRequestComponent } from './admin/admin-dashboard/admin-dashboard-requests/admin-request-list/admin-request/admin-request.component';
-<<<<<<< Updated upstream
 import { AdminViewFormsComponent } from './admin/admin-view-forms/admin-view-forms.component';
 import { AdminViewRepositoryComponent } from './admin/admin-view-repository/admin-view-repository.component';
 import { AdminViewBoxComponent } from './admin/admin-view-forms/admin-view-box/admin-view-box.component';
 
-=======
 import { IndexDBService } from './shared/services/indexdb.service';
 import { AdminVerificationsListComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-list/admin-verifications-list.component';
 import { AdminVerifyComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-list/admin-verify/admin-verify.component'
 import { AdminVerificationsPreviewComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-preview/admin-verifications-preview.component'
->>>>>>> Stashed changes
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,15 +49,12 @@ import { AdminVerificationsPreviewComponent } from './admin/admin-dashboard/admi
     AdminRequestListComponent,
     AdminPreviewComponent,
     AdminRequestComponent,
-<<<<<<< Updated upstream
     AdminViewFormsComponent,
     AdminViewRepositoryComponent,
-    AdminViewBoxComponent
-=======
+    AdminViewBoxComponent,
     AdminVerificationsListComponent,
     AdminVerifyComponent,
     AdminVerificationsPreviewComponent
->>>>>>> Stashed changes
   ],
   imports: [
     BrowserModule,
