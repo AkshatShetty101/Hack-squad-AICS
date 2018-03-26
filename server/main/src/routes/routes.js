@@ -299,4 +299,11 @@ router.post('/translate',
 	verifyMiddleware.verifyPerson,
 	require('./translate/translate'));
 
+/**
+ * OCR Route
+ */
+router.post('/ocr',
+	verifyMiddleware.verifyPerson,
+	require('./ocr/ocr'));
+
 module.exports = router;
