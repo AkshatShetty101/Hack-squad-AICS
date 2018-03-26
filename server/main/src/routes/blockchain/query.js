@@ -147,7 +147,8 @@ exports.getFormProgress = (req, res) => {
 					console.log(data);
 					let output = {
 						success:true,
-						currentStage: assets[0].type
+						currentStage: assets[0].type,
+						metadata:assets[0].metadata
 					}
 					res.status(200).send(output);
 				}).catch((err) => {
@@ -190,7 +191,8 @@ exports.getTemplateProgress = (req, res) => {
 					console.log(data);
 					let output = {
 						success:true,
-						currentStage: assets[0].type
+						currentStage: assets[0].type,
+						metadata:assets[0].metadata
 					}
 					res.status(200).send(output);
 				}).catch((err) => {
