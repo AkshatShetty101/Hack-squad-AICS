@@ -1,5 +1,4 @@
 /*inside box*/
-
 .overlay {
   height: minmax(10vh, 30vh);
   display: grid;
@@ -9,28 +8,33 @@
   grid-template-columns: repeat(4, minmax(10px, 1fr));
   grid-template-rows: repeat(2, minmax(10px, 1fr));
   justify-content: center;
+  padding: 4%;
+  border-radius: 10px;
+  // box-shadow: 0px 1px 10px #b3b3b3;
+  background-color:rgba(179,179,179,0.39);
+    font-family: "fira sans";
+  justify-content: center;
 }
 
-.blue {
-  background-color: #0B7BD2;
+.lb1{
+  background-color: #DC3548;
 }
-
-.grey {
-  background-color: rgba(71, 71, 71, 0.24);
+.lb2{
+  background-color: #007bff;
 }
-
-.inner_grid_dark {
-  background-color: #38393A;
+.lb3{
+  background-color:#28a745;
 }
 
 .overlay>div {
 
   border-radius: 0px;
   box-shadow: 0px 1px 2px rgba(71, 71, 71, 0.55);
-  text-align: center;
-  vertical-align: middle;
+  text-align:center;
+  vertical-align:middle;
   justify-content: center;
 }
+
 
 /*button styling*/
 
@@ -97,25 +101,6 @@
   padding-top: 10px;
 }
 
-.one {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.two {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-.three {
-  grid-column: 3;
-  grid-row: 2;
-}
-
-.four {
-  grid-column: 4;
-  grid-row: 2;
-}
 
 .form_num {
   word-wrap: break-word;
@@ -129,7 +114,7 @@
   color: #38393A;
   text-align: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .value {
@@ -138,12 +123,12 @@
   text-align: center;
   font-weight: light;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 12px;
 }
 
 .form_links {
   font-family: 'fira sans';
-  color: #38393A;
+  color: #eeeeee;
   font-weight: bold;
   text-decoration: none;
   text-align: center;
@@ -151,20 +136,20 @@
 }
 
 .fa_dark {
-  color: #38393A;
+  color:#eeeeee;
   font-size: 20px;
   padding-top: 12px;
 }
 
 @media (max-width:1400px) {
   .fa_dark {
-    color: #38393A;
+    color: #eeeeee;
     font-size: 10px;
     padding-top: 10px;
   }
   .form_links {
     font-family: 'fira sans';
-    color: #38393A;
+    color: #eeeeee;
     font-weight: bold;
     text-decoration: none;
     text-align: center;
@@ -177,6 +162,6 @@
     color: #38393A;
     text-align: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 12px;
   }
 }
