@@ -26,6 +26,7 @@ import { AdminPreviewComponent } from './admin/admin-dashboard/admin-dashboard-r
 import { AdminRequestComponent } from './admin/admin-dashboard/admin-dashboard-requests/admin-request-list/admin-request/admin-request.component';
 import { AdminViewFormsComponent } from './admin/admin-view-forms/admin-view-forms.component';
 import { AdminViewRepositoryComponent } from './admin/admin-view-repository/admin-view-repository.component';
+import { AdminViewBoxComponent } from './admin/admin-view-forms/admin-view-box/admin-view-box.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AdminViewRepositoryComponent } from './admin/admin-view-repository/admi
     AdminPreviewComponent,
     AdminRequestComponent,
     AdminViewFormsComponent,
-    AdminViewRepositoryComponent
+    AdminViewRepositoryComponent,
+    AdminViewBoxComponent
   ],
   imports: [
     BrowserModule,
