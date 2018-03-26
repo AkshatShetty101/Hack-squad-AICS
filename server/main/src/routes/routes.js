@@ -204,12 +204,7 @@ router.post('/reqAuth/remove',
 	verifyMiddleware.verifySystemAdmin,
 	require('./requestingAuth/removeRequestingAuth'));
 
-router.post('/reqAuth/edit',
-	verifyMiddleware.verifyPerson,
-	verifyMiddleware.verifyRequestingAuthority,
-	require('./requestingAuth/editRequestingAuthForm'));
-
-router.post('/reqAuth/makeRequest',
+router.post('/reqAuth/request',
 	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyRequestingAuthority,
 	require('./requestingAuth/makeRequest'));

@@ -25,7 +25,7 @@ const divisionSchema = new Schema({
 		type: String,
 		lowercase: true,
 		trim: true,
-		enum: ['division', 'organization', 'group'],
+		enum: ['division', 'organisation', 'group'],
 		required: [true, 'division type is required']
 	}
 });
