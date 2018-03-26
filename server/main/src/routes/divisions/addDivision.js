@@ -2,7 +2,7 @@ const Division = require('../../models/division');
 
 module.exports = (req, res) => {
 	// Checking if division is already registered
-	if (req.body.name && req.body.name.length > 0 && req.body.type && ['division', 'organization', 'group'].indexOf(req.body.type) > -1) {
+	if (req.body.name && req.body.name.length > 0 && req.body.type && ['division', 'organisation', 'group'].indexOf(req.body.type) > -1) {
 		Division.findOne({ name: req.body.name }, function (err, result) {
 			if (err) {
 				console.error(err);

@@ -57,7 +57,7 @@ exports.getTemplateRequestId = (req, res, next) => {
 				res.locals.requestId = asset[0].requestId;
 				next();
 			})
-			.catch((error) => {
+			.catch((err) => {
 				console.error(err.message);
 				res.status(500).json(responseMessage.FAIL.TEMPLATE.NOT_EXISTS);
 				// Add optional error handling here.
