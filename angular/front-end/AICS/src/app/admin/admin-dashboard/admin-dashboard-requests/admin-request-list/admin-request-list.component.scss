@@ -18,14 +18,16 @@
   
 }
 
-.reqs{
-    margin-top:15px;
-    overflow-y: auto;
+.holder{
     grid-row: 1/ span 3;
     grid-column: 1;
+}
+
+.reqs{
+    overflow-y: auto;
     align-items:center;
     justify-self:left;
-    max-height: 95%;
+    height: 66vh;
     // padding-right: 20px;
     width:100%;
 }

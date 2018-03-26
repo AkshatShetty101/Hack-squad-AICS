@@ -1,4 +1,6 @@
-<div class="req_text">Requests</div>
-<div class="reqs">
-        <app-admin-request *ngFor="let req of requestList" [id]="req.id" [type]="'approval'" (loadRequest)="loadIt($event)"></app-admin-request>
+<div class="holder">
+        <div class="req_text">Requests</div>
+        <div class="reqs">
+                <app-admin-request *ngFor="let req of requestList" [id]="req.id" [type]="'approval'" (loadRequest)="loadIt($event)"></app-admin-request>
+        </div>
 </div>
