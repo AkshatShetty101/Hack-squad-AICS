@@ -279,9 +279,17 @@ router.post('/query/getFormRequestId',
 	verifyMiddleware.verifyPerson,
 	queryMiddleware.getFormRequestId);
 
+router.post('/query/getFormProgress',
+	verifyMiddleware.verifyPerson,
+	queryMiddleware.getFormProgress);
+
+	router.post('/query/getTemplateProgress',
+	verifyMiddleware.verifyPerson,
+	queryMiddleware.getTemplateProgress);
+
 /**
- * Notification Route
- */
+* Notification Route
+*/
 router.get('/notification',
 	verifyMiddleware.verifyPerson,
 	require('../utils/sseHelper'),

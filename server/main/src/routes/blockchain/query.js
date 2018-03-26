@@ -122,3 +122,88 @@ exports.getMyCurrentFormsPromise = (req, res) => {
 			// Add optional error handling here.
 		});
 };
+
+exports.getFormProgress = (req, res) => {
+	this.bizNetworkConnection = new BusinessNetworkConnection();
+	this.cardName = config.get('cardName');
+
+	return this.bizNetworkConnection.connect(this.cardName)
+		.then(() => {
+			console.log('in1');
+			var query = this.bizNetworkConnection.buildQuery(
+				`SELECT org.acme.aics.FormEvent
+				WHERE(form == _$inputValue)`);
+			return this.bizNetworkConnection.query(query, { inputValue: "resource:org.acme.aics.Form#" + req.body.formId });
+		})
+		.then((assets) => {
+			console.log(assets);
+			if (assets.length) {
+				new Promise((resolve, reject) => {
+					assets.sort(function (x, y) {
+						return y.timestamp - x.timestamp;
+					});
+					resolve(assets);
+				}).then((data) => {
+					console.log(data);
+					let output = {
+						success:true,
+						currentStage: assets[0].type
+					}
+					res.status(200).send(output);
+				}).catch((err) => {
+					console.log(err);
+					// res.send(200).send(responseMessage.SUCCESS.SUCCESS)	
+				})
+			} else {
+				res.status(200).send(responseMessage.FAIL.FORM.NOT_EXISTS);
+			}
+		})
+		.catch((err) => {
+			console.error(err.message);
+			res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
+			// Add optional error handling here.
+		});
+}
+
+
+exports.getTemplateProgress = (req, res) => {
+	this.bizNetworkConnection = new BusinessNetworkConnection();
+	this.cardName = config.get('cardName');
+
+	return this.bizNetworkConnection.connect(this.cardName)
+		.then(() => {
+			console.log('in1');
+			var query = this.bizNetworkConnection.buildQuery(
+				`SELECT org.acme.aics.TemplateEvent
+				WHERE(template == _$inputValue)`);
+			return this.bizNetworkConnection.query(query, { inputValue: "resource:org.acme.aics.Template#" + req.body.templateId });
+		})
+		.then((assets) => {
+			console.log(assets);
+			if (assets.length) {
+				new Promise((resolve, reject) => {
+					assets.sort(function (x, y) {
+						return y.timestamp - x.timestamp;
+					});
+					resolve(assets);
+				}).then((data) => {
+					console.log(data);
+					let output = {
+						success:true,
+						currentStage: assets[0].type
+					}
+					res.status(200).send(output);
+				}).catch((err) => {
+					console.log(err);
+					// res.send(200).send(responseMessage.SUCCESS.SUCCESS)	
+				})
+			} else {
+				res.status(200).send(responseMessage.FAIL.FORM.NOT_EXISTS);
+			}
+		})
+		.catch((err) => {
+			console.error(err.message);
+			res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
+			// Add optional error handling here.
+		});
+}
