@@ -1,15 +1,28 @@
-<div class="vers">
-  <ul>
-      <li><a href="#">Verification from Group Coordinator</a></li>
-      <li><a href="#">Verification from Group Coordinator</a></li>
-      <li><a href="#">Verification from Group Coordinator</a></li>                        
-      <li><a href="#">Verification from Requesting Authority</a></li>
-      <li><a href="#">Verification from Group Coordinator</a></li>
-      <li><a href="#">Verification from Group Coordinator</a></li>
-  </ul>
-</div>
-<div class="actions sub_grid">
-  <button class="btn btn1"><i class="fa fa-eye">&nbsp; Preview</i></button>
-  <button class="btn btn2"><i class="fa fa-check-square">&nbsp; Authorise</i></button>
-  
+<div class="main_data1">
+    <div class="holder1">
+        <app-admin-verifications-list (loadRequest)="previewIt($event)"></app-admin-verifications-list>
+    </div>
+    <div class="holder2" *ngIf="requestToLoad.id!=='default'">
+        <app-admin-verifications-preview [data]="requestToLoad"></app-admin-verifications-preview>
+    </div>
+    <div class="holder3">
+        Charts
+    </div>
+    <div class="holder4">
+        Actions
+        <div class="sub_grid" *ngIf="requestToLoad.id!=='default'">
+            <div class="sub_holder1">
+                <button class="btn">Create Template</button>
+            </div>
+            <div class="sub_holder2">
+                <button class="btn">Load Template</button>
+            </div>
+            <div class="sub_holder3">
+                <button class="btn">Find Form</button>
+            </div>
+            <div class="sub_holder4">
+                <button class="btn">Reject Request</button>
+            </div>
+        </div>
+    </div>
 </div>
