@@ -14,6 +14,7 @@ import { HttpService } from './shared/services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { LocalStorageModule} from 'angular-2-local-storage';
+import { AngularIndexedDB } from 'angular2-indexeddb';
 import { AuthService } from './shared/services/auth.service';
 import { AdminDashboardRequestsComponent } from './admin/admin-dashboard/admin-dashboard-requests/admin-dashboard-requests.component';
 import { AdminDashboardVerificationsComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-dashboard-verifications.component';
@@ -26,7 +27,12 @@ import { AdminPreviewComponent } from './admin/admin-dashboard/admin-dashboard-r
 import { AdminRequestComponent } from './admin/admin-dashboard/admin-dashboard-requests/admin-request-list/admin-request/admin-request.component';
 import { AdminViewFormsComponent } from './admin/admin-view-forms/admin-view-forms.component';
 import { AdminViewRepositoryComponent } from './admin/admin-view-repository/admin-view-repository.component';
+import { AdminViewBoxComponent } from './admin/admin-view-forms/admin-view-box/admin-view-box.component';
 
+import { IndexDBService } from './shared/services/indexdb.service';
+import { AdminVerificationsListComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-list/admin-verifications-list.component';
+import { AdminVerifyComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-list/admin-verify/admin-verify.component'
+import { AdminVerificationsPreviewComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-preview/admin-verifications-preview.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +50,11 @@ import { AdminViewRepositoryComponent } from './admin/admin-view-repository/admi
     AdminPreviewComponent,
     AdminRequestComponent,
     AdminViewFormsComponent,
-    AdminViewRepositoryComponent
+    AdminViewRepositoryComponent,
+    AdminViewBoxComponent,
+    AdminVerificationsListComponent,
+    AdminVerifyComponent,
+    AdminVerificationsPreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +62,7 @@ import { AdminViewRepositoryComponent } from './admin/admin-view-repository/admi
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     ReactiveFormsModule,
     HttpClientModule,
+    // AngularIndexedDB,
     HttpModule,
     LocalStorageModule.withConfig({
       prefix: 'app',
@@ -59,6 +70,7 @@ import { AdminViewRepositoryComponent } from './admin/admin-view-repository/admi
     })
   ],
   providers: [
+    IndexDBService,
     HttpService,
     AuthService
   ],
