@@ -1,0 +1,9 @@
+<div class="elementHolder">
+   <select [formControl]="valueField" [name]="'valueField'"
+    [required]="required">
+    <option *ngFor="let option of options; let i = index" 
+      [value]="option.value" [class]="class" [innerHTML]="option.label"
+      [selected]="option.selected == true">
+    </option>
+  </select>
+</div>

@@ -1,0 +1,23 @@
+<div [draggable]="draggableFlag" class="elementHolder">
+  <div *ngFor="let option of options; let i = index">
+    <input *ngIf="subtype === 'radio'" [formControl]="valueField" [value]="option.value" 
+      [required]="required" [type]="subtype" [class]="class" [name]="'valueField'" 
+      [checked]="option.value===value?true:false" (click)="updateFieldValue(subtype, i)" />
+    <input *ngIf="subtype === 'checkbox'" [formControl]="valueField" [value]="option.value" 
+      [required]="required" [type]="subtype" [class]="class" [name]="'valueField'" 
+      [checked]="option.value.indexOf(value[i]) === -1?false:true" (click)="updateFieldValue(subtype, i)" />
+    <span [innerHTML]="option.label"></span>
+  </div>
+  <br />
+  <button (click)="deleteElement()">Delete element</button>
+  <form [formGroup]="myForm" class="hiddenfields" (ngSubmit)="updateValues(myForm)">
+    <label>Required: </label>
+    <input formControlName="required" type="checkbox" />
+    <label>Option Value</label><input type="text" formControlName="addValue" />
+    <label>Option Label</label><input type="text" formControlName="addLabel" />
+    <label>Option Number</label><input type="number" formControlName="removeOption" />
+    <button type="button" (click)="deleteOption(myForm)">-</button>
+    <button type="button" (click)="addOption(myForm)">+</button>
+    <button type="submit">Close</button>
+  </form>
+</div>
