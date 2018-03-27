@@ -32,7 +32,8 @@ import { AdminViewBoxComponent } from './admin/admin-view-forms/admin-view-box/a
 import { IndexDBService } from './shared/services/indexdb.service';
 import { AdminVerificationsListComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-list/admin-verifications-list.component';
 import { AdminVerifyComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-list/admin-verify/admin-verify.component'
-import { AdminVerificationsPreviewComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-preview/admin-verifications-preview.component'
+import { AdminVerificationsPreviewComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-preview/admin-verifications-preview.component';
+
 
 import { AngularDraggableModule } from 'angular2-draggable';
 import { DragDirective } from './shared/directives/drag.directive';
