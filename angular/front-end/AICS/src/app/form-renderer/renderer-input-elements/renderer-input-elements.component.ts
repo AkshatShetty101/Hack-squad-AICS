@@ -5,8 +5,7 @@ import { FormRenderService } from '../form-render.service';
 import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Subject } from 'rxjs/Subject';
 import { Ng4FilesStatus, Ng4FilesSelected } from '../../ng4-files';
-import {FileUploader} from 'ng2-file-upload';
-
+declare var saveAs: any;
 @Component({
   selector: 'app-renderer-input-elements',
   templateUrl: './renderer-input-elements.component.html',
@@ -27,7 +26,6 @@ export class RendererInputElementsComponent implements OnInit {
   @Input() valid;
   @Input() pos;
 
-  public uploader: FileUploader = new FileUploader({url: 'http://localhost:3000/api/video', itemAlias: 'video'});
   public selectedFiles: any;
   valueField: FormControl = new FormControl();
   constructor(
@@ -40,18 +38,6 @@ export class RendererInputElementsComponent implements OnInit {
         this.sendElement();
       }
     );
-    // this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
-    // this.uploader.onCompleteItem = (item: any, response: any, status1: any, headers: any) => {
-    //   console.log(item, response, status1, headers);
-    //   console.log(item);
-    //   console.log(response);
-    //   console.log(status1);
-    //   console.log(headers);
-    // };
-  }
-  upload() {
-    // this.uploader.queue[0].upload();
-    console.log(this.uploader.queue);
   }
   public filesSelect(selectedFiles: Ng4FilesSelected): void {
     console.log(selectedFiles);

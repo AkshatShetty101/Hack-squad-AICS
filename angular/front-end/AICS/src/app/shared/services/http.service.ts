@@ -16,13 +16,13 @@ export class HttpService {
   verifyUser(request: any) {
     const body = request;
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this._http.post('http://aics.in:3000/api/users/login', body, { headers });
+    return this._http.post('http://localhost:3000/api/users/login', body, { headers });
   }
 
   deleteUser(request: any, token) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/users/delete', body, { headers })
+    return this.http.post('http://localhost:3000/api/users/delete', body, { headers })
       .map((response: Response) => response.json());
   }
 
@@ -30,49 +30,49 @@ export class HttpService {
   addTemplates(request: any, token: any) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/templates/add', body, { headers })
+    return this.http.post('http://localhost:3000/api/templates/add', body, { headers })
       .map((response: Response) => response.json());
   }// body - format, title, tags
 
   editTemplates(request: any, token: any) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/templates/edit', body, { headers })
+    return this.http.post('http://localhost:3000/api/templates/edit', body, { headers })
       .map((response: Response) => response.json());
   }// body - format, title, tags
 
   deleteTemplates(request: any, token: any) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/templates/delete', body, { headers })
+    return this.http.post('http://localhost:3000/api/templates/delete', body, { headers })
       .map((response: Response) => response.json());
   }// body - templateId
 
   submitTemplates(request: any, token: any) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/templates/submit', body, { headers })
+    return this.http.post('http://localhost:3000/api/templates/submit', body, { headers })
       .map((response: Response) => response.json());
   }// body - templateId
 
   approveTemplates(request: any, token: any) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/templates/approve', body, { headers })
+    return this.http.post('http://localhost:3000/api/templates/approve', body, { headers })
       .map((response: Response) => response.json());
   }// body - templateId
 
   rejectAndImproveTemplates(request: any, token: any) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/templates/rejectAndImprove', body, { headers })
+    return this.http.post('http://localhost:3000/api/templates/rejectAndImprove', body, { headers })
       .map((response: Response) => response.json());
   }// body - templateId
 
   rejectAndDeleteTemplates(request: any, token: any) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/templates/rejectAndDelete', body, { headers })
+    return this.http.post('http://localhost:3000/api/templates/rejectAndDelete', body, { headers })
       .map((response: Response) => response.json());
   }// body - templateId
 
@@ -80,55 +80,55 @@ export class HttpService {
   editForm(request: any, files: any[], token) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/forms/edit', body, { headers })
+    return this.http.post('http://localhost:3000/api/forms/edit', body, { headers })
       .map((response: Response) => response.json());
   }// body - formId, data; files
 
   deleteForm(request: any, token) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/forms/delete', body, { headers })
+    return this.http.post('http://localhost:3000/api/forms/delete', body, { headers })
       .map((response: Response) => response.json());
   }// body - formId
 
   assignFormUser(request: any, token) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/forms/assignUser', body, { headers })
+    return this.http.post('http://localhost:3000/api/forms/assignUser', body, { headers })
       .map((response: Response) => response.json());
   }// body - formId, assigneeId, deadline
 
   assignGC(request: any, token) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/forms/assignGC', body, { headers })
+    return this.http.post('http://localhost:3000/api/forms/assignGC', body, { headers })
       .map((response: Response) => response.json());
   }// body - formId, assigneeId, deadline
 
   forfeitForm(request: any, token) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/forms/forfeit', body, { headers })
+    return this.http.post('http://localhost:3000/api/forms/forfeit', body, { headers })
       .map((response: Response) => response.json());
   }// body - formId
   submitFormToGC(request: any, token) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/forms/submitToGC', body, { headers })
+    return this.http.post('http://localhost:3000/api/forms/submitToGC', body, { headers })
       .map((response: Response) => response.json());
   }// body - formId
 
   approveFormByGC(request: any, token) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/forms/approveGC', body, { headers })
+    return this.http.post('http://localhost:3000/api/forms/approveGC', body, { headers })
       .map((response: Response) => response.json());
   }// body - formId
 
   approveFormByAdmin(request: any, token) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/forms/approveAdmin', body, { headers })
+    return this.http.post('http://localhost:3000/api/forms/approveAdmin', body, { headers })
       .map((response: Response) => response.json());
   }// body - formId
 
@@ -136,21 +136,21 @@ export class HttpService {
   addReqAuth(request: any, token: any) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/reqAuth/add', body, { headers })
+    return this.http.post('http://localhost:3000/api/reqAuth/add', body, { headers })
       .map((response: Response) => response.json());
   }// body - email, password
 
   removeReqAuth(request: any, token: any) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/reqAuth/remove', body, { headers })
+    return this.http.post('http://localhost:3000/api/reqAuth/remove', body, { headers })
       .map((response: Response) => response.json());
   }// body - ra_id
 
   makeRequestReqAuth(request: any, token: any) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/reqAuth/makeRequest', body, { headers })
+    return this.http.post('http://localhost:3000/api/reqAuth/makeRequest', body, { headers })
       .map((response: Response) => response.json());
   }// body - data
 
@@ -158,7 +158,7 @@ export class HttpService {
   addDivisionUser(request: any, token: any) {
     const body = request;
     let headers = new Headers({ 'x-access-token': token });
-    return this.http.post('http://aics.in:3000/api/division/add', body, { headers })
+    return this.http.post('http://localhost:3000/api/division/add', body, { headers })
       .map((response: Response) => response.json());
   }// body - name, type
 

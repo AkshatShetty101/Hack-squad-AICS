@@ -53,15 +53,12 @@ import { FormBuildService } from './form-builder/form-build.service';
 import { BuilderTextareaElementsComponent } from './form-builder/builder-textarea-elements/builder-textarea-elements.component';
 import { BuilderSelectElementsComponent } from './form-builder/builder-select-elements/builder-select-elements.component';
 import { RendererSelectElementsComponent } from './form-renderer/renderer-select-elements/renderer-select-elements.component';
-import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
 import { Ng4FilesModule } from './ng4-files';
 
 @NgModule({
   declarations: [
     AppComponent,
     DragDirective,
-    FileSelectDirective,
-    FileDropDirective,
     FormRendererComponent,
     RendererInputElementsComponent,
     RendererHeaderElementsComponent,
@@ -105,7 +102,7 @@ import { Ng4FilesModule } from './ng4-files';
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     HttpClientModule,
     Ng4FilesModule,
-    // AngularIndexedDB,
+    AngularIndexedDB,
     HttpModule,
     LocalStorageModule.withConfig({
       prefix: 'app',
