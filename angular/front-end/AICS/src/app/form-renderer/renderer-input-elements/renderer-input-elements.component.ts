@@ -4,7 +4,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { FormRenderService } from '../form-render.service';
 import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Subject } from 'rxjs/Subject';
-
+import { Ng4FilesStatus, Ng4FilesSelected } from '../../ng4-files';
+declare var saveAs: any;
 @Component({
   selector: 'app-renderer-input-elements',
   templateUrl: './renderer-input-elements.component.html',
@@ -25,6 +26,7 @@ export class RendererInputElementsComponent implements OnInit {
   @Input() valid;
   @Input() pos;
 
+  public selectedFiles: any;
   valueField: FormControl = new FormControl();
   constructor(
     private formRender: FormRenderService
@@ -36,6 +38,17 @@ export class RendererInputElementsComponent implements OnInit {
         this.sendElement();
       }
     );
+  }
+  public filesSelect(selectedFiles: Ng4FilesSelected): void {
+    console.log(selectedFiles);
+    if (selectedFiles.status !== Ng4FilesStatus.STATUS_SUCCESS) {
+      this.selectedFiles = selectedFiles.status;
+      return;
+      // Hnadle error statuses here
+    }
+    this.selectedFiles = Array.from(selectedFiles.files).map(file => file.name);
+    console.log(selectedFiles.files);
+    this.value = selectedFiles.files[0];
   }
   sendElement() {
     this.touched = this.valueField.touched;
@@ -58,7 +71,7 @@ export class RendererInputElementsComponent implements OnInit {
         this.valid = 'false';
       }
     } else {
-      if (this.valueField.value === null) {
+    if (this.valueField.value === null) {
         this.valid = 'false';
       }
     }
@@ -67,20 +80,46 @@ export class RendererInputElementsComponent implements OnInit {
   }
   getElement() {
     let element: {};
-    return element = {
-      'type': 'input',
-      'subtype': this.subtype,
-      'class': this.eclass,
-      'label': this.label,
-      'placeholder': this.placeholder,
-      'maxlength': this.maxlength,
-      'max': this.max,
-      'min': this.min,
-      'required': this.required,
-      'value': this.valueField.value,
-      'valid': this.valid,
-      'touched': this.touched,
-      'pristine': this.pristine
-    };
+    if(this.subtype === 'file'){
+      element = {
+        'type': 'input',
+        'subtype': this.subtype,
+        'class': this.eclass,
+        'label': this.label,
+        'placeholder': this.placeholder,
+        'maxlength': this.maxlength,
+        'max': this.max,
+        'min': this.min,
+        'required': this.required,
+        'value': this.value,
+        'valid': this.valid,
+        'touched': this.touched,
+        'pristine': this.pristine
+      }; 
+    }
+    else{
+      element = {
+        'type': 'input',
+        'subtype': this.subtype,
+        'class': this.eclass,
+        'label': this.label,
+        'placeholder': this.placeholder,
+        'maxlength': this.maxlength,
+        'max': this.max,
+        'min': this.min,
+        'required': this.required,
+        'value': this.valueField.value,
+        'valid': this.valid,
+        'touched': this.touched,
+        'pristine': this.pristine
+      };
+    }
+    return element;
+  }
+  download(file){
+    console.log(file);
+    let blob = new Blob([file], {type: file.type});
+    let filename = file.name;
+    saveAs(blob, filename);
   }
 }

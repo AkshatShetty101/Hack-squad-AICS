@@ -56,6 +56,7 @@ import { RendererSelectElementsComponent } from './form-renderer/renderer-select
 import { RaComponent } from './ra/ra.component';
 import { RaMakeRequestComponent } from './ra/ra-dashboard/ra-make-request/ra-make-request.component';
 import { RaDashboardComponent } from './ra/ra-dashboard/ra-dashboard.component';
+import { Ng4FilesModule } from './ng4-files';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { RaDashboardComponent } from './ra/ra-dashboard/ra-dashboard.component';
     AppRoutingModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     HttpClientModule,
-    // AngularIndexedDB,
+    Ng4FilesModule,
+    AngularIndexedDB,
     HttpModule,
     LocalStorageModule.withConfig({
       prefix: 'app',
