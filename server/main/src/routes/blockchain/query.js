@@ -15,7 +15,6 @@ exports.getMyForms = (req, res) => {
 				'SELECT ' + NS_F + ' WHERE (assigneeId CONTAINS _$inputValue)');
 			return this.bizNetworkConnection.query(query, { inputValue: res.locals.user._id });
 		})
-
 		.then((assets) => {
 			let promise = new Promise((resolve, reject) => {
 				let list = [];
@@ -58,7 +57,7 @@ exports.getTemplateRequestId = (req, res, next) => {
 				res.locals.requestId = asset[0].requestId;
 				next();
 			})
-			.catch((error) => {
+			.catch((err) => {
 				console.error(err.message);
 				res.status(500).json(responseMessage.FAIL.TEMPLATE.NOT_EXISTS);
 				// Add optional error handling here.
@@ -96,3 +95,117 @@ exports.getFormRequestId = (req, res, next) => {
 		res.status(500).json(responseMessage.FAIL.INC_INV_DATA);
 	}
 };
+
+exports.getMyCurrentFormsPromise = (req, res) => {
+	this.bizNetworkConnection = new BusinessNetworkConnection();
+	this.cardName = config.get('cardName');
+	return this.bizNetworkConnection.connect(this.cardName)
+		.then(() => {
+			console.log('in1');
+			var query = this.bizNetworkConnection.buildQuery(
+				'SELECT ' + NS_F + ' WHERE (assigneeId CONTAINS _$inputValue)');
+			return this.bizNetworkConnection.query(query, { inputValue: res.locals.user._id });
+		})
+		.then((assets) => {
+			return new Promise((resolve, reject) => {
+				let list = [];
+				for (let data of assets) {
+					console.log(data.formId);
+					list.push(data.formId);
+				}
+				resolve(list);
+			});
+		})
+		.catch((err) => {
+			console.error(err.message);
+			res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
+			// Add optional error handling here.
+		});
+};
+
+exports.getFormProgress = (req, res) => {
+	this.bizNetworkConnection = new BusinessNetworkConnection();
+	this.cardName = config.get('cardName');
+
+	return this.bizNetworkConnection.connect(this.cardName)
+		.then(() => {
+			console.log('in1');
+			var query = this.bizNetworkConnection.buildQuery(
+				`SELECT org.acme.aics.FormEvent
+				WHERE(form == _$inputValue)`);
+			return this.bizNetworkConnection.query(query, { inputValue: "resource:org.acme.aics.Form#" + req.body.formId });
+		})
+		.then((assets) => {
+			console.log(assets);
+			if (assets.length) {
+				new Promise((resolve, reject) => {
+					assets.sort(function (x, y) {
+						return y.timestamp - x.timestamp;
+					});
+					resolve(assets);
+				}).then((data) => {
+					console.log(data);
+					let output = {
+						...responseMessage.SUCCESS.SUCCESS,
+						currentStage: assets[0].type,
+						metadata:assets[0].metadata
+					}
+					res.status(200).json(output);
+				}).catch((err) => {
+					console.error(err);
+					res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
+				})
+			} else {
+				res.status(200).send(responseMessage.FAIL.FORM.NOT_EXISTS);
+			}
+		})
+		.catch((err) => {
+			console.error(err.message);
+			res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
+			// Add optional error handling here.
+		});
+}
+
+
+exports.getTemplateProgress = (req, res) => {
+	this.bizNetworkConnection = new BusinessNetworkConnection();
+	this.cardName = config.get('cardName');
+
+	return this.bizNetworkConnection.connect(this.cardName)
+		.then(() => {
+			console.log('in1');
+			var query = this.bizNetworkConnection.buildQuery(
+				`SELECT org.acme.aics.TemplateEvent
+				WHERE(template == _$inputValue)`);
+			return this.bizNetworkConnection.query(query, { inputValue: "resource:org.acme.aics.Template#" + req.body.templateId });
+		})
+		.then((assets) => {
+			console.log(assets);
+			if (assets.length) {
+				new Promise((resolve, reject) => {
+					assets.sort(function (x, y) {
+						return y.timestamp - x.timestamp;
+					});
+					resolve(assets);
+				}).then((data) => {
+					console.log(data);
+					let output = {
+						...responseMessage.SUCCESS.SUCCESS,
+						currentStage: assets[0].type,
+						metadata:assets[0].metadata
+					}
+					res.status(200).json(output);
+				}).catch((err) => {
+					console.error(err);
+					res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);	
+				})
+			} else {
+				res.status(200).json(responseMessage.FAIL.FORM.NOT_EXISTS);
+			}
+		})
+		.catch((err) => {
+			console.error(err.message);
+			res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
+			// Add optional error handling here.
+		});
+}

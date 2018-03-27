@@ -1,0 +1,6 @@
+<div class="holder">
+        <div class="req_text">Requests</div>
+        <div class="reqs">
+                <app-admin-verify *ngFor="let form of formList" [id]="form.id" [type]="form.type" (loadRequest)="loadIt($event)"></app-admin-verify>
+        </div>
+</div>

@@ -31,11 +31,19 @@ formTC.addResolver({
 	resolve: require('../resolvers/form/findOwnQuery')
 });
 
+formTC.addResolver({
+	kind: 'query',
+	name: 'findOwnQuery',
+	type: 'Json',
+	resolve: require('../resolvers/form/countFormQuery')
+});
+
 schemaComposer.rootQuery().addFields({
 	formById: formTC.getResolver('findById'),
 	formOne: formTC.getResolver('findOne'),
 	formMany: formTC.getResolver('findMany'),
-	formOwn: formTC.getResolver('findOwnQuery')
+	formOwn: formTC.getResolver('findOwnQuery'),
+	formCount: formTC.getResolver('formCountQuery')
 });
 
 module.exports = schemaComposer.buildSchema();

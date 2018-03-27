@@ -12,9 +12,6 @@ const requestingAuthoritySchema = new Schema({
 		type: String,
 		required: [true, 'password is required']
 	},
-},
-{
-	timestamps: true
 });
 
 module.exports = {

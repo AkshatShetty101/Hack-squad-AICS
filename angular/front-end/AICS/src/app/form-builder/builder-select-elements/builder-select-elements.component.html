@@ -1,0 +1,19 @@
+<div [draggable]="draggableFlag" class="elementHolder">
+  <select [formControl]="valueField" [name]="'valueField'"
+  [required]="required">
+    <option *ngFor="let option of options; let i = index" 
+      [value]="option.value" [selected]="option.value===value?true:false" 
+      [class]="class" [innerHTML]="option.label" (click)="updateFieldValue(i)">
+    </option>
+  </select><br />
+  <button (click)="deleteElement()">Delete element</button>
+  <form [formGroup]="myForm" class="hiddenfields" (ngSubmit)="updateValues(myForm)">
+    <label>Required: </label>
+    <input formControlName="required" type="checkbox" />
+    <label>Option Value</label><input type="text" formControlName="addValue" />
+    <label>Option Label</label><input type="text" formControlName="addLabel" />
+    <button (click)="replaceOption(myForm)">Replace</button>
+    <button (click)="addOption(myForm)">+</button>
+    <button type="submit">Close</button>
+  </form>
+</div>

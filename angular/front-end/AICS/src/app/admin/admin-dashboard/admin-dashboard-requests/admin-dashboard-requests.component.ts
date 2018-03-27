@@ -8,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class AdminDashboardRequestsComponent implements OnInit {
 
   constructor() { }
-
+  requestToLoad:{id:string,title:string,data:string}={id:"default",title:"default",data:"default"};
   ngOnInit() {
   }
-
+  previewIt(request:{id:string,title:string,data:string}){
+    this.requestToLoad = request;
+  }
 }

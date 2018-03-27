@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IndexDBService } from '../../../shared/services/indexdb.service';
 
 @Component({
   selector: 'app-admin-dashboard-verifications',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminDashboardVerificationsComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private IndexDB: IndexDBService) { }
+  requestToLoad: { id: string} = { id: "default"};
   ngOnInit() {
+    console.log('from here!!!!');
   }
-
+  previewIt(request: { id: string}) {
+    this.requestToLoad = request;
+  }
 }

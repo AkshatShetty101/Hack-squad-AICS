@@ -8,31 +8,18 @@
     text-align: center;
   
 }
-
 .inside-left{
-    width: 40%;
+    width: 30%;
     background-color: #0d8aee;
-    background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
     float: left;
     height: 50px;
     line-height: 50px;
     text-align: center;
+  
 }
-.btn {
-  flex: 1 1 auto;
-  margin: 10px;
-  padding: 30px;
-  text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
- /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
-  box-shadow: 0 0 20px #eee;
-  border-radius: 10px;
- }
+
 button{
- width: 100%;
+    width: 100%;
     border: 1px solid #979798;
     background-color: #eeeeee;
     -webkit-appearance: none;
@@ -41,7 +28,7 @@ button{
     line-height: 1.2;
     outline: 0;
     padding: 0px 0px 0px 0px;
-    margin: 0 0px 0 0;
+    margin: 5px 0 0 0;
     position: relative;
     border-radius: 3px;
     color: white;

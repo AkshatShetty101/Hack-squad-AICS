@@ -204,12 +204,7 @@ router.post('/reqAuth/remove',
 	verifyMiddleware.verifySystemAdmin,
 	require('./requestingAuth/removeRequestingAuth'));
 
-router.post('/reqAuth/edit',
-	verifyMiddleware.verifyPerson,
-	verifyMiddleware.verifyRequestingAuthority,
-	require('./requestingAuth/editRequestingAuthForm'));
-
-router.post('/reqAuth/makeRequest',
+router.post('/reqAuth/request',
 	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyRequestingAuthority,
 	require('./requestingAuth/makeRequest'));
@@ -284,9 +279,17 @@ router.post('/query/getFormRequestId',
 	verifyMiddleware.verifyPerson,
 	queryMiddleware.getFormRequestId);
 
+router.post('/query/getFormProgress',
+	verifyMiddleware.verifyPerson,
+	queryMiddleware.getFormProgress);
+
+	router.post('/query/getTemplateProgress',
+	verifyMiddleware.verifyPerson,
+	queryMiddleware.getTemplateProgress);
+
 /**
- * Notification Route
- */
+* Notification Route
+*/
 router.get('/notification',
 	verifyMiddleware.verifyPerson,
 	require('../utils/sseHelper'),
@@ -298,5 +301,12 @@ router.get('/notification',
 router.post('/translate',
 	verifyMiddleware.verifyPerson,
 	require('./translate/translate'));
+
+/**
+ * OCR Route
+ */
+router.post('/ocr',
+	verifyMiddleware.verifyPerson,
+	require('./ocr/ocr'));
 
 module.exports = router;

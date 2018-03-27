@@ -1,0 +1,47 @@
+<div class="overlay">
+  <div class="form_no">
+    <span class="form_num  title ">FORM NO</span>
+    <span class="form_num value">{{ form.id }}</span>
+  </div>
+  <div class="form2">
+    <span class="form_num  title ">{{ form.title }}</span>
+    <br>
+    <span class="form_num value">{{ form.divison }}</span>
+  </div>
+  <div [class]="cl">
+    <span>
+      <i class="fa fa-line-chart fa_dark" aria-hidden="true"></i>
+    </span>
+    <br/>
+    <span class="form_num  form_links">TRACKING</span>
+  </div>
+  <div [class]="cl">
+    <span>
+      <i class="fa fa-file-text fa_dark" aria-hidden="true"></i>
+    </span>
+    <br>
+    <span class="form_num  form_links">VIEW</span>
+  </div>
+  <div [class]="cl">
+    <span>
+      <i class="fa fa-list fa_dark" aria-hidden="true"></i>
+    </span>
+    <br>
+    <span class="form_num  form_links" (click)="modalOpen=true">PREVIEW</span>
+  </div>
+  <div [class]="cl">
+    <span>
+      <i class="fa fa-exclamation fa_dark" aria-hidden="true"></i>
+    </span>
+    <br>
+    <span class="form_num  form_links">ISSUES</span>
+  </div>
+</div>
+<!-- The Modal -->
+<div *ngIf="modalOpen == true" id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" (click)="modalOpen=false">&times;</span>
+    <app-form-renderer></app-form-renderer>
+  </div>
+</div>

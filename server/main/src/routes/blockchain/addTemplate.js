@@ -50,7 +50,9 @@ module.exports = (req, res, next) => {
 										// Returning response
 										console.log("Template Added successfully to block-chain");
 										// next();
-										res.status(200).json(responseMessage.SUCCESS.SUCCESS);
+										let messageToSend = responseMessage.SUCCESS.SUCCESS;
+										messageToSend.templateId = res.locals.templateId.toString();
+										res.status(200).json(messageToSend);
 									});
 								}).catch((err) => {
 									// Catching errors
@@ -65,13 +67,14 @@ module.exports = (req, res, next) => {
 					}).catch((err) => {
 						// Catching errors
 						console.error(err.message);
-						next();
+						res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
+						// next();
 					});
 				});
 		})
 		.catch(err => {
 			// Catching errors
-			console.log(err);
-			res.send({ 'success': false, 'message': err.message });
+			console.error(err);
+			res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 		});
 }
