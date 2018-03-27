@@ -28,11 +28,14 @@ import { AdminRequestComponent } from './admin/admin-dashboard/admin-dashboard-r
 import { AdminViewFormsComponent } from './admin/admin-view-forms/admin-view-forms.component';
 import { AdminViewRepositoryComponent } from './admin/admin-view-repository/admin-view-repository.component';
 import { AdminViewBoxComponent } from './admin/admin-view-forms/admin-view-box/admin-view-box.component';
+import { CalendarModule } from 'angular-calendar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { IndexDBService } from './shared/services/indexdb.service';
 import { AdminVerificationsListComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-list/admin-verifications-list.component';
 import { AdminVerifyComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-list/admin-verify/admin-verify.component'
-import { AdminVerificationsPreviewComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-preview/admin-verifications-preview.component'
+import { AdminVerificationsPreviewComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-preview/admin-verifications-preview.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +70,9 @@ import { AdminVerificationsPreviewComponent } from './admin/admin-dashboard/admi
     LocalStorageModule.withConfig({
       prefix: 'app',
       storageType: 'localStorage'
-    })
+    }),
+    BrowserAnimationsModule,
+    CalendarModule.forRoot()
   ],
   providers: [
     IndexDBService,

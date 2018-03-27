@@ -170,6 +170,10 @@
     z-index:2;
 }
 
+.blue{
+    background-color:#0A6EBE;
+    border: 2px solid #0A6EBE !important;
+}
 .bar{
     border:2px solid silver;
     line-height: 1.2em;
@@ -348,7 +352,7 @@
 .text_decoration{
     font-family:'fira sans';
     color:#38393A;
-    font-size:8px;
+    font-size:12px;
     word-wrap: break-word;
 }
 .state1{
