@@ -9,7 +9,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { AdminTrackingComponent } from './admin/admin-tracking/admin-tracking.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpService } from './shared/services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
@@ -33,9 +33,43 @@ import { IndexDBService } from './shared/services/indexdb.service';
 import { AdminVerificationsListComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-list/admin-verifications-list.component';
 import { AdminVerifyComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-list/admin-verify/admin-verify.component'
 import { AdminVerificationsPreviewComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-verifications-preview/admin-verifications-preview.component'
+
+import { AngularDraggableModule } from 'angular2-draggable';
+import { DragDirective } from './shared/directives/drag.directive';
+import { FormRendererComponent } from './form-renderer/form-renderer.component';
+import { RendererInputElementsComponent } from './form-renderer/renderer-input-elements/renderer-input-elements.component';
+import { RendererHeaderElementsComponent } from './form-renderer/renderer-header-elements/renderer-header-elements.component';
+import { RendererParagraphElementsComponent } from './form-renderer/renderer-paragraph-elements/renderer-paragraph-elements.component';
+import { RendererTextareaElementsComponent } from './form-renderer/renderer-textarea-elements/renderer-textarea-elements.component';
+import { RendererGroupElementsComponent } from './form-renderer/renderer-group-elements/renderer-group-elements.component';
+import { FormRenderService } from './form-renderer/form-render.service';
+import { FormBuilderComponent } from './form-builder/form-builder.component';
+import { BuilderInputElementsComponent } from './form-builder/builder-input-elements/builder-input-elements.component';
+import { BuilderGroupElementsComponent } from './form-builder/builder-group-elements/builder-group-elements.component';
+import { BuilderHeaderElementsComponent } from './form-builder/builder-header-elements/builder-header-elements.component';
+import { BuilderParagraphElementsComponent } from './form-builder/builder-paragraph-elements/builder-paragraph-elements.component';
+import { FormBuildService } from './form-builder/form-build.service';
+import { BuilderTextareaElementsComponent } from './form-builder/builder-textarea-elements/builder-textarea-elements.component';
+import { BuilderSelectElementsComponent } from './form-builder/builder-select-elements/builder-select-elements.component';
+import { RendererSelectElementsComponent } from './form-renderer/renderer-select-elements/renderer-select-elements.component';
 @NgModule({
   declarations: [
     AppComponent,
+    DragDirective,
+    FormRendererComponent,
+    RendererInputElementsComponent,
+    RendererHeaderElementsComponent,
+    RendererParagraphElementsComponent,
+    RendererTextareaElementsComponent,
+    RendererGroupElementsComponent,
+    FormBuilderComponent,
+    BuilderInputElementsComponent,
+    BuilderGroupElementsComponent,
+    BuilderHeaderElementsComponent,
+    BuilderParagraphElementsComponent,
+    BuilderTextareaElementsComponent,
+    BuilderSelectElementsComponent,
+    RendererSelectElementsComponent,
     AdminDashboardComponent,
     AdminTrackingComponent,
     AdminComponent,
@@ -58,9 +92,11 @@ import { AdminVerificationsPreviewComponent } from './admin/admin-dashboard/admi
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularDraggableModule,
     AppRoutingModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
-    ReactiveFormsModule,
     HttpClientModule,
     // AngularIndexedDB,
     HttpModule,
@@ -70,6 +106,8 @@ import { AdminVerificationsPreviewComponent } from './admin/admin-dashboard/admi
     })
   ],
   providers: [
+    FormRenderService,
+    FormBuildService,
     IndexDBService,
     HttpService,
     AuthService

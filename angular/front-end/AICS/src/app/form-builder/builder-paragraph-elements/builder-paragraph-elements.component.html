@@ -1,0 +1,9 @@
+<div class="elementHolder"  [draggable]="draggableFlag">
+  <p [innerHTML]="content"></p>
+  <form [formGroup]="myForm" class="hiddenfields" (ngSubmit)="updateValues(myForm)">
+    <label>Content: </label>
+    <textarea formControlName="content"></textarea>
+    <button type="submit">Close</button>
+  </form>
+  <button (click)="deleteElement()">Delete Element</button>
+</div>
