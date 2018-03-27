@@ -146,14 +146,14 @@ exports.getFormProgress = (req, res) => {
 				}).then((data) => {
 					console.log(data);
 					let output = {
-						success:true,
+						...responseMessage.SUCCESS.SUCCESS,
 						currentStage: assets[0].type,
 						metadata:assets[0].metadata
 					}
-					res.status(200).send(output);
+					res.status(200).json(output);
 				}).catch((err) => {
-					console.log(err);
-					// res.send(200).send(responseMessage.SUCCESS.SUCCESS)	
+					console.error(err);
+					res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 				})
 			} else {
 				res.status(200).send(responseMessage.FAIL.FORM.NOT_EXISTS);
@@ -190,17 +190,17 @@ exports.getTemplateProgress = (req, res) => {
 				}).then((data) => {
 					console.log(data);
 					let output = {
-						success:true,
+						...responseMessage.SUCCESS.SUCCESS,
 						currentStage: assets[0].type,
 						metadata:assets[0].metadata
 					}
-					res.status(200).send(output);
+					res.status(200).json(output);
 				}).catch((err) => {
-					console.log(err);
-					// res.send(200).send(responseMessage.SUCCESS.SUCCESS)	
+					console.error(err);
+					res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);	
 				})
 			} else {
-				res.status(200).send(responseMessage.FAIL.FORM.NOT_EXISTS);
+				res.status(200).json(responseMessage.FAIL.FORM.NOT_EXISTS);
 			}
 		})
 		.catch((err) => {
