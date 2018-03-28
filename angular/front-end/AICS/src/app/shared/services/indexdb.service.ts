@@ -68,11 +68,7 @@ export class IndexDBService {
   }
 
   getAllRequests() {
-    this.db.getAll('requests').then((people) => {
-      console.log(people);
-    }, (error) => {
-      console.log(error);
-    });
+    return this.db.getAll('requests');
   }
 
   getRequestByKey(key: number) {
@@ -86,6 +82,22 @@ export class IndexDBService {
       console.log(error);
       return { success: false, message: "Delete Unsuccessful" };
     });
+  }
+
+  cursor(): { id: string, title: string, data: string }[] {
+    let list: { id: string, title: string, data: string }[] = [];
+    this.db.openCursor('requests', (evt) => {
+      var cursor = (<any>evt.target).result;
+      if (cursor) {
+        console.log(cursor);
+        list.push({ id: cursor.key.toString(), title: cursor.value.title, data: cursor.value.data });
+        cursor.continue();
+      } else {
+        console.log('Entries all displayed.');
+        return list;
+      }
+    });
+    return list;
   }
 }
 
