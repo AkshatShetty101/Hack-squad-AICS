@@ -54,6 +54,7 @@ import { BuilderTextareaElementsComponent } from './form-builder/builder-textare
 import { BuilderSelectElementsComponent } from './form-builder/builder-select-elements/builder-select-elements.component';
 import { RendererSelectElementsComponent } from './form-renderer/renderer-select-elements/renderer-select-elements.component';
 import { Ng4FilesModule } from './ng4-files';
+import { AdminFormComponent } from './admin/admin-view-repository/admin-form/admin-form.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { Ng4FilesModule } from './ng4-files';
     AdminViewBoxComponent,
     AdminVerificationsListComponent,
     AdminVerifyComponent,
-    AdminVerificationsPreviewComponent
+    AdminVerificationsPreviewComponent,
+    AdminFormComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +104,7 @@ import { Ng4FilesModule } from './ng4-files';
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     HttpClientModule,
     Ng4FilesModule,
-    AngularIndexedDB,
+    // AngularIndexedDB,
     HttpModule,
     LocalStorageModule.withConfig({
       prefix: 'app',
