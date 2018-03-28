@@ -273,17 +273,19 @@ router.post('/query/getMyForms',
 
 router.post('/query/getTemplateRequestId',
 	verifyMiddleware.verifyPerson,
-	queryMiddleware.getTemplateRequestId);
+	queryMiddleware.getTemplateRequestId,
+	require('../utils/sendSuccess'));
 
 router.post('/query/getFormRequestId',
 	verifyMiddleware.verifyPerson,
-	queryMiddleware.getFormRequestId);
+	queryMiddleware.getFormRequestId,
+	require('../utils/sendSuccess'));
 
 router.post('/query/getFormProgress',
 	verifyMiddleware.verifyPerson,
 	queryMiddleware.getFormProgress);
 
-	router.post('/query/getTemplateProgress',
+router.post('/query/getTemplateProgress',
 	verifyMiddleware.verifyPerson,
 	queryMiddleware.getTemplateProgress);
 

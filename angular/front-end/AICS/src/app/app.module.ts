@@ -53,6 +53,9 @@ import { FormBuildService } from './form-builder/form-build.service';
 import { BuilderTextareaElementsComponent } from './form-builder/builder-textarea-elements/builder-textarea-elements.component';
 import { BuilderSelectElementsComponent } from './form-builder/builder-select-elements/builder-select-elements.component';
 import { RendererSelectElementsComponent } from './form-renderer/renderer-select-elements/renderer-select-elements.component';
+import { RaComponent } from './ra/ra.component';
+import { RaMakeRequestComponent } from './ra/ra-dashboard/ra-make-request/ra-make-request.component';
+import { RaDashboardComponent } from './ra/ra-dashboard/ra-dashboard.component';
 import { Ng4FilesModule } from './ng4-files';
 import { AdminFormComponent } from './admin/admin-view-repository/admin-form/admin-form.component';
 
@@ -93,7 +96,10 @@ import { AdminFormComponent } from './admin/admin-view-repository/admin-form/adm
     AdminVerificationsListComponent,
     AdminVerifyComponent,
     AdminVerificationsPreviewComponent,
-    AdminFormComponent
+    AdminFormComponent,
+    RaComponent,
+    RaMakeRequestComponent,
+    RaDashboardComponent
   ],
   imports: [
     BrowserModule,
