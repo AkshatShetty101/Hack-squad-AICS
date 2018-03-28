@@ -61,6 +61,7 @@ import { TrackRequestComponent } from './ra/ra-dashboard/track-request/track-req
 import { RaRequestListComponent } from './ra/ra-dashboard/track-request/ra-request-list/ra-request-list.component';
 import { RaRequestComponent } from './ra/ra-dashboard/track-request/ra-request-list/ra-request/ra-request.component';
 import { RaRequestPreviewComponent } from './ra/ra-dashboard/track-request/ra-request-preview/ra-request-preview.component';
+import { AdminFormComponent } from './admin/admin-view-repository/admin-form/admin-form.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import { RaRequestPreviewComponent } from './ra/ra-dashboard/track-request/ra-re
     AdminVerificationsListComponent,
     AdminVerifyComponent,
     AdminVerificationsPreviewComponent,
+    AdminFormComponent,
     RaComponent,
     RaMakeRequestComponent,
     RaDashboardComponent,
