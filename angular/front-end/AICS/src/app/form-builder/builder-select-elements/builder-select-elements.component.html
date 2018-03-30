@@ -1,45 +1,3 @@
-<!-- <div [draggable]="draggableFlag" class="elementHolder">
-  <div class="icon1" (click)="hiddenForm=!hiddenForm">
-    <mat-icon>edit</mat-icon>
-  </div>
-  <div class="icon2" (click)="deleteElement()">
-    <mat-icon>delete</mat-icon>
-  </div>
-  <div class="label_transition">
-    <div *ngFor="let option of options; let i = index">
-      <input *ngIf="subtype === 'radio'" [formControl]="valueField" [value]="option.value" [required]="required" [type]="subtype"
-        [class]="class" [name]="'valueField'" [checked]="option.value===value?true:false" (click)="updateFieldValue(subtype, i)"
-      />
-      <input *ngIf="subtype === 'checkbox'" [formControl]="valueField" [value]="option.value" [required]="required" [type]="subtype"
-        [class]="class" [name]="'valueField'" [checked]="option.value.indexOf(value[i]) === -1?false:true" (click)="updateFieldValue(subtype, i)"
-      />
-      <span [innerHTML]="option.label"></span>
-    </div>
-  </div>
-  <form *ngIf="hiddenForm" [formGroup]="myForm" class="input_box inner_grid" (ngSubmit)="updateValues(myForm)">
-    <div class="required">
-      <label>Required&nbsp;:&nbsp;</label>
-      <mat-checkbox formControlName="required"></mat-checkbox>
-    </div>
-    <div class="label1">
-      <label>Option Value&nbsp;:&nbsp;</label>
-      <input class="within" type="text" formControlName="addValue" />
-    </div>
-    <div class="label3">
-      <label>Option Label&nbsp;:&nbsp;</label>
-      <input class="within" type="text" formControlName="addLabel" />
-    </div>
-    <div class="label_4 option_number">
-      <div class="label4">Option Number&nbsp;:&nbsp;</div>
-      <div class="input_1">
-        <input class="within" type="text" formControlName="removeOption" />
-      </div>
-    </div>
-    <div class="close">
-      <button type="submit" mat-raised-button color="accent">CLOSE</button>
-    </div>
-  </form>
-</div> -->
 <div [draggable]="draggableFlag" class="elementHolder">
   <div class="icon1" (click)="hiddenForm=!hiddenForm">
     <mat-icon>edit</mat-icon>
@@ -74,6 +32,12 @@
       <div class="label4">Option Number&nbsp;:&nbsp;</div>
       <div class="input_1">
         <input class="within" type="text" formControlName="removeOption" />
+      </div>
+      <div (click)="addOption(myForm)" class="plus">
+        <i class="fa fa-plus"></i>
+      </div>
+      <div (click)="deleteOption(myForm)" class="minus">
+        <i class="fa fa-minus"></i>
       </div>
     </div>
     <div class="close">

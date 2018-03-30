@@ -3,7 +3,6 @@ const router = express.Router();
 const graphQLHTTP = require('express-graphql');
 const verifyMiddleware = require('../utils/verifyMiddleware');
 const queryMiddleware = require('./blockchain/query');
-// const queryMiddleware = require('../routes/blockchain/query');
 
 router.all('/', function (req, res) {
 	res.json(responseMessage.SUCCESS.IT_WORKS);
@@ -145,6 +144,7 @@ router.post('/forms/submitToGC',
 
 // router.post('/forms/submitToAdmin',
 // 	verifyMiddleware.verifyPerson,
+// 	verifyMiddleware.verifyGC,
 // 	require('./forms/submitToAdmin'),
 // 	require('./blockchain/submitForm'));
 

@@ -1,8 +1,4 @@
-/**
- * eslint disable
-*/
-
-// Declaring constants
+/**eslint-disable */
 const config = require('config');
 
 // Declaring block-chain related information
@@ -36,9 +32,6 @@ module.exports = (req, res,next) => {
 			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
 				// Returning response
 				console.log('Form Approved successfully');
-				const notifToSend = notificationMessage.ADMIN.GC_APP_FORM;
-				notifToSend.data = { templateId: req.body.formId, causerId: res.locals.user._id.toString() };
-				notificationsHelper.addNotificationToQueue(res.locals.admin_id.toString(), notifToSend);
 				// next();
 				res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 			}).catch((err) => {
