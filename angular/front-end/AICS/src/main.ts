@@ -9,7 +9,7 @@ if (environment.production) {
   enableProdMode();
 }
 
-// Observable.interval(4000).take(1).subscribe(() => {
+// Observable.interval(40000).take(1).subscribe(() => {
   platformBrowserDynamic().bootstrapModule(AppModule)
     .catch(err => console.log(err));
 // })
