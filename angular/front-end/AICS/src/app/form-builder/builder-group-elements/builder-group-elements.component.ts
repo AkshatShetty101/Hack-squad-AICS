@@ -4,7 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { FormBuildService } from '../form-build.service';
 
 @Component({
-  selector: 'ngsf-builder-group-elements',
+  selector: 'app-builder-group-elements',
   templateUrl: './builder-group-elements.component.html',
   styleUrls: ['./builder-group-elements.component.css']
 })
@@ -24,6 +24,7 @@ export class BuilderGroupElementsComponent implements OnInit {
   @Input() pos;
   @Input() draggableFlag;
 
+  hiddenForm: boolean  = false;
   valueField: FormControl = new FormControl();
   myForm: FormGroup = new FormGroup({
     required: new FormControl(),
@@ -44,6 +45,7 @@ export class BuilderGroupElementsComponent implements OnInit {
         this.sendElement();
       }
     );
+    // console.log(this.subtype);
   }
   deleteOption(form){
     this.options.splice(form.controls.removeOption.value-1, 1);
@@ -91,18 +93,27 @@ export class BuilderGroupElementsComponent implements OnInit {
     form.controls.addLabel.reset();
     form.controls.addValue.reset();
     let element = this.getElement();
+    console.log(element);
     this.update.emit(element);
+    this.hiddenForm = false;
   }
   sendElement() {
     // console.log(this.valueField.value);
     this.touched = this.valueField.touched;
     this.pristine = this.valueField.pristine;
-    this.valid =  this.valueField.valid;
+    this.valid = true;
+    if(this.required){
+      if(this.value === '' || this.value === null || this.value === undefined || this.value.length === 0){
+        this.valid = false;
+      }
+    }
     const element = this.getElement();
     this.formBuild.updateForm(element, this.pos);
   }
   updateFieldValue(subtype, index) {
     // console.log(index);
+    this.touched = true;
+    this.pristine = false;
     if (subtype === 'radio') {
       this.value = this.options[index].value;
     }else

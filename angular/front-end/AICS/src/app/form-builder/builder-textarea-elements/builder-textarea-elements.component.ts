@@ -4,7 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { FormBuildService } from '../form-build.service';
 
 @Component({
-  selector: 'ngsf-builder-textarea-elements',
+  selector: 'app-builder-textarea-elements',
   templateUrl: './builder-textarea-elements.component.html',
   styleUrls: ['./builder-textarea-elements.component.css']
 })
@@ -33,6 +33,7 @@ export class BuilderTextareaElementsComponent implements OnInit {
     rows: new FormControl(),
     cols: new FormControl()
   });
+  hiddenForm: boolean = false;
   valueField: FormControl = new FormControl();
   constructor(
     private formBuild: FormBuildService
@@ -67,6 +68,7 @@ export class BuilderTextareaElementsComponent implements OnInit {
     form.controls.placeholder.reset();
     let element = this.getElement();
     this.update.emit(element);
+    this.hiddenForm = false;
   }
   sendElement() {
     this.touched = this.valueField.touched;

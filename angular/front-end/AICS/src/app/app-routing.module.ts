@@ -10,6 +10,40 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminTrackingComponent } from './admin/admin-tracking/admin-tracking.component';
 import { GcComponent } from './gc/gc.component';
 import { UserComponent } from './user/user.component';
+import { AdminViewFormsComponent } from './admin/admin-view-forms/admin-view-forms.component';
+import { AdminViewRepositoryComponent } from './admin/admin-view-repository/admin-view-repository.component';
+import { RaDashboardComponent } from './ra/ra-dashboard/ra-dashboard.component';
+import { RaMakeRequestComponent } from './ra/ra-dashboard/ra-make-request/ra-make-request.component';
+
+const routes: Routes = [
+  { path: '', component: AppComponent},
+  { path: 'login', component: LoginComponent},
+  { path: 'admin', component: AdminComponent, children: [
+    { path: 'tracking', component: AdminTrackingComponent },
+    { path: 'view_forms', component: AdminViewFormsComponent },
+    { path: 'view_repository', component: AdminViewRepositoryComponent },
+    { path: 'dashboard', component: AdminDashboardComponent, children: [
+      { path: 'request', component: AdminDashboardRequestsComponent },
+      { path: 'verification', component: AdminDashboardVerificationsComponent },
+      { path: 'repository', component: AdminDashboardRepositoryComponent },
+      { path: '', pathMatch: 'full', redirectTo: 'request' }
+    ]},
+    { path: '', pathMatch: 'full', redirectTo: 'dashboard' }
+  ]},
+  { path: 'gc', component: GcComponent, children: [
+
+  ]},
+  { path: 'user', component: UserComponent, children: [
+
+  ]},
+  { path: 'requesting_authority', component: AdminComponent, children: [
+    { path: 'dashboard', component: RaDashboardComponent, children: [
+      { path: 'make_request', component: RaMakeRequestComponent },
+    ]},
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full'}
+  ]},
+  { path: '**', component: AppComponent},
+=======
 import { RaDashboardComponent } from './ra/ra-dashboard/ra-dashboard.component';
 import { RaMakeRequestComponent } from './ra/ra-dashboard/ra-make-request/ra-make-request.component';
 import { TrackRequestComponent } from './ra/ra-dashboard/track-request/track-request.component';
@@ -53,6 +87,7 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
+>>>>>>> 55076a883d375f5c3f869eeb2a6878364c7b728b
 ];
 
 @NgModule({

@@ -4,7 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { FormBuildService } from '../form-build.service';
 
 @Component({
-  selector: 'ngsf-builder-select-elements',
+  selector: 'app-builder-select-elements',
   templateUrl: './builder-select-elements.component.html',
   styleUrls: ['./builder-select-elements.component.css']
 })
@@ -24,11 +24,13 @@ export class BuilderSelectElementsComponent implements OnInit {
   @Input() pos;
   @Input() draggableFlag;
 
+  hiddenForm: boolean = false;
   valueField: FormControl = new FormControl();
   myForm: FormGroup = new FormGroup({
     required: new FormControl(),
     addValue: new FormControl(),
-    addLabel: new FormControl()
+    addLabel: new FormControl(),
+    removeOption: new FormControl()
   });
   constructor(
     private formBuild: FormBuildService
@@ -40,6 +42,9 @@ export class BuilderSelectElementsComponent implements OnInit {
         this.sendElement();
       }
     );
+  }
+  deleteOption(form){
+    this.options.splice(form.controls.removeOption.value-1, 1);
   }
   replaceOption(form) {
     // console.log(form);
@@ -85,6 +90,7 @@ export class BuilderSelectElementsComponent implements OnInit {
     form.controls.addValue.reset();
     let element = this.getElement();
     this.update.emit(element);
+    this.hiddenForm = false;
   }
   sendElement() {
     console.log(this.valueField);

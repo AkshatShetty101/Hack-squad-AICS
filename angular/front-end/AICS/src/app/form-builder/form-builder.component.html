@@ -13,7 +13,7 @@
             <div *ngFor="let element of cell.value;let i=index" #refElements>
               <div [ngSwitch]="element.type">
                 <div *ngSwitchCase="'input'">
-                  <ngsf-builder-input-elements #ref 
+                  <app-builder-input-elements #ref 
                     #elements ngsfDrag
                     (directionOfMovement)="movementOfTarget($event)"
                     (dragstart)="dragStart($event)"
@@ -26,10 +26,10 @@
                     [subtype]="element.subtype" [required]="element.required" [label]="element.label" [value]="element.value"
                     [eclass]="element.class" [placeholder]="element.placeholder" [maxlength]="element.maxlength" [max]="element.max" [min]="element.min"
                     [pos]="i" (delete)=deleteElement($event) (update)=updateElement($event)>
-                  </ngsf-builder-input-elements>
+                  </app-builder-input-elements>
                 </div>
                 <div *ngSwitchCase="'header'">
-                  <ngsf-builder-header-elements #ref 
+                  <app-builder-header-elements #ref 
                     #elements ngsfDrag
                     (directionOfMovement)="movementOfTarget($event)"
                     (dragstart)="dragStart($event)"
@@ -41,10 +41,10 @@
                     [draggableFlag]="elConfigs[i].draggable"
                     [subtype]="element.subtype" [label]="element.label" [eclass]="element.class" [pos]="i" (delete)=deleteElement($event)
                     (update)=updateElement($event)>
-                  </ngsf-builder-header-elements>
+                  </app-builder-header-elements>
                 </div>
                 <div *ngSwitchCase="'paragraph'">
-                  <ngsf-builder-paragraph-elements #ref 
+                  <app-builder-paragraph-elements #ref 
                     #elements ngsfDrag
                     (directionOfMovement)="movementOfTarget($event)"
                     (dragstart)="dragStart($event)"
@@ -56,10 +56,10 @@
                     [draggableFlag]="elConfigs[i].draggable"
                     [eclass]="element.class" [content]="element.content" [pos]="i" (delete)=deleteElement($event)
                     (update)=updateElement($event)>
-                  </ngsf-builder-paragraph-elements>
+                  </app-builder-paragraph-elements>
                 </div>
                 <div *ngSwitchCase="'textarea'">
-                  <ngsf-builder-textarea-elements #ref 
+                  <app-builder-textarea-elements #ref 
                     #elements ngsfDrag
                     (directionOfMovement)="movementOfTarget($event)"
                     (dragstart)="dragStart($event)"
@@ -72,10 +72,10 @@
                     [required]="element.required" [label]="element.label" [value]="element.value" [eclass]="element.class"
                     [placeholder]="element.placeholder" [rows]="element.rows" [cols]="element.rows" [pos]="i" (delete)=deleteElement($event)
                     (update)=updateElement($event)>
-                  </ngsf-builder-textarea-elements>
+                  </app-builder-textarea-elements>
                 </div>
                 <div *ngSwitchCase="'group'">
-                  <ngsf-builder-group-elements #ref
+                  <app-builder-group-elements #ref
                     #elements ngsfDrag
                     (directionOfMovement)="movementOfTarget($event)"
                     (dragstart)="dragStart($event)"
@@ -87,10 +87,10 @@
                     [draggableFlag]="elConfigs[i].draggable" 
                     [required]="element.required" [value]="element.value" [options]="element.options" [eclass]="element.class"
                     [subtype]="element.subtype" [pos]="i" (delete)=deleteElement($event) (update)=updateElement($event)>
-                  </ngsf-builder-group-elements>
+                  </app-builder-group-elements>
                 </div>
                 <div *ngSwitchCase="'select'">
-                  <ngsf-builder-select-elements #ref
+                  <app-builder-select-elements #ref
                     #elements ngsfDrag
                     (directionOfMovement)="movementOfTarget($event)"
                     (dragstart)="dragStart($event)"
@@ -102,7 +102,7 @@
                     [draggableFlag]="elConfigs[i].draggable" 
                     [required]="element.required" [value]="element.value" [options]="element.options" [eclass]="element.class"
                     [subtype]="element.subtype" [pos]="i" (delete)=deleteElement($event) (update)=updateElement($event)>
-                  </ngsf-builder-select-elements>
+                  </app-builder-select-elements>
                 </div>
               </div>
             </div>
