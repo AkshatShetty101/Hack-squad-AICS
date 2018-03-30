@@ -11,10 +11,10 @@ import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpService } from './shared/services/http.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-import { LocalStorageModule} from 'angular-2-local-storage';
-import { AngularIndexedDB } from 'angular2-indexeddb';
+import { LocalStorageModule } from 'angular-2-local-storage';
+// import { AngularIndexedDB } from 'angular2-indexeddb';
 import { AuthService } from './shared/services/auth.service';
 import { AdminDashboardRequestsComponent } from './admin/admin-dashboard/admin-dashboard-requests/admin-dashboard-requests.component';
 import { AdminDashboardVerificationsComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-dashboard-verifications.component';
@@ -57,9 +57,18 @@ import { RaComponent } from './ra/ra.component';
 import { RaMakeRequestComponent } from './ra/ra-dashboard/ra-make-request/ra-make-request.component';
 import { RaDashboardComponent } from './ra/ra-dashboard/ra-dashboard.component';
 import { Ng4FilesModule } from './ng4-files';
+import { TrackRequestComponent } from './ra/ra-dashboard/track-request/track-request.component';
+import { RaRequestListComponent } from './ra/ra-dashboard/track-request/ra-request-list/ra-request-list.component';
+import { RaRequestComponent } from './ra/ra-dashboard/track-request/ra-request-list/ra-request/ra-request.component';
+import { RaRequestPreviewComponent } from './ra/ra-dashboard/track-request/ra-request-preview/ra-request-preview.component';
 import { AdminFormComponent } from './admin/admin-view-repository/admin-form/admin-form.component';
 import { MatIconModule } from '@angular/material';
 import { MatButtonModule, MatRadioModule, MatCheckboxModule} from '@angular/material';
+import { IssueTrackerComponent } from './issue-tracker/issue-tracker.component';
+import { IssueComponent } from './issue-tracker/issue/issue.component';
+import { IssueDetailsComponent } from './issue-tracker/issue-details/issue-details.component';
+import { GraphQLService } from './shared/services/graphql.service';
+import { HTTPInterceptor } from './shared/services/http.interceptor'
 
 @NgModule({
   declarations: [
@@ -101,7 +110,14 @@ import { MatButtonModule, MatRadioModule, MatCheckboxModule} from '@angular/mate
     AdminFormComponent,
     RaComponent,
     RaMakeRequestComponent,
-    RaDashboardComponent
+    RaDashboardComponent,
+    TrackRequestComponent,
+    RaRequestListComponent,
+    RaRequestComponent,
+    RaRequestPreviewComponent,
+    IssueTrackerComponent,
+    IssueComponent,
+    IssueDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -124,11 +140,13 @@ import { MatButtonModule, MatRadioModule, MatCheckboxModule} from '@angular/mate
     })
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HTTPInterceptor, multi: true },
     FormRenderService,
     FormBuildService,
     IndexDBService,
     HttpService,
-    AuthService
+    AuthService,
+    GraphQLService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,7 @@
 const ReqForm = require('../../models/request_form');
 const Person = require('../../models/person');
 const notificationsHelper = require('../../utils/notificationsHelper');
+const mailerHelper = require('../../utils/mailerHelper');
 
 module.exports = (req, res) => {
 	if (req.body.data) {
@@ -44,9 +45,12 @@ module.exports = (req, res) => {
 							console.error(err);
 							res.status(400).send(responseMessage.FAIL.SOMETHING_WRONG);
 						} else {
-							const notifToSend = notificationMessage.ADMIN.RA_MAKE_REQ;
+							let notifToSend = notificationMessage.ADMIN.RA_MAKE_REQ;
 							notifToSend.data = { reqFormId: data._id.toString(), causerId: res.locals.user._id.toString() };
 							notificationsHelper.addNotificationToQueue(id.toString(), notifToSend);
+							let mailToSend = mailerHelper.mailData(res.locals.user._id.toString(),
+								'A new request has been made', `Request Id: ${data._id.toString()}`, '');
+							mailerHelper.sendMail(mailToSend);
 							res.status(200).send(responseMessage.SUCCESS.SUCCESS);
 						}
 					});
