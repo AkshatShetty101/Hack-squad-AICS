@@ -7,9 +7,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AdminPreviewComponent implements OnInit {
   @Input() data :{id:string,title:string,data:string}={id:"default",data:"default",title:"default"};
+  @Input() t:number;
   constructor() { }
 
   ngOnInit() {
+    console.log(this.t);
   }
 
 }

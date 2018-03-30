@@ -1,9 +1,9 @@
 <div class="main_data">
     <div class="holder1">
-        <app-admin-request-list (loadRequest)="previewIt($event)"></app-admin-request-list>
+        <app-admin-request-list (lr)="clearIt()" (loadRequest)="previewIt($event)"></app-admin-request-list>
     </div>
     <div class="holder2" *ngIf="requestToLoad.id!=='default'">
-        <app-admin-preview [data]="requestToLoad"></app-admin-preview>
+        <app-admin-preview [t]="test" [data]="requestToLoad"></app-admin-preview>
     </div>
     <div class="holder3">
         Charts

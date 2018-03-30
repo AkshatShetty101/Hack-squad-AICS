@@ -4,7 +4,6 @@ import { AuthService } from './shared/services/auth.service';
 import { Router } from '@angular/router';
 import { IndexDBService } from './shared/services/indexdb.service';
 
-declare var EventSource: any;
 
 @Component({
   selector: 'app-root',
@@ -19,6 +18,11 @@ export class AppComponent implements OnInit {
     private router: Router,
     private idb: IndexDBService
   ) {
+    this.idb.openConnection().then(()=>{
+      console.log('connected!');
+    }).catch((err)=>{
+      console.log(err);
+    });
     // auth.statusEmitted$.subscribe(
     //   (status) => {
     //    this.logged = status;
@@ -31,12 +35,13 @@ export class AppComponent implements OnInit {
     //     }
     //   }
     // );
-    const sse$ = new EventSource(this.auth.baseURI + '/notifications');
-    sse$.onmessage = (event) => {
-      console.log(event);
-    };
   }
   ngOnInit() {
+    this.idb.openConnection().then(()=>{
+      console.log('connection established!!');
+    }).catch((err)=>{
+      console.log(err);
+    });
     // this.auth.checkStatus();
   }
 }

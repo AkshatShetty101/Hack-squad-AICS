@@ -48,7 +48,8 @@ module.exports = (req, res) => {
 					'A form has been forfeited by a person in your division', '',
 					`Hey <b>Krilin</b>,<br/>
 				<br/>
-				<p>A form has been forfeited by a person in your division.<br/>Forfeiter_Id: ${res.locals.user._id.toString()} Form_Id: <i>${req.body.formId.toString()}</i></p>
+				<p>A form has been forfeited by a person in your division.<br/>
+				Forfeiter_Id: <i>${res.locals.user._id.toString()}</i> Form_Id: <i>${req.body.formId.toString()}</i></p>
 				<br/>
 				Thanks,<br/>
 				AICS MeitY Team`);

@@ -5,7 +5,7 @@
 <div class="main_grid">
   <div class="drag_grid">
     <div class="button2">
-      <div class="preview">
+      <div (click)="renderForm()" class="preview">
         <i class="fa fa-eye"></i>
       </div>
       <div class="view_request">
@@ -177,4 +177,12 @@
       </tbody>
     </table>
   </div>
+</div>
+<!-- The Modal -->
+<div *ngIf="modalOpen" id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close" (click)="modalOpen=false">&times;</span>
+      <app-form-renderer></app-form-renderer>
+    </div>
 </div>

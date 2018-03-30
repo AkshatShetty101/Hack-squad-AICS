@@ -20,19 +20,23 @@ export class RaMakeRequestComponent implements OnInit {
     private indexedDB: IndexDBService) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
+    this.id = this.route.snapshot.queryParams['id'];
+    console.log(this.id);
     if (this.id) {
-      this.indexedDB.openConnection()
-        .then((data) => {
-          this.indexedDB.getRequestByKey(this.id).then((output) => {
-            if (output) {
-              this.myForm.controls['title'].setValue(output.title);
-              this.myForm.controls['data'].setValue(output.data);
-            }
-          });
-        }).catch((err) => {
-          console.log(err);
-        });
+      // this.indexedDB.openConnection()
+      //   .then((data) => {
+      console.log('here!');
+      this.indexedDB.getRequestByKey(this.id).then((output) => {
+        if (output) {
+          console.log('found it!');
+          console.log(output);
+          console.log(output);
+          this.myForm.controls['title'].setValue(output.title);
+          this.myForm.controls['data'].setValue(output.data);
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
     }
   }
 

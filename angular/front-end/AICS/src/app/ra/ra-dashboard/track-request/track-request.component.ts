@@ -20,6 +20,6 @@ export class TrackRequestComponent implements OnInit {
   }
   route() {
     console.log('here!');
-    // this.router.navigateByUrl('/ra/dashboard/makeRequest', {queryParams:{id:this.requestToLoad.id}})  ;
+    this.router.navigate(['/requesting_authority/dashboard/make_request'],{queryParams:{id:this.requestToLoad.id}})  ;
   }
 }

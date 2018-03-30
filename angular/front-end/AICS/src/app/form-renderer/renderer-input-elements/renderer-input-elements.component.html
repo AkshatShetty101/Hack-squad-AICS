@@ -1,11 +1,23 @@
 <div class="elementHolder">
-  <label *ngIf="subtype !== 'file'" [innerHTML]="label"></label>
-  <br />
-  <input *ngIf="subtype !== 'file'" [formControl]="valueField" [required]="required" [type]="subtype" [class]="class" 
-    [placeholder]="placeholder" [value]="value" />
-  <ng4-files-click *ngIf="subtype === 'file'" (filesSelect)="filesSelect($event)">
-    <span>Click me to upload</span>
-  </ng4-files-click>
-  <button *ngIf="subtype === 'file'" 
-    (click)="download(value)">Download</button>
+  <div class="on_transition_label">
+    <label [innerHTML]="label"></label>  
+  </div>
+  <div>
+    <input [formControl]="valueField" [required]="required" [type]="subtype" 
+      [placeholder]="placeholder" />
+  </div>  
+<!--       
+  <div *ngIf="subtype !== 'file'" class="on_transition_label">
+    <label [innerHTML]="label"></label>
+  </div>
+  <div *ngIf="subtype !== 'file'">
+    <input [formControl]="valueField" [required]="required" [type]="subtype" [placeholder]="placeholder" [value]="value"
+    />
+  </div> -->
+  <!-- <div *ngIf="subtype === 'file'" class="on_transition_label">
+    <ng4-files-click (filesSelect)="filesSelect($event)">
+      <span>Click me to upload</span>
+    </ng4-files-click>
+    <button (click)="download(value)">Download</button>
+  </div> -->
 </div>

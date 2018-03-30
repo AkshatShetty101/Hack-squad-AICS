@@ -4,6 +4,7 @@ import { ViewChild, ViewChildren, AfterViewInit } from '@angular/core';
 import { DragEventConfig, DragEventParticipant, XY } from '../shared/models/drag.model';
 import { AfterViewChecked } from '@angular/core';
 import { FormBuildService } from './form-build.service';
+import { FormRenderService } from '../form-renderer/form-render.service';
 
 @Component({
   selector: 'app-form-builder',
@@ -15,6 +16,7 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
   table: any;
   selectedRow: number;
   selectedCol: number;
+  modalOpen: boolean = false;
   // F this lint
   dropEventsList: any[] = [];
   toolConfigs: DragEventConfig[] = [];
@@ -47,7 +49,8 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
 
   constructor(
     private formBuild: FormBuildService,
-    private parentRef: ElementRef
+    private parentRef: ElementRef,
+    private formRender: FormRenderService
   ) {
     Observable.fromEvent(this.parentRef.nativeElement, 'drop')
       .filter((event) => {
@@ -520,6 +523,10 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
     this.table.rows[r].cols[c].value.splice(i, 1);
   }
 
+  renderForm(){
+    this.formRender.table = this.table;
+    this.modalOpen = true;
+  }
   closeForm() {
     this.formBuild.getForm();
     let form = this.formBuild.table;
