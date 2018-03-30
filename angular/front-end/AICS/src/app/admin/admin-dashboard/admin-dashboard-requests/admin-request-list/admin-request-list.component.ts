@@ -1,5 +1,6 @@
+import { IndexDBService } from './../../../../shared/services/indexdb.service';
 import { GraphQLService } from './../../../../shared/services/graphql.service';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-admin-request-list',
@@ -9,10 +10,23 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class AdminRequestListComponent implements OnInit {
   requestList: { id: string, title: string, data: string }[] = [];
   @Output() loadRequest = new EventEmitter<{ id: string, title: string, data: string }>();
-
+  @Output() lr = new EventEmitter<{}>();
   constructor(
-    private gql: GraphQLService
-  ) { }
+    private gql: GraphQLService,
+    private idb: IndexDBService,
+    private ref: ChangeDetectorRef
+  ) {
+    this.idb.notifs.asObservable().subscribe(
+      (event: any) => {
+        console.log(event);
+        switch (event.status) {
+          case 'RA_MAKE_REQ':
+            this.getFreshData();
+            break;
+        }
+      }
+    );
+   }
 
 
   ngOnInit() {
@@ -29,6 +43,10 @@ export class AdminRequestListComponent implements OnInit {
     //     data: 'Request for data regarding the census data for thw year 2016-17. This data should be delivered in s structured manner with excel sheets providing major details'
     //   }
     // ];
+    this.getFreshData();
+  }
+
+  getFreshData() {
     this.gql.loadRequestedFormData()
       .subscribe(
         (data: any) => {
@@ -39,6 +57,8 @@ export class AdminRequestListComponent implements OnInit {
               const { title, description } = element.data, id = element._id;
               this.requestList.push({ id: id, title: title, data: description });
             });
+            this.ref.detectChanges();
+            this.loadShit();
         },
         (err) => {
           console.log(err);
@@ -46,6 +66,9 @@ export class AdminRequestListComponent implements OnInit {
       );
   }
 
+  loadShit(){
+    this.lr.emit();
+  }
 
   loadIt(request: { id: string }) {
     console.log(request);
