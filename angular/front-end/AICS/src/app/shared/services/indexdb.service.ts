@@ -1,13 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { AngularIndexedDB } from 'angular2-indexeddb';
 
 @Injectable()
 export class IndexDBService {
   private db = new AngularIndexedDB('myDb', 1);
+  public notifs = new Subject();
+
   constructor() {
     // this.db = new AngularIndexedDB('myDb', 1);
   }
+
   openConnection() {
     // this.db = new AngularIndexedDB('myDb', 1);
     let ct = this.db.dbWrapper.dbVersion
@@ -26,24 +29,11 @@ export class IndexDBService {
       // objectStore.createIndex("timestamp", "email", { unique: false });
     });
   }
-  addNotif(data: {
-    code: string,
-    objectId: string,
-    propogatorId: string,
-    timestamp: string
-  }): { success: boolean, message: string } {
-    this.db.add('notifs', {
-      code: data.code,
-      objectId: data.objectId,
-      propogatorId: data.propogatorId,
-      timestamp: data.timestamp
-    }).then(() => {
-      return { success: true, message: "Notif added successfully" };
-    }, (error) => {
-      console.log(error);
-      return { success: false, message: "Notif not added" };
-    });
-    return { success: false, message: "Notif not added" };
+
+  addNotif(data: any) {
+    this.notifs.next(data);
+    console.log(data);
+    return this.db.add('notifs',data);
   }
 
   getAllNotifs() {

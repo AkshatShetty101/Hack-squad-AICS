@@ -26,9 +26,10 @@ export class HTTPInterceptor implements HttpInterceptor {
     if (request.url.split(':')[1] !== '3000/api/users/login') {
       const mutatedRequest = request.clone({
         headers: request.headers.set('Content-Type', 'application/json')
-          .set('x-access-token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWFiMGNkMjFlZWRlNGYzMDUwOTA0OTRiIiwiaWF0IjoxNTIyMzgzODMzLCJleHAiOjE1NzMxNTA2NTl9.77ifxdrtyDpVpUvhKttlGmQqYbCYsfsbo5a_1qTNVLs'),
+          .set('x-access-token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWFiMGNkMjFlZWRlNGYzMDUwOTA0OTRiIiwiaWF0IjoxNTIyMzk0OTI3LCJleHAiOjE1NjIwNjc4Njh9.qbZFeun4SPFfaRnkbLPpHTxvbUVHTGcWV0PsPy3LtZw'),
         // .set('x-access-token', this.auth.get)
       });
+      console.log(mutatedRequest);
       return next.handle(mutatedRequest);
         // .do((event: HttpEvent<any>) => {
         //   if (event instanceof HttpResponse) {

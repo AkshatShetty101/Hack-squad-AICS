@@ -69,6 +69,7 @@ import { IssueComponent } from './issue-tracker/issue/issue.component';
 import { IssueDetailsComponent } from './issue-tracker/issue-details/issue-details.component';
 import { GraphQLService } from './shared/services/graphql.service';
 import { HTTPInterceptor } from './shared/services/http.interceptor';
+import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component'
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { HTTPInterceptor } from './shared/services/http.interceptor';
     RaRequestPreviewComponent,
     IssueTrackerComponent,
     IssueComponent,
-    IssueDetailsComponent
+    IssueDetailsComponent,
+    IssueNewComponent
   ],
   imports: [
     BrowserModule,

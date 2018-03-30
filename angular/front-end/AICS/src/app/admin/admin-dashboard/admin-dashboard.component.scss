@@ -11,7 +11,7 @@
 .container1{
 	display:grid;
 	grid-template-columns: 12% repeat(3,minmax(26%,1fr)) 10%;
-	grid-template-rows: 5vh 8% 75vh 8%;            
+	grid-template-rows: 5vh 5vh 75vh 8%;            
 	text-align:center;            
 }
 
@@ -20,7 +20,12 @@
 	grid-column:2;           
 	background-color: #979797;
 	color:#38393A;
-	padding: 15px;
+	font-size:16px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	// padding: 15px;
+	font-family:'fira sans';
 	box-shadow: 0px 0.5px 5px #38393A;
 }
 .due_ver{
@@ -28,7 +33,12 @@
 	grid-column:3;  
 	background-color: #979797;
 	color:#38393A;
-	padding: 15px;
+	font-size:16px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	font-family:'fira sans';
+	// padding: 30px;
 	box-shadow: 0px 0.5px 5px #38393A;
 }
 .add_rep{
@@ -36,12 +46,16 @@
 	grid-column:4; 
 	background-color: #979797;
 	color:#38393A;
-	padding: 15px;
+	font-size:16px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	font-family:'fira sans';
 	box-shadow: 0px 0.5px 5px #38393A;
 }
 .active{
 	background-color:#38393A; 
-	padding: 15px;
+	
 	color:#979797;
 	box-shadow: 0.5px 0.5px 5px #38393a;
 }

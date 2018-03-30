@@ -21,4 +21,9 @@ export class IssueTrackerComponent implements OnInit {
     console.log('outside!');
     this.issueToLoadId = data._id;
   }
+
+  newIssue(){
+    console.log('route to issue-new');
+    //Pass the formId in the parameters of while routing 
+  }
 }
