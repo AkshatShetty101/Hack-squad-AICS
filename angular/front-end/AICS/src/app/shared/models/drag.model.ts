@@ -76,12 +76,14 @@ export class XY {
 
 export class DragEventParticipant {
     public el: HTMLElement;
+    public parentDropZone: HTMLElement;
     public type: string;
     public toAdd: string;
 
-    constructor({ el = null, type = 'element', toAdd = null }:
-    { el?: HTMLElement, type?: string, toAdd?: string } = {}) {
+    constructor({ el = null, parentDropZone = null, type = 'element', toAdd = null }:
+        { el?: HTMLElement, parentDropZone?: HTMLElement, type?: string, toAdd?: string } = {}) {
         this.el = el;
+        this.parentDropZone = parentDropZone;
         this.type = type;
         this.toAdd = toAdd;
     }
