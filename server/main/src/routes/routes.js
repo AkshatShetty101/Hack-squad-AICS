@@ -37,7 +37,7 @@ router.all('/users',
  */
 router.all('/reqForm',
 	verifyMiddleware.verifyPerson,
-	verifyMiddleware.verifyAdminOrGC,
+	// verifyMiddleware.verifyAdminOrGC,
 	graphQLHTTP((req, res) => ({ // to be replaced by router.post
 		schema: require('./graphql/schemas/request_form'),
 		context: { req, res },
