@@ -20,7 +20,19 @@ const mailData = (sender, subject, text, html) => {
 	};
 };
 
+const sendMail = (mailData) => {
+	transporter.sendMail(mailData, (err, info) => {
+		if (err) {
+			console.error(err);
+		} else {
+			console.log('Message sent:', info.messageId);
+			// Preview only available when sending through an Ethereal account
+			// console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+		}
+	});
+};
+
 module.exports = {
-	transporter: transporter,
+	sendMail: sendMail,
 	mailData: mailData
 };
