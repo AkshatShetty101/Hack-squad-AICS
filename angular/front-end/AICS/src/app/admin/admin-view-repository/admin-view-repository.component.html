@@ -1,3 +1,26 @@
-<p>
-  admin-view-repository works!
-</p>
+<div class="filter_grid">
+  <div class="status">
+    Division :
+  </div>
+  <button *ngFor="let division of divisionList" [class]="'btn btn-outline-warning '+division" (click)="selectedDivision = division">
+    <span>
+      <i class="fa fa-check" aria-hidden="true"></i>
+    </span>
+    <span class="value" [innerHTML]="'Division '+division"></span>
+  </button>
+  <button class="btn btn-outline-warning D" (click)="selectedDivision = 'all'">
+    <span>
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </span>
+    <span class="value">Clear selection</span>
+  </button>
+</div>
+<div class="wrapper">
+  <div *ngFor="let form of getFormList(); let i=index">
+    <app-admin-form [id]="form.id" [deadline]="form.deadline" [title]="form.title" [division]="division">
+    </app-admin-form>
+  </div>
+</div>
+<footer class="button_grid">
+  <input type="text" value="SEARCH" class="btn-1 btn" />
+</footer>

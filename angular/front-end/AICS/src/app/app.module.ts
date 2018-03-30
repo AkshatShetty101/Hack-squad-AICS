@@ -14,7 +14,7 @@ import { HttpService } from './shared/services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { LocalStorageModule} from 'angular-2-local-storage';
-import { AngularIndexedDB } from 'angular2-indexeddb';
+// import { AngularIndexedDB } from 'angular2-indexeddb';
 import { AuthService } from './shared/services/auth.service';
 import { AdminDashboardRequestsComponent } from './admin/admin-dashboard/admin-dashboard-requests/admin-dashboard-requests.component';
 import { AdminDashboardVerificationsComponent } from './admin/admin-dashboard/admin-dashboard-verifications/admin-dashboard-verifications.component';
@@ -57,6 +57,11 @@ import { RaComponent } from './ra/ra.component';
 import { RaMakeRequestComponent } from './ra/ra-dashboard/ra-make-request/ra-make-request.component';
 import { RaDashboardComponent } from './ra/ra-dashboard/ra-dashboard.component';
 import { Ng4FilesModule } from './ng4-files';
+import { TrackRequestComponent } from './ra/ra-dashboard/track-request/track-request.component';
+import { RaRequestListComponent } from './ra/ra-dashboard/track-request/ra-request-list/ra-request-list.component';
+import { RaRequestComponent } from './ra/ra-dashboard/track-request/ra-request-list/ra-request/ra-request.component';
+import { RaRequestPreviewComponent } from './ra/ra-dashboard/track-request/ra-request-preview/ra-request-preview.component';
+import { AdminFormComponent } from './admin/admin-view-repository/admin-form/admin-form.component';
 
 @NgModule({
   declarations: [
@@ -95,9 +100,14 @@ import { Ng4FilesModule } from './ng4-files';
     AdminVerificationsListComponent,
     AdminVerifyComponent,
     AdminVerificationsPreviewComponent,
+    AdminFormComponent,
     RaComponent,
     RaMakeRequestComponent,
-    RaDashboardComponent
+    RaDashboardComponent,
+    TrackRequestComponent,
+    RaRequestListComponent,
+    RaRequestComponent,
+    RaRequestPreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -108,7 +118,7 @@ import { Ng4FilesModule } from './ng4-files';
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     HttpClientModule,
     Ng4FilesModule,
-    AngularIndexedDB,
+    // AngularIndexedDB,
     HttpModule,
     LocalStorageModule.withConfig({
       prefix: 'app',
