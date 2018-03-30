@@ -6,12 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-dashboard-requests.component.scss']
 })
 export class AdminDashboardRequestsComponent implements OnInit {
+  requestToLoad: { id: string, title: string, data: string } = { id: 'default', title: 'default', data: 'default' };
 
   constructor() { }
-  requestToLoad:{id:string,title:string,data:string}={id:"default",title:"default",data:"default"};
-  ngOnInit() {
-  }
-  previewIt(request:{id:string,title:string,data:string}){
+
+  ngOnInit() { }
+
+  previewIt(request: { id: string, title: string, data: string }) {
     this.requestToLoad = request;
   }
 }
