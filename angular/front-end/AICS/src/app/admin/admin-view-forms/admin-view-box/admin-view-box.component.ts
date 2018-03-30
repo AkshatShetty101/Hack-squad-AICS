@@ -134,7 +134,7 @@ export class AdminViewBoxComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.formRender.elements = this.data;
+    // this.formRender.elements = this.data;
   }
 
 }
