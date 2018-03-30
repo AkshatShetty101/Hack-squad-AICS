@@ -61,9 +61,6 @@ export class IndexDBService {
     return this.db.getAll('requests');
   }
 
-  getRequestByKey(key: number) {
-    return this.db.getByKey('requests', key);
-  }
 
   deleteRequest(key: number) {
     this.db.delete('requests', key).then(() => {
@@ -73,6 +70,26 @@ export class IndexDBService {
       return { success: false, message: "Delete Unsuccessful" };
     });
   }
+
+  getRequestByKey(data): any {
+
+    return new Promise((res, rej) => {
+      this.db.openCursor('requests', (evt) => {
+        var cursor = (<any>evt.target).result;
+        if (cursor) {
+          console.log(cursor);
+          if (cursor.key.toString() === data.toString()) {
+            console.log(cursor.value)
+            console.log("matched stuff resolving");
+            res(cursor.value);
+          }
+          else
+            cursor.continue();
+        }
+      });
+    });
+  }
+
 
   cursor(): { id: string, title: string, data: string }[] {
     let list: { id: string, title: string, data: string }[] = [];
