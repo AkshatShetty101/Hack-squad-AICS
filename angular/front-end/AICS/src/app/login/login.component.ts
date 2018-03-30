@@ -143,6 +143,7 @@ export class LoginComponent implements OnInit {
     // console.log(request);
     this.myForm.reset();
     this.auth.empty();
+    this.router.navigateByUrl('/admin');
     this.http.verifyUser(request)
       .subscribe(
         (response) => {
@@ -151,7 +152,7 @@ export class LoginComponent implements OnInit {
           //   console.log('Here!');
           //   this.auth.storeStatus(response.token);
           //   this.auth.storeRole(response.designation);
-          //   this.router.navigateByUrl('');
+            this.router.navigateByUrl('/admin');
           // }
         },
         (error) => {
@@ -159,7 +160,7 @@ export class LoginComponent implements OnInit {
           // if(error.status === 'INVALID_CRED'){
           //   alert('Wrong username or password');
           // }
-          // this.router.navigateByUrl('');
+          this.router.navigateByUrl('/admin');
         });
   }
 
