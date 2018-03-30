@@ -26,12 +26,11 @@ export class AdminRequestListComponent implements OnInit {
         }
       }
     );
-   }
+  }
 
 
   ngOnInit() {
     //Get the data here!!!!
-<<<<<<< HEAD
     // this.requestList = [
     //   {
     //     id: '41235345342',
@@ -58,45 +57,16 @@ export class AdminRequestListComponent implements OnInit {
               const { title, description } = element.data, id = element._id;
               this.requestList.push({ id: id, title: title, data: description });
             });
-            this.ref.detectChanges();
-            this.loadShit();
+          this.ref.detectChanges();
+          this.loadShit();
         },
         (err) => {
           console.log(err);
         }
       );
-=======
-    this.requestList = [
-      {
-        id: '41235345342',
-        title: 'Census Data',
-        data: 'Request for data regarding the census data for thw year 2016-17. This data should be delivered in s structured manner with excel sheets providing major details'
-      },
-      {
-        id: '41235345342',
-        title: 'Census Data',
-        data: 'Request for data regarding the census data for thw year 2016-17. This data should be delivered in s structured manner with excel sheets providing major details'
-      }
-    ];
-    // this.gql.loadRequestedFormData()
-      // .subscribe(
-      //   (data: any) => {
-      //     this.requestList = [];
-      //     data.data.reqFormOwn.forEach(
-      //       (element: any) => {
-      //         console.log(element);
-      //         const { title, description } = element.data, id = element._id;
-      //         this.requestList.push({ id: id, title: title, data: description });
-      //       });
-      //   },
-      //   (err) => {
-      //     console.log(err);
-      //   }
-      // );
->>>>>>> 56e5219861500c0f0f9fca4600d66482eebd4dd9
   }
 
-  loadShit(){
+  loadShit() {
     this.lr.emit();
   }
 
