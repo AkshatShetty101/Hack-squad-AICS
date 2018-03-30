@@ -11,7 +11,7 @@ export class FormBuildService {
     [r, c, i] = pos.split('-');
     this.table.rows[r].cols[c].value[i] = element;
     console.log('Pos- ' + pos);
-    // console.log(element);
+    console.log(element);
   }
   getForm(){
     this.formSubject.next(true);
@@ -19,11 +19,8 @@ export class FormBuildService {
   initForm(){
     this.table = new Table();
     let col = new Column();
-    // console.log(col);
     let row = new Row();
-    // console.log(row);
     row.cols.push(col);
     this.table.rows.push(row);
-    // console.log(this.table);
   }
 }

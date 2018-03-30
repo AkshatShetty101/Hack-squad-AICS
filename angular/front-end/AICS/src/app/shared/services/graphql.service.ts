@@ -17,16 +17,33 @@ export class GraphQLService {
 
   loadIssueDetails(id: string) {
     const body = {
-      query: "{ issueTrackerById (_id:\""+id+"\"){ heading {title,subtitle,description},created_by,is_open,tags,data {by,message,timestamp}}}"};
+      query: "{ issueTrackerById (_id:\"" + id + "\"){ heading {title,subtitle,description},created_by,is_open,tags,data {by,message,timestamp}}}"
+    };
     console.log(body);
     console.log('finding data!!!');
     return this.http.post(this.auth.baseURI + '/issueTracker', body);
   }
 
+  loadDbRequestList() {
+    const body = {
+      query: '{ reqFormMany { _id data } }'
+    };
+    return this.http.post(this.auth.baseURI + '/reqForm', body);
+  }
+  
   loadRequestedFormData() {
     const body = {
       query: '{ reqFormOwn { _id data } }'
     };
     return this.http.post(this.auth.baseURI + '/reqForm', body);
   }
+
+  loadTemplateIdFromRequestId(id) {
+    const body = {
+      query: "{  reqFormById (_id:\"" + id + "\"){ template{ template_id} } }"
+    };
+    return this.http.post(this.auth.baseURI + '/reqForm', body);
+  }
+
+
 }

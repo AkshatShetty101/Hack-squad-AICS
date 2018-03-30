@@ -11,6 +11,7 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class FormRendererComponent implements OnInit {
   table: any;
+  open: boolean = true;
   constructor(
     private formRender: FormRenderService,
     private http: HttpService,
@@ -18,6 +19,13 @@ export class FormRendererComponent implements OnInit {
   ) { }
   ngOnInit() {
     this.table = this.formRender.table;
+    console.log(this.table);
+    if(this.table === null || this.table === undefined){
+      this.open = false;
+    }
+    else{
+      this.open = true;
+    }
   }
   saveForm(){
     setTimeout(this.formRender.getForm(), 200);
@@ -27,7 +35,7 @@ export class FormRendererComponent implements OnInit {
     const request = {
       body: form
     };
-    this.http.editTemplates(request, this.auth.getToken())
+    this.http.editTemplates(request)
       .subscribe(
         (response) => {
           console.log(response);
