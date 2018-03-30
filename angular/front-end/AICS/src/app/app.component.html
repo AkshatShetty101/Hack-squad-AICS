@@ -1,19 +1,21 @@
-<div class="lang">
-    <div class="fonts">
-        <div>
-            <i class="fa fa-plus" style="font-size:12px;"></i>
-        </div>
-        <div>
-            <i class="fa fa-minus" style="font-size:12px;"></i>
-        </div>
-        <div>
-            <i class="fa fa-font" style="font-size:12px;"></i>
-        </div>
-        <div>Hindi</div>
-    </div>
-</div>
-<div class="background_blue color"></div>
-<div class="lower_div"></div>
 <!-- <app-admin></app-admin> -->
-<app-ra></app-ra>
-<!-- <router-outlet></router-outlet> -->
+<!-- <app-ra></app-ra> -->
+<div [ngClass]="'theme-name'">
+    <div class="lang">
+        <div class="fonts">
+            <div>
+                <i class="fa fa-plus" style="font-size:12px;"></i>
+            </div>
+            <div>
+                <i class="fa fa-minus" style="font-size:12px;"></i>
+            </div>
+            <div>
+                <i class="fa fa-font" style="font-size:12px;"></i>
+            </div>
+            <div>Hindi</div>
+        </div>
+    </div>
+    <div class="background_blue color"></div>
+    <div class="lower_div"></div>
+    <router-outlet></router-outlet>        
+</div>

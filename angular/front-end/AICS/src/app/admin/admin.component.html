@@ -1,10 +1,10 @@
 <nav class="container">
   <div class="dashboard">
-      <a href="#" class="navlinks">
+      <a class="navlinks" [routerLink]="'./dashboard'" routerLinkActive="active">
           <i class="fa fa-dashboard">&nbsp;</i>Dashboard</a>
   </div>
   <div class="forms">
-      <a href="#" class="navlinks right">
+      <a href="#" class="navlinks right" [routerLink]="'./view_forms'">
           <i class="fa fa-server">&nbsp;</i>Forms</a>
   </div>
   <div class="view_repo">
@@ -18,6 +18,6 @@
 </nav>
 <!-- <app-admin-tracking></app-admin-tracking> -->
 <!-- <app-admin-view-forms></app-admin-view-forms> -->
-<app-admin-view-repository></app-admin-view-repository>
+<!-- <app-admin-view-repository></app-admin-view-repository> -->
 <!-- <app-admin-dashboard></app-admin-dashboard>         -->
-<!-- <router-outlet></router-outlet> -->
+<router-outlet></router-outlet>

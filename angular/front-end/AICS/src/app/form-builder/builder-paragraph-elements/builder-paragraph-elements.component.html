@@ -1,9 +1,35 @@
+<!-- <div [draggable]="draggableFlag" class="elementHolder">
+    <div class="icon1"><mat-icon>edit</mat-icon></div>
+    <div class="icon2"><mat-icon>delete</mat-icon></div>
+    <div class="label1">Paragraph</div>
+    <div class="cont inner_grid">
+      <div class="para">
+        <label>Content&nbsp;:&nbsp;</label><textarea></textarea>
+      </div>
+      <div class="set"><button mat-raised-button color="accent">SET</button></div>
+      <div class="close_1"><button mat-raised-button color="accent">CLOSE</button></div>
+
+    </div>
+</div> -->
+
+<!-- <div [draggable]="draggableFlag" class="elementHolder">
+    <div class="icon1"><mat-icon>edit</mat-icon></div>
+    <div class="icon2"><mat-icon>delete</mat-icon></div>
+    <div class="label1">Paragraph</div>
+</div> -->
+
+
+
+
 <div class="elementHolder"  [draggable]="draggableFlag">
+  <div class="icon1"><mat-icon>edit</mat-icon></div>
+  <div class="icon2"><mat-icon (click)="deleteElement()">delete</mat-icon></div>  
   <p [innerHTML]="content"></p>
-  <form [formGroup]="myForm" class="hiddenfields" (ngSubmit)="updateValues(myForm)">
-    <label>Content: </label>
-    <textarea formControlName="content"></textarea>
-    <button type="submit">Close</button>
+  <form [formGroup]="myForm" class="cont inner_grid" (ngSubmit)="updateValues(myForm)">
+    <div class="para">
+      <label>Content&nbsp;:&nbsp;</label>
+      <textarea formControlName="content"></textarea>
+    </div>
+    <div class="close"><button mat-raised-button color="accent">CLOSE</button></div>
   </form>
-  <button (click)="deleteElement()">Delete Element</button>
 </div>

@@ -58,6 +58,8 @@ import { RaMakeRequestComponent } from './ra/ra-dashboard/ra-make-request/ra-mak
 import { RaDashboardComponent } from './ra/ra-dashboard/ra-dashboard.component';
 import { Ng4FilesModule } from './ng4-files';
 import { AdminFormComponent } from './admin/admin-view-repository/admin-form/admin-form.component';
+import { MatIconModule } from '@angular/material';
+import { MatButtonModule, MatRadioModule, MatCheckboxModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -110,6 +112,10 @@ import { AdminFormComponent } from './admin/admin-view-repository/admin-form/adm
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     HttpClientModule,
     Ng4FilesModule,
+    MatIconModule,
+    MatButtonModule,
+    MatRadioModule,
+    MatCheckboxModule,
     // AngularIndexedDB,
     HttpModule,
     LocalStorageModule.withConfig({
