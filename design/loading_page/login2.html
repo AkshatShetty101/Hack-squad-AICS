@@ -33,21 +33,35 @@
         padding: 2em 3em;
         border-radius: 10px;
         display:grid;
-        grid-template-columns:10% 45% 45%;
+        grid-template-columns:15% 42.5% 42.5%;
         grid-template-rows:20% 20% 10%  5% 10% 20% 10% 5%;
         padding:0px;
         padding-right: 2%;
       }
+      input[type=text] {
+                /* padding: 15px 15px; */
+                border:1px solid #d9d9d9;
+                box-sizing: border-box;   
+                width: 100%; 
+                height:100%;
+                font-size: 18px; 
+                box-shadow: 2px 2px 5px #d9d9d9;
+                /* margin-bottom: 15px;                         */
+            }
       .main_grid{
-        box-shadow: 0px 2px 8px #474747;
+        box-shadow:0px 2px 10px #b3b3b3;
         text-shadow: 0px 0px 2px #131415;
         font-family: 'Open Sans', sans-serif;
         grid-column:2/4;
         grid-row:1/9;
         background: white;
         height:100%;
-        width:100%;
+        width:95%;
+        display:flex;
         padding-right:15px;
+        justify-self:center;
+        /* border-radius: 10px; */
+       
       }
       
       
@@ -97,6 +111,8 @@
       }
 
       .logo {
+          display:flex;
+          justify-self:center;
           grid-column:3;
           grid-row:1;
           margin-top:-22%;
@@ -113,7 +129,7 @@
       .password{
         grid-column:3;
           grid-row:5;
-          box-shadow:2px 2px 5px #d9d9d9;
+          /* box-shadow:2px 2px 5px #d9d9d9; */
       }
       .form_num {
             word-wrap: break-word;
@@ -161,6 +177,16 @@
             width: 70%;
 
         }
+
+        .submit{
+            display:flex;
+            align-self:end;
+            justify-self:center;
+            width:80%;
+            height:50%; 
+            grid-column:3;
+            grid-row:6;
+        }
         .contact_us{
            display:flex;
            align-self:center;
@@ -172,6 +198,7 @@
            box-shadow: 0px 2px 8px #474747;    
            background-color:#474747;
            padding-left:12px;
+          
 
         }
         .contact_inner_grid{
@@ -189,7 +216,7 @@
                 grid-column:1/3;
                 grid-row:1;
                 font-size:20px;
-                box-shadow: 0 8px 6px -6px black;
+                box-shadow: 0 5px 6px -6px black;
                 padding-top:5%;
                 font-size:25px;
                 font-weight:10px;
@@ -228,6 +255,16 @@
         .text_decoration{
             font-size:15px;
         }
+        @media (max-width:1200px){
+            .address{
+            grid-column:2;
+            grid-row:2;
+            font-size:12px;
+        }
+        .text_decoration{
+            font-size:12px;
+        } 
+        }
       </style>
       
 </head>
@@ -261,7 +298,7 @@
             </svg>
     </div>
     <div class="email_info">
-            <span class="form_num"><input type="text" placeholder="&#xf2bd;   Email"></span>
+            <span class="form_num"><input type="text" placeholder=" &#xf2bd;   Email"></span>
     </div>
     <div class="password">
             <span class="form_num"><input type="text" placeholder=" &#xf023;    Password"></span>
@@ -286,6 +323,7 @@
             </div>
             <div class="text_decoration"><span class="form_num">+91-11-24364799</span></div>
     </div>
+    <div class="submit"><button class="btn btn-1 ">Submit</button></div>
 </div>
   <script src='https://cldup.com/S6Ptkwu_qA.js'></script>
     <script  src="js/index.js"></script>

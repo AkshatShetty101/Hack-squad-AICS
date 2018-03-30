@@ -134,6 +134,7 @@ import { HTTPInterceptor } from './shared/services/http.interceptor'
     MatCheckboxModule,
     // AngularIndexedDB,
     HttpModule,
+    MatTabsModule,
     LocalStorageModule.withConfig({
       prefix: 'app',
       storageType: 'localStorage'
