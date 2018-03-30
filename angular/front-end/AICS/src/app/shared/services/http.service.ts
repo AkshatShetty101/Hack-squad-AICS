@@ -122,4 +122,10 @@ export class HttpService {
     const body = request;
     return this.http.post(this.auth.baseURI + '/division/add', body);
   }// body - name, type
+
+  addIssueComment(request: any, token: any) {
+    const body = request;
+    return this.http.post(this.auth.baseURI + '/issueTracker/update', body);
+  }// body - name, type
+
 }
