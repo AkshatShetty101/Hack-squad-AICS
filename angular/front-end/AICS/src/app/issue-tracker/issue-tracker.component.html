@@ -1,7 +1,7 @@
 <div class="container1">
 
   <div class="form_det">
-    {{ formName }}
+    {{ form.name }}#{{ form.id}}
   </div>
   <div class="new_issue">
     <button class="btn btn-primary">NEW ISSUE</button>
@@ -21,6 +21,6 @@
 </div>
 <ng-template #othercontent>
   <div class="issuebox">
-    <app-issue-details [id]="issueToLoadId"></app-issue-details>
+    <app-issue-details [formId]="form.id" [id]="issueToLoadId"></app-issue-details>
   </div>
 </ng-template>

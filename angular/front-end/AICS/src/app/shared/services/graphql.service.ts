@@ -17,14 +17,10 @@ export class GraphQLService {
 
   loadIssueDetails(id: string) {
     const body = {
-      query: "{ issueTrackerById (_id:"+id+"){ heading{title,subtitle,description}}}"};
+      query: "{ issueTrackerById (_id:\""+id+"\"){ heading {title,subtitle,description},created_by,is_open,tags,data {by,message,timestamp}}}"};
     console.log(body);
     console.log('finding data!!!');
-    this.http.post(this.baseURI + '/issueTracker', body)
-      .subscribe((data) => {
-        console.log(data);
-      }, (error) => {
-        console.log(error);
-      });
+    return this.http.post(this.baseURI + '/issueTracker', body);
+  
   }
 }
