@@ -17,7 +17,7 @@ export class RaRequestListComponent implements OnInit {
 
   ngOnInit() {
     //Get the data here!!!!
-    this.graphql.loadDbRequestList().subscribe((data) => {
+    this.graphql.loadDbRequestList().subscribe((data:any) => {
       Object.keys(data.data.reqFormMany).forEach((i) => {
         this.dbrequestList.push(data.data.reqFormMany[i]);
       });
