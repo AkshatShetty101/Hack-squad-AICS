@@ -21,7 +21,8 @@ module.exports = (req, res, next) => {
 					'A form has been submitted by a person in your division', '',
 					`Hey <b>Rajesh</b>,<br/>
 				<br/>
-				<p>A form has been submitted by a person in your division and awaits your approval. Form_Id: <i>${req.body.formIdId.toString()}</i></p>
+				<p>A form has been submitted by a person in your division and awaits your approval.<br/>
+				Submitter_Id: <i>${res.locals.user._id.toString()}</i> Form_Id: <i>${req.body.formIdId.toString()}</i></p>
 				<br/>
 				Thanks,<br/>
 				AICS MeitY Team`);
