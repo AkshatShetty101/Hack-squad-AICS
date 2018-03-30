@@ -58,7 +58,9 @@ module.exports = (req, res) => {
 							Thanks,<br/>
 							AICS MeitY Team`);
 							mailerHelper.sendMail(mailToSend);
-							res.status(200).send(responseMessage.SUCCESS.SUCCESS);
+							let messageToSend = responseMessage.SUCCESS.SUCCESS;
+							messageToSend.reqFormId = data._id.toString();
+							res.status(200).json(messageToSend);
 						}
 					});
 				}).catch((err) => {
