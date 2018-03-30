@@ -11,9 +11,9 @@ import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpService } from './shared/services/http.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-import { LocalStorageModule} from 'angular-2-local-storage';
+import { LocalStorageModule } from 'angular-2-local-storage';
 // import { AngularIndexedDB } from 'angular2-indexeddb';
 import { AuthService } from './shared/services/auth.service';
 import { AdminDashboardRequestsComponent } from './admin/admin-dashboard/admin-dashboard-requests/admin-dashboard-requests.component';
@@ -62,6 +62,11 @@ import { RaRequestListComponent } from './ra/ra-dashboard/track-request/ra-reque
 import { RaRequestComponent } from './ra/ra-dashboard/track-request/ra-request-list/ra-request/ra-request.component';
 import { RaRequestPreviewComponent } from './ra/ra-dashboard/track-request/ra-request-preview/ra-request-preview.component';
 import { AdminFormComponent } from './admin/admin-view-repository/admin-form/admin-form.component';
+import { IssueTrackerComponent } from './issue-tracker/issue-tracker.component';
+import { IssueComponent } from './issue-tracker/issue/issue.component';
+import { IssueDetailsComponent } from './issue-tracker/issue-details/issue-details.component';
+import { GraphQLService } from './shared/services/graphql.service';
+import { HTTPInterceptor } from './shared/services/http.interceptor'
 
 @NgModule({
   declarations: [
@@ -107,7 +112,10 @@ import { AdminFormComponent } from './admin/admin-view-repository/admin-form/adm
     TrackRequestComponent,
     RaRequestListComponent,
     RaRequestComponent,
-    RaRequestPreviewComponent
+    RaRequestPreviewComponent,
+    IssueTrackerComponent,
+    IssueComponent,
+    IssueDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -126,11 +134,13 @@ import { AdminFormComponent } from './admin/admin-view-repository/admin-form/adm
     })
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HTTPInterceptor, multi: true },
     FormRenderService,
     FormBuildService,
     IndexDBService,
     HttpService,
-    AuthService
+    AuthService,
+    GraphQLService
   ],
   bootstrap: [AppComponent]
 })
