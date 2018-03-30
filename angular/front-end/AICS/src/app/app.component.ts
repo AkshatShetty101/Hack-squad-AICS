@@ -37,6 +37,11 @@ export class AppComponent implements OnInit {
     // );
   }
   ngOnInit() {
+    this.idb.openConnection().then(()=>{
+      console.log('connection established!!');
+    }).catch((err)=>{
+      console.log(err);
+    });
     // this.auth.checkStatus();
   }
 }

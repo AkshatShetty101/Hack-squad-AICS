@@ -1,3 +1,4 @@
+import { SSEService } from './shared/services/sse.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -69,7 +70,7 @@ import { IssueComponent } from './issue-tracker/issue/issue.component';
 import { IssueDetailsComponent } from './issue-tracker/issue-details/issue-details.component';
 import { GraphQLService } from './shared/services/graphql.service';
 import { HTTPInterceptor } from './shared/services/http.interceptor';
-import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component'
+import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component';
 
 @NgModule({
   declarations: [
@@ -148,7 +149,8 @@ import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component
     IndexDBService,
     HttpService,
     AuthService,
-    GraphQLService
+    GraphQLService,
+    SSEService
   ],
   bootstrap: [AppComponent]
 })

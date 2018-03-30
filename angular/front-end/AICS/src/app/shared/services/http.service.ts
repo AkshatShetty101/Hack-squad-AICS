@@ -127,5 +127,10 @@ export class HttpService {
     const body = request;
     return this.http.post(this.auth.baseURI + '/issueTracker/update', body);
   }// body - name, type
+  addIssue(request: any, token: any) {
+    const body = request;
+    return this.http.post(this.auth.baseURI + '/issueTracker/add', body);
+  }// body - name, type
+
 
 }
