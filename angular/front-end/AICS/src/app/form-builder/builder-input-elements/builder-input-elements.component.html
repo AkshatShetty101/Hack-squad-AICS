@@ -8,7 +8,7 @@
     <input [formControl]="valueField" [required]="required" [type]="subtype" 
       [placeholder]="placeholder" />
   </div>  
-  <form [style.display]="hiddenForm?'grid':'none'" [formGroup]="myForm" class="date inner_grid" (ngSubmit)="updateValues(myForm)">
+  <form [style.display]="hiddenForm?'grid':'none'" [formGroup]="myForm" class="date inner_grid">
     <div class="row_inp_label">
       <label>Required&nbsp;:&nbsp;</label>
     </div>
@@ -45,6 +45,6 @@
     <div class="row_inp_field">
       <input *ngIf="subtype === 'number'" formControlName="min" type="number" />
     </div>
-    <div class="close_1"><button mat-raised-button color="accent">CLOSE</button></div>
+    <div class="close_1"><button type="button" (click)="updateValues(myForm)" mat-raised-button color="accent">CLOSE</button></div>
   </form>
 </div>

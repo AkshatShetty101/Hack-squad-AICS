@@ -3,7 +3,7 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class AuthService {
-  public baseURI = 'http://localhost:3000/api';
+  public baseURI = 'http://aics.in:3000/api';
 
   constructor(
   ) { }

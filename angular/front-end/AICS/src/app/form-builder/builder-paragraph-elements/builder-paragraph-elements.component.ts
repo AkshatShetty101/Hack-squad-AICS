@@ -33,7 +33,7 @@ export class BuilderParagraphElementsComponent implements OnInit {
     }
     let element = this.getElement();
     // console.log(element);
-    this.update.emit(element);
+    this.update.emit({'element': element, 'pos': this.pos});
     this.hiddenForm = false;
   }
   getElement() {

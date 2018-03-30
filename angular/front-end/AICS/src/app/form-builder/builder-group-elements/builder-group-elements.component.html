@@ -7,16 +7,16 @@
   </div>
   <div class="label_transition">
     <div *ngFor="let option of options; let i = index">
-      <input *ngIf="subtype === 'radio'" [formControl]="valueField" [value]="option.value" [required]="required" [type]="subtype"
-        [class]="class" [name]="'valueField'" [checked]="option.value===value?true:false" (click)="updateFieldValue(subtype, i)"
+      <input *ngIf="subtype === 'radio'" [value]="option.value" [required]="required" [type]="subtype"
+        [class]="class" [name]="'valueField'" [checked]="option.value==value?true:false" (click)="updateFieldValue(subtype, i)"
       />
-      <input *ngIf="subtype === 'checkbox'" [formControl]="valueField" [value]="option.value" [required]="required" [type]="subtype"
-        [class]="class" [name]="'valueField'" [checked]="option.value.indexOf(value[i]) === -1?false:true" (click)="updateFieldValue(subtype, i)"
+      <input *ngIf="subtype === 'checkbox'" [value]="option.value" [required]="required" [type]="subtype"
+        [class]="class" [name]="'valueField'" [checked]="option.value.indexOf(value[i]) != -1?true:false" (click)="updateFieldValue(subtype, i)"
       />
       <span [innerHTML]="option.label"></span>
     </div>
   </div>
-  <form [style.display]="hiddenForm?'grid':'none'" [formGroup]="myForm" class="input_box inner_grid" (ngSubmit)="updateValues(myForm)">
+  <form [style.display]="hiddenForm?'grid':'none'" [formGroup]="myForm" class="input_box inner_grid">
     <div class="required">
       <label>Required&nbsp;:&nbsp;</label>
       <mat-checkbox formControlName="required"></mat-checkbox>
@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="close">
-      <button type="submit" mat-raised-button color="accent">CLOSE</button>
+      <button type="button" (click)="updateValues(myForm)" mat-raised-button color="accent">CLOSE</button>
     </div>
   </form>
 </div>

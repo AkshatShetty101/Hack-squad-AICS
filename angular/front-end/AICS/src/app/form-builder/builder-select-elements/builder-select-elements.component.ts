@@ -89,7 +89,7 @@ export class BuilderSelectElementsComponent implements OnInit {
     form.controls.addLabel.reset();
     form.controls.addValue.reset();
     let element = this.getElement();
-    this.update.emit(element);
+    this.update.emit({'element': element, 'pos': this.pos});
     this.hiddenForm = false;
   }
   sendElement() {
