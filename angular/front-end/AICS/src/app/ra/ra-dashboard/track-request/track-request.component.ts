@@ -30,7 +30,7 @@ export class TrackRequestComponent implements OnInit {
   }
 
   approve() {
-    this.graphql.loadTemplateIdFromRequestId(this.requestToLoad.id).subscribe((data)=>{
+    this.graphql.loadTemplateIdFromRequestId(this.requestToLoad.id).subscribe((data:any)=>{
       console.log(data.data.reqFormById.template.template_id);
     this.http.approveTemplates({templateId:data.data.reqFormById.template.template_id}, 1).subscribe((data) => {
       console.log(data);
