@@ -1,13 +1,16 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { AngularIndexedDB } from 'angular2-indexeddb';
+import { SSEService } from './sse.service';
 
 @Injectable()
 export class IndexDBService {
   private db = new AngularIndexedDB('myDb', 1);
-  public notifs = new Subject();
 
-  constructor() {
+
+  constructor(
+    private sse: SSEService
+  ) {
     // this.db = new AngularIndexedDB('myDb', 1);
   }
 
@@ -31,9 +34,9 @@ export class IndexDBService {
   }
 
   addNotif(data: any) {
-    this.notifs.next(data);
+    this.sse.emitNotif(data);
     console.log(data);
-    return this.db.add('notifs',data);
+    return this.db.add('notifs', data);
   }
 
   getAllNotifs() {

@@ -1,3 +1,4 @@
+import { SSEService } from './shared/services/sse.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -148,7 +149,8 @@ import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component
     IndexDBService,
     HttpService,
     AuthService,
-    GraphQLService
+    GraphQLService,
+    SSEService
   ],
   bootstrap: [AppComponent]
 })
