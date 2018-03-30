@@ -70,7 +70,7 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
   }
 
   ngOnInit() {
-    this.elements = this.formBuild.elements;
+    // this.elements = this.formBuild.elements;
     this.table = {
       'type': 'table',
       'subtype': '',
