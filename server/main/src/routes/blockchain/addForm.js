@@ -11,6 +11,8 @@ this.NS = config.get('NS');
 this.NS_F = config.get('NS_F');
 this.NS_T = config.get('NS_T');
 this.NS_P = config.get('NS_P');
+const notificationsHelper = require('../../utils/notificationsHelper');
+const mailerHelper = require('../../utils/mailerHelper');
 
 module.exports = (req, res) => {
 	// Establishing connection
@@ -57,8 +59,18 @@ module.exports = (req, res) => {
 												// Returning response
 												console.log('Form Added successfully to block-chain');
 												const notifToSend = notificationMessage.ADMIN.RA_APP_TEMP;
-												notifToSend.data = { formId: res.locals.formId, causerId: res.locals.user._id.toString() };
+												notifToSend.data = { formId: res.locals.formId.toString(), causerId: res.locals.user._id.toString() };
 												notificationsHelper.addNotificationToQueue(res.locals.admin_id.toString(), notifToSend);
+												let mailToSend = mailerHelper.mailData(`
+												Rajesh Singhania <rajeshsinghania@meity.gov.in>`, // Random name & email <- Admin
+												'A new form has to be assigned', '',
+												`Hey <b>Rajesh</b>,<br/>
+												<br/>
+												<p>A new form has been created which has to be assigned. Form_Id: <i>${req.locals.formId.toString()}</i></p>
+												<br/>
+												Thanks,<br/>
+												AICS MeitY Team`);
+												mailerHelper.sendMail(mailToSend);
 												res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 											});
 										}).catch((err) => {
