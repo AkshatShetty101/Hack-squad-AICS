@@ -209,13 +209,13 @@ router.post('/reqAuth/request',
 	verifyMiddleware.verifyRequestingAuthority,
 	require('./requestingAuth/makeRequest'));
 
-router.all('/reqAuth',
-	verifyMiddleware.verifyRequestingAuthority,
-	graphQLHTTP((req, res) => ({ // to be replaced by router.post
-		schema: require('./graphql/schemas/requesting_authority'),
-		context: { req, res },
-		graphiql: process.env.NODE_ENV !== 'production'
-	})));
+// router.all('/reqAuth',
+// 	verifyMiddleware.verifyRequestingAuthority,
+// 	graphQLHTTP((req, res) => ({ // to be replaced by router.post
+// 		schema: require('./graphql/schemas/requesting_authority'),
+// 		context: { req, res },
+// 		graphiql: process.env.NODE_ENV !== 'production'
+// 	})));
 
 /**
  * Issue Tracker Routes
