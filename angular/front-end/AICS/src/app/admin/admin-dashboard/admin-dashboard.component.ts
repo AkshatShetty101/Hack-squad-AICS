@@ -5,14 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.scss']
 })
-export class AdminDashboardComponent implements OnInit {
+export class AdminDashboardComponent {
 
-  constructor() { }
-  requestToLoad: { id: string, title: string, data: string } = { id: "default", title: "default", data: "default" };
-  ngOnInit() {
-  }
-  previewIt(request: { id: string, title: string, data: string }) {
-    this.requestToLoad = request;
-  }
+  
 
 }

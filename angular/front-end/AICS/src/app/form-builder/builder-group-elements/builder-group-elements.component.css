@@ -1,13 +1,12 @@
 .elementHolder{
-  
         display:grid;
         grid-template-columns: 94% 3% 3%;
         grid-template-rows:10% 88% 5px;
         height:100%;
-        width:100%;
         grid-row-gap:3px;
         border:0.5px solid rgb(223, 215, 202);
         border-radius:5px;
+        font-size: 16px;
     }
 .icon1{
     grid-row:1;

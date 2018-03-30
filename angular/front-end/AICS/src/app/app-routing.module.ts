@@ -19,16 +19,14 @@ import { FormRendererComponent } from './form-renderer/form-renderer.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent },
+  // { path: 'login', component: LoginComponent },
   { path: 'formBuilder', component: FormBuilderComponent },
   { path: 'formRenderer', component: FormRendererComponent },
-  {
-    path: 'admin', component: AdminComponent, children: [
+  { path: 'admin', component: AdminComponent, children: [
       { path: 'tracking', component: AdminTrackingComponent },
       { path: 'view_forms', component: AdminViewFormsComponent },
       { path: 'view_repository', component: AdminViewRepositoryComponent },
-      {
-        path: 'dashboard', component: AdminDashboardComponent, children: [
+      { path: 'dashboard', component: AdminDashboardComponent, children: [
           { path: 'request', component: AdminDashboardRequestsComponent },
           { path: 'verification', component: AdminDashboardVerificationsComponent },
           { path: 'repository', component: AdminDashboardRepositoryComponent },

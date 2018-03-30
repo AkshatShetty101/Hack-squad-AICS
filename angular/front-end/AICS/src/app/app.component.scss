@@ -22,18 +22,18 @@
 */
 
 .background_blue{
-	height:98vh;
+	height:100vh;
 	width:100%;
 	position:absolute;
 	clip-path: polygon(40% 0,100% 0,100% 70%,40% 0);
 }
 
 .lower_div{
-	height:98vh;
+	height:100vh;
 	width:100%;
 	position:absolute;
 	clip-path: polygon(
-60% 100%, /* left top */
+55% 100%, /* left top */
 100% 45%, /* right top */ 
 100% 100%, /* right bottom */
 60% 100%/* left bottom */
