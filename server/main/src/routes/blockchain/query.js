@@ -10,7 +10,6 @@ exports.getMyForms = (req, res) => {
 	this.cardName = config.get('cardName');
 	return this.bizNetworkConnection.connect(this.cardName)
 		.then(() => {
-			console.log('in1');
 			var query = this.bizNetworkConnection.buildQuery(
 				'SELECT ' + NS_F + ' WHERE (assigneeId CONTAINS _$inputValue)');
 			return this.bizNetworkConnection.query(query, { inputValue: res.locals.user._id });
@@ -129,7 +128,6 @@ exports.getFormProgress = (req, res) => {
 
 	return this.bizNetworkConnection.connect(this.cardName)
 		.then(() => {
-			console.log('in1');
 			var query = this.bizNetworkConnection.buildQuery(
 				`SELECT org.acme.aics.FormEvent
 				WHERE(form == _$inputValue)`);
@@ -148,7 +146,7 @@ exports.getFormProgress = (req, res) => {
 					let output = {
 						...responseMessage.SUCCESS.SUCCESS,
 						currentStage: assets[0].type,
-						metadata:assets[0].metadata
+						metadata: assets[0].metadata
 					}
 					res.status(200).json(output);
 				}).catch((err) => {
@@ -173,7 +171,6 @@ exports.getTemplateProgress = (req, res) => {
 
 	return this.bizNetworkConnection.connect(this.cardName)
 		.then(() => {
-			console.log('in1');
 			var query = this.bizNetworkConnection.buildQuery(
 				`SELECT org.acme.aics.TemplateEvent
 				WHERE(template == _$inputValue)`);
@@ -192,12 +189,12 @@ exports.getTemplateProgress = (req, res) => {
 					let output = {
 						...responseMessage.SUCCESS.SUCCESS,
 						currentStage: assets[0].type,
-						metadata:assets[0].metadata
+						metadata: assets[0].metadata
 					}
 					res.status(200).json(output);
 				}).catch((err) => {
 					console.error(err);
-					res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);	
+					res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 				})
 			} else {
 				res.status(200).json(responseMessage.FAIL.FORM.NOT_EXISTS);

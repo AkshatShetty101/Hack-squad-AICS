@@ -23,7 +23,7 @@ module.exports = (req, res, next) => {
 			let factory = this.businessNetworkDefinition.getFactory();
 			// Loading form registry
 			let asignee = factory.newRelationship(this.NS, 'Person', res.locals.user._id.toString());
-			let newHolder = factory.newRelationship(this.NS, 'Person', res.locals.admin_id.toString());
+			let newHolder = factory.newRelationship(this.NS, 'Person', res.locals.gc_id.toString());
 			let transaction = factory.newTransaction(this.NS, 'FormEvent');
 			transaction.person = asignee;
 			transaction.newHolder = newHolder;
