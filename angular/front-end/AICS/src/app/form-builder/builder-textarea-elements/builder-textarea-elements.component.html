@@ -9,7 +9,8 @@
     <label [innerHTML]="label"></label>
   </div>
   <div>
-    <textarea [formControl]="valueField" [rows]="rows" [cols]="cols" [class]="class" [placeholder]="placeholder" [required]="required">
+    <textarea [formControl]="valueField" [rows]="rows" [cols]="cols" [class]="class" 
+      [placeholder]="placeholder" [required]="required" [value]="value">
     </textarea>
   </div>
   <form [style.display]="hiddenForm?'grid':'none'" [formGroup]="myForm" class="area inner_grid" (ngSubmit)="updateValues(myForm)">
@@ -37,8 +38,8 @@
       <input formControlName="cols" type="text">
     </div>
     <div class="close_1">
-      <button mat-raised-button color="accent">CLOSE</button>
-    </div>
+      <button type="submit" mat-raised-button color="accent">CLOSE</button>
+    </div>  
   </form>
 </div>
 <!-- <div class="elementHolder" [draggable]="draggableFlag">
