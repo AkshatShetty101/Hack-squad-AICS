@@ -43,8 +43,18 @@ module.exports = (req, res) => {
 										console.log(result);
 										// Returning response
 										const notifToSend = notificationMessage.RA.ADMIN_DEL_TEMP;
-										notifToSend.data = { templateId: req.body.templateId, causerId: res.locals.user._id.toString() };
+										notifToSend.data = { templateId: req.body.templateId.toString(), causerId: res.locals.user._id.toString() };
 										notificationsHelper.addNotificationToQueue(res.locals.ra_id.toString(), notifToSend);
+										let mailToSend = mailerHelper.mailData(`
+										Hrithik Chauhan <hrithikchauhan@meity.gov.in>`, // Random name & email <- RA
+										'An incomplete template for your request has been deleted', '',
+										`Hey <b>Hrithik</b>,<br/>
+										<br/>
+										<p>An incomplete template for your request has been deleted. Please make a new request. Template_Id: <i>${req.body.templateId.toString()}</i></p>
+										<br/>
+										Thanks,<br/>
+										AICS MeitY Team`);
+										mailerHelper.sendMail(mailToSend);
 										res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 									});
 								});

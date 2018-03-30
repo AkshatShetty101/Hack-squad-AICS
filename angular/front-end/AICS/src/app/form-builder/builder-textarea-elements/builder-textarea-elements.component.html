@@ -1,11 +1,48 @@
-<div class="elementHolder" [draggable]="draggableFlag">
-  <label [innerHTML]="label"></label><br />
-  <textarea [formControl]="valueField" [rows]="rows" [cols]="cols" [class]="class"
-    [placeholder]="placeholder" [required]="required">
-  </textarea>
-  <form [formGroup]="myForm" class="hiddenfields" (ngSubmit)="updateValues(myForm)">
-    <label>Required: </label>
-    <input formControlName="required" type="checkbox" />  
+<div [draggable]="draggableFlag" class="elementHolder">
+  <div class="icon1">
+    <mat-icon (click)="hiddenForm=!hiddenForm">edit</mat-icon>
+  </div>
+  <div class="icon2">
+    <mat-icon (click)="deleteElement()">delete</mat-icon>
+  </div>
+  <div class="on_transition_label">
+    <label [innerHTML]="label"></label>
+  </div>
+  <div>
+    <textarea [formControl]="valueField" [rows]="rows" [cols]="cols" [class]="class" [placeholder]="placeholder" [required]="required">
+    </textarea>
+  </div>
+  <form [style.display]="hiddenForm?'grid':'none'" [formGroup]="myForm" class="area inner_grid" (ngSubmit)="updateValues(myForm)">
+    <div class="row_inp_label">
+      Required&nbsp;:&nbsp;
+    </div>
+    <div class="row_inp_field">
+      <mat-checkbox formControlName="required"></mat-checkbox>
+    </div>
+    <div class="row_inp_label">
+      Label&nbsp;:&nbsp;</div>
+    <div class="row_inp_field">
+      <input formControlName="label" type="text">
+    </div>
+    <div class="row_inp_label">
+      Rows&nbsp;:&nbsp;
+    </div>
+    <div class="row_inp_field">
+      <input formControlName="rows" type="text">
+    </div>
+    <div class="row_inp_label">
+      Columns&nbsp;:&nbsp;
+    </div>
+    <div class="row_inp_field">
+      <input formControlName="cols" type="text">
+    </div>
+    <div class="close_1">
+      <button mat-raised-button color="accent">CLOSE</button>
+    </div>
+  </form>
+</div>
+<!-- <div class="elementHolder" [draggable]="draggableFlag">
+  <form [formGroup]="myForm" class="area inner_grid" (ngSubmit)="updateValues(myForm)">
     <label>Label: </label>
     <input formControlName="label" type="text" />
     <label>Rows: </label>
@@ -15,4 +52,4 @@
     <button type="submit">Close</button>
   </form>
   <button (click)="deleteElement()">Delete Element</button>
-</div>
+</div> -->

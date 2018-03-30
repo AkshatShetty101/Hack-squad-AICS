@@ -3,7 +3,7 @@ import { Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'ngsf-builder-header-elements',
+  selector: 'app-builder-header-elements',
   templateUrl: './builder-header-elements.component.html',
   styleUrls: ['./builder-header-elements.component.css']
 })
@@ -21,6 +21,7 @@ export class BuilderHeaderElementsComponent implements OnInit {
     label: new FormControl(),
     subtype: new FormControl()
   });
+  hiddenForm: boolean = false;
   constructor() { }
 
   ngOnInit() {
@@ -37,8 +38,9 @@ export class BuilderHeaderElementsComponent implements OnInit {
     }
     form.controls.label.reset();
     let element = this.getElement();
-    // console.log(element);
+    console.log(element);
     this.update.emit(element);
+    this.hiddenForm = false;
   }
   getElement() {
     let element: {};

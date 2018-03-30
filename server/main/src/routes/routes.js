@@ -124,7 +124,7 @@ router.post('/forms/delete',
 
 router.post('/forms/assignUser',
 	verifyMiddleware.verifyPerson,
-	// verifyMiddleware.verifyAdmin,
+	verifyMiddleware.verifyGC,
 	require('./forms/assignUser'),
 	require('./blockchain/assignForm'));
 

@@ -1,17 +1,18 @@
 const ReqForm = require('../../models/request_form');
 const Person = require('../../models/person');
 const notificationsHelper = require('../../utils/notificationsHelper');
+const mailerHelper = require('../../utils/mailerHelper');
 
 module.exports = (req, res) => {
 	if (req.body.data) {
-		Person.find({ designation: 'admin' }, { _id: 1 }, (err, result) => {
+		Person.find({ designation: 'admin' }, (err, result) => {
 			if (err) {
 				console.error(err);
 				res.status(400).send(responseMessage.FAIL.SOMETHING_WRONG);
 			} else {
 				let promise = new Promise((resolve, reject) => {
 					let ct = -1;
-					let adminId = '';
+					let adminObj;
 					async.each(result, (admin, callback) => {
 						ReqForm.count({ admin_id: admin._id, is_closed: false }, (err, data) => {
 							if (err) {
@@ -19,24 +20,24 @@ module.exports = (req, res) => {
 								reject(err);
 							} else {
 								if (ct === -1) {
-									adminId = admin._id;
+									adminObj = admin;
 									ct = data;
 								} else if (ct > data) {
 									ct = data;
-									adminId = admin._id;
+									adminObj = admin;
 								}
 								callback();
 							}
 						});
 					}, (err) => {
 						console.error(err);
-						err ? reject(err) : resolve(adminId);
+						err ? reject(err) : resolve(adminObj);
 					});
 				});
-				promise.then((id) => {
+				promise.then((admin) => {
 					const formData = new ReqForm({
 						ra_id: res.locals.user._id,
-						admin_id: id,
+						admin_id: admin._id,
 						data: req.body.data
 					});
 					formData.save((err, data) => {
@@ -44,9 +45,19 @@ module.exports = (req, res) => {
 							console.error(err);
 							res.status(400).send(responseMessage.FAIL.SOMETHING_WRONG);
 						} else {
-							const notifToSend = notificationMessage.ADMIN.RA_MAKE_REQ;
+							let notifToSend = notificationMessage.ADMIN.RA_MAKE_REQ;
 							notifToSend.data = { reqFormId: data._id.toString(), causerId: res.locals.user._id.toString() };
-							notificationsHelper.addNotificationToQueue(id.toString(), notifToSend);
+							notificationsHelper.addNotificationToQueue(admin._id.toString(), notifToSend);
+							let mailToSend = mailerHelper.mailData(`
+							${admin.name.firstName} ${admin.name.lastName} <${admin.email}>`,
+							'A new request has been made', '',
+							`Hey <b>${admin.name.firstName}</b>,<br/>
+							<br/>
+							<p>A new request has been made and assigned to you. Request_Id: <i>${data._id.toString()}</i></p>
+							<br/>
+							Thanks,<br/>
+							AICS MeitY Team`);
+							mailerHelper.sendMail(mailToSend);
 							res.status(200).send(responseMessage.SUCCESS.SUCCESS);
 						}
 					});

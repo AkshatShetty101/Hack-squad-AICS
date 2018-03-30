@@ -1,5 +1,7 @@
-// Declaring constants
 const Form = require('../../models/form');
+const notificationsHelper = require('../../utils/notificationsHelper');
+const mailerHelper = require('../../utils/mailerHelper');
+
 module.exports = (req, res, next) => {
 	// Setting new form data
 	if (req.body.formId && req.body.deadline && req.body.assigneeId) {
@@ -15,6 +17,16 @@ module.exports = (req, res, next) => {
 						const notifToSend = notificationMessage.GC.ADMIN_ASS_FORM;
 						notifToSend.data = { templateId: req.body.formId, causerId: res.locals.user._id.toString() };
 						notificationsHelper.addNotificationToQueue(req.body.assigneeId.toString(), notifToSend);
+						let mailToSend = mailerHelper.mailData(`
+						Sunil Bindu <sunilbindu@meity.gov.in>`, // Random name & email <- GC
+							'A form has been assigned to your division', '',
+							`Hey <b>Sunil</b>,<br/>
+						<br/>
+						<p>A form has been assigned to your division. Form_Id: <i>${req.body.formId.toString()}</i></p>
+						<br/>
+						Thanks,<br/>
+						AICS MeitY Team`);
+						mailerHelper.sendMail(mailToSend);
 						next();
 					} else {
 						res.status(400).json(responseMessage.FAIL.FORM.NOT_EXISTS);

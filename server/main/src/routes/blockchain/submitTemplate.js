@@ -10,6 +10,8 @@ this.businessNetworkIdentifier = config.get('bna');
 this.NS = config.get('NS');
 this.NS_T = config.get('NS_T');
 this.NS_P = config.get('NS_P');
+const notificationsHelper = require('../../utils/notificationsHelper');
+const mailerHelper = require('../../utils/mailerHelper');
 
 module.exports = (req, res) => {
 		// Establishing connection
@@ -39,6 +41,16 @@ module.exports = (req, res) => {
 					const notifToSend = notificationMessage.RA.ADMIN_SUB_TEMP;
 					notifToSend.data = { templateId: req.body.templateId.toString(), causerId: res.locals.user._id.toString() };
 					notificationsHelper.addNotificationToQueue(ra.locals.ra_id.toString(), notifToSend);
+					let mailToSend = mailerHelper.mailData(`
+					Hrithik Chauhan <hrithikchauhan@meity.gov.in>`, // Random name & email <- RA
+					'A new template has been assigned to you for approval', '',
+					`Hey <b>Hrithik</b>,<br/>
+					<br/>
+					<p>A new template has been made and assigned to you for approval. Template_Id: <i>${req.body.templateId.toString()}</i></p>
+					<br/>
+					Thanks,<br/>
+					AICS MeitY Team`);
+					mailerHelper.sendMail(mailToSend);
 					res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 				}).catch((err) => {
 					// Catching errors

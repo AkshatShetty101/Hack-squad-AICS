@@ -1,4 +1,5 @@
-<div class="issue_grid">
+
+<div class="issue_grid" *ngIf="isDataLoaded">
 	<div class="heading">
 		<div class="bolder">{{ heading.title }}</div>
 		<div>Issue Description - {{ heading.description }}</div>
@@ -17,4 +18,10 @@
 			{{ d.message }}
 		</div>
 	</div>
+	<form class="h-100" [formGroup]="myForm" (ngSubmit)="addComment(myForm.value)">
+		<div class="comment">
+			<input type="search" class="form-control" placeholder="Enter title here" formControlName="data">
+			<button type="submit" [disabled]="!myForm.valid" class="btn btn-outline-success">Submit</button>
+		</div>
+	</form>
 </div>
