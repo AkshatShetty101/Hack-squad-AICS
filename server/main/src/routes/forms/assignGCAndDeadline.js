@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
 						console.log('Assigned form and set deadline');
 						const notifToSend = notificationMessage.GC.ADMIN_ASS_FORM;
 						notifToSend.data = { formId: req.body.formId, causerId: res.locals.user._id.toString() };
-						notificationsHelper.addNotificationToQueue(req.body.assigneeId.toString(), notifToSend);
+						notificationsHelper.addNotificationToQueue(req.body.assigneeId, notifToSend);
 						let mailToSend = mailerHelper.mailData(`
 						Sunil Bindu <sunilbindu@meity.gov.in>`, // Random name & email <- GC
 							'A form has been assigned to your division', '',

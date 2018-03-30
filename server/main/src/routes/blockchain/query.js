@@ -53,6 +53,7 @@ exports.getTemplateRequestId = (req, res, next) => {
 				return this.bizNetworkConnection.query(query, { inputValue: req.body.templateId });
 			})
 			.then((asset) => {
+				console.log('[QUERY getTemplateRequestId]', asset);
 				res.locals.requestId = asset[0].requestId;
 				next();
 			})
