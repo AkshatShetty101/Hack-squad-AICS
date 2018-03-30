@@ -1,0 +1,26 @@
+<div class="container1">
+
+  <div class="form_det">
+    {{ formName }}
+  </div>
+  <div class="new_issue">
+    <button class="btn btn-primary">NEW ISSUE</button>
+
+  </div>
+  <div class="issuebox round-border" *ngIf="issueToLoadId == undefined;else othercontent">
+    <div class="issue_grid">
+      <div class="title">
+        <i class="fa fa-exclamation-circle"></i>&nbsp; Issues
+      </div>
+      <div class="filter_tag">Comments&nbsp;
+        <i class="fa fa-angle-down"></i>
+      </div>
+    </div>
+    <app-issue *ngFor="let issue of issueList;" [issue]="issue" (passId)="loadDetails($event)"></app-issue>
+  </div>
+</div>
+<ng-template #othercontent>
+  <div class="issuebox">
+    <app-issue-details [id]="issueToLoadId"></app-issue-details>
+  </div>
+</ng-template>

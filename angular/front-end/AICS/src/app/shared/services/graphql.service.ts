@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {  HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class GraphQLService {
@@ -10,8 +10,21 @@ export class GraphQLService {
   ) { }
 
   profileDetails() {
-    const body = { query: '{ userOne {name { firstName middleName lastName } designation } }'};
+    const body = { query: '{ userOne {name { firstName middleName lastName } designation } }' };
     this.http.post(this.baseURI + '/users', body)
       .subscribe();
+  }
+
+  loadIssueDetails(id: string) {
+    const body = {
+      query: "{ issueTrackerById (_id:"+id+"){ heading{title,subtitle,description}}}"};
+    console.log(body);
+    console.log('finding data!!!');
+    this.http.post(this.baseURI + '/issueTracker', body)
+      .subscribe((data) => {
+        console.log(data);
+      }, (error) => {
+        console.log(error);
+      });
   }
 }
