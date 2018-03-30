@@ -37,7 +37,7 @@ module.exports = (req, res) => {
 				promise.then((admin) => {
 					const formData = new ReqForm({
 						ra_id: res.locals.user._id,
-						admin_id: '5ab9e461fb8efa268477780a	',//admin._id
+						admin_id: '5ab9e461fb8efa268477780a',//admin._id
 						data: req.body.data
 					});
 					formData.save((err, data) => {
