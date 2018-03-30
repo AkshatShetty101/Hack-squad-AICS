@@ -44,6 +44,10 @@
             font-size:19px;
             font-weight:bold;   
         }
+        .comment{
+            display: grid;
+            grid-template-columns: 85% 15%;
+        }
         .replies{
             display:grid;
             grid-template-rows:25% 17% 58%;

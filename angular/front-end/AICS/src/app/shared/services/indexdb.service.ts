@@ -1,13 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { AngularIndexedDB } from 'angular2-indexeddb';
+import { SSEService } from './sse.service';
 
 @Injectable()
 export class IndexDBService {
   private db = new AngularIndexedDB('myDb', 1);
-  constructor() {
+
+
+  constructor(
+    private sse: SSEService
+  ) {
     // this.db = new AngularIndexedDB('myDb', 1);
   }
+
   openConnection() {
     // this.db = new AngularIndexedDB('myDb', 1);
     let ct = this.db.dbWrapper.dbVersion
@@ -26,24 +32,11 @@ export class IndexDBService {
       // objectStore.createIndex("timestamp", "email", { unique: false });
     });
   }
-  addNotif(data: {
-    code: string,
-    objectId: string,
-    propogatorId: string,
-    timestamp: string
-  }): { success: boolean, message: string } {
-    this.db.add('notifs', {
-      code: data.code,
-      objectId: data.objectId,
-      propogatorId: data.propogatorId,
-      timestamp: data.timestamp
-    }).then(() => {
-      return { success: true, message: "Notif added successfully" };
-    }, (error) => {
-      console.log(error);
-      return { success: false, message: "Notif not added" };
-    });
-    return { success: false, message: "Notif not added" };
+
+  addNotif(data: any) {
+    this.sse.emitNotif(data);
+    console.log(data);
+    return this.db.add('notifs', data);
   }
 
   getAllNotifs() {
@@ -71,9 +64,6 @@ export class IndexDBService {
     return this.db.getAll('requests');
   }
 
-  getRequestByKey(key: number) {
-    return this.db.getByKey('requests', key);
-  }
 
   deleteRequest(key: number) {
     this.db.delete('requests', key).then(() => {
@@ -83,6 +73,26 @@ export class IndexDBService {
       return { success: false, message: "Delete Unsuccessful" };
     });
   }
+
+  getRequestByKey(data): any {
+
+    return new Promise((res, rej) => {
+      this.db.openCursor('requests', (evt) => {
+        var cursor = (<any>evt.target).result;
+        if (cursor) {
+          console.log(cursor);
+          if (cursor.key.toString() === data.toString()) {
+            console.log(cursor.value)
+            console.log("matched stuff resolving");
+            res(cursor.value);
+          }
+          else
+            cursor.continue();
+        }
+      });
+    });
+  }
+
 
   cursor(): { id: string, title: string, data: string }[] {
     let list: { id: string, title: string, data: string }[] = [];

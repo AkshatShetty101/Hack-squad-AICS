@@ -10,20 +10,20 @@ import { AuthService } from '../shared/services/auth.service';
   styleUrls: ['./form-renderer.component.css']
 })
 export class FormRendererComponent implements OnInit {
-  elements: any[] = [];
+  table: any;
   constructor(
     private formRender: FormRenderService,
     private http: HttpService,
     private auth: AuthService
   ) { }
   ngOnInit() {
-    this.elements = this.formRender.elements;
+    this.table = this.formRender.table;
   }
   saveForm(){
     setTimeout(this.formRender.getForm(), 200);
-    const form: any = this.formRender.elements;
+    const form: any = this.formRender.table;
     console.log(form);
-    this.elements = form;
+    this.table = form;
     const request = {
       body: form
     };

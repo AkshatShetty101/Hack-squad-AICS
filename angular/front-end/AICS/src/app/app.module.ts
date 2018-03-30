@@ -1,3 +1,4 @@
+import { SSEService } from './shared/services/sse.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -68,7 +69,8 @@ import { IssueTrackerComponent } from './issue-tracker/issue-tracker.component';
 import { IssueComponent } from './issue-tracker/issue/issue.component';
 import { IssueDetailsComponent } from './issue-tracker/issue-details/issue-details.component';
 import { GraphQLService } from './shared/services/graphql.service';
-import { HTTPInterceptor } from './shared/services/http.interceptor'
+import { HTTPInterceptor } from './shared/services/http.interceptor';
+import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +119,8 @@ import { HTTPInterceptor } from './shared/services/http.interceptor'
     RaRequestPreviewComponent,
     IssueTrackerComponent,
     IssueComponent,
-    IssueDetailsComponent
+    IssueDetailsComponent,
+    IssueNewComponent
   ],
   imports: [
     BrowserModule,
@@ -134,7 +137,6 @@ import { HTTPInterceptor } from './shared/services/http.interceptor'
     MatCheckboxModule,
     // AngularIndexedDB,
     HttpModule,
-    MatTabsModule,
     LocalStorageModule.withConfig({
       prefix: 'app',
       storageType: 'localStorage'
@@ -147,7 +149,8 @@ import { HTTPInterceptor } from './shared/services/http.interceptor'
     IndexDBService,
     HttpService,
     AuthService,
-    GraphQLService
+    GraphQLService,
+    SSEService
   ],
   bootstrap: [AppComponent]
 })

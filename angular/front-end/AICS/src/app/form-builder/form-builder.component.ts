@@ -4,6 +4,7 @@ import { ViewChild, ViewChildren, AfterViewInit } from '@angular/core';
 import { DragEventConfig, DragEventParticipant, XY } from '../shared/models/drag.model';
 import { AfterViewChecked } from '@angular/core';
 import { FormBuildService } from './form-build.service';
+import { FormRenderService } from '../form-renderer/form-render.service';
 
 @Component({
   selector: 'app-form-builder',
@@ -11,20 +12,22 @@ import { FormBuildService } from './form-build.service';
   styleUrls: ['./form-builder.component.css']
 })
 export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChecked {
-  @ViewChildren('refElement') ref: any;
-  elements: any[] = [];
+  random: any;
   table: any;
+  selectedRow: number;
+  selectedCol: number;
+  modalOpen: boolean = false;
   // F this lint
   dropEventsList: any[] = [];
   toolConfigs: DragEventConfig[] = [];
-  elConfigs: DragEventConfig[] = [];
+  elConfigs: DragEventConfig[][][] = [];
   source: DragEventParticipant;
   target: DragEventParticipant;
   participantsMap: {} = {};
   dropParameter: { direction: string, placement: InsertPosition };
-  elHTMLs: HTMLElement[] = [];
+  elHTMLs: Element[][][] = [];
   toolHTMLs: HTMLElement[] = [];
-  dropZoneHTMLs: HTMLElement;
+  dropZoneHTMLs: HTMLElement[] = [];
   inputFunctionType: string;
   toolButtons: any[] = [
     { 'id': 'input_text', 'message': 'Add Input Text', 'fn': this.addInput, 'params': ['text', ''] },
@@ -38,17 +41,21 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
     { 'id': 'group_chk', 'message': 'Add Checkbox Group', 'fn': this.addGroup, 'params': ['checkbox', ''] },
     { 'id': 'select', 'message': 'Add Select Group', 'fn': this.addSelect, 'params': ['', ''] }
   ];
-  @ViewChildren('elements', { read: ElementRef }) elRefs: any;
   @ViewChildren('tools', { read: ElementRef }) toolRefs: any;
-  @ViewChild('dropZone', { read: ElementRef }) dropZoneRef: ElementRef;
+  @ViewChild('tableRef', { read: ElementRef }) tableRef: any;
+
+  // olderParentHTML: HTMLElement = null;
+  dropZonesMap: Map<HTMLElement, any>;
+
   constructor(
     private formBuild: FormBuildService,
-    private parentRef: ElementRef
+    private parentRef: ElementRef,
+    private formRender: FormRenderService
   ) {
     Observable.fromEvent(this.parentRef.nativeElement, 'drop')
       .filter((event) => {
-        console.log(event);
-        console.log(this.dropEventsList);
+        // console.log(event);
+        // console.log(this.dropEventsList);
         if (this.dropEventsList === []) {
           return true;
         }
@@ -63,116 +70,141 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
       })
       .subscribe((event) => {
         this.dropEventsList.push(event);
-        console.log(this.dropEventsList);
+        // console.log(this.dropEventsList);
         this.dropped(event);
       });
     this.toolConfigs = this.toolButtons.map(() => new DragEventConfig());
   }
 
   ngOnInit() {
-    // this.elements = this.formBuild.elements;
-    this.table = {
-      'type': 'table',
-      'subtype': '',
-      'class': '',
-      'label': '',
-      'width': '100',
-      'height': '100',
-      'rows': [
-        {
-          height: 'auto',
-          'cols': [
-            {
-              height: '100',
-              width: '100',
-              value: this.elements,
-              editable: 'true',
-            }
-            // },
-            // {
-            //   height: '100',
-            //   width: '100',
-            //   value: [this.elements[1], this.elements[2]],
-            //   editable: 'true',
-            // }
-          ]
-        }
-      ]
-    };
-    for (const element of this.elements) {
-      this.elConfigs.push(new DragEventConfig());
-    }
+    this.formBuild.initForm();
+    this.table = this.formBuild.table;
+    console.log(this.table);
+    this.table.rows.forEach((_, r) => {
+      this.elConfigs.push([]);
+      this.table.rows[r].cols.forEach((_, c) => {
+        this.elConfigs[r].push([]);
+        this.table.rows[r].cols[c].value.forEach((_, v) => {
+          this.elConfigs[r][c].push(new DragEventConfig());
+        });
+      });
+    });
+    // console.log(this.elConfigs);
   }
 
   ngAfterViewInit() {
+    this.updateHTMLVariables();
     this.toolHTMLs = this.toolRefs._results.map((ref) => ref.nativeElement);
-    // console.log(this.elRefs);
-    if (this.elRefs._results) {
-      this.elHTMLs = this.elRefs._results.map((ref) => {
-        this.elConfigs.push(new DragEventConfig());
-        return ref.nativeElement;
-      });
-    } else {
-      this.elHTMLs = [];
-      this.elConfigs = [];
-    }
-    // console.log(this.toolHTMLs);
     this.participantsMap['tool'] = this.toolHTMLs;
-    // console.log(this.dropZoneRef);
-    this.participantsMap['dropZone'] = [this.dropZoneRef.nativeElement];
-    this.participantsMap['element'] = [];
-    // console.log(this.participantsMap);
-    //  console.log(
-    this.elRefs._results.map((ref) => ref.nativeElement.firstChild);
-  }
-  ngAfterViewChecked() {
-    // console.log(
-    // this.elRefs._results.map((ref) => ref.nativeElement.firstChild)
-    // );
-    this.elHTMLs = this.elRefs._results.map((ref) => ref.nativeElement.firstChild);
   }
 
+  ngAfterViewChecked() {
+    this.updateHTMLVariables();
+    // console.log(this.dropZonesMap);
+    // console.log(this.participantsMap);
+  }
+
+
+  updateHTMLVariables() {
+    this.elHTMLs = [], this.elConfigs = [], this.dropZoneHTMLs = [], this.dropZonesMap = new Map();
+    const table = this.tableRef.nativeElement;
+    Array.from(table.children).forEach((_, r) => {
+      this.elHTMLs.push([]);
+      this.elConfigs.push([]);
+      Array.from(table.children[r].children).forEach((dropZoneHTML: any, c) => {
+        this.elHTMLs[r].push([]), this.elConfigs[r].push([]), this.dropZoneHTMLs.push(dropZoneHTML);
+        this.dropZonesMap.set(dropZoneHTML, { r: r, c: c });
+        Array.from(table.children[r].children[c].children).forEach((div: Element, v) => {
+          // const x: HTMLElement = div.querySelector('.elementHolder');
+          console.log();
+          this.elHTMLs[r][c].push(div.querySelector('.elementHolder'));
+          this.elConfigs[r][c].push(new DragEventConfig());
+        });
+      });
+    });
+    this.participantsMap['dropZone'] = this.dropZoneHTMLs;
+  }
+  updateWidth(){
+    let col: any;
+    let width = 80 / (this.table.rows[this.selectedRow].cols.length);
+    for(col of this.table.rows[this.selectedRow].cols){
+      col.width = width;
+    }
+  }
+  addRow() {
+    let row = {
+      height: 100,
+      'cols': [
+        {
+          height: 100,
+          width: 100,
+          value: [],
+          editable: true,
+        }
+      ]
+    };
+    this.table.rows.push(row);
+    // console.log(this.table);
+  }
+  addCol() {
+    let col = {
+      height: 100,
+      width: 100,
+      value: [],
+      editable: true,
+    };
+    this.table.rows[this.selectedRow].cols.push(col);
+    this.updateWidth();
+    // console.log(this.table);
+  }
+  deleteRow() {
+    console.log(this.selectedRow);
+    this.table.rows.splice(this.selectedRow, 1);
+  }
+  deleteCol() {
+    console.log(this.selectedCol);
+    this.table.rows[this.selectedRow].cols.splice(this.selectedCol, 1);
+    if(this.table.rows[this.selectedRow].cols.length === 0){
+      this.table.rows.splice(this.selectedRow, 1);
+    }
+    this.updateWidth();
+  }
   dragStart(event) {
-    //  console.log(this.elements);
-    let el = this.getValidElement(event.path[0]);
-    //  console.log(el);
-    //  console.log(el.className);
+    const el = this.getValidElement(event.path[0]);
     this.source = new DragEventParticipant({ el: el });
-    this.elHTMLs.forEach(x => console.log(x));
     switch (this.identifyDragEventParticipant(el)) {
       case 'tool':
         this.source.type = 'tool';
         break;
       case 'element':
-        //  console.log('start');
-        for (const i in this.elHTMLs) {
-          if (this.elHTMLs[i] !== el) {
-            //  console.log(i);
-            this.elConfigs[i].draggable = false;
-          }
-        }
+        this.source.parentDropZone = el.closest('.dropZone');
+        this.elConfigs.forEach((_, r) => {
+          this.elConfigs[r].forEach((_, c) => {
+            this.elConfigs[r][c].forEach((_, v) => {
+              if (this.elConfigs[r][c][v] !== el) {
+                this.elConfigs[r][c][v].draggable = false;
+              }
+            });
+          });
+        });
         event.dataTransfer.effectAllowed = 'move';
-      // console.log(this.elConfigs.map(x => x.draggable));
     }
-    // console.log(this.identifyDragEventParticipant(el));
-    // console.log(this.source);
   }
 
   dragEnd(event) {
-    //  console.log(this.elements);
-    let el = this.getValidElement(event.path[0]);
-    // this.source = null;
+    const el = this.getValidElement(event.path[0]);
     switch (this.identifyDragEventParticipant(el)) {
       case 'element':
-        //  console.log('end');
-        this.elConfigs.forEach(x => x.draggable = true);
-      // this.range(0, this.elements.length - 1)
-      //   .filter((i) => this.elHTMLs[i] !== el)
-      //   .forEach((i) => this.elConfigs[i].draggable = true);
-      // console.log(this.elConfigs.map(x => x.draggable));
+        this.elConfigs.forEach((_, r) => {
+          this.elConfigs[r].forEach((_, c) => {
+            this.elConfigs[r][c].forEach((_, v) => {
+              if (this.elConfigs[r][c][v] !== el) {
+                this.elConfigs[r][c][v].draggable = false;
+              }
+            });
+          });
+        });
     }
-    // console.log(this.identifyDragEventParticipant(el));
-    // console.log(this.source);
   }
 
   // moveTarget(offset: XY) {
@@ -198,22 +230,17 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
 
   dragEnter(event) {
     event.preventDefault();
-    //  console.log('enter');
-    //  console.log(this.elements);
-    let el = this.getValidElement(event.path[0]);
-    //  console.log(el);
+    const el = this.getValidElement(event.path[0]);
     this.target = new DragEventParticipant({ el: el });
-    if (this.identifyDragEventParticipant(el) === 'dropZone') {
+    if (el.className === 'dropZone') {
       this.target.type = 'dropZone';
+    } else if (el.className === 'elementHolder') {
+      this.target.parentDropZone = el.closest('.dropZone');
     }
-    // console.log(this.identifyDragEventParticipant(el));
-    // console.log(this.target);
   }
 
   dragOver(event) {
     event.preventDefault();
-    // console.log(this.source);
-    // console.log(this.target);
     if (this.source.type === 'element' && this.target.type === 'element') {
       event.dataTransfer.dropEffect = 'move';
     }
@@ -225,41 +252,49 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
 
   dropped(event) {
     event.preventDefault();
-    console.log('dropping');
-    console.log(this.target);
-    console.log(this.source);
-    // console.log(this.source);
+    // console.log('dropping in ' + this.selectedRow + '-' + this.selectedCol);
     // console.log(this.target);
-    // console.log('dropping');
+    // console.log(this.source);
+    console.log(this.source);
+    console.log(this.target);
+    console.log(this.dropZonesMap);
     if (this.target.type === 'dropZone' && this.source.type === 'tool') {
-      // console.log(this.toolHTMLs);
-      // console.log(this.source.el);
-      // console.log(this.indexOf(this.toolHTMLs, this.source.el));
-      // const index = this.indexOf(this.toolHTMLs, this.source.el);
-      this.elConfigs.push(new DragEventConfig());
+      console.log(this.dropZonesMap.get(this.target.el));
+      const { r, c } = this.dropZonesMap.get(this.target.el);
+      console.log(r + '-' + c);
+      // this.elConfigs[r][c].push(new DragEventConfig());
       let button = this.toolButtons.filter(
         btn => btn['id'] === this.inputFunctionType
       )[0];
-      this.elements.push(button.fn(...button.params));
+      this.table.rows[this.selectedRow].cols[this.selectedCol].value.push(button.fn(...button.params));
+      // console.log(this.table.rows[this.selectedRow].cols[this.selectedCol].value);
     } else if (this.source.type === 'element' && this.target.type === 'element') {
-      console.log(this.elHTMLs);
-      console.log(this.elements);
-      const srcID = this.elHTMLs.indexOf(this.source.el),
-        tgtID = this.elHTMLs.indexOf(this.target.el);
-      console.log(srcID + '~' + tgtID);
-      console.log(this.pairs(srcID, tgtID));
-      for (const [x, y] of this.pairs(srcID, tgtID)) {
-        // [this.elements[x], this.elements[y]] = [this.elements[y], this.elements[x]];
-        console.log([x, y]);
-        const temp = this.elements[x];
-        this.elements[x] = this.elements[y];
-        this.elements[y] = temp;
+      if (this.source.parentDropZone === this.target.parentDropZone) {
+        const { r, c } = this.dropZonesMap.get(this.target.parentDropZone);
+        const srcID = this.elHTMLs[r][c].indexOf(this.source.el),
+          tgtID = this.elHTMLs[r][c].indexOf(this.target.el);
+        console.log(srcID + '~' + tgtID);
+        console.log(this.pairs(srcID, tgtID));
+        for (const [x, y] of this.pairs(srcID, tgtID)) {
+          [this.table.rows[r].cols[c].value[x], this.table.rows[r].cols[c].value[y]] =
+            [this.table.rows[r].cols[c].value[y], this.table.rows[r].cols[c].value[x]];
+        }
+      } else {
+
       }
-      // [this.data[srcID], this.data[tgtID]] = [this.data[tgtID], this.data[srcID]];
-      // console.log(this.elements);
-      // this.target.el.insertAdjacentElement(this.dropParameter.placement, this.source.el);
     }
-    // console.log(this.elements);
+  }
+
+  addElement(id){
+    console.log(this.selectedRow+"-"+this.selectedCol);
+    let button = this.toolButtons.filter(
+      btn => btn['id'] === id
+    )[0];
+    this.table.rows[this.selectedRow].cols[this.selectedCol].value.push(button.fn(...button.params));
+  }
+
+  getElementPosition(el) {
+    return this.dropZonesMap.get(el.closest('.dropZone'));
   }
 
   getValidElement(el) {
@@ -474,16 +509,27 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
     };
     return element;
   }
-  updateElement(element, pos) {
-    this.elements[pos] = element;
-    //  console.log(element);
+  updateElement({ element, pos }) {
+    let r, c, i;
+    [r, c, i] = pos.split('-');
+    // console.log(r,c,i);
+    this.table.rows[r].cols[c].value[i] = element;
   }
 
   deleteElement(pos) {
-    // console.log('clicked delete outside!', pos);
-    this.elements.splice(pos, 1);
+    let r, c, i;
+    [r, c, i] = pos.split('-');
+    // console.log(r,c,i);
+    this.table.rows[r].cols[c].value.splice(i, 1);
   }
 
+  renderForm(){
+    this.formRender.table = this.table;
+    this.modalOpen = true;
+  }
   closeForm() {
+    this.formBuild.getForm();
+    let form = this.formBuild.table;
+    console.log(form);
   }
 }

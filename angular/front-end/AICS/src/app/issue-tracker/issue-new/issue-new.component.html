@@ -1,0 +1,33 @@
+<div>
+  <div class="container mt-5">
+    <div class="big">
+      Create New Issue
+    </div>
+    <form [formGroup]="myForm" (ngSubmit)="submit(myForm.value)">
+      <div class="holder">
+        <div class="title">
+          <input type="text" class="form-control" placeholder="Enter title here" formControlName="title">
+        </div>
+        <div class="sub1">
+          <input type="text" class="form-control" placeholder="Enter subtitle here" formControlName="subtitle">
+        </div>
+        <div class="sub2">
+          <select class="form-control" formControlName="tags">
+            <option value="default" disabled="true">Select your option</option>
+            <option value="1">Doubt</option>
+            <option value="1">Invalid Data</option>
+            <option value="1">Incorrect Data</option>
+          </select>
+        </div>
+        <div class="desc">
+          <textarea class="form-control" formControlName="description" placeholder="Enter Description here"></textarea>
+        </div>
+        <div class="desc">
+          <textarea class="form-control" formControlName="message" placeholder="Enter Message here"></textarea>
+        </div>
+        <button type="button" (click)="cancel()" class="btns1 btn btn-outline-danger">Cancel</button>
+        <button type="submit" [disabled]="!myForm.valid" class="btns2 btn btn-outline-success">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

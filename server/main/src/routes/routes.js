@@ -3,7 +3,6 @@ const router = express.Router();
 const graphQLHTTP = require('express-graphql');
 const verifyMiddleware = require('../utils/verifyMiddleware');
 const queryMiddleware = require('./blockchain/query');
-// const queryMiddleware = require('../routes/blockchain/query');
 
 router.all('/', function (req, res) {
 	res.json(responseMessage.SUCCESS.IT_WORKS);
@@ -143,16 +142,16 @@ router.post('/forms/submitToGC',
 	require('./forms/submitToGC'),
 	require('./blockchain/submitForm'));
 
-// router.post('/forms/submitToAdmin',
-// 	verifyMiddleware.verifyPerson,
-// 	require('./forms/submitToAdmin'),
-// 	require('./blockchain/submitForm'));
+router.post('/forms/submitToAdmin',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyGC,
+	require('./forms/submitToAdmin'),
+	require('./blockchain/submitForm'));
 
 router.post('/forms/approveGC',
 	verifyMiddleware.verifyPerson,
 	require('./forms/approveGCAndSubmitToAdmin'),
 	require('./blockchain/approveForm'));
-// require('./blockchain/submitForm'));
 
 router.post('/forms/approveAdmin',
 	verifyMiddleware.verifyPerson,
@@ -161,13 +160,13 @@ router.post('/forms/approveAdmin',
 	require('./blockchain/approveForm'),
 	require('./blockchain/submitForm'));
 
-// router.post('/forms/rejectAdminAndImprove',
-// 	verifyMiddleware.verifyPerson,
-// 	verifyMiddleware.verifyAdmin,
-// 	require('./forms/rejectFormAdmin'),
-// 	require('./blockchain/rejectForm'),
-// 	require('./forms/assignGCAndDeadline'),
-// 	require('./blockchain/assignForm'));
+router.post('/forms/rejectAdminAndImprove',
+	verifyMiddleware.verifyPerson,
+	verifyMiddleware.verifyAdmin,
+	require('./forms/rejectFormAdmin'),
+	require('./blockchain/rejectFormAdmin'),
+	require('./forms/assignGCAndDeadline'),
+	require('./blockchain/assignForm'));
 
 router.post('/forms/approveRA',
 	verifyMiddleware.verifyPerson,
@@ -208,14 +207,6 @@ router.post('/reqAuth/request',
 	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyRequestingAuthority,
 	require('./requestingAuth/makeRequest'));
-
-// router.all('/reqAuth',
-// 	verifyMiddleware.verifyRequestingAuthority,
-// 	graphQLHTTP((req, res) => ({ // to be replaced by router.post
-// 		schema: require('./graphql/schemas/requesting_authority'),
-// 		context: { req, res },
-// 		graphiql: process.env.NODE_ENV !== 'production'
-// 	})));
 
 /**
  * Issue Tracker Routes
