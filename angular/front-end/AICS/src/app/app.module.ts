@@ -68,7 +68,7 @@ import { IssueTrackerComponent } from './issue-tracker/issue-tracker.component';
 import { IssueComponent } from './issue-tracker/issue/issue.component';
 import { IssueDetailsComponent } from './issue-tracker/issue-details/issue-details.component';
 import { GraphQLService } from './shared/services/graphql.service';
-import { HTTPInterceptor } from './shared/services/http.interceptor'
+import { HTTPInterceptor } from './shared/services/http.interceptor';
 
 @NgModule({
   declarations: [
@@ -134,7 +134,6 @@ import { HTTPInterceptor } from './shared/services/http.interceptor'
     MatCheckboxModule,
     // AngularIndexedDB,
     HttpModule,
-    MatTabsModule,
     LocalStorageModule.withConfig({
       prefix: 'app',
       storageType: 'localStorage'
