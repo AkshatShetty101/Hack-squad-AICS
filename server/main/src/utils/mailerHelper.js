@@ -12,15 +12,16 @@ const transporter = nodemailer.createTransport({
 
 const mailData = (sender, subject, text, html) => {
 	return {
-		from: '"MEITy AICS" <aics@meity.gov.in>',
+		from: '"MeitY AICS" <aics@meity.gov.in>',
 		to: sender,
 		subject,
-		text,
-		html
+		html,
+		text
 	};
 };
 
 const sendMail = (mailData) => {
+	console.log('[NODEMAILER] ', mailData);
 	transporter.sendMail(mailData, (err, info) => {
 		if (err) {
 			console.error(err);

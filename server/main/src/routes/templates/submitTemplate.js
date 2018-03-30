@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
 		}
 	};
 	console.log(res.locals.requestId);
-	ReqForm.findByIdAndUpdate(res.locals.requestId, { $set: data },{ new:true }, (err, result) => {
+	ReqForm.findByIdAndUpdate(res.locals.requestId, { $set: data }, { new:true }, (err, result) => {
 		if (err) {
 			console.error(err);
 			res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
