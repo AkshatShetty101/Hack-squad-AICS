@@ -1,0 +1,18 @@
+.elementHolder{
+    display:grid;
+    grid-template-columns: 94% 3% 3%;
+    grid-template-rows:10% 90%;
+    height:100%;
+    border:0.5px solid rgb(223, 215, 202);
+    border-radius:5px;
+    font-size: 16px;
+}
+.on_transition_label{
+    grid-row:1;
+    grid-column:1;
+    display: flex;
+    align-items:center;
+    margin-left: 1%;
+    font-family: 'fira sans';
+    font-size: 20px;
+ }

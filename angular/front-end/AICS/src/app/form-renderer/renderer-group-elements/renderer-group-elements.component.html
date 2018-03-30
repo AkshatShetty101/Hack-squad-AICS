@@ -1,11 +1,13 @@
 <div class="elementHolder">
-  <div *ngFor="let option of options; let i = index">
-    <input *ngIf="subtype === 'radio'" [formControl]="valueField" [value]="option.value" 
-      [required]="required" [type]="subtype" [class]="class" [name]="'valueField'" 
-      [checked]="option.value===value?true:false" (click)="updateFieldValue(subtype, i)" />
-    <input *ngIf="subtype === 'checkbox'" [formControl]="valueField" [value]="option.value" 
-      [required]="required" [type]="subtype" [class]="class" [name]="'valueField'" 
-      [checked]="value.indexOf(option.value) !== -1" (click)="updateFieldValue(subtype, i)" />
-    <span [innerHTML]="option.label"></span>
+  <div class="label_transition">
+    <div *ngFor="let option of options; let i = index">
+      <input *ngIf="subtype === 'radio'" [formControl]="valueField" [value]="option.value" [required]="required" [type]="subtype"
+        [class]="class" [name]="'valueField'" [checked]="option.value===value?true:false" (click)="updateFieldValue(subtype, i)"
+      />
+      <input *ngIf="subtype === 'checkbox'" [formControl]="valueField" [value]="option.value" [required]="required" [type]="subtype"
+        [class]="class" [name]="'valueField'" [checked]="option.value.indexOf(value[i]) === -1?false:true" (click)="updateFieldValue(subtype, i)"
+      />
+      <span [innerHTML]="option.label"></span>
+    </div>
   </div>
 </div>
