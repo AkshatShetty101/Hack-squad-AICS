@@ -1,0 +1,26 @@
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+	host: 'smtp.mailtrap.io',
+	port: 2525,
+	secure: false, // true for 465, false for other ports
+	auth: {
+		user: 'f41049cf6c5448',
+		pass: '47e457de79fdc3'
+	}
+});
+
+const mailData = (sender, subject, text, html) => {
+	return {
+		from: '"MEITy AICS" <aics@meity.gov.in>',
+		to: sender,
+		subject,
+		text,
+		html
+	};
+};
+
+module.exports = {
+	transporter: transporter,
+	mailData: mailData
+};
