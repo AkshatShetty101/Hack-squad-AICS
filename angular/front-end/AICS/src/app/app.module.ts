@@ -24,7 +24,7 @@ import { UserComponent } from './user/user.component';
 import { AdminRequestListComponent } from './admin/admin-dashboard/admin-dashboard-requests/admin-request-list/admin-request-list.component';
 import { AdminPreviewComponent } from './admin/admin-dashboard/admin-dashboard-requests/admin-preview/admin-preview.component';
 import { AdminRequestComponent } from './admin/admin-dashboard/admin-dashboard-requests/admin-request-list/admin-request/admin-request.component';
-
+import {MatTabsModule} from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +49,7 @@ import { AdminRequestComponent } from './admin/admin-dashboard/admin-dashboard-r
     ReactiveFormsModule,
     HttpClientModule,
     HttpModule,
+    MatTabsModule,
     LocalStorageModule.withConfig({
       prefix: '-app',
       storageType: 'localStorage'
