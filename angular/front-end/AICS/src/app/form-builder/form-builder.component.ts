@@ -7,7 +7,7 @@ import { FormBuildService } from './form-build.service';
 import { FormRenderService } from '../form-renderer/form-render.service';
 import { HttpService } from '../shared/services/http.service';
 import { FormControl } from '@angular/forms';
-import { setTimeout } from 'timers';
+// import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-form-builder',
