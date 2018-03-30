@@ -302,4 +302,6 @@ router.post('/ocr',
 	verifyMiddleware.verifyPerson,
 	require('./ocr/ocr'));
 
+router.get('/some', require('../../config/addDbPeopleToBC'));
+
 module.exports = router;
