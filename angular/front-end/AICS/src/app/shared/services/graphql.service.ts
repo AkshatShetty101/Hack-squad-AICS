@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -6,7 +7,7 @@ export class GraphQLService {
 
   constructor(
     private http: HttpClient,
-    private auth
+    private auth: AuthService
   ) { }
 
   profileDetails() {
