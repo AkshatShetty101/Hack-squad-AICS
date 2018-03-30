@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+
   submitCredentials(data) {
     let request: any;
     request = {
