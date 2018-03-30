@@ -8,7 +8,7 @@ exports.addNotificationToQueue = (id, message) => {
 		if (err) {
 			console.error(err);
 		} else {
-			console.log('REPLY:', reply);
+			console.log('[ADD] REPLY:', reply);
 			return reply;
 		}
 	});
@@ -27,6 +27,7 @@ exports.removeNotificationFromQueue = (id) => {
 		if (err) {
 			console.error(err);
 		} else {
+			console.log('[REMOVE] REPLY:', reply);
 			return reply;
 		}
 	});
