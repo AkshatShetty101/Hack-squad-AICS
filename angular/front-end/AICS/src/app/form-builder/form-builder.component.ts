@@ -521,5 +521,8 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
   }
 
   closeForm() {
+    this.formBuild.getForm();
+    let form = this.formBuild.table;
+    console.log(form);
   }
 }

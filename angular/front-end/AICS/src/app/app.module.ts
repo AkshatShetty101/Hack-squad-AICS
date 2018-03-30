@@ -62,7 +62,7 @@ import { RaRequestListComponent } from './ra/ra-dashboard/track-request/ra-reque
 import { RaRequestComponent } from './ra/ra-dashboard/track-request/ra-request-list/ra-request/ra-request.component';
 import { RaRequestPreviewComponent } from './ra/ra-dashboard/track-request/ra-request-preview/ra-request-preview.component';
 import { AdminFormComponent } from './admin/admin-view-repository/admin-form/admin-form.component';
-import { MatIconModule } from '@angular/material';
+import { MatIconModule, MatTabsModule } from '@angular/material';
 import { MatButtonModule, MatRadioModule, MatCheckboxModule} from '@angular/material';
 import { IssueTrackerComponent } from './issue-tracker/issue-tracker.component';
 import { IssueComponent } from './issue-tracker/issue/issue.component';
