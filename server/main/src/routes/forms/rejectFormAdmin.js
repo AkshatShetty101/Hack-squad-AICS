@@ -1,5 +1,4 @@
 var Form = require('../../models/form');
-var 
 const notificationsHelper = require('../../utils/notificationsHelper');
 const mailerHelper = require('../../utils/mailerHelper');
 
