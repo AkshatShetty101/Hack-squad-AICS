@@ -19,12 +19,7 @@ export class GraphQLService {
       query: "{ issueTrackerById (_id:\""+id+"\"){ heading {title,subtitle,description},created_by,is_open,tags,data {by,message,timestamp}}}"};
     console.log(body);
     console.log('finding data!!!');
-    this.http.post(this.auth.baseURI + '/issueTracker', body)
-      .subscribe((data) => {
-        console.log(data);
-      }, (error) => {
-        console.log(error);
-      });
+    return this.http.post(this.auth.baseURI + '/issueTracker', body)
   }
 
   loadRequestedFormData() {
