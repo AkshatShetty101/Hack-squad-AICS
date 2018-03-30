@@ -1,107 +1,173 @@
-<div class="wrapper">
-  <div>
+<!-- <button type="button" (click)="addRow()">Add Row</button>
+<button type="button" (click)="addCol()">Add Column</button>
+<button type="button" (click)="deleteRow()">Delete Row</button>
+<button type="button" (click)="deleteCol()">Delete Column</button> -->
+<div class="main_grid">
+  <div class="drag_grid">
+    <div class="button2">
+      <div class="preview">
+        <i class="fa fa-eye"></i>
+      </div>
+      <div class="view_request">
+        <i class="fa fa-list"></i>
+      </div>
+      <div class="save" (click)="closeForm()">
+        <i class="fa fa-check"></i>
+      </div>
+    </div>
+    <div #tools appDrag *ngFor="let button of toolButtons; let i=index" [draggable]="toolConfigs[i].draggable"
+      class="tool" (directionOfMovement)="movementOfTarget($event)" (inputFunctionType)="inputFunctionType = $event" (dragstart)="dragStart($event)"
+      (dragend)="dragEnd($event)" [id]="button.id" (click)="addElement(button.id)">
+      <div *ngIf="button.id === 'textarea'" class="inner_grid">
+        <div>
+          <i class="fa fa-font icon1"></i>
+        </div>
+        <div class="text">Text area</div>
+      </div>
+      <div *ngIf="button.id === 'table'" class="inner_grid">
+        <div>
+          <i class="fa fa-table icon1"></i>
+        </div>
+        <div class="text">Table</div>
+      </div>
+      <div *ngIf="button.id === 'select'" class="inner_grid">
+        <div>
+          <i class="fa fa-list icon1"></i>
+        </div>
+        <div class="text">Select</div>
+      </div>
+      <div *ngIf="button.id === 'header'" class="inner_grid">
+        <div>
+          <i class="fa fa-header icon1"></i>
+        </div>
+        <div class="text">Header</div>
+      </div>
+      <div *ngIf="button.id === 'paragraph'" class="inner_grid">
+        <div>
+          <i class="fa fa-paragraph icon1"></i>
+        </div>
+        <div class="text">Paragraph</div>
+      </div>
+      <div *ngIf="button.id === 'input_text'" class="inner_grid">
+        <div>
+          <i class="fa fa-text-width icon1"></i>
+        </div>
+        <div class="text">Text Field</div>
+      </div>
+      <div *ngIf="button.id === 'group_rad'" class="inner_grid">
+        <div>
+          <i class="fa fa-circle-o icon1"></i>
+        </div>
+        <div class="text">Radio Group</div>
+      </div>
+      <div *ngIf="button.id === 'group_chk'" class="inner_grid">
+        <div>
+          <i class="fa fa-check-square icon1"></i>
+        </div>
+        <div class="text">Check Box</div>
+      </div>
+      <div *ngIf="button.id === 'input_number'" class="inner_grid">
+        <div>
+          <i class="fa fa-sort-numeric-asc icon1"></i>
+        </div>
+        <div class="text">Number</div>
+      </div>
+      <div *ngIf="button.id === 'input_file'" class="inner_grid">
+        <div>
+          <i class="fa fa-upload icon1"></i>
+        </div>
+        <div class="text">File Upload</div>
+      </div>
+      <div *ngIf="button.id === 'input_date'" class="innergrid1">
+        <div>
+          <i class="fa fa-calendar icon1"></i>
+        </div>
+        <div class="text">Date</div>
+      </div>
+    </div>
+  </div>
+  <div class="build_form">
     <table [style.width]="table.width+'%'" [style.height]="table.height+'%'" 
-      [style.border-collapse]="'collapse'" 
-      border="1">
-      <tbody>
-        <tr *ngFor="let row of table.rows" [style.height]="row.height+'%'">
-          <td *ngFor="let cell of row.cols" class="dropZone" #dropZone
-            (dragenter)="dragEnter($event)" (dragover)="dragOver($event)"
-            (dragleave)="dragLeave($event)" (distinctDrop)="dropped($event)" 
-            [style.height]="cell.height+'%'" [style.width]="cell.width+'%'" 
-            >
-            <div *ngFor="let element of cell.value;let i=index" #refElements>
+      [style.border-collapse]="'collapse'" border="1">
+      <tbody #tableRef>
+        <tr *ngFor="let row of table.rows;let r = index" 
+          [style.width]="row.height+'%'" (click)="selectedRow=r">
+          <td *ngFor="let col of row.cols;let c = index" class="dropZone my_td"
+            (dragenter)="dragEnter($event)" (dragover)="dragOver($event)" (click)="selectedCol=c"
+            (dragleave)="dragLeave($event)" (drop)="selectedRow=r;selectedCol=c" 
+            [style.width]="col.width+'%'">
+            <div *ngFor="let element of col.value;let i=index">
               <div [ngSwitch]="element.type">
                 <div *ngSwitchCase="'input'">
-                  <app-builder-input-elements #ref 
-                    #elements ngsfDrag
-                    (directionOfMovement)="movementOfTarget($event)"
-                    (dragstart)="dragStart($event)"
-                    (dragend)="dragEnd($event)"
-                    (dragenter)="dragEnter($event)"
-                    (dragover)="dragOver($event)"
-                    (dragleave)="dragLeave($event)"
-                    (distinctDrop)="dropped($event)"
-                    [draggableFlag]="elConfigs[i].draggable"
-                    [subtype]="element.subtype" [required]="element.required" [label]="element.label" [value]="element.value"
-                    [eclass]="element.class" [placeholder]="element.placeholder" [maxlength]="element.maxlength" [max]="element.max" [min]="element.min"
-                    [pos]="i" (delete)=deleteElement($event) (update)=updateElement($event)>
+                  <app-builder-input-elements appDrag 
+                    (directionOfMovement)="movementOfTarget($event)" (dragstart)="dragStart($event)"
+                    (dragend)="dragEnd($event)" (dragenter)="dragEnter($event)" 
+                    (dragover)="dragOver($event)" (dragleave)="dragLeave($event)"
+                    (drop)="selectedRow=r;selectedCol=c" [draggableFlag]="'elConfigs[r][c][i].draggable'" 
+                    [subtype]="element.subtype" [required]="element.required" [label]="element.label" 
+                    [value]="element.value" [eclass]="element.class" [placeholder]="element.placeholder" 
+                    [maxlength]="element.maxlength" [max]="element.max" [min]="element.min"
+                    [pos]="r+'-'+c+'-'+i" (delete)="selectedRow=r;selectedCol=c;deleteElement($event)" 
+                    (update)="updateElement($event)">
                   </app-builder-input-elements>
                 </div>
                 <div *ngSwitchCase="'header'">
-                  <app-builder-header-elements #ref 
-                    #elements ngsfDrag
-                    (directionOfMovement)="movementOfTarget($event)"
-                    (dragstart)="dragStart($event)"
-                    (dragend)="dragEnd($event)"
-                    (dragenter)="dragEnter($event)"
-                    (dragover)="dragOver($event)"
-                    (dragleave)="dragLeave($event)"
-                    (distinctDrop)="dropped($event)"
-                    [draggableFlag]="elConfigs[i].draggable"
-                    [subtype]="element.subtype" [label]="element.label" [eclass]="element.class" [pos]="i" (delete)=deleteElement($event)
-                    (update)=updateElement($event)>
+                  <app-builder-header-elements appDrag
+                    (directionOfMovement)="movementOfTarget($event)" (dragstart)="dragStart($event)"
+                    (dragend)="dragEnd($event)" (dragenter)="dragEnter($event)"
+                    (dragover)="dragOver($event)" (dragleave)="dragLeave($event)"
+                    (drop)="selectedRow=r;selectedCol=c;" [draggableFlag]="'elConfigs[r][c][i].draggable'"
+                    [subtype]="element.subtype" [label]="element.label" [eclass]="element.class" 
+                    [pos]="r+'-'+c+'-'+i" (delete)="selectedRow=r;selectedCol=c;deleteElement($event)" 
+                    (update)="updateElement($event)">
                   </app-builder-header-elements>
                 </div>
                 <div *ngSwitchCase="'paragraph'">
-                  <app-builder-paragraph-elements #ref 
-                    #elements ngsfDrag
-                    (directionOfMovement)="movementOfTarget($event)"
-                    (dragstart)="dragStart($event)"
-                    (dragend)="dragEnd($event)"
-                    (dragenter)="dragEnter($event)"
-                    (dragover)="dragOver($event)"
-                    (dragleave)="dragLeave($event)"
-                    (distinctDrop)="dropped($event)"
-                    [draggableFlag]="elConfigs[i].draggable"
-                    [eclass]="element.class" [content]="element.content" [pos]="i" (delete)=deleteElement($event)
+                  <app-builder-paragraph-elements appDrag
+                    (directionOfMovement)="movementOfTarget($event)" (dragstart)="dragStart($event)"
+                    (dragend)="dragEnd($event)" (dragenter)="dragEnter($event)"
+                    (dragover)="dragOver($event)" (dragleave)="dragLeave($event)"
+                    (drop)="selectedRow=r;selectedCol=c;" [draggableFlag]="'elConfigs[r][c][i].draggable'"
+                    [eclass]="element.class" [content]="element.content" [pos]="r+'-'+c+'-'+i" 
+                    (delete)="selectedRow=r;selectedCol=c;deleteElement($event)" 
                     (update)=updateElement($event)>
                   </app-builder-paragraph-elements>
                 </div>
                 <div *ngSwitchCase="'textarea'">
-                  <app-builder-textarea-elements #ref 
-                    #elements ngsfDrag
-                    (directionOfMovement)="movementOfTarget($event)"
-                    (dragstart)="dragStart($event)"
-                    (dragend)="dragEnd($event)"
-                    (dragenter)="dragEnter($event)"
-                    (dragover)="dragOver($event)"
-                    (dragleave)="dragLeave($event)"
-                    (distinctDrop)="dropped($event)"
-                    [draggableFlag]="elConfigs[i].draggable"
-                    [required]="element.required" [label]="element.label" [value]="element.value" [eclass]="element.class"
-                    [placeholder]="element.placeholder" [rows]="element.rows" [cols]="element.rows" [pos]="i" (delete)=deleteElement($event)
+                  <app-builder-textarea-elements appDrag
+                    (directionOfMovement)="movementOfTarget($event)" (dragstart)="dragStart($event)"
+                    (dragend)="dragEnd($event)" (dragenter)="dragEnter($event)"
+                    (dragover)="dragOver($event)" (dragleave)="dragLeave($event)"
+                    (drop)="selectedRow=r;selectedCol=c;" [draggableFlag]="'elConfigs[r][c][i].draggable'"
+                    [required]="element.required" [label]="element.label" [value]="element.value" 
+                    [eclass]="element.class" [placeholder]="element.placeholder" [rows]="element.rows" 
+                    [cols]="element.rows" [pos]="r+'-'+c+'-'+i" 
+                    (delete)="selectedRow=r;selectedCol=c;deleteElement($event)" 
                     (update)=updateElement($event)>
                   </app-builder-textarea-elements>
                 </div>
                 <div *ngSwitchCase="'group'">
-                  <app-builder-group-elements #ref
-                    #elements ngsfDrag
-                    (directionOfMovement)="movementOfTarget($event)"
-                    (dragstart)="dragStart($event)"
-                    (dragend)="dragEnd($event)"
-                    (dragenter)="dragEnter($event)"
-                    (dragover)="dragOver($event)"
-                    (dragleave)="dragLeave($event)"
-                    (distinctDrop)="dropped($event)"
-                    [draggableFlag]="elConfigs[i].draggable" 
-                    [required]="element.required" [value]="element.value" [options]="element.options" [eclass]="element.class"
-                    [subtype]="element.subtype" [pos]="i" (delete)=deleteElement($event) (update)=updateElement($event)>
+                  <app-builder-group-elements appDrag
+                    (directionOfMovement)="movementOfTarget($event)" (dragstart)="dragStart($event)"
+                    (dragend)="dragEnd($event)" (dragenter)="dragEnter($event)"
+                    (dragover)="dragOver($event)" (drop)="selectedRow=r;selectedCol=c;"
+                    (dragleave)="dragLeave($event)" [draggableFlag]="'elConfigs[r][c][i].draggable'" 
+                    [required]="element.required" [value]="element.value" [options]="element.options" 
+                    [eclass]="element.class" [subtype]="element.subtype" [pos]="r+'-'+c+'-'+i" 
+                    (delete)="selectedRow=r;selectedCol=c;deleteElement($event)" 
+                    (update)=updateElement($event)>
                   </app-builder-group-elements>
                 </div>
                 <div *ngSwitchCase="'select'">
-                  <app-builder-select-elements #ref
-                    #elements ngsfDrag
-                    (directionOfMovement)="movementOfTarget($event)"
-                    (dragstart)="dragStart($event)"
-                    (dragend)="dragEnd($event)"
-                    (dragenter)="dragEnter($event)"
-                    (dragover)="dragOver($event)"
-                    (dragleave)="dragLeave($event)"
-                    (drop)="dropped($event)"
-                    [draggableFlag]="elConfigs[i].draggable" 
-                    [required]="element.required" [value]="element.value" [options]="element.options" [eclass]="element.class"
-                    [subtype]="element.subtype" [pos]="i" (delete)=deleteElement($event) (update)=updateElement($event)>
+                  <app-builder-select-elements appDrag
+                    (directionOfMovement)="movementOfTarget($event)" (dragstart)="dragStart($event)"
+                    (dragend)="dragEnd($event)" (dragenter)="dragEnter($event)"
+                    (dragover)="dragOver($event)" (drop)="selectedRow=r;selectedCol=c;"
+                    (dragleave)="dragLeave($event)" [draggableFlag]="'elConfigs[r][c][i].draggable'" 
+                    [required]="element.required" [value]="element.value" [options]="element.options" 
+                    [eclass]="element.class" [subtype]="element.subtype" [pos]="r+'-'+c+'-'+i" 
+                    (delete)="selectedRow=r;selectedCol=c;deleteElement($event)" 
+                    (update)=updateElement($event)>
                   </app-builder-select-elements>
                 </div>
               </div>
@@ -110,120 +176,5 @@
         </tr>
       </tbody>
     </table>
-  </div>
-  <!-- <div class="dropZone" #dropZone
-    (dragenter)="dragEnter($event)"                 
-    (dragover)="dragOver($event)"
-    (dragleave)="dragLeave($event)"                 
-    (distinctDrop)="dropped($event)">
-    <div *ngFor="let element of elements;let i=index" #refElements>
-      <div [ngSwitch]="element.type">
-        <div *ngSwitchCase="'input'">
-          <ngsf-builder-input-elements #ref 
-            #elements ngsfDrag
-            (directionOfMovement)="movementOfTarget($event)"
-            (dragstart)="dragStart($event)"
-            (dragend)="dragEnd($event)"
-            (dragenter)="dragEnter($event)"
-            (dragover)="dragOver($event)"
-            (dragleave)="dragLeave($event)"
-            (distinctDrop)="dropped($event)"
-            [draggableFlag]="elConfigs[i].draggable"
-            [subtype]="element.subtype" [required]="element.required" [label]="element.label" [value]="element.value"
-            [eclass]="element.class" [placeholder]="element.placeholder" [maxlength]="element.maxlength" [max]="element.max" [min]="element.min"
-            [pos]="i" (delete)=deleteElement($event) (update)=updateElement($event)>
-          </ngsf-builder-input-elements>
-        </div>
-        <div *ngSwitchCase="'header'">
-          <ngsf-builder-header-elements #ref 
-            #elements ngsfDrag
-            (directionOfMovement)="movementOfTarget($event)"
-            (dragstart)="dragStart($event)"
-            (dragend)="dragEnd($event)"
-            (dragenter)="dragEnter($event)"
-            (dragover)="dragOver($event)"
-            (dragleave)="dragLeave($event)"
-            (distinctDrop)="dropped($event)"
-            [draggableFlag]="elConfigs[i].draggable"
-            [subtype]="element.subtype" [label]="element.label" [eclass]="element.class" [pos]="i" (delete)=deleteElement($event)
-            (update)=updateElement($event)>
-          </ngsf-builder-header-elements>
-        </div>
-        <div *ngSwitchCase="'paragraph'">
-          <ngsf-builder-paragraph-elements #ref 
-            #elements ngsfDrag
-            (directionOfMovement)="movementOfTarget($event)"
-            (dragstart)="dragStart($event)"
-            (dragend)="dragEnd($event)"
-            (dragenter)="dragEnter($event)"
-            (dragover)="dragOver($event)"
-            (dragleave)="dragLeave($event)"
-            (distinctDrop)="dropped($event)"
-            [draggableFlag]="elConfigs[i].draggable"
-            [eclass]="element.class" [content]="element.content" [pos]="i" (delete)=deleteElement($event)
-            (update)=updateElement($event)>
-          </ngsf-builder-paragraph-elements>
-        </div>
-        <div *ngSwitchCase="'textarea'">
-          <ngsf-builder-textarea-elements #ref 
-            #elements ngsfDrag
-            (directionOfMovement)="movementOfTarget($event)"
-            (dragstart)="dragStart($event)"
-            (dragend)="dragEnd($event)"
-            (dragenter)="dragEnter($event)"
-            (dragover)="dragOver($event)"
-            (dragleave)="dragLeave($event)"
-            (distinctDrop)="dropped($event)"
-            [draggableFlag]="elConfigs[i].draggable"
-            [required]="element.required" [label]="element.label" [value]="element.value" [eclass]="element.class"
-            [placeholder]="element.placeholder" [rows]="element.rows" [cols]="element.rows" [pos]="i" (delete)=deleteElement($event)
-            (update)=updateElement($event)>
-          </ngsf-builder-textarea-elements>
-        </div>
-        <div *ngSwitchCase="'group'">
-          <ngsf-builder-group-elements #ref
-            #elements ngsfDrag
-            (directionOfMovement)="movementOfTarget($event)"
-            (dragstart)="dragStart($event)"
-            (dragend)="dragEnd($event)"
-            (dragenter)="dragEnter($event)"
-            (dragover)="dragOver($event)"
-            (dragleave)="dragLeave($event)"
-            (distinctDrop)="dropped($event)"
-            [draggableFlag]="elConfigs[i].draggable" 
-            [required]="element.required" [value]="element.value" [options]="element.options" [eclass]="element.class"
-            [subtype]="element.subtype" [pos]="i" (delete)=deleteElement($event) (update)=updateElement($event)>
-          </ngsf-builder-group-elements>
-        </div>
-        <div *ngSwitchCase="'select'">
-          <ngsf-builder-select-elements #ref
-            #elements ngsfDrag
-            (directionOfMovement)="movementOfTarget($event)"
-            (dragstart)="dragStart($event)"
-            (dragend)="dragEnd($event)"
-            (dragenter)="dragEnter($event)"
-            (dragover)="dragOver($event)"
-            (dragleave)="dragLeave($event)"
-            (drop)="dropped($event)"
-            [draggableFlag]="elConfigs[i].draggable" 
-            [required]="element.required" [value]="element.value" [options]="element.options" [eclass]="element.class"
-            [subtype]="element.subtype" [pos]="i" (delete)=deleteElement($event) (update)=updateElement($event)>
-          </ngsf-builder-select-elements>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <div class="side">
-    <button #tools ngsfDrag
-      *ngFor="let button of toolButtons; let i=index"
-      [draggable]="toolConfigs[i].draggable"
-      [type]="tool"
-      class="tool"
-      (directionOfMovement)="movementOfTarget($event)"
-      (inputFunctionType) = "inputFunctionType = $event"
-      (dragstart)="dragStart($event)"
-      (dragend)="dragEnd($event)"
-      [id]="button.id" [innerHTML]="button.message">
-    </button>
   </div>
 </div>

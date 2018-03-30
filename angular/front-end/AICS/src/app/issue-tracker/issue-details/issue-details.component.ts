@@ -10,7 +10,8 @@ import { HttpService } from '../../shared/services/http.service';
 })
 export class IssueDetailsComponent implements OnInit {
   @Input() id: string;
-  @Input() formId: string
+  @Input() formId: string;
+  isDataLoaded: boolean = false;
   heading: { title: string, subtitle: string, description: string };
   data: { by: string, message: string, timestamp: string }[];
   myForm: FormGroup = new FormGroup({
@@ -21,17 +22,36 @@ export class IssueDetailsComponent implements OnInit {
     private http: HttpService) { }
   ngOnInit() {
     console.log('stuff');
-    let d = this.graphqlService.loadIssueDetails(this.id)
+    this.graphqlService.loadIssueDetails(this.id)
       .subscribe((data: any) => {
         console.log(data.data.issueTrackerById);
         this.heading = data.data.issueTrackerById.heading;
         this.data = data.data.issueTrackerById.data;
+        this.isDataLoaded = true;
       }, (error) => {
         console.log(error);
       });
   }
 
-  addComment() {
-
+  addComment(data) {
+    this.myForm.controls['data'].setValue('');
+    console.log(data);
+    this.http.addIssueComment({ "issueId": this.id, "type": "ISSUE", "update": { "message": data.data }, }, "A")
+      .subscribe(
+        (data) => {
+          this.myForm.controls['data'].setValue('');
+          console.log(data);      
+          this.graphqlService.loadIssueDetails(this.id)
+          .subscribe((data: any) => {
+            console.log(data.data.issueTrackerById);
+            this.heading = data.data.issueTrackerById.heading;
+            this.data = data.data.issueTrackerById.data;
+          }, (error) => {
+            console.log(error);
+          });    
+        },
+        (err) => {
+          console.log(err);
+        });
   }
 }

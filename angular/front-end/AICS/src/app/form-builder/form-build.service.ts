@@ -9,8 +9,8 @@ export class FormBuildService {
   updateForm(element, pos){
     let r, c, i;
     [r, c, i] = pos.split('-');
-    this.table[r][c][i] = element;
-    // console.log('Pos- ' + pos);
+    this.table.rows[r].cols[c].value[i] = element;
+    console.log('Pos- ' + pos);
     // console.log(element);
   }
   getForm(){
@@ -19,11 +19,11 @@ export class FormBuildService {
   initForm(){
     this.table = new Table();
     let col = new Column();
-    console.log(col);
+    // console.log(col);
     let row = new Row();
-    console.log(row);
+    // console.log(row);
     row.cols.push(col);
     this.table.rows.push(row);
-    console.log(this.table);
+    // console.log(this.table);
   }
 }

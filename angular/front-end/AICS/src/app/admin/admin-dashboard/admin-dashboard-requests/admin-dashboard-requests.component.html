@@ -10,12 +10,12 @@
     </div>
     <div class="holder4">
         Actions
-        <div class="sub_grid" *ngIf="requestToLoad.id!=='default'">
+        <div class="sub_grid">
             <div class="sub_holder1">
-                <button class="btn">Create Template</button>
+                <button class="btn" (click)="openBuilder()">Create Template</button>
             </div>
             <div class="sub_holder2">
-                <button class="btn">Load Template</button>
+                <button class="btn" >Load Template</button>
             </div>
             <div class="sub_holder3">
                 <button class="btn">Find Form</button>
