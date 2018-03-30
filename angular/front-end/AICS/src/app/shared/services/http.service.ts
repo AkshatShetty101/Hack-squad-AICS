@@ -25,17 +25,17 @@ export class HttpService {
   }
 
   // Template related requests - can pass metadata in all requests
-  addTemplates(request: any, token: any) {
+  addTemplates(request: any) {
     const body = request;
     return this.http.post(this.auth.baseURI + '/templates/add', body);
   }// body - format, title, tags
 
-  editTemplates(request: any, token: any) {
+  editTemplates(request: any) {
     const body = request;
     return this.http.post(this.auth.baseURI + '/templates/edit', body);
   }// body - format, title, tags
 
-  deleteTemplates(request: any, token: any) {
+  deleteTemplates(request: any) {
     const body = request;
     return this.http.post(this.auth.baseURI + '/templates/delete', body);
   }// body - templateId
