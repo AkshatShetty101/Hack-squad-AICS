@@ -4,7 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { FormBuildService } from '../form-build.service';
 
 @Component({
-  selector: 'ngsf-builder-input-elements',
+  selector: 'app-builder-input-elements',
   templateUrl: './builder-input-elements.component.html',
   styleUrls: ['./builder-input-elements.component.css']
 })
@@ -28,6 +28,7 @@ export class BuilderInputElementsComponent implements OnInit {
   @Input() pos;
   @Input() draggableFlag;
 
+  hiddenForm: boolean = false;
   myForm: FormGroup = new FormGroup({
     required: new FormControl(),
     label: new FormControl(),
@@ -74,6 +75,7 @@ export class BuilderInputElementsComponent implements OnInit {
     form.controls.placeholder.reset();
     let element = this.getElement();
     this.update.emit(element);
+    this.hiddenForm = false;
   }
   sendElement() {
     this.touched = this.valueField.touched;

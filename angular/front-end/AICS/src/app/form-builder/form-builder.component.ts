@@ -6,7 +6,7 @@ import { AfterViewChecked } from '@angular/core';
 import { FormBuildService } from './form-build.service';
 
 @Component({
-  selector: 'ngsf-form-builder',
+  selector: 'app-form-builder',
   templateUrl: './form-builder.component.html',
   styleUrls: ['./form-builder.component.css']
 })

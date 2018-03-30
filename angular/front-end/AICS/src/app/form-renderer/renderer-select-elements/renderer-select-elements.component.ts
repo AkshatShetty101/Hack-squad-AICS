@@ -40,7 +40,7 @@ export class RendererSelectElementsComponent implements OnInit {
     for(i=0; i<this.options.length; i++){
       this.options[i].selected = this.options[i].value == this.value;
     }
-    console.log(this.options);
+    // console.log(this.options);
   }
   sendElement() {
     this.value = this.valueField.value;
@@ -50,7 +50,7 @@ export class RendererSelectElementsComponent implements OnInit {
     this.valid =  this.valueField.valid;
     const element = this.getElement();
     this.formRender.updateForm(element, this.pos);
-    console.log(this.value);
+    // console.log(this.value);
     // console.log(this.options[0].value === this.value);
   }
   getElement() {

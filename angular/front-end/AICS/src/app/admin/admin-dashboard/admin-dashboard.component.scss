@@ -17,12 +17,11 @@
 
 .due_req{
 	grid-row: 2;
-	grid-column:2;            
-	background-color:#38393A; 
+	grid-column:2;           
+	background-color: #979797;
+	color:#38393A;
 	padding: 15px;
-	color:#979797;
-	box-shadow: 0.5px 0.5px 5px #38393a;
-	
+	box-shadow: 0px 0.5px 5px #38393A;
 }
 .due_ver{
 	grid-row: 2;
@@ -40,7 +39,12 @@
 	padding: 15px;
 	box-shadow: 0px 0.5px 5px #38393A;
 }
-
+.active{
+	background-color:#38393A; 
+	padding: 15px;
+	color:#979797;
+	box-shadow: 0.5px 0.5px 5px #38393a;
+}
 
 
 

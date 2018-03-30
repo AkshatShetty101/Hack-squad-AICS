@@ -1,23 +1,77 @@
+<!-- <div [draggable]="draggableFlag" class="elementHolder">
+    <div class="icon1"><mat-icon>edit</mat-icon></div>
+    <div class="icon2"><mat-icon>delete</mat-icon></div>
+    <div class="on_transition_label">Input Date</div>
+    <div class="date inner_grid">
+      
+        <div class="row_inp_label">
+          <label>Required&nbsp;:&nbsp;</label>
+        </div>
+        <div class="row_inp_field">
+          <mat-checkbox></mat-checkbox>
+        </div>
+        <div class="row_inp_label">Label&nbsp;:&nbsp;</div><div class="row_inp_field"><input type="text"></div>
+        <div class="row_inp_label">
+          <label>Max Value&nbsp;:&nbsp;</label>
+        </div>
+        <div class="row_inp_field">
+          <input type="text">
+        </div>
+        <div class="row_inp_label"><label>Min Value&nbsp;:&nbsp;</label></div><div class="row_inp_field"><input type="text"></div>
+
+
+       <div class="close_1"><button mat-raised-button color="accent">CLOSE</button></div>
+      
+    </div>
+</div> -->
+
 <div [draggable]="draggableFlag" class="elementHolder">
-  <label [innerHTML]="label"></label>
-  <br />
-  <input [formControl]="valueField" [required]="required" [type]="subtype" [class]="class" 
-    [placeholder]="placeholder" />
-  <br />
-  <form [formGroup]="myForm" class="hiddenfields" (ngSubmit)="updateValues(myForm)">
-    <label>Required: </label>
-    <input formControlName="required" type="checkbox" />
-    <label *ngIf="subtype === 'text' || subtype === 'number'">Placeholder: </label>
-    <input *ngIf="subtype === 'text' || subtype === 'number'" formControlName="placeholder" type="text" />
-    <label>Label: </label>
-    <input formControlName="label" type="text" />
-    <label *ngIf="subtype === 'text'">Maxlength: </label>
-    <input *ngIf="subtype === 'text'" formControlName="maxlength" type="number" />
-    <label *ngIf="subtype === 'number'">Max Value: </label>
-    <input *ngIf="subtype === 'number'" formControlName="max" type="number" />
-    <label *ngIf="subtype === 'number'">Min Value: </label>
-    <input *ngIf="subtype === 'number'" formControlName="min" type="number" />
-    <button type="submit">Close</button>
+  <div class="icon1" (click)="hiddenForm=!hiddenForm"><mat-icon>edit</mat-icon></div>
+  <div class="icon2" (click)="deleteElement()"><mat-icon>delete</mat-icon></div>
+  <div class="on_transition_label">
+    <label [innerHTML]="label"></label>  
+  </div>
+  <div>
+    <input [formControl]="valueField" [required]="required" [type]="subtype" 
+      [placeholder]="placeholder" />
+  </div>  
+  <form [style.display]="hiddenForm?'grid':'none'" [formGroup]="myForm" class="date inner_grid" (ngSubmit)="updateValues(myForm)">
+    <div class="row_inp_label">
+      <label>Required&nbsp;:&nbsp;</label>
+    </div>
+    <div class="row_inp_field">
+      <mat-checkbox formControlName="required"></mat-checkbox>
+    </div>
+    <div class="row_inp_label">
+      <label>Label: </label>
+    </div>
+    <div class="row_inp_field">
+      <input formControlName="label" type="text" />
+    </div>
+    <div class="row_inp_label">
+      <label *ngIf="subtype === 'text' || subtype === 'number'">Placeholder: </label>
+    </div>
+    <div class="row_inp_field">
+      <input *ngIf="subtype === 'text' || subtype === 'number'" formControlName="placeholder" type="text" />
+    </div>
+    <div class="row_inp_label">
+      <label *ngIf="subtype === 'text'">Maxlength: </label>
+    </div>
+    <div class="row_inp_field">
+      <input *ngIf="subtype === 'text'" formControlName="maxlength" type="number" />
+    </div>
+    <div class="row_inp_label">
+      <label *ngIf="subtype === 'number'">Max Value: </label>
+    </div>
+    <div class="row_inp_field">
+      <input *ngIf="subtype === 'number'" formControlName="max" type="number" />
+    </div>
+    <div class="row_inp_label">
+      <label *ngIf="subtype === 'number'">Min Value: </label>
+    </div>
+    <div class="row_inp_field">
+      <input *ngIf="subtype === 'number'" formControlName="min" type="number" />
+    </div>
+    <div class="close_1"><button mat-raised-button color="accent">CLOSE</button></div>
   </form>
-  <button (click)="deleteElement()">Delete element</button>
 </div>

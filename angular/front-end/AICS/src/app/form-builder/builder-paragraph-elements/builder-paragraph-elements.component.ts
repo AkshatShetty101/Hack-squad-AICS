@@ -3,7 +3,7 @@ import { Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'ngsf-builder-paragraph-elements',
+  selector: 'app-builder-paragraph-elements',
   templateUrl: './builder-paragraph-elements.component.html',
   styleUrls: ['./builder-paragraph-elements.component.css']
 })
@@ -16,6 +16,7 @@ export class BuilderParagraphElementsComponent implements OnInit {
   @Input() eclass;
   @Input() pos;
   @Input() draggableFlag;
+  hiddenForm: boolean = false;
   myForm: FormGroup = new FormGroup({
     content: new FormControl()
   });
@@ -33,6 +34,7 @@ export class BuilderParagraphElementsComponent implements OnInit {
     let element = this.getElement();
     // console.log(element);
     this.update.emit(element);
+    this.hiddenForm = false;
   }
   getElement() {
     let element: {};

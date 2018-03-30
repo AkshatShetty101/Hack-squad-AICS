@@ -1,0 +1,36 @@
+.container1{
+    display:grid;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows:9vh 90%;
+    width:100%;
+}
+.title{
+    justify-self: start;
+}
+.new_issue{
+    grid-row:1;
+    grid-column:2;
+    display:flex;
+    align-items:center;
+    justify-self:end;
+}
+.issuebox{
+    grid-column:2;
+}
+.issue_grid{
+    display:grid;
+    grid-template-columns:1fr 20% ;
+    background-color: #e0e0e0; 
+    align-items:center;
+    text-align:center;
+    padding-left:2%;
+    height: 5vh;
+    box-shadow:1px 1px 2px #b3b3b3;
+    border-radius:4px 4px 0px 0px !important;    
+}
+.form_det{
+    grid-column:2;
+    grid-row:1;
+    display:flex;
+    align-items:center;
+}

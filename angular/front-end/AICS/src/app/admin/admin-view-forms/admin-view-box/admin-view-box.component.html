@@ -38,10 +38,10 @@
   </div>
 </div>
 <!-- The Modal -->
-<div *ngIf="modalOpen == true" id="myModal" class="modal">
+<div *ngIf="modalOpen" id="myModal" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close" (click)="modalOpen=false">&times;</span>
-    <app-form-renderer></app-form-renderer>
+    <app-form-builder></app-form-builder>
   </div>
 </div>

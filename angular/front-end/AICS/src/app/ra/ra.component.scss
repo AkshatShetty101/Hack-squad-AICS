@@ -1,0 +1,45 @@
+/**
+* Navbar styling
+*/
+.navlinks {
+	font-family: 'fira sans';
+	display: block;
+	text-decoration: none;
+	padding: 5%;
+	color: #979797;
+	text-shadow: 0px 0.05px 0.5px black;
+
+}
+
+.right {
+	box-shadow: -5px 0 5px -5px black;
+}
+
+
+nav {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: auto;
+	position: sticky;
+	align-items: center;
+	text-align: center;
+	vertical-align: center;
+	box-shadow: 0px 0.5px 5px #38393A;
+	background: #38393A;
+}
+
+.container {
+	min-width: 100%;
+}
+
+/**
+* Navbar media queries
+*/
+@media (min-width:600px) {
+	.navlinks {
+		padding: 3.5%;
+		font-size: 110%;
+	}
+}
+
+//
