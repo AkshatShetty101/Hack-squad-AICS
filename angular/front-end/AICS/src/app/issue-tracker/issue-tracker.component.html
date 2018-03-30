@@ -1,11 +1,10 @@
-<div class="container1">
+<!-- <div class="container1">
 
   <div class="form_det">
     {{ form.name }}#{{ form.id}}
   </div>
   <div class="new_issue">
-    <button class="btn btn-primary">NEW ISSUE</button>
-
+    <button class="btn btn-primary" (click)="newIssue()">NEW ISSUE</button>
   </div>
   <div class="issuebox round-border" *ngIf="issueToLoadId == undefined;else othercontent">
     <div class="issue_grid">
@@ -23,4 +22,5 @@
   <div class="issuebox">
     <app-issue-details [formId]="form.id" [id]="issueToLoadId"></app-issue-details>
   </div>
-</ng-template>
+</ng-template> -->
+<app-issue-new></app-issue-new>
