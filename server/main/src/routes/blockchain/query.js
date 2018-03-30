@@ -12,7 +12,7 @@ exports.getMyForms = (req, res) => {
 		.then(() => {
 			var query = this.bizNetworkConnection.buildQuery(
 				'SELECT ' + NS_F + ' WHERE (assigneeId CONTAINS _$inputValue)');
-			return this.bizNetworkConnection.query(query, { inputValue: res.locals.user._id });
+			return this.bizNetworkConnection.query(query, { inputValue: res.locals.user._id.toString() });
 		})
 		.then((assets) => {
 			let promise = new Promise((resolve, reject) => {
@@ -50,7 +50,7 @@ exports.getTemplateRequestId = (req, res, next) => {
 				console.log(req.body.templateId);
 				var query = this.bizNetworkConnection.buildQuery(
 					'SELECT ' + NS_T + ' WHERE (templateId == _$inputValue)');
-				return this.bizNetworkConnection.query(query, { inputValue: req.body.templateId.toString() });
+				return this.bizNetworkConnection.query(query, { inputValue: req.body.templateId });
 			})
 			.then((asset) => {
 				res.locals.requestId = asset[0].requestId;
@@ -78,7 +78,7 @@ exports.getFormRequestId = (req, res, next) => {
 				console.log(req.body.formId);
 				var query = this.bizNetworkConnection.buildQuery(
 					'SELECT ' + NS_F + ' WHERE (formId == _$inputValue)');
-				return this.bizNetworkConnection.query(query, { inputValue: req.body.formId.toString() });
+				return this.bizNetworkConnection.query(query, { inputValue: req.body.formId });
 			})
 			.then((asset) => {
 				res.locals.requestId = asset[0].requestId;
@@ -103,7 +103,7 @@ exports.getMyCurrentFormsPromise = (req, res) => {
 			console.log('in1');
 			var query = this.bizNetworkConnection.buildQuery(
 				'SELECT ' + NS_F + ' WHERE (assigneeId CONTAINS _$inputValue)');
-			return this.bizNetworkConnection.query(query, { inputValue: res.locals.user._id });
+			return this.bizNetworkConnection.query(query, { inputValue: res.locals.user._id.toString() });
 		})
 		.then((assets) => {
 			return new Promise((resolve, reject) => {
