@@ -8,9 +8,7 @@ export class IndexDBService {
   private db = new AngularIndexedDB('myDb', 1);
 
 
-  constructor(
-    private sse: SSEService
-  ) {
+  constructor() {
     // this.db = new AngularIndexedDB('myDb', 1);
   }
 
@@ -34,8 +32,6 @@ export class IndexDBService {
   }
 
   addNotif(data: any) {
-    this.sse.emitNotif(data);
-    console.log(data);
     return this.db.add('notifs', data);
   }
 

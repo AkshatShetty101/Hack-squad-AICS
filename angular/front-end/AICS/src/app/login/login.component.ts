@@ -1,5 +1,6 @@
+import { SSEService } from './../shared/services/sse.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { HttpService } from '../shared/services/http.service';
 import { AuthService } from '../shared/services/auth.service';
 import { Router } from '@angular/router';
@@ -17,11 +18,12 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpService,
     private auth: AuthService,
+    private sse: SSEService,
     private router: Router
   ) {
-    this.myForm = fb.group({
-      'username': ['', [Validators.required]],
-      'password': ['', [Validators.required]]
+    this.myForm = new FormGroup({
+      username: new FormControl(),
+      password: new FormControl()
     });
   }
 
@@ -140,27 +142,27 @@ export class LoginComponent implements OnInit {
       email: data.username,
       password: data.password
     };
-    // console.log(request);
+    console.log(request);
     this.myForm.reset();
     this.auth.empty();
-    this.router.navigateByUrl('/admin');
+    // this.router.navigateByUrl('/admin');
     this.http.verifyUser(request)
       .subscribe(
-        (response) => {
-          console.log(response);
-          // if(response.status === 'LOGIN'){
-          //   console.log('Here!');
-          //   this.auth.storeStatus(response.token);
-          //   this.auth.storeRole(response.designation);
+        (response: any) => {
+          // console.log(response.token);
+          if (response.status === 'LOGIN') {
+            // console.log('Here!');
+            this.auth.storeStatus(response.token, response.designation);
+            this.sse.establishSSE();
             this.router.navigateByUrl('/admin');
-          // }
+          }
         },
         (error) => {
           console.log(error);
-          // if(error.status === 'INVALID_CRED'){
-          //   alert('Wrong username or password');
-          // }
-          this.router.navigateByUrl('/admin');
+          if (error.status === 'INVALID_CRED') {
+            alert('Wrong username or password');
+          }
+          // this.router.navigateByUrl('/admin');
         });
   }
 
