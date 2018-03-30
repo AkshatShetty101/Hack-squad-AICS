@@ -154,7 +154,18 @@ export class LoginComponent implements OnInit {
             // console.log('Here!');
             this.auth.storeStatus(response.token, response.designation);
             this.sse.establishSSE();
-            this.router.navigateByUrl('/admin');
+            if(response.designation === 'admin'){
+              this.router.navigateByUrl('/admin');
+            } else
+            if(response.designation === 'gc'){
+              this.router.navigateByUrl('/gc');
+            } else
+            if(response.designation === 'ra'){
+              this.router.navigateByUrl('/requesting_authority');
+            }
+            else{
+              this.router.navigateByUrl('/user');
+            }
           }
         },
         (error) => {
