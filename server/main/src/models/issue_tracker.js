@@ -42,7 +42,7 @@ const issueTrackerSchema = new Schema({
 	},
 	tags: {
 		type: [String],
-		enum: ['doubt', 'incorrect template', 'insufficient data'],
+		enum: ['doubt', 'incorrect_template', 'insufficient_data'],
 		default: []
 	},
 	data: [bySchema]

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-admin-request',
@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-request.component.scss']
 })
 export class AdminRequestComponent implements OnInit {
-
+  @Output() loadRequest = new EventEmitter<{ id: string }>();
+  @Input() id: string = "default";
+  @Input() type: string = "default";
   constructor() { }
 
   ngOnInit() {
   }
+
+  loadIt() {
+    this.loadRequest.emit({ id: this.id });
+  }
+
 
 }

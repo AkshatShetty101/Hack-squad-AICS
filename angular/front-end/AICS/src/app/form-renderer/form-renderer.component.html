@@ -1,0 +1,35 @@
+<div *ngFor="let element of elements;let i=index">
+  <div [ngSwitch]="element.type">
+    <div *ngSwitchCase="'input'">
+      <app-renderer-input-elements [subtype]="element.subtype" [required]="element.required" [label]="element.label" [value]="element.value"
+        [eclass]="element.class" [placeholder]="element.placeholder" [maxlength]="element.maxlength" [max]="element.max" [min]="element.min"
+        [pos]="i" [valid]="element.valid" [touched]="element.touched" [pristine]="element.pristine">
+      </app-renderer-input-elements>
+    </div>
+    <div *ngSwitchCase="'header'">
+      <app-renderer-header-elements [subtype]="element.subtype" [label]="element.label" [eclass]="element.class" [pos]="i">
+      </app-renderer-header-elements>
+    </div>
+    <div *ngSwitchCase="'paragraph'">
+      <app-renderer-paragraph-elements [eclass]="element.class" [content]="element.content" [pos]="i">
+      </app-renderer-paragraph-elements>
+    </div>
+    <div *ngSwitchCase="'textarea'">
+      <app-renderer-textarea-elements [required]="element.required" [label]="element.label" [value]="element.value" [eclass]="element.class"
+        [placeholder]="element.placeholder" [rows]="element.rows" [cols]="element.rows" [pos]="i"
+        [valid]="element.valid" [touched]="element.touched" [pristine]="element.pristine">
+      </app-renderer-textarea-elements>
+    </div>
+    <div *ngSwitchCase="'group'">
+      <app-renderer-group-elements [required]="element.required" [value]="element.value" [options]="element.options" [eclass]="element.class"
+        [subtype]="element.subtype" [pos]="i" [valid]="element.valid" [touched]="element.touched" [pristine]="element.pristine">
+      </app-renderer-group-elements>
+    </div>
+    <div *ngSwitchCase="'select'">
+      <app-renderer-select-elements [required]="element.required" [value]="element.value" [options]="element.options" [eclass]="element.class"
+        [subtype]="element.subtype" [pos]="i" [valid]="element.valid" [touched]="element.touched" [pristine]="element.pristine">
+      </app-renderer-select-elements>
+    </div>
+  </div>
+</div>
+<button (click)="saveForm()" type="button">Save Form</button>

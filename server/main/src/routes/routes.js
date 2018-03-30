@@ -204,23 +204,18 @@ router.post('/reqAuth/remove',
 	verifyMiddleware.verifySystemAdmin,
 	require('./requestingAuth/removeRequestingAuth'));
 
-router.post('/reqAuth/edit',
-	verifyMiddleware.verifyPerson,
-	verifyMiddleware.verifyRequestingAuthority,
-	require('./requestingAuth/editRequestingAuthForm'));
-
-router.post('/reqAuth/makeRequest',
+router.post('/reqAuth/request',
 	verifyMiddleware.verifyPerson,
 	verifyMiddleware.verifyRequestingAuthority,
 	require('./requestingAuth/makeRequest'));
 
-router.all('/reqAuth',
-	verifyMiddleware.verifyRequestingAuthority,
-	graphQLHTTP((req, res) => ({ // to be replaced by router.post
-		schema: require('./graphql/schemas/requesting_authority'),
-		context: { req, res },
-		graphiql: process.env.NODE_ENV !== 'production'
-	})));
+// router.all('/reqAuth',
+// 	verifyMiddleware.verifyRequestingAuthority,
+// 	graphQLHTTP((req, res) => ({ // to be replaced by router.post
+// 		schema: require('./graphql/schemas/requesting_authority'),
+// 		context: { req, res },
+// 		graphiql: process.env.NODE_ENV !== 'production'
+// 	})));
 
 /**
  * Issue Tracker Routes
@@ -278,15 +273,25 @@ router.post('/query/getMyForms',
 
 router.post('/query/getTemplateRequestId',
 	verifyMiddleware.verifyPerson,
-	queryMiddleware.getTemplateRequestId);
+	queryMiddleware.getTemplateRequestId,
+	require('../utils/sendSuccess'));
 
 router.post('/query/getFormRequestId',
 	verifyMiddleware.verifyPerson,
-	queryMiddleware.getFormRequestId);
+	queryMiddleware.getFormRequestId,
+	require('../utils/sendSuccess'));
+
+router.post('/query/getFormProgress',
+	verifyMiddleware.verifyPerson,
+	queryMiddleware.getFormProgress);
+
+router.post('/query/getTemplateProgress',
+	verifyMiddleware.verifyPerson,
+	queryMiddleware.getTemplateProgress);
 
 /**
- * Notification Route
- */
+* Notification Route
+*/
 router.get('/notification',
 	verifyMiddleware.verifyPerson,
 	require('../utils/sseHelper'),
@@ -298,5 +303,12 @@ router.get('/notification',
 router.post('/translate',
 	verifyMiddleware.verifyPerson,
 	require('./translate/translate'));
+
+/**
+ * OCR Route
+ */
+router.post('/ocr',
+	verifyMiddleware.verifyPerson,
+	require('./ocr/ocr'));
 
 module.exports = router;

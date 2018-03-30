@@ -1,0 +1,99 @@
+<!-- <div [draggable]="draggableFlag" class="elementHolder">
+  <div class="icon1">
+    <mat-icon>edit</mat-icon>
+  </div>
+  <div class="icon2">
+    <mat-icon>delete</mat-icon>
+  </div>
+  <div class="label_transition">Radio Group</div>
+  <div class="input_box inner_grid">
+    <div class="required">
+      <label>Required&nbsp;:&nbsp;</label>
+      <mat-checkbox></mat-checkbox>
+    </div>
+    <div class="label1">
+      <label>Option Value&nbsp;:&nbsp;</label>
+      <input type="text" class="input_specs" />
+    </div>
+    <div class="label3">
+      <label>Option Label&nbsp;:&nbsp;</label>
+      <input type="text" class="input_specs" />
+    </div>
+    <div class="label_4 option_number">
+      <div class="label4">Option Number&nbsp;:</div>
+      <div class="input_1">
+        <input type="text" class="input_specs_opt" />
+      </div>
+      <div class="plus">
+        <i class="fa fa-plus"></i>
+      </div>
+      <div class="minus">
+        <i class="fa fa-minus"></i>
+      </div>
+    </div>
+    <div class="set">
+      <button mat-raised-button color="accent">SET</button>
+    </div>
+    <div class="close">
+      <button mat-raised-button color="accent">CLOSE</button>
+    </div>
+  </div> -->
+
+  <!--
+  <div class="options_1">
+    <mat-radio-group>
+      <mat-radio-button value="1">Option 1</mat-radio-button>
+      <br>
+      <mat-radio-button value="2">Option 2</mat-radio-button>
+    </mat-radio-group>
+  </div>-->
+
+
+<div [draggable]="draggableFlag" class="elementHolder">
+  <div class="icon1" (click)="hiddenForm=!hiddenForm">
+    <mat-icon>edit</mat-icon>
+  </div>
+  <div class="icon2" (click)="deleteElement()">
+    <mat-icon>delete</mat-icon>
+  </div>
+  <div class="label_transition">
+    <div *ngFor="let option of options; let i = index">
+      <input *ngIf="subtype === 'radio'" [formControl]="valueField" [value]="option.value" [required]="required" [type]="subtype"
+        [class]="class" [name]="'valueField'" [checked]="option.value===value?true:false" (click)="updateFieldValue(subtype, i)"
+      />
+      <input *ngIf="subtype === 'checkbox'" [formControl]="valueField" [value]="option.value" [required]="required" [type]="subtype"
+        [class]="class" [name]="'valueField'" [checked]="option.value.indexOf(value[i]) === -1?false:true" (click)="updateFieldValue(subtype, i)"
+      />
+      <span [innerHTML]="option.label"></span>
+    </div>
+  </div>
+  <form [style.display]="hiddenForm?'grid':'none'" [formGroup]="myForm" class="input_box inner_grid" (ngSubmit)="updateValues(myForm)">
+    <div class="required">
+      <label>Required&nbsp;:&nbsp;</label>
+      <mat-checkbox formControlName="required"></mat-checkbox>
+    </div>
+    <div class="label1">
+      <label>Option Value&nbsp;:&nbsp;</label>
+      <input class="input_specs" type="text" formControlName="addValue" />
+    </div>
+    <div class="label3">
+      <label>Option Label&nbsp;:&nbsp;</label>
+      <input class="input_specs" type="text" formControlName="addLabel" />
+    </div>
+    <div class="label_4 option_number">
+      <div class="label4">Option Number&nbsp;:&nbsp;</div>
+      <div class="input_1">
+        <input class="input_specs_opt" type="text" formControlName="removeOption" />
+      </div>
+      <div class="plus">
+        <i class="fa fa-plus"></i>
+      </div>
+      <div class="minus">
+        <i class="fa fa-minus"></i>
+      </div>
+    </div>
+    <div class="close">
+      <button type="submit" mat-raised-button color="accent">CLOSE</button>
+    </div>
+  </form>
+</div>

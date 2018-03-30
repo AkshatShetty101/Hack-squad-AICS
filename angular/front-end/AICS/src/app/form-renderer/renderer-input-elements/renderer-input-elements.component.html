@@ -1,0 +1,11 @@
+<div class="elementHolder">
+  <label *ngIf="subtype !== 'file'" [innerHTML]="label"></label>
+  <br />
+  <input *ngIf="subtype !== 'file'" [formControl]="valueField" [required]="required" [type]="subtype" [class]="class" 
+    [placeholder]="placeholder" [value]="value" />
+  <ng4-files-click *ngIf="subtype === 'file'" (filesSelect)="filesSelect($event)">
+    <span>Click me to upload</span>
+  </ng4-files-click>
+  <button *ngIf="subtype === 'file'" 
+    (click)="download(value)">Download</button>
+</div>

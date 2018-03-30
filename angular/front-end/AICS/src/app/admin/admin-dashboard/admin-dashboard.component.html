@@ -1,15 +1,17 @@
 <div class="container1">
-    <div class="due_req">
-        <a class="tab" href="dashboard-req.html">DUE REQUESTS</a>
+    <div class="due_req" [routerLink]="'./request'" routerLinkActive="active">
+        <a class="tab">Request</a>
     </div>
-    <div class="due_ver">
-        <a class="tab" href="dashboard-ver.html">DUE VERIFICATIONS</a>
+    <div class="due_ver" [routerLink]="'./verification'" routerLinkActive="active">
+        <a class="tab">Verifications</a>
     </div>
-    <div class="add_rep">
-        <a class="tab" href="dashboard-repo.html">ADD TO REPOSITORY</a>
+    <div class="add_rep" [routerLink]="'./repository'" routerLinkActive="active">
+        <a class="tab">Repository</a>
     </div>
     <div class="bgbody"></div>
-    <div class="offsetbg main_data">
-        <app-admin-dashboard-requests></app-admin-dashboard-requests>
+    <div class="offsetbg">
+        <!-- <app-admin-dashboard-requests></app-admin-dashboard-requests> -->
+        <!-- <app-admin-dashboard-verifications></app-admin-dashboard-verifications> -->
+        <router-outlet></router-outlet>
     </div>
 </div>

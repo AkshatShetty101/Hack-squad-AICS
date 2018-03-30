@@ -1,0 +1,21 @@
+@import '~@angular/material/theming';
+@import './styles.scss';
+
+@include mat-core();
+.theme-name{
+    // Material Colors
+    $primary: mat-palette($mat-blue, 500);
+    $accent: mat-palette($mat-blue);
+    $warn: mat-palette($mat-blue);
+    $theme: mat-light-theme($primary, $accent, $warn);
+    // Extra Colors
+    $shadow: mat-palette($mat-blue);
+    $background: mat-palette($mat-red);
+ 
+
+    @mixin set-theme($theme, $shadow, $background) {
+        @include global-theme($theme, $shadow, $background);
+    }
+    @include angular-material-theme($theme);
+    @include set-theme($theme, $shadow, $background);
+}

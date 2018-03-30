@@ -1,15 +1,15 @@
 <div class="form_no_grid mb-3">
-  <app-admin-form-box *ngFor="let form of formList;let i=index" [form]="form" [cl]="'op'+(i+1).toString()"></app-admin-form-box>
+    <app-admin-form-box *ngFor="let form of formList;let i=index" [form]="form" [cl]="'op'+(i+1).toString()"></app-admin-form-box>
 </div>
 <div align="center">
-  <svg width="3px" height="" viewBox="0 0 3 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
-      <g id="iPhone-X" transform="translate(-98.000000, -83.000000)" stroke="#979797" stroke-width="2">
-        <path d="M99.5,84.5 L99.5,127.5" id="Line"></path>
-      </g>
-    </g>
-  </svg>
+    <svg width="3px" height="" viewBox="0 0 3 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs></defs>
+        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+            <g id="iPhone-X" transform="translate(-98.000000, -83.000000)" stroke="#979797" stroke-width="2">
+                <path d="M99.5,84.5 L99.5,127.5" id="Line"></path>
+            </g>
+        </g>
+    </svg>
 </div>
 
 
@@ -93,7 +93,7 @@
             </svg>
         </div>
     </div>
-   
+
     <div class="days_go">
         <span class="title form_num title_days_go">DAYS TO GO</span>
         <span class="date form_num title_days_go">40 DAYS</span>
@@ -101,54 +101,81 @@
             <i class="fa fa-clock-o big_icons" aria-hidden="true"></i>
         </div>
     </div>
-    <div class="progress_title"><span class="title form_num title_days_go">PROGRESS</span></div>
+    <div class="progress_title">
+        <span class="title form_num title_days_go">PROGRESS</span>
+    </div>
 </div>
 
 <div class="progress_grid">
-    <div class="circle circle1">
-    </div>
-    <div class="circle circle2">
-    </div>
-    <div class="circle circle3">
-    </div>
-    <div class="circle circle4">
-    </div>
-    <div class="circle circle5">
-    </div>
-    <div class="circle circle6">
-    </div>
-    <div class="circle circle7">
-    </div>
-    <div class="circle circle8">
-    </div>
-    <div class="circle circle9">
-    </div>
-    <div class="circle circle10">
-    </div>
-    <div class="circle circle11">
-    </div>
-    <div class="bar1 bar"></div>
-    <div class="bar2 bar"></div>
-    <div class="bar3 bar"></div>
-    <div class="bar4 bar"></div>
-    <div class="bar5 bar"></div>
-    <div class="bar6 bar"></div>
-    <div class="bar7 bar"></div>
-    <div class="bar8 bar"></div>
-    <div class="bar9 bar"></div>
-    <div class="bar10 bar"></div>
+    <!-- <app-admin-progress></app-admin-progress> -->
 
-    <div class="text_decoration state1"><span>CREATED</span></div>
-    <div class="text_decoration state2"><span>EDITED</span></div>
-    <div class="text_decoration state3"><span>RA VERIFIED</span></div>
-    <div class="text_decoration state4"><span>APPROVED</span></div>
-    <div class="text_decoration state5"><span>DELEGATED TO GC</span></div>
-    <div class="text_decoration state6"><span>DELEGATED TO USER</span></div>
-    <div class="text_decoration state7"><span>IN PROGRESS</span></div>
-    <div class="text_decoration state8"><span>GC VERIFICATION</span></div>
-    <div class="text_decoration state9"><span>ADMIN VERIFICATION</span></div>
-    <div class="text_decoration state10"><span>RA VERIFICATION</span></div>
-    <div class="text_decoration state11"><span>DONE</span></div>
+    <div [ngClass]="state.bar_val>=1?'blue circle circle1':'circle   circle1'">
+    </div>
+    <div [ngClass]="state.bar_val>=2?'blue circle circle2':'circle   circle2'">
+    </div>
+    <div [ngClass]="state.bar_val>=3?'blue circle circle3':'circle   circle3'">
+    </div>
+    <div [ngClass]="state.bar_val>=4?'blue circle circle4':'circle   circle4'">
+    </div>
+    <div [ngClass]="state.bar_val>=5?'blue circle circle5':'circle   circle5'">
+    </div>
+    <div [ngClass]="state.bar_val>=6?'blue circle circle6':'circle   circle6'">
+    </div>
+    <div [ngClass]="state.bar_val>=7?'blue circle circle7':'circle   circle7'">
+    </div>
+    <div [ngClass]="state.bar_val>=8?'blue circle circle8':'circle   circle8'">
+    </div>
+    <div [ngClass]="state.bar_val>=9?'blue circle circle9':'circle   circle9'">
+    </div>
+    <div [ngClass]="state.bar_val>=10?'blue circle circle10':'circle   circle10'">
+    </div>
+    <div [ngClass]="state.bar_val>=11?'blue circle circle11':'circle   circle11'">
+    </div>
+    <div [ngClass]="state.bar_val>1?'blue bar bar1':'bar   bar1'"></div>
+    <div [ngClass]="state.bar_val>2?'blue bar bar2':'bar   bar2'"></div>
+    <div [ngClass]="state.bar_val>3?'blue bar bar3':'bar   bar3'"></div>
+    <div [ngClass]="state.bar_val>4?'blue bar bar4':'bar   bar4'"></div>
+    <div [ngClass]="state.bar_val>5?'blue bar bar5':'bar   bar5'"></div>
+    <div [ngClass]="state.bar_val>6?'blue bar bar6':'bar   bar6'"></div>
+    <div [ngClass]="state.bar_val>7?'blue bar bar7':'bar   bar7'"></div>
+    <div [ngClass]="state.bar_val>8?'blue bar bar8':'bar   bar8'"></div>
+    <div [ngClass]="state.bar_val>9?'blue bar bar9':'bar   bar9'"></div>
+    <div [ngClass]="state.bar_val>10?'blue bar bar10':'bar   bar10'"></div>
+
+
+    <div class="text_decoration state1">
+        <span>CREATED</span>
+    </div>
+    <div class="text_decoration state2">
+        <span>EDITED</span>
+    </div>
+    <div class="text_decoration state3">
+        <span>RA VERIFIED</span>
+    </div>
+    <div class="text_decoration state4">
+        <span>APPROVED</span>
+    </div>
+    <div class="text_decoration state5">
+        <span>DELEGATED TO GC</span>
+    </div>
+    <div class="text_decoration state6">
+        <span>DELEGATED TO USER</span>
+    </div>
+    <div class="text_decoration state7">
+        <span>IN PROGRESS</span>
+    </div>
+    <div class="text_decoration state8">
+        <span>GC VERIFICATION</span>
+    </div>
+    <div class="text_decoration state9">
+        <span>ADMIN VERIFICATION</span>
+    </div>
+    <div class="text_decoration state10">
+        <span>RA VERIFICATION</span>
+    </div>
+    <div class="text_decoration state11">
+        <span>DONE</span>
+    </div>
 
 
 </div>

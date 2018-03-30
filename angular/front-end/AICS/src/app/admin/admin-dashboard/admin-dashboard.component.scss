@@ -17,12 +17,11 @@
 
 .due_req{
 	grid-row: 2;
-	grid-column:2;            
-	background-color:#38393A; 
+	grid-column:2;           
+	background-color: #979797;
+	color:#38393A;
 	padding: 15px;
-	color:#979797;
-	box-shadow: 0.5px 0.5px 5px #38393a;
-	
+	box-shadow: 0px 0.5px 5px #38393A;
 }
 .due_ver{
 	grid-row: 2;
@@ -40,17 +39,13 @@
 	padding: 15px;
 	box-shadow: 0px 0.5px 5px #38393A;
 }
-
-
-.holder{
-    grid-row: 1/ span 3;
-    grid-column: 1;
-    align-items:center;
-    justify-self:left;
-    padding-left: 10%;
-    max-height: 95%;
-    width:100%;
+.active{
+	background-color:#38393A; 
+	padding: 15px;
+	color:#979797;
+	box-shadow: 0.5px 0.5px 5px #38393a;
 }
+
 
 
 .offsetbg{
@@ -65,12 +60,6 @@
 	box-shadow: 0px 0.5px 5px rgb(67, 147, 228);            
 }
 
-.main_data{
-	display:grid;
-	grid-template-columns: 36% 34% 30%;
-	grid-template-rows: 55% 2% 43%;
-	// align-items: center;            
-}
 
 
 .bgbody{

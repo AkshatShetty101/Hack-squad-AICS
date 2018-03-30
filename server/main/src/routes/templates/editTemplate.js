@@ -1,21 +1,19 @@
-const template = require('../../models/template');
+const Template = require('../../models/template');
+
 module.exports = (req, res, next) => {
-	// let newForm = {
-	// 	data: req.body.data
-	// };
-	let newData = {};
-	if (req.body.title) {
-		newData.title = req.body.title;
-	}
-	if (req.body.tags) {
-		newData.tags = req.body.tags;
-	}
-	if (req.body.format) {
-		newData.format = req.body.format;
-	}
-	console.log(newData);
-	if (req.body.templateId && (newData.title || newData.format || newData.tags)) {
-		template.findByIdAndUpdate(req.body.templateId, { $set: newData }, (err, result) => {
+	if (req.body.templateId && req.body.update && (req.body.update.title
+		|| req.body.update.format || req.body.update.tags)) {
+		let newData = {};
+		if (req.body.update.title) {
+			newData.title = req.body.update.title;
+		}
+		if (req.body.update.tags) {
+			newData.tags = req.body.update.tags;
+		}
+		if (req.body.format) {
+			newData.format = req.body.update.format;
+		}
+		Template.findByIdAndUpdate(req.body.templateId, { $set: newData }, (err, result) => {
 			if (err) {
 				console.error(err);
 				res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);

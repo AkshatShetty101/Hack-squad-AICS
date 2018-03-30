@@ -58,7 +58,7 @@ module.exports = (req, res) => {
 												console.log('Form Added successfully to block-chain');
 												const notifToSend = notificationMessage.ADMIN.RA_APP_TEMP;
 												notifToSend.data = { formId: res.locals.formId, causerId: res.locals.user._id.toString() };
-												notificationsHelper.addNotificationToQueue(res.locals.admin_id, notifToSend);
+												notificationsHelper.addNotificationToQueue(res.locals.admin_id.toString(), notifToSend);
 												res.status(200).json(responseMessage.SUCCESS.SUCCESS);
 											});
 										}).catch((err) => {

@@ -1,0 +1,11 @@
+<div class="rows" (click)="load()">
+  <div class="name" >
+    <i [ngClass]="issue.status=='open'?'open fa fa-exclamation-circle':'closed fa fa-exclamation-circle'"></i>&nbsp;{{ issue.title }}
+    <div *ngFor="let t of issue.tags;" [ngClass]="t=='doubt'?'doubt tag':t=='incorrect template'?'incorrect tag':'insufficient tag'" [innerHTML]="t">
+    </div>
+  </div>
+  <div class="det">#{{issue._id}}&nbsp;{{ issue.user}}
+  </div>
+
+  <div class="reply"><i class="fa fa-comment"></i>&nbsp; {{ issue.comments }}</div>
+</div>
