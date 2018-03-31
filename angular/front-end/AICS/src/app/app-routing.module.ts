@@ -21,12 +21,13 @@ import { TrackRequestComponent } from './ra/ra-dashboard/track-request/track-req
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'formBuilder', component: FormBuilderComponent },
+  // {path:'formBuilder',component: FormBuilderComponent},
   { path: 'formRenderer', component: FormRendererComponent },
   { path: 'admin', component: AdminComponent, children: [
       { path: 'tracking', component: AdminTrackingComponent },
       { path: 'view_forms', component: AdminViewFormsComponent },
       { path: 'view_repository', component: AdminViewRepositoryComponent },
+      { path: 'formBuilder', component: FormBuilderComponent },
       { path: 'dashboard', component: AdminDashboardComponent, children: [
           { path: 'request', component: AdminDashboardRequestsComponent },
           { path: 'verification', component: AdminDashboardVerificationsComponent },
