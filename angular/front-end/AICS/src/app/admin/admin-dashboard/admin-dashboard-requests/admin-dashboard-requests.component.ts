@@ -44,6 +44,8 @@ export class AdminDashboardRequestsComponent implements OnInit, AfterViewInit {
 
   openBuilder() {
     this.formBuild.initForm();
+    this.formBuild.requestId = this.requestToLoad.id;
+    this.formBuild.route = '/admin/dashboard/verifications';
     this.router.navigateByUrl('/formBuilder');
   }
 

@@ -174,6 +174,7 @@ export class LoginComponent implements OnInit {
     this.http.verifyUser(request)
       .subscribe(
         (response: any) => {
+          console.log(response.token);
           if (response.status === 'LOGIN') {
             //console.log('Here!');
             this.auth.storeStatus(response.token, response.designation);
