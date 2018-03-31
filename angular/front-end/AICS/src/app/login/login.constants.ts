@@ -27,7 +27,6 @@ export const  keywords: object  =
       value : 'Password',
       translationType : 'TRANSLATE_FONT'
     },
-    
 ],
   'HINDI' : [
     {
