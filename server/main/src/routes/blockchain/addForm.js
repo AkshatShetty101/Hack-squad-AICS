@@ -35,12 +35,15 @@ module.exports = (req, res) => {
 										let assignee = factory.newRelationship(this.NS, 'Person', res.locals.user._id.toString());
 										let template = factory.newRelationship(this.NS, 'Template', req.body.templateId.toString());
 										// Creating a new form asset
+										console.log(assignee);
+										console.log(template);
 										form = factory.newResource(this.NS, 'Form', res.locals.formId);
 										form.createdBy = assignee;
 										form.currentHolder = assignee;
 										form.template = template;
 										form.requestId = res.locals.requestId.toString();
 										form.isValid = true;
+										console.log(form)
 										// Adding form to form registry
 										formRegistry.add(form).then((data) => {
 											// Creating the transaction

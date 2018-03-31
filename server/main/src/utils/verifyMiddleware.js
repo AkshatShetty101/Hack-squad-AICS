@@ -20,7 +20,7 @@ exports.verifyPerson = (req, res, next) => {
 			else {
 				// Get user data and save it for use in other routes
 				User.findOne({ _id: decoded.data }, (err, data) => {
-					if (data) {
+					if (data) {	
 						res.locals.user = data;
 						console.log('Verified person!');
 						next();
