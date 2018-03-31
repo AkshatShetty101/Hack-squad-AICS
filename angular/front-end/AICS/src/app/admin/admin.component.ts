@@ -18,16 +18,7 @@ export class AdminComponent implements OnInit {
     private sse: SSEService,
     private idb: IndexDBService
   ) {
-    const sse$ = this.sse.establishSSE();
-    sse$.onmessage = (event) => {
-      console.log('sse');
-      this.idb.addNotif(JSON.parse(event.data)).then(() => {
-        console.log('success!');
-      }).catch((error) => {
-        console.log(error);
-      });
-      this.sse.emitNotif(event);
-    };
+    this.sse.establishSSE();
   }
 
   ngOnInit() { }
