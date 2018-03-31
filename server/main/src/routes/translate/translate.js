@@ -15,7 +15,7 @@ module.exports = (req, res) => {
 				});
 		};
 
-		const translatePromise = Object.keys(res.body.data).map((key) => {
+		const translatePromise = Object.keys(req.body.data).map((key) => {
 			return new Promise((resolve, reject) => {
 				getTranslation(key, resolve, reject);
 			});
