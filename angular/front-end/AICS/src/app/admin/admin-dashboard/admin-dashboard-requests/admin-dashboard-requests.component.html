@@ -6,14 +6,14 @@
         <app-admin-preview [t]="test" [data]="requestToLoad"></app-admin-preview>
     </div>
     <div class="holder3">
-        <div style="width: 100%; height: 100%">
             <canvas baseChart 
+            style="width: 5em; height: 5em; padding-top: 5vh;"
             [data]="pieChartData" 
-            [labels]="pieChartLabels" 
+            [labels]="pieChartLabels"
+            [colors]="pieChartColors"
             [chartType]="pieChartType" 
             (chartHover)="chartHovered($event)"
             (chartClick)="chartClicked($event)"></canvas>
-        </div>
     </div>
     <div class="holder4">
         <div class="sub_grid">
