@@ -290,7 +290,7 @@ input {
 
 .lang{
     display:grid;
-    grid-template-rows: repeat(5, 20%);
+    grid-template-rows: repeat(2, 20%);
     height: 40vh;
     width:3vw;
     position:fixed;
@@ -311,18 +311,7 @@ input {
     color: #f7f7f7;
     font-size:14px;
 }
-.icon1{
-    // background-color:#B71C1C;
-    background-color: #38393a;
-    border-top-left-radius:5px;
-}
-.icon2{
-    // background-color: #009688;
-    background-color: #38393a;
-}
-.icon3{
-    background-color: #38393a;
-}
+
 .icon4{
     // background-color: #004489;
     background-color: #38393a;

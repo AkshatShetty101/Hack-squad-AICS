@@ -14,6 +14,9 @@ export class AuthService {
     if (this.themeName === 'theme-one'){
       this.themeName = 'theme-two';
       this.themeChange.emit(this.themeName);
+    } else {
+      this.themeName = 'theme-one';
+      this.themeChange.emit(this.themeName);
     }
   }
   storeStatus(token: string, role: string) {
