@@ -23,11 +23,12 @@ module.exports = (req, res, next) => {
 					// Saving form data
 					formData.save((err, result) => {
 						if (err) {
+							console.error(err);
 							res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
 						} else {
 							// Adding required parameters
 							console.log('Added Form to DB');
-							res.locals.formId = result._id.toString();
+							res.locals.formId = result._id;
 							// Passing contorl to addForm to block-chain
 							next();
 						}

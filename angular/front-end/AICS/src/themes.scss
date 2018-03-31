@@ -18,4 +18,29 @@
     }
     @include angular-material-theme($theme);
     @include set-theme($theme, $shadow, $background);
+    .particles-js-bg{
+        background: linear-gradient(to bottom right, #375E8B, #407CAD, #3F7DAD, #318BA5, #3983AA, #94989C, #9C9A9B) no-repeat;
+    }
+}
+
+
+.theme-name{
+    // Material Colors
+    $primary: mat-palette($mat-blue, 500);
+    $accent: mat-palette($mat-blue);
+    $warn: mat-palette($mat-blue);
+    $theme: mat-light-theme($primary, $accent, $warn);
+    // Extra Colors
+    $shadow: mat-palette($mat-blue);
+    $background: mat-palette($mat-red);
+ 
+
+    @mixin set-theme($theme, $shadow, $background) {
+        @include global-theme($theme, $shadow, $background);
+    }
+    @include angular-material-theme($theme);
+    @include set-theme($theme, $shadow, $background);
+    .particles-js-bg{
+        background: linear-gradient(to bottom right, #375E8B, #407CAD, #3F7DAD, #318BA5, #3983AA, #94989C, #9C9A9B) no-repeat;
+    }
 }
