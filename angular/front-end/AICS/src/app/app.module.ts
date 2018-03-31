@@ -73,6 +73,9 @@ import { HTTPInterceptor } from './shared/services/http.interceptor';
 import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component';
 import { ChartsModule } from 'ng2-charts';
 
+import { TestComponent } from './test/test.component';
+import { ChartServiceService } from './chart-service.service';
+// import "gitgraph";
 @NgModule({
   declarations: [
     AppComponent,
@@ -121,7 +124,9 @@ import { ChartsModule } from 'ng2-charts';
     IssueTrackerComponent,
     IssueComponent,
     IssueDetailsComponent,
-    IssueNewComponent
+    IssueNewComponent,
+    TestComponent,
+    // gitgraph
   ],
   imports: [
     BrowserModule,
@@ -150,6 +155,7 @@ import { ChartsModule } from 'ng2-charts';
     HttpService,
     AuthService,
     GraphQLService,
+    ChartServiceService,
     SSEService
   ],
   bootstrap: [AppComponent]
