@@ -64,7 +64,7 @@ import { RaRequestComponent } from './ra/ra-dashboard/track-request/ra-request-l
 import { RaRequestPreviewComponent } from './ra/ra-dashboard/track-request/ra-request-preview/ra-request-preview.component';
 import { AdminFormComponent } from './admin/admin-view-repository/admin-form/admin-form.component';
 import { MatIconModule, MatTabsModule } from '@angular/material';
-import { MatButtonModule, MatRadioModule, MatCheckboxModule} from '@angular/material';
+import { MatButtonModule, MatRadioModule, MatCheckboxModule } from '@angular/material';
 import { IssueTrackerComponent } from './issue-tracker/issue-tracker.component';
 import { IssueComponent } from './issue-tracker/issue/issue.component';
 import { IssueDetailsComponent } from './issue-tracker/issue-details/issue-details.component';
@@ -72,6 +72,13 @@ import { GraphQLService } from './shared/services/graphql.service';
 import { HTTPInterceptor } from './shared/services/http.interceptor';
 import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component';
 import {TranslateService} from './shared/services/translate.service';
+import { ChartsModule } from 'ng2-charts';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { TestComponent } from './test/test.component';
+import { ChartServiceService } from './chart-service.service';
+// import "gitgraph";
 @NgModule({
   declarations: [
     AppComponent,
@@ -120,10 +127,13 @@ import {TranslateService} from './shared/services/translate.service';
     IssueTrackerComponent,
     IssueComponent,
     IssueDetailsComponent,
-    IssueNewComponent
+    IssueNewComponent,
+    TestComponent,
+    // gitgraph
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     AngularDraggableModule,
@@ -135,8 +145,8 @@ import {TranslateService} from './shared/services/translate.service';
     MatButtonModule,
     MatRadioModule,
     MatCheckboxModule,
-    // AngularIndexedDB,
-    HttpModule,
+    MatSnackBarModule,
+    ChartsModule,
     LocalStorageModule.withConfig({
       prefix: 'app',
       storageType: 'localStorage'
@@ -150,8 +160,9 @@ import {TranslateService} from './shared/services/translate.service';
     HttpService,
     AuthService,
     GraphQLService,
-    SSEService,
-    TranslateService
+    TranslateService,
+    ChartServiceService,
+    SSEService
   ],
   bootstrap: [AppComponent]
 })

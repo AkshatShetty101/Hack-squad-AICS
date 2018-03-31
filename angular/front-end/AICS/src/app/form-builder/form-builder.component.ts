@@ -7,6 +7,7 @@ import { FormBuildService } from './form-build.service';
 import { FormRenderService } from '../form-renderer/form-render.service';
 import { HttpService } from '../shared/services/http.service';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 // import { setTimeout } from 'timers';
 
 @Component({
@@ -57,7 +58,8 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
     private parentRef: ElementRef,
     private formRender: FormRenderService,
     private http: HttpService,
-    private changeRef: ChangeDetectorRef
+    private changeRef: ChangeDetectorRef,
+    private router: Router
   ) {
     Observable.fromEvent(this.parentRef.nativeElement, 'drop')
       .filter((event) => {
@@ -564,8 +566,12 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
       console.log(request);
       this.http.addTemplates(request)
         .subscribe(
-        (response) => {
+        (response: any) => {
           console.log(response);
+          if(response.status === "SUCCESS"){
+            this.formBuild.templateId = response.templateId;
+            this.router.navigateByUrl('/admin')
+          }
         }
         );
     }, 200);

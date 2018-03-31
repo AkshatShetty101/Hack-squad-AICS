@@ -6,7 +6,14 @@
         <app-admin-preview [t]="test" [data]="requestToLoad"></app-admin-preview>
     </div>
     <div class="holder3">
-        Charts
+            <canvas baseChart 
+            style="width: 5em; height: 5em; padding-top: 5vh;"
+            [data]="pieChartData" 
+            [labels]="pieChartLabels"
+            [colors]="pieChartColors"
+            [chartType]="pieChartType" 
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
     </div>
     <div class="holder4">
         <div class="sub_grid">
@@ -14,7 +21,7 @@
                 <button class="btn" (click)="openBuilder()">Create Template</button>
             </div>
             <div class="sub_holder2">
-                <button class="btn" >Load Template</button>
+                <button class="btn">Load Template</button>
             </div>
             <div class="sub_holder3">
                 <button class="btn">Find Form</button>

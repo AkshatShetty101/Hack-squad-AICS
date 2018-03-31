@@ -7,6 +7,7 @@ import { HttpService } from '../shared/services/http.service';
 import { AuthService } from '../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { keywords as PageTextWords } from './login.constants';
+import { MatSnackBar } from '@angular/material';
 
 declare var particlesJS: any;
 @Component({
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private sse: SSEService,
     private router: Router,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private snackBar: MatSnackBar
   ) {
     this.myForm = new FormGroup({
       username: new FormControl(),
@@ -154,6 +156,9 @@ export class LoginComponent implements OnInit {
       });
     });
   }
+  openSnackBar(message:string) {
+    this.snackBar.open(message,"Close",{duration:1000});
+  }
 
   submitCredentials(data) {
     let request: any;
@@ -161,16 +166,16 @@ export class LoginComponent implements OnInit {
       email: data.username,
       password: data.password
     };
-    console.log(request);
-    this.myForm.reset();
+    if(request.password != null)
+    {
+      this.myForm.reset();
     this.auth.empty();
     // this.router.navigateByUrl('/admin');
     this.http.verifyUser(request)
       .subscribe(
         (response: any) => {
-          // console.log(response.token);
           if (response.status === 'LOGIN') {
-            // console.log('Here!');
+            //console.log('Here!');
             this.auth.storeStatus(response.token, response.designation);
             this.sse.establishSSE();
             if (response.designation === 'admin') {
@@ -188,12 +193,17 @@ export class LoginComponent implements OnInit {
           }
         },
         (error) => {
-          console.log(error);
+          console.log("Error");
+          this.openSnackBar("Wrong Credentials!");
           if (error.status === 'INVALID_CRED') {
-            alert('Wrong username or password');
+           
           }
           // this.router.navigateByUrl('/admin');
         });
+    }else{
+      this.openSnackBar("Please enter credentials!");
+    }
+    
   }
 
 }
