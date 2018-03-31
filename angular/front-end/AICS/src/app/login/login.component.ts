@@ -158,15 +158,15 @@ export class LoginComponent implements OnInit {
   toggleLanguage() {
 
     this.currentLanguageIsEnglish = !this.currentLanguageIsEnglish;
-    console.log("changed to",this.currentLanguageIsEnglish)
+    console.log("changed to", this.currentLanguageIsEnglish)
     if (!this.currentLanguageIsEnglish) {
       console.log('translating to hindi');
       PageTextWords['HINDI'].forEach((el: any) => {
-          this.htmlPageText[el.key] = el.value;
-        });
+        this.htmlPageText[el.key] = el.value;
+      });
     }
     else {
-      console.log("shoukd change to English",this.currentLanguageIsEnglish)
+      console.log("shoukd change to English", this.currentLanguageIsEnglish)
       PageTextWords['ENGLISH'].forEach((el: any) => {
         this.htmlPageText[el.key] = el.value;
       });
@@ -184,45 +184,27 @@ export class LoginComponent implements OnInit {
     };
     if (request.password != null) {
       this.myForm.reset();
-<<<<<<< HEAD
       this.auth.empty();
       // this.router.navigateByUrl('/admin');
       this.http.verifyUser(request)
         .subscribe(
           (response: any) => {
+            console.log(response.token);
             if (response.status === 'LOGIN') {
-              //console.log('Here!');
+              // console.log('Here!');
               this.auth.storeStatus(response.token, response.designation);
               this.sse.establishSSE();
               if (response.designation === 'admin') {
                 this.router.navigateByUrl('/admin');
-=======
-    this.auth.empty();
-    // this.router.navigateByUrl('/admin');
-    this.http.verifyUser(request)
-      .subscribe(
-        (response: any) => {
-          console.log(response.token);
-          if (response.status === 'LOGIN') {
-            // console.log('Here!');
-            this.auth.storeStatus(response.token, response.designation);
-            this.sse.establishSSE();
-            if (response.designation === 'admin') {
-              this.router.navigateByUrl('/admin');
-            } else
-              if (response.designation === 'gc') {
+              } else if (response.designation === 'gc') {
                 this.router.navigateByUrl('/gc');
->>>>>>> 08f47d556db08a6ceb2551837f2fb82fa8bb4ef7
-              } else
-                if (response.designation === 'gc') {
-                  this.router.navigateByUrl('/gc');
-                } else
-                  if (response.designation === 'ra') {
-                    this.router.navigateByUrl('/requesting_authority');
-                  }
-                  else {
-                    this.router.navigateByUrl('/user');
-                  }
+              } else if (response.designation === 'gc') {
+                this.router.navigateByUrl('/gc');
+              } else if (response.designation === 'ra') {
+                this.router.navigateByUrl('/requesting_authority');
+              } else {
+                this.router.navigateByUrl('/user');
+              }
             }
           },
           (error) => {
