@@ -37,10 +37,11 @@ module.exports = (req, res) => {
 										// Creating a new form asset
 										console.log(assignee);
 										console.log(template);
-										form = factory.newResource(this.NS, 'Form', res.locals.formId);
+										form = factory.newResource(this.NS, 'Form', res.locals.formId.toString());
 										form.createdBy = assignee;
 										form.currentHolder = assignee;
 										form.template = template;
+										form.isCompleted = false;
 										form.requestId = res.locals.requestId.toString();
 										form.isValid = true;
 										console.log(form)
