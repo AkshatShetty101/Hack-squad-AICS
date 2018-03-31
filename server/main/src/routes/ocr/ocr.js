@@ -3,8 +3,7 @@ const path = require('path');
 
 module.exports = (req, res) => {
 	console.log(req.body);
-	const rxdFile = new Blob(req.body.file);
-	console.log(rxdFile);
+	console.log(req.file);
 	const TesseractScanner = Tesseract.create({
 		workerPath: path.join(__dirname, '../../../', 'node_modules', 'tesseract.js', 'dist', 'worker.js'),
 		corePath: path.join(__dirname, '../../../', 'node_modules', 'tesseract.js-core', 'index.js'),

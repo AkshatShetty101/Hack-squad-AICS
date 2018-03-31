@@ -87,8 +87,11 @@
         <i class="fa fa-font"></i>
       </span>
     </div>
-    <div class="rows icon4">
-      <span>हिन्दी</span>
+    <div class="rows icon4" (click)="toggleLanguage()">
+      
+      <span *ngIf="currentLanguageIsEnglish"> हिन्दी</span>
+      <span *ngIf="!currentLanguageIsEnglish"> Eng</span>
+
     </div>
     <div class="rows icon5" (click)='toggleTheme()'>
       <span>

@@ -46,5 +46,10 @@ export class GraphQLService {
     return this.http.post(environment.serverUrl + '/reqForm', body);
   }
 
-
+  loadCountBasedForms(id) {
+    const body = {
+      query: "query: { formCount { } }"
+    };
+    return this.http.post(environment.serverUrl + '/forms', body);
+  }
 }

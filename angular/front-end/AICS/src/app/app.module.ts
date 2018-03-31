@@ -76,8 +76,8 @@ import { ChartsModule } from 'ng2-charts';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { TestComponent } from './test/test.component';
 import { ChartServiceService } from './chart-service.service';
+import { GitGraphComponent } from './git-graph/git-graph.component';
 // import "gitgraph";
 @NgModule({
   declarations: [
@@ -128,7 +128,7 @@ import { ChartServiceService } from './chart-service.service';
     IssueComponent,
     IssueDetailsComponent,
     IssueNewComponent,
-    TestComponent,
+    GitGraphComponent,
     // gitgraph
   ],
   imports: [

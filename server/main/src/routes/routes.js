@@ -297,7 +297,11 @@ router.post('/translate',
 /**
  * OCR Route
  */
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+
 router.post('/ocr',
+	upload.single('avatar'),
 	require('./ocr/ocr'));
 
 router.get('/some', require('../../config/addDbPeopleToBC'));
