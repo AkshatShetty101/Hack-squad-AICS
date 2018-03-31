@@ -8,7 +8,8 @@ import { FormRenderService } from '../../../form-renderer/form-render.service';
 })
 export class AdminViewBoxComponent implements OnInit {
   @Input()cl: string;
-  @Input()form:{ id: string, title: string, division: string, deadline: number };
+  // @Input()form:{ id: string, title: string, division: string, deadline: number };
+  @Input()form:any;
   modalOpen: boolean = false;
   constructor(
     private formRender: FormRenderService

@@ -23,7 +23,8 @@ export class HTTPInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const split = request.url.split(':');
-    if (split[split.length - 1] !== '3000/api/users/login') {
+    const ignoreURLs = ['3000/api/users/login', '3000/api/translate'];
+    if (ignoreURLs.indexOf(split[split.length - 1]) === -1) {
       const mutatedRequest = request.clone({
         headers: request.headers.set('Content-Type', 'application/json')
           .set('x-access-token', this.auth.getToken()),

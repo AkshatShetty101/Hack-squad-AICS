@@ -26,7 +26,7 @@ export class AdminVerificationsListComponent implements OnInit {
     );
   }
 
-  approveFormList: { id: string, type: string }[] = [];
+  approveFormList: { id: string}[] = [];
   assignFormList: { id: string }[] = [];
   ngOnInit() {
     // this.indexedDB.openConnection()
@@ -36,16 +36,18 @@ export class AdminVerificationsListComponent implements OnInit {
     //   }).catch((err) => {
 
     //   });
-    this.indexedDB.getSpecificNotifs("GC.ADMIN_ASS_FORM").then((data: any) => {
-      this.assignFormList = data;
-      this.indexedDB.getSpecificNotifs("RA.ADMIN_APP_FORM").then((data: any) => {
-        this.approveFormList = data;
-      }).catch((err) => {
-        console.log(err);
-      });
-    }).catch((err) => {
-      console.log(err);
-    });
+    this.approveFormList = [{id:'123456789'},{id:'12345678'},{id:'23456789'}];
+    this.assignFormList = [{id:'423456789'},{id:'45545678'},{id:'27656789'}];
+    // this.indexedDB.getSpecificNotifs("GC.ADMIN_ASS_FORM").then((data: any) => {
+    //   this.assignFormList = data;
+    //   this.indexedDB.getSpecificNotifs("RA.ADMIN_APP_FORM").then((data: any) => {
+    //     this.approveFormList = data;
+    //   }).catch((err) => {
+    //     console.log(err);
+    //   });
+    // }).catch((err) => {
+    //   console.log(err);
+    // });
   }
 
   getFreshData() {
