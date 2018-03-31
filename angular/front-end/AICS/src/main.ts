@@ -12,4 +12,4 @@ if (environment.production) {
 Observable.interval(2000).take(1).subscribe(() => {
   platformBrowserDynamic().bootstrapModule(AppModule)
     .catch(err => console.log(err));
-})
+});

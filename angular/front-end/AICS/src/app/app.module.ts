@@ -71,7 +71,7 @@ import { IssueDetailsComponent } from './issue-tracker/issue-details/issue-detai
 import { GraphQLService } from './shared/services/graphql.service';
 import { HTTPInterceptor } from './shared/services/http.interceptor';
 import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component';
-
+import {TranslateService} from './shared/services/translate.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -150,7 +150,8 @@ import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component
     HttpService,
     AuthService,
     GraphQLService,
-    SSEService
+    SSEService,
+    TranslateService
   ],
   bootstrap: [AppComponent]
 })
