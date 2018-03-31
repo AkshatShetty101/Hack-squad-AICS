@@ -5,6 +5,7 @@ import { Table, Row, Column } from '../shared/models/table.model';
 export class FormBuildService {
   formSubject: Subject<boolean> = new Subject();
   table: Table;
+  templateId: any;
   constructor() { }
   updateForm(element, pos){
     let r, c, i;
