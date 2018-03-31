@@ -19,6 +19,11 @@ export class HttpService {
     return this.http.post(this.auth.baseURI + '/users/login', body);
   }
 
+  ocr(request: any) {
+    const body = request;
+    return this.http.post(this.auth.baseURI + '/ocr', body);
+  }
+
   deleteUser(request: any, token) {
     const body = request;
     return this.http.post(this.auth.baseURI + '/users/delete', body);

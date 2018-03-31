@@ -11,10 +11,12 @@ export class AdminDashboardRequestsComponent implements OnInit, AfterViewInit {
   requestToLoad: { id: string, title: string, data: string } = { id: 'default', title: 'default', data: 'default' };
   test: number;
   table: any;
+
   constructor(
     private change: ChangeDetectorRef,
     private formBuild: FormBuildService,
-    private router: Router) { }
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.requestToLoad = { id: 'default', title: 'default', data: 'default' };
@@ -33,13 +35,32 @@ export class AdminDashboardRequestsComponent implements OnInit, AfterViewInit {
     console.log('change detected!!');
     this.requestToLoad = { id: 'default', title: 'default', data: 'default' };
   }
+
   clearIt() {
     this.change.detectChanges();
     // this.requestToLoad = { id: 'default', title: 'default', data: 'default' };
     console.log('cleared');
   }
+
   openBuilder() {
     this.formBuild.initForm();
     this.router.navigateByUrl('/formBuilder');
+  }
+
+  // Pie
+  public pieChartLabels: string[] = ['Beyond Deadline', 'Within a week', 'Beyond a week'];
+  public pieChartColors: any[] = [
+    { backgroundColor: ['#d50303', '#ffd52b', '#023611'] }
+  ];
+  public pieChartData: number[] = [300, 500, 300];
+  public pieChartType: string = 'pie';
+
+  // events
+  public chartClicked(e: any): void {
+    console.log(e);
+  }
+
+  public chartHovered(e: any): void {
+    console.log(e);
   }
 }
