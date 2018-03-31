@@ -72,6 +72,8 @@ import { GraphQLService } from './shared/services/graphql.service';
 import { HTTPInterceptor } from './shared/services/http.interceptor';
 import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component';
 import { ChartsModule } from 'ng2-charts';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TestComponent } from './test/test.component';
 import { ChartServiceService } from './chart-service.service';
@@ -130,6 +132,7 @@ import { ChartServiceService } from './chart-service.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     AngularDraggableModule,
@@ -141,6 +144,7 @@ import { ChartServiceService } from './chart-service.service';
     MatButtonModule,
     MatRadioModule,
     MatCheckboxModule,
+    MatSnackBarModule,
     ChartsModule,
     LocalStorageModule.withConfig({
       prefix: 'app',
