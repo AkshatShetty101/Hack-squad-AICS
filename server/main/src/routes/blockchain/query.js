@@ -76,6 +76,7 @@ exports.getTemplateRequestId = (req, res, next) => {
 				console.log(doc);
 				if (doc) {
 					res.locals.requestId = doc._id;
+					console.log('getTemplateRequestId reached!');
 					next();
 				} else {
 					// console.error(err.message);
