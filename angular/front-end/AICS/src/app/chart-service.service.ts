@@ -13,33 +13,33 @@ export class ChartServiceService {
   ) {
 
   }
-  public templateCreator(){
-    return  {
-    colors: ["#979797", "#008fb5", "#f1c109"],
-    branch: {
-      lineWidth: 10,
-      spacingX: 50,
-      labelRotation: 0
-    },
-    commit: {
-      spacingY: -80,
-      dot: {
-        size: 14
+  public templateCreator() {
+    return {
+      colors: ["#979797", "#008fb5", "#FF8C00", "#f1c109", "#5d9451"],
+      branch: {
+        lineWidth: 5,
+        spacingX: 50,
+        labelRotation: 0
       },
-      message: {
-        displayAuthor: false,
-        displayBranch: true,
-        displayHash: false,
-        font: "normal 12pt Arial"
+      commit: {
+        spacingY: -80,
+        dot: {
+          size: 14
+        },
+        message: {
+          displayAuthor: false,
+          displayBranch: true,
+          displayHash: false,
+          font: "normal 12pt Arial"
+        }
       }
-    }
-  };
+    };
   }
   public buildEventChart(sampleJson: any[]) {
     let number = 0;
     console.log(this.templateCreator());
     let template = new GitGraph.Template(this.templateCreator());
-    this.gitgraph = new GitGraph({template:template});
+    this.gitgraph = new GitGraph({ template: template });
     console.log(this.gitgraph);
     this.parties = Array.from(new Set(sampleJson.map(item => item.newHolderType)));
 
@@ -47,16 +47,16 @@ export class ChartServiceService {
       if (number == 0) {
         this.swimlanes[0] = this.gitgraph.branch(element.personType);
         this.swimlanes[0].commit({
-          message:element.type,
-          author:" ",
-          onClick: function(commit) {
+          message: element.type,
+          author: " ",
+          onClick: function (commit) {
             this.snackBar.open(element.type);
           }
         });
       } else {
         let personSwimlaneNumber = this.findSwimlaneNumber(element.personType);
         let newPersonSwimlaneNumber = this.findSwimlaneNumber(element.newHolderType);
-       
+
         if (element.personType == element.newHolderType) {
           this.swimlanes[personSwimlaneNumber].commit(element.type);
         } else if (newPersonSwimlaneNumber > personSwimlaneNumber) {

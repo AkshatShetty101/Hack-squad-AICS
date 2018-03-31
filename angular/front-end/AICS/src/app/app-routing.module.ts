@@ -1,3 +1,4 @@
+import { GitGraphComponent } from './git-graph/git-graph.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -23,19 +24,21 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   // {path:'formBuilder',component: FormBuilderComponent},
   { path: 'formRenderer', component: FormRendererComponent },
-  { path: 'admin', component: AdminComponent, children: [
+  {
+    path: 'admin', component: AdminComponent, children: [
       { path: 'tracking', component: AdminTrackingComponent },
       { path: 'view_forms', component: AdminViewFormsComponent },
       { path: 'view_repository', component: AdminViewRepositoryComponent },
       { path: 'formBuilder', component: FormBuilderComponent },
-      { path: 'dashboard', component: AdminDashboardComponent, children: [
+      {
+        path: 'dashboard', component: AdminDashboardComponent, children: [
           { path: 'request', component: AdminDashboardRequestsComponent },
           { path: 'verification', component: AdminDashboardVerificationsComponent },
           { path: 'repository', component: AdminDashboardRepositoryComponent },
           { path: '', pathMatch: 'full', redirectTo: 'request' }
         ]
       },
-      { path: '', pathMatch: 'full', redirectTo: 'dashboard'}
+      { path: '', pathMatch: 'full', redirectTo: 'dashboard' }
     ]
   },
   {
@@ -55,7 +58,8 @@ const routes: Routes = [
   },
   {
     path: 'requesting_authority', component: AdminComponent, children: [
-      { path: 'dashboard', component: RaDashboardComponent, children: [
+      {
+        path: 'dashboard', component: RaDashboardComponent, children: [
           { path: 'make_request', component: RaMakeRequestComponent },
           { path: 'track_request', component: TrackRequestComponent },
           { path: '', pathMatch: 'full', redirectTo: 'make_request' }
@@ -64,6 +68,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
+  { path: 'graph', component: GitGraphComponent },
   { path: '**', component: LoginComponent },
 ];
 
