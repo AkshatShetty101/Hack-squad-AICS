@@ -18,10 +18,11 @@ export class AdminRequestListComponent implements OnInit {
     private sse: SSEService,
     private ref: ChangeDetectorRef
   ) {
-    this.sse.getNotif().subscribe(
+    const sse$ = this.sse.getNotif();
+    sse$.subscribe(
       (event: any) => {
-        console.log(event);
-        switch (event.status) {
+        console.log(JSON.parse(event.data).status);
+        switch (JSON.parse(event.data).status) {
           case 'RA_MAKE_REQ':
             this.getFreshData();
             break;

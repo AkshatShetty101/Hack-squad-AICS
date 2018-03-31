@@ -45,13 +45,13 @@ const routes: Routes = [
     path: 'user', component: UserComponent, children: []
   },
   {
-    path:'issue_tracker', component: IssueNewComponent
+    path: 'issue_tracker', component: IssueNewComponent
   },
   {
-    path:'issue_details', component: IssueNewComponent
+    path: 'issue_details', component: IssueNewComponent
   },
   {
-    path:'new-issue', component: IssueNewComponent
+    path: 'new-issue', component: IssueNewComponent
   },
   {
     path: 'requesting_authority', component: AdminComponent, children: [

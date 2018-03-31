@@ -1,9 +1,9 @@
-// Declaring constants
+const ReqForm = require('../../models/request_form');
 const Template = require('../../models/template');
 
 module.exports = (req, res, next) => {
 	// Setting data for new template
-	if (req.body.format && req.body.title) {
+	if (req.body.format && req.body.title && req.body.requestId) {
 		const templateData = new Template({
 			created_by: res.locals.user._id,
 			tags: req.body.tags ? req.body.tags : [],
@@ -20,7 +20,15 @@ module.exports = (req, res, next) => {
 				// Adding required parameters
 				res.locals.templateId = result._id;
 				// Passing control to addForm to DB
-				next();
+				ReqForm.updateOne({ _id: req.body.requestId }, { $set: { template: { templateId: result._id } } }, (err, doc) => {
+					if (err) {
+						console.error(err);
+						res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
+					} else {
+						console.log(doc);
+						next();
+					}
+				});
 			}
 		});
 	} else {

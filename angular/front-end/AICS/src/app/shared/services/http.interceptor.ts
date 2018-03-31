@@ -22,12 +22,11 @@ export class HTTPInterceptor implements HttpInterceptor {
   constructor(private auth: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(request + '~' + request.url.split(':')[1] !== '3000/api/users/login');
-    if (request.url.split(':')[1] !== '3000/api/users/login') {
+    const split = request.url.split(':');
+    if (split[split.length - 1] !== '3000/api/users/login') {
       const mutatedRequest = request.clone({
         headers: request.headers.set('Content-Type', 'application/json')
-          // .set('x-access-token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWFiMGNkMjFlZWRlNGYzMDUwOTA0OTRiIiwiaWF0IjoxNTIyMzk0OTI3LCJleHAiOjE1NjIwNjc4Njh9.qbZFeun4SPFfaRnkbLPpHTxvbUVHTGcWV0PsPy3LtZw'),
-          .set('x-access-token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWFiNGRiMzU2NDM3MzYwMjQwMWJlOGU3IiwiaWF0IjoxNTIyNDQ0MDg5LCJleHAiOjE1OTkzNTQ1NzB9.7RRtHNe17E3v85TFUnezDz1vy0NMtaXEOKHbiy58K54'),
+          .set('x-access-token', this.auth.getToken()),
         // .set('x-access-token', this.auth.get)
       });
       console.log(mutatedRequest);
@@ -48,6 +47,7 @@ export class HTTPInterceptor implements HttpInterceptor {
       // });
     } else {
       console.log('Some shit happened!');
+      return next.handle(request);
     }
   }
 
