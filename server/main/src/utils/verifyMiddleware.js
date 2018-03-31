@@ -7,6 +7,7 @@ const SysAdmin = require('../models/system_admin');
 module.exports = exports = {};
 
 exports.verifyPerson = (req, res, next) => {
+	console.log('Verifying person!');
 	// check header or url parameters or post parameters for token
 	const token = req.body.token || req.query.token || req.headers['x-access-token'];
 	if (token) {
@@ -21,7 +22,7 @@ exports.verifyPerson = (req, res, next) => {
 				User.findOne({ _id: decoded.data }, (err, data) => {
 					if (data) {
 						res.locals.user = data;
-						
+						console.log('Verified person!');
 						next();
 					} else {
 						// If not user, possibly Requesting Authority
@@ -74,6 +75,7 @@ exports.verifyAdminOrGC = (req, res, next) => {
 
 exports.verifyRequestingAuthority = (req, res, next) => {
 	if (res.locals.user.designation === 'ra') {
+		console.log('Verifying RA!');
 		next(); // token is verified and is ra
 	} else {
 		console.log('\n=================Not RA====================\n');

@@ -68,6 +68,7 @@ exports.getTemplateRequestId = (req, res, next) => {
 	// 	res.status(500).json(responseMessage.FAIL.INC_INV_DATA);
 	// }
 	if (req.body.templateId) {
+		console.log('finding reqId of templateId!');
 		ReqForm.findOne({ 'template.template_id': req.body.templateId }, { _id: 1 }, (err, doc) => {
 			if (err) {
 				console.error(err);
@@ -76,6 +77,7 @@ exports.getTemplateRequestId = (req, res, next) => {
 				console.log(doc);
 				if (doc) {
 					res.locals.requestId = doc._id;
+					console.log('GOT IT!');
 					next();
 				} else {
 					// console.error(err.message);
