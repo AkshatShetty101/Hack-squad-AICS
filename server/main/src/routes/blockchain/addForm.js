@@ -37,10 +37,11 @@ module.exports = (req, res) => {
 										// Creating a new form asset
 										console.log(assignee);
 										console.log(template);
-										form = factory.newResource(this.NS, 'Form', res.locals.formId);
+										form = factory.newResource(this.NS, 'Form', res.locals.formId.toString());
 										form.createdBy = assignee;
 										form.currentHolder = assignee;
 										form.template = template;
+										form.isCompleted = false;
 										form.requestId = res.locals.requestId.toString();
 										form.isValid = true;
 										console.log(form)
@@ -69,7 +70,7 @@ module.exports = (req, res) => {
 												'A new form has to be assigned', '',
 												`Hey <b>Rajesh</b>,<br/>
 												<br/>
-												<p>A new form has been created which has to be assigned. Form_Id: <i>${req.locals.formId.toString()}</i></p>
+												<p>A new form has been created which has to be assigned. Form_Id: <i>${res.locals.formId.toString()}</i></p>
 												<br/>
 												Thanks,<br/>
 												AICS MeitY Team`);
