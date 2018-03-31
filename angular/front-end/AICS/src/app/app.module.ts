@@ -1,3 +1,4 @@
+import { SSEService } from './shared/services/sse.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -153,7 +154,8 @@ import { ChartServiceService } from './chart-service.service';
     HttpService,
     AuthService,
     GraphQLService,
-    ChartServiceService
+    ChartServiceService,
+    SSEService
   ],
   bootstrap: [AppComponent]
 })

@@ -10,10 +10,9 @@ exports.getMyForms = (req, res) => {
 	this.cardName = config.get('cardName');
 	return this.bizNetworkConnection.connect(this.cardName)
 		.then(() => {
-			console.log('in1');
 			var query = this.bizNetworkConnection.buildQuery(
 				'SELECT ' + NS_F + ' WHERE (assigneeId CONTAINS _$inputValue)');
-			return this.bizNetworkConnection.query(query, { inputValue: res.locals.user._id });
+			return this.bizNetworkConnection.query(query, { inputValue: res.locals.user._id.toString() });
 		})
 		.then((assets) => {
 			let promise = new Promise((resolve, reject) => {
@@ -40,28 +39,50 @@ exports.getMyForms = (req, res) => {
 		});
 };
 
+const ReqForm = require('../../models/request_form');
 exports.getTemplateRequestId = (req, res, next) => {
-	this.bizNetworkConnection = new BusinessNetworkConnection();
-	this.cardName = config.get('cardName');
+	// this.bizNetworkConnection = new BusinessNetworkConnection();
+	// this.cardName = config.get('cardName');
+	// if (req.body.templateId) {
+	// 	return this.bizNetworkConnection.connect(this.cardName)
+	// 		.then((result) => {
+	// 			this.businessNetworkDefinition = result;
+	// 			// Getting factory definitions
+	// 			console.log(req.body.templateId);
+	// 			var query = this.bizNetworkConnection.buildQuery(
+	// 				'SELECT ' + NS_T + ' WHERE (templateId == _$inputValue)');
+	// 			return this.bizNetworkConnection.query(query, { inputValue: req.body.templateId });
+	// 		})
+	// 		.then((asset) => {
+	// 			console.log('[QUERY getTemplateRequestId]', asset);
+	// 			res.locals.requestId = asset[0].requestId;
+	// 			next();
+	// 		})
+	// 		.catch((err) => {
+	// 			console.error(err.message);
+	// 			res.status(500).json(responseMessage.FAIL.TEMPLATE.NOT_EXISTS);
+	// 			// Add optional error handling here.
+	// 		});
+	// } else {
+	// 	console.error(err.message);
+	// 	res.status(500).json(responseMessage.FAIL.INC_INV_DATA);
+	// }
 	if (req.body.templateId) {
-		return this.bizNetworkConnection.connect(this.cardName)
-			.then((result) => {
-				this.businessNetworkDefinition = result;
-				// Getting factory definitions
-				console.log(req.body.templateId);
-				var query = this.bizNetworkConnection.buildQuery(
-					'SELECT ' + NS_T + ' WHERE (templateId == _$inputValue)');
-				return this.bizNetworkConnection.query(query, { inputValue: req.body.templateId.toString() });
-			})
-			.then((asset) => {
-				res.locals.requestId = asset[0].requestId;
-				next();
-			})
-			.catch((err) => {
-				console.error(err.message);
-				res.status(500).json(responseMessage.FAIL.TEMPLATE.NOT_EXISTS);
-				// Add optional error handling here.
-			});
+		ReqForm.findOne({ 'template.template_id': req.body.templateId }, { _id: 1 }, (err, doc) => {
+			if (err) {
+				console.error(err);
+				res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);	
+			} else {
+				console.log(doc);
+				if (doc) {
+					res.locals.requestId = doc._id;
+					next();
+				} else {
+					// console.error(err.message);
+					res.status(500).json(responseMessage.FAIL.TEMPLATE.NOT_EXISTS);
+				}
+			}
+		});
 	} else {
 		console.error(err.message);
 		res.status(500).json(responseMessage.FAIL.INC_INV_DATA);
@@ -79,7 +100,7 @@ exports.getFormRequestId = (req, res, next) => {
 				console.log(req.body.formId);
 				var query = this.bizNetworkConnection.buildQuery(
 					'SELECT ' + NS_F + ' WHERE (formId == _$inputValue)');
-				return this.bizNetworkConnection.query(query, { inputValue: req.body.formId.toString() });
+				return this.bizNetworkConnection.query(query, { inputValue: req.body.formId });
 			})
 			.then((asset) => {
 				res.locals.requestId = asset[0].requestId;
@@ -104,7 +125,7 @@ exports.getMyCurrentFormsPromise = (req, res) => {
 			console.log('in1');
 			var query = this.bizNetworkConnection.buildQuery(
 				'SELECT ' + NS_F + ' WHERE (assigneeId CONTAINS _$inputValue)');
-			return this.bizNetworkConnection.query(query, { inputValue: res.locals.user._id });
+			return this.bizNetworkConnection.query(query, { inputValue: res.locals.user._id.toString() });
 		})
 		.then((assets) => {
 			return new Promise((resolve, reject) => {
@@ -129,7 +150,6 @@ exports.getFormProgress = (req, res) => {
 
 	return this.bizNetworkConnection.connect(this.cardName)
 		.then(() => {
-			console.log('in1');
 			var query = this.bizNetworkConnection.buildQuery(
 				`SELECT org.acme.aics.FormEvent
 				WHERE(form == _$inputValue)`);
@@ -148,7 +168,7 @@ exports.getFormProgress = (req, res) => {
 					let output = {
 						...responseMessage.SUCCESS.SUCCESS,
 						currentStage: assets[0].type,
-						metadata:assets[0].metadata
+						metadata: assets[0].metadata
 					}
 					res.status(200).json(output);
 				}).catch((err) => {
@@ -173,7 +193,6 @@ exports.getTemplateProgress = (req, res) => {
 
 	return this.bizNetworkConnection.connect(this.cardName)
 		.then(() => {
-			console.log('in1');
 			var query = this.bizNetworkConnection.buildQuery(
 				`SELECT org.acme.aics.TemplateEvent
 				WHERE(template == _$inputValue)`);
@@ -192,12 +211,12 @@ exports.getTemplateProgress = (req, res) => {
 					let output = {
 						...responseMessage.SUCCESS.SUCCESS,
 						currentStage: assets[0].type,
-						metadata:assets[0].metadata
+						metadata: assets[0].metadata
 					}
 					res.status(200).json(output);
 				}).catch((err) => {
 					console.error(err);
-					res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);	
+					res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);
 				})
 			} else {
 				res.status(200).json(responseMessage.FAIL.FORM.NOT_EXISTS);

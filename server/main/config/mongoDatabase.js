@@ -1,4 +1,3 @@
-const mongoDb = require('mongodb');
 const mongoose = require('mongoose');
 
 module.exports = () => {

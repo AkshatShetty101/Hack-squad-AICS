@@ -2,6 +2,8 @@
 // Declaring constants
 const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 const config = require('config');
+const notificationsHelper = require('../../utils/notificationsHelper');
+const mailerHelper = require('../../utils/mailerHelper');
 
 // Declaring block-chain related information
 this.bizNetworkConnection = new BusinessNetworkConnection();

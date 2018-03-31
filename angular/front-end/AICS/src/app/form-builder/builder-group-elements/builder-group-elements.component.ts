@@ -25,7 +25,6 @@ export class BuilderGroupElementsComponent implements OnInit {
   @Input() draggableFlag;
 
   hiddenForm: boolean  = false;
-  valueField: FormControl = new FormControl();
   myForm: FormGroup = new FormGroup({
     required: new FormControl(),
     addValue: new FormControl(),
@@ -37,9 +36,6 @@ export class BuilderGroupElementsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.subtype === 'checkbox'){
-      this.value = [];
-    }
     this.formBuild.formSubject.subscribe(
       (event) => {
         this.sendElement();
@@ -93,14 +89,11 @@ export class BuilderGroupElementsComponent implements OnInit {
     form.controls.addLabel.reset();
     form.controls.addValue.reset();
     let element = this.getElement();
-    console.log(element);
-    this.update.emit(element);
+    // console.log(element);
+    this.update.emit({'element': element, 'pos': this.pos});
     this.hiddenForm = false;
   }
   sendElement() {
-    // console.log(this.valueField.value);
-    this.touched = this.valueField.touched;
-    this.pristine = this.valueField.pristine;
     this.valid = true;
     if(this.required){
       if(this.value === '' || this.value === null || this.value === undefined || this.value.length === 0){
@@ -121,7 +114,7 @@ export class BuilderGroupElementsComponent implements OnInit {
       this.value.push(this.options[index].value);
     }
     else{
-      this.value.splice(this.value.indexOf(this.options[index]), 1);
+      this.value.splice(this.value.indexOf(this.options[index].value), 1);
     }
   }
   getElement() {

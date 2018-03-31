@@ -17,6 +17,8 @@ import { RaMakeRequestComponent } from './ra/ra-dashboard/ra-make-request/ra-mak
 import { FormBuilderComponent } from './form-builder/form-builder.component';
 import { FormRendererComponent } from './form-renderer/form-renderer.component';
 import { TestComponent } from './test/test.component';
+import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component';
+import { TrackRequestComponent } from './ra/ra-dashboard/track-request/track-request.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -44,16 +46,26 @@ const routes: Routes = [
     path: 'user', component: UserComponent, children: []
   },
   {
+    path: 'issue_tracker', component: IssueNewComponent
+  },
+  {
+    path: 'issue_details', component: IssueNewComponent
+  },
+  {
+    path: 'new-issue', component: IssueNewComponent
+  },
+  {
     path: 'requesting_authority', component: AdminComponent, children: [
-      {
-        path: 'dashboard', component: RaDashboardComponent, children: [
+      { path: 'dashboard', component: RaDashboardComponent, children: [
           { path: 'make_request', component: RaMakeRequestComponent },
+          { path: 'track_request', component: TrackRequestComponent },
+          { path: '', pathMatch: 'full', redirectTo: 'make_request' }
         ]
       },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
-  { path: '**', component: AppComponent },
+  { path: '**', component: LoginComponent },
 ];
 
 @NgModule({

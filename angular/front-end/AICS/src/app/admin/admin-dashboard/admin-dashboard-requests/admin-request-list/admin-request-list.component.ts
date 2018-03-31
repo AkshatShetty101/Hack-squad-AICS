@@ -1,3 +1,4 @@
+import { SSEService } from './../../../../shared/services/sse.service';
 import { IndexDBService } from './../../../../shared/services/indexdb.service';
 import { GraphQLService } from './../../../../shared/services/graphql.service';
 import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
@@ -11,15 +12,17 @@ export class AdminRequestListComponent implements OnInit {
   requestList: { id: string, title: string, data: string }[] = [];
   @Output() loadRequest = new EventEmitter<{ id: string, title: string, data: string }>();
   @Output() lr = new EventEmitter<{}>();
+
   constructor(
     private gql: GraphQLService,
-    private idb: IndexDBService,
+    private sse: SSEService,
     private ref: ChangeDetectorRef
   ) {
-    this.idb.notifs.asObservable().subscribe(
+    const sse$ = this.sse.getNotif();
+    sse$.subscribe(
       (event: any) => {
-        console.log(event);
-        switch (event.status) {
+        console.log(JSON.parse(event.data).status);
+        switch (JSON.parse(event.data).status) {
           case 'RA_MAKE_REQ':
             this.getFreshData();
             break;

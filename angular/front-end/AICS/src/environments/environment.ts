@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  serverUrl: "http://aics.in:3000"
+  serverUrl: "http://aics.in:3000/api"
 };

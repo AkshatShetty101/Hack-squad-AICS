@@ -15,14 +15,14 @@ module.exports = (req, res, next) => {
 					if (result) {
 						console.log('Assigned form and set deadline');
 						const notifToSend = notificationMessage.GC.ADMIN_ASS_FORM;
-						notifToSend.data = { templateId: req.body.formId, causerId: res.locals.user._id.toString() };
-						notificationsHelper.addNotificationToQueue(req.body.assigneeId.toString(), notifToSend);
+						notifToSend.data = { formId: req.body.formId, causerId: res.locals.user._id.toString() };
+						notificationsHelper.addNotificationToQueue(req.body.assigneeId, notifToSend);
 						let mailToSend = mailerHelper.mailData(`
 						Sunil Bindu <sunilbindu@meity.gov.in>`, // Random name & email <- GC
 							'A form has been assigned to your division', '',
 							`Hey <b>Sunil</b>,<br/>
 						<br/>
-						<p>A form has been assigned to your division. Form_Id: <i>${req.body.formId.toString()}</i></p>
+						<p>A form has been assigned to your division. Form_Id: <i>${req.body.formId}</i></p>
 						<br/>
 						Thanks,<br/>
 						AICS MeitY Team`);

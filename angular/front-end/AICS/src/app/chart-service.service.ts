@@ -20,6 +20,7 @@ swimlanes:any = [];
     console.log(this.swimlanes[0]);
     sampleJson.forEach(element => {
       if(number == 0 ){
+        console.log()
           this.swimlanes[0] = this.gitgraph.branch(element.personType);
       }else{
         console.log(element);

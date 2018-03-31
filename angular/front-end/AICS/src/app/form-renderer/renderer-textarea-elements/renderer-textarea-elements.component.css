@@ -1,0 +1,21 @@
+.elementHolder{
+    display:grid;
+    grid-template-columns: 94%;
+    grid-template-rows:100%;
+    height:100%;
+    border:0.5px solid rgb(223, 215, 202);
+    border-radius:5px;
+    font-family:'fira sans';
+    font-size: 16px;
+}
+
+.on_transition_label{
+    grid-row:1;
+    grid-column:1;
+    display: flex;
+    align-items:center;
+    margin-left: 1%;
+    font-family: 'fira sans';
+    font-size: 20px;
+    font-weight:bold;
+ }

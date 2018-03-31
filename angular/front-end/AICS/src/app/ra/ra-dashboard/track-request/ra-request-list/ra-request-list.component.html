@@ -2,6 +2,6 @@
     <div class="req_text">Requests</div>
     <div class="reqs">
             <app-ra-request *ngFor="let req of idbrequestList" [id]="req.id" [type]="'incomplete'" [cl]="'cl1'" (loadRequest)="loadIt($event)"></app-ra-request>
-            <app-ra-request *ngFor="let req of dbrequestList" [id]="req.id" [type]="'submitted'" [cl]="'cl2'" (loadRequest)="loadIt1($event)"></app-ra-request>
+            <app-ra-request *ngFor="let req of dbrequestList" [id]="req._id" [type]="'submitted'" [cl]="'cl2'" (loadRequest)="loadIt1($event)"></app-ra-request>
     </div>
 </div>
