@@ -23,12 +23,13 @@ exports.getNotificationFromQueue = (id) => {
 };
 
 exports.removeNotificationFromQueue = (id) => {
-	redisClient.LPOP(id, (err, reply) => {
-		if (err) {
-			console.error(err);
-		} else {
-			console.log('[REMOVE] REPLY:', reply);
-			return reply;
-		}
-	});
+	// redisClient.LPOP(id, (err, reply) => {
+	// 	if (err) {
+	// 		console.error(err);
+	// 	} else {
+	// 		console.log('[REMOVE] REPLY:', reply);
+	// 		return reply;
+	// 	}
+	// });
+	console.log('remove!');
 };
