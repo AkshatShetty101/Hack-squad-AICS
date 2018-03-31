@@ -45,7 +45,7 @@
 .main_grid{
     display:grid;
     grid-template-columns:10% 60% 20% 10%;
-    grid-template-rows: 50px 90%;
+    /* grid-template-rows: 50px 90%; */
     height:100%;
     width:100%;
     background-color:#d3d3d3;
@@ -200,3 +200,16 @@
     margin: 5px;
     display: inline-block;
   }
+  .formBuilder-top{
+    padding-top: 25px;
+    padding-left: 12%;
+    padding-right: 40%;
+    background-color: #d3d3d3;
+  }
+  .demo-chip-list {
+    width: 100%;
+  }
+  .mat-form-field {
+    
+    width: 100%;
+}

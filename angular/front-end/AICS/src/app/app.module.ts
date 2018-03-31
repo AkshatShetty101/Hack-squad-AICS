@@ -75,6 +75,8 @@ import {TranslateService} from './shared/services/translate.service';
 import { ChartsModule } from 'ng2-charts';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material/input';
+import {MatChipsModule} from '@angular/material/chips';
 
 import { ChartServiceService } from './chart-service.service';
 import { GitGraphComponent } from './git-graph/git-graph.component';
@@ -146,7 +148,9 @@ import { GitGraphComponent } from './git-graph/git-graph.component';
     MatRadioModule,
     MatCheckboxModule,
     MatSnackBarModule,
+    MatChipsModule,
     ChartsModule,
+    MatInputModule,
     LocalStorageModule.withConfig({
       prefix: 'app',
       storageType: 'localStorage'

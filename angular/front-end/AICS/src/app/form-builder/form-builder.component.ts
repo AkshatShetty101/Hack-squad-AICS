@@ -9,6 +9,8 @@ import { HttpService } from '../shared/services/http.service';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 // import { setTimeout } from 'timers';
+import {MatChipInputEvent} from '@angular/material';
+import {ENTER, COMMA} from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-form-builder',
@@ -21,8 +23,8 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
   selectedRow: number;
   selectedCol: number;
   modalOpen: boolean = false;
-  formTitle: FormControl = new FormControl('Title');
-  formTag: FormControl = new FormControl('');
+  formTitle: FormControl = new FormControl();
+  formTag: FormControl = new FormControl();
   // F this lint
   dropEventsList: any[] = [];
   toolConfigs: DragEventConfig[] = [];
@@ -35,6 +37,8 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
   toolHTMLs: HTMLElement[] = [];
   dropZoneHTMLs: HTMLElement[] = [];
   inputFunctionType: string;
+  tags:string[] = [];
+  separatorKeysCodes = [ENTER, COMMA];
   toolButtons: any[] = [
     { 'id': 'input_text', 'message': 'Add Input Text', 'fn': this.addInput, 'params': ['text', ''] },
     { 'id': 'input_number', 'message': 'Add Input Number', 'fn': this.addInput, 'params': ['number', ''] },
@@ -555,14 +559,14 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
       console.log(this.formBuild.table);
       form = this.formBuild.table;
       this.table = form;
-      if (this.formTag.value !== null || this.formTag.value !== undefined) {
-        tags = this.formTag.value.split(' ');
-      }
+      // if (this.formTag.value !== null || this.formTag.value !== undefined) {
+      //   tags = this.formTag.value.split(' ');
+      // }
       let request = {
         requestId: this.formBuild.requestId,
         format: form,
         title: this.formTitle.value,
-        tags: tags
+        tags: this.tags
       };
       console.log(request);
       this.http.addTemplates(request)
@@ -576,5 +580,27 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
         }
         );
     }, 200);
+  }
+  add(event: MatChipInputEvent): void {
+    let input = event.input;
+    let value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.tags.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(tag: any): void {
+    let index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+    }
   }
 }

@@ -2,15 +2,34 @@
 <button type="button" (click)="addCol()">Add Column</button>
 <button type="button" (click)="deleteRow()">Delete Row</button>
 <button type="button" (click)="deleteCol()">Delete Column</button> -->
-<div>
-  <div class="metadata">
+<div class="formBuilder-top">
+  <!-- <div class="metadata">
     <label>Enter form title:&nbsp;</label>
     <input type="text" [formControl]="formTitle" />
   </div>
   <div class="metadata">
     <label>Enter form tags (space separated):&nbsp;</label>
     <input type="text" [formControl]="formTag" />
-  </div>
+  </div> -->
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Form Title" [formControl]="formTitle">
+      </mat-form-field>
+    
+      <mat-form-field class="full-width">
+          <mat-chip-list #chipList>
+              <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                       [removable]="removable" (remove)="remove(tag)">
+                {{tag}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="New tag..."
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)" />
+            </mat-chip-list>
+      </mat-form-field>
+
 </div>
 <div class="main_grid">
   <div class="drag_grid">
