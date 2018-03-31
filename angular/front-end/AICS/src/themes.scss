@@ -27,20 +27,20 @@
 
 .theme-two{
     // Material Colors
-    $primary: #ffffff;
-    $accent: #008080;
-    $warn: #38393a;
-    $theme: mat-light-theme($primary, $accent, $warn);
-    // Extra Colors
-    $shadow: mat-palette($mat-grey, 900);
-    $background: #191d21;
+    // $primary: #ffffff;
+    // $accent: #008080;
+    // $warn: #38393a;
+    // $theme: mat-light-theme($primary, $accent, $warn);
+    // // Extra Colors
+    // $shadow: mat-palette($mat-grey, 900);
+    // $background: #191d21;
  
 
-    @mixin set-theme($theme, $shadow, $background) {
-        @include global-theme($theme, $shadow, $background);
-    }
-    @include angular-material-theme($theme);
-    @include set-theme($theme, $shadow, $background);
+    // @mixin set-theme($theme, $shadow, $background) {
+    //     @include global-theme($theme, $shadow, $background);
+    // }
+    // @include angular-material-theme($theme);
+    // @include set-theme($theme, $shadow, $background);
     .particles-js-bg{
             background: linear-gradient(to bottom right, #003434, #004e4e, #006767, #008181, #009b9b, #00b4b4, #9C9A9B) no-repeat;
     }
