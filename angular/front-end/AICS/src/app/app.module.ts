@@ -134,7 +134,7 @@ import { ChartServiceService } from './chart-service.service';
     ReactiveFormsModule,
     AngularDraggableModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('/app-worker.js', { enabled: environment.production }),
     HttpClientModule,
     Ng4FilesModule,
     MatIconModule,
