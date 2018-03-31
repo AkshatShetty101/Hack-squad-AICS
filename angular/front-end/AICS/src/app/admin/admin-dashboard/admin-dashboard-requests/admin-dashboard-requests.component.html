@@ -6,16 +6,22 @@
         <app-admin-preview [t]="test" [data]="requestToLoad"></app-admin-preview>
     </div>
     <div class="holder3">
-        Charts
+        <div style="width: 100%; height: 100%">
+            <canvas baseChart 
+            [data]="pieChartData" 
+            [labels]="pieChartLabels" 
+            [chartType]="pieChartType" 
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+        </div>
     </div>
     <div class="holder4">
-        Actions
         <div class="sub_grid">
             <div class="sub_holder1">
                 <button class="btn" (click)="openBuilder()">Create Template</button>
             </div>
             <div class="sub_holder2">
-                <button class="btn" >Load Template</button>
+                <button class="btn">Load Template</button>
             </div>
             <div class="sub_holder3">
                 <button class="btn">Find Form</button>

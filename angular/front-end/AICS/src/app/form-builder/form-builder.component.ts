@@ -1,10 +1,14 @@
 import { Observable } from 'rxjs/Rx';
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { ViewChild, ViewChildren, AfterViewInit } from '@angular/core';
 import { DragEventConfig, DragEventParticipant, XY } from '../shared/models/drag.model';
 import { AfterViewChecked } from '@angular/core';
 import { FormBuildService } from './form-build.service';
 import { FormRenderService } from '../form-renderer/form-render.service';
+import { HttpService } from '../shared/services/http.service';
+import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+// import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-form-builder',
@@ -17,6 +21,8 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
   selectedRow: number;
   selectedCol: number;
   modalOpen: boolean = false;
+  formTitle: FormControl = new FormControl('Title');
+  formTag: FormControl = new FormControl('');
   // F this lint
   dropEventsList: any[] = [];
   toolConfigs: DragEventConfig[] = [];
@@ -50,7 +56,10 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
   constructor(
     private formBuild: FormBuildService,
     private parentRef: ElementRef,
-    private formRender: FormRenderService
+    private formRender: FormRenderService,
+    private http: HttpService,
+    private changeRef: ChangeDetectorRef,
+    private router: Router
   ) {
     Observable.fromEvent(this.parentRef.nativeElement, 'drop')
       .filter((event) => {
@@ -99,6 +108,9 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
   }
 
   ngAfterViewChecked() {
+    // console.log(this.formBuild.table);
+    this.table = this.formBuild.table;
+    this.changeRef.detectChanges();
     this.updateHTMLVariables();
     // console.log(this.dropZonesMap);
     // console.log(this.participantsMap);
@@ -124,10 +136,10 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
     });
     this.participantsMap['dropZone'] = this.dropZoneHTMLs;
   }
-  updateWidth(){
+  updateWidth() {
     let col: any;
     let width = 80 / (this.table.rows[this.selectedRow].cols.length);
-    for(col of this.table.rows[this.selectedRow].cols){
+    for (col of this.table.rows[this.selectedRow].cols) {
       col.width = width;
     }
   }
@@ -164,7 +176,7 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
   deleteCol() {
     console.log(this.selectedCol);
     this.table.rows[this.selectedRow].cols.splice(this.selectedCol, 1);
-    if(this.table.rows[this.selectedRow].cols.length === 0){
+    if (this.table.rows[this.selectedRow].cols.length === 0) {
       this.table.rows.splice(this.selectedRow, 1);
     }
     this.updateWidth();
@@ -285,8 +297,8 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
     }
   }
 
-  addElement(id){
-    console.log(this.selectedRow+"-"+this.selectedCol);
+  addElement(id) {
+    console.log(this.selectedRow + "-" + this.selectedCol);
     let button = this.toolButtons.filter(
       btn => btn['id'] === id
     )[0];
@@ -492,6 +504,7 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
         'touched': 'false'
       };
     }
+    console.log(element);
     return element;
   }
   addSelect(subtype: string, eclass: string) {
@@ -509,11 +522,14 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
     };
     return element;
   }
-  updateElement({ element, pos }) {
-    let r, c, i;
-    [r, c, i] = pos.split('-');
-    // console.log(r,c,i);
-    this.table.rows[r].cols[c].value[i] = element;
+  updateElement(data: any) {
+    console.log(data);
+    // console.log(element);
+    // console.log(pos);
+    // let r, c, i;
+    // [r, c, i] = pos.split('-');
+    // console.log(this.table.rows[r].cols[c].value);
+    // this.table.rows[r].cols[c].value[i] = element;
   }
 
   deleteElement(pos) {
@@ -523,13 +539,41 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
     this.table.rows[r].cols[c].value.splice(i, 1);
   }
 
-  renderForm(){
-    this.formRender.table = this.table;
-    this.modalOpen = true;
+  renderForm() {
+    this.formBuild.getForm();
+    setTimeout(() => {
+      // console.log(this.formBuild.table);
+      this.formRender.table = this.formBuild.table;
+      this.table = this.formBuild.table;
+      this.modalOpen = true;
+    }, 200);
   }
   closeForm() {
     this.formBuild.getForm();
-    let form = this.formBuild.table;
-    console.log(form);
+    let form: any, tags = '';
+    setTimeout(() => {
+      console.log(this.formBuild.table);
+      form = this.formBuild.table;
+      this.table = form;
+      if (this.formTag.value !== null || this.formTag.value !== undefined) {
+        tags = this.formTag.value.split(' ');
+      }
+      let request = {
+        format: form,
+        title: this.formTitle.value,
+        tags: tags
+      };
+      console.log(request);
+      this.http.addTemplates(request)
+        .subscribe(
+        (response: any) => {
+          console.log(response);
+          if(response.status === "SUCCESS"){
+            this.formBuild.templateId = response.templateId;
+            this.router.navigateByUrl('/admin')
+          }
+        }
+        );
+    }, 200);
   }
 }

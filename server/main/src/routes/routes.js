@@ -37,7 +37,7 @@ router.all('/users',
  */
 router.all('/reqForm',
 	verifyMiddleware.verifyPerson,
-	verifyMiddleware.verifyAdminOrGC,
+	// verifyMiddleware.verifyAdminOrGC,
 	graphQLHTTP((req, res) => ({ // to be replaced by router.post
 		schema: require('./graphql/schemas/request_form'),
 		context: { req, res },
@@ -292,14 +292,14 @@ router.get('/notification',
  * Translate Route
  */
 router.post('/translate',
-	verifyMiddleware.verifyPerson,
 	require('./translate/translate'));
 
 /**
  * OCR Route
  */
 router.post('/ocr',
-	verifyMiddleware.verifyPerson,
 	require('./ocr/ocr'));
+
+router.get('/some', require('../../config/addDbPeopleToBC'));
 
 module.exports = router;

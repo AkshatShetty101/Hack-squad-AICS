@@ -8,9 +8,7 @@ export class IndexDBService {
   private db = new AngularIndexedDB('myDb', 1);
 
 
-  constructor(
-    private sse: SSEService
-  ) {
+  constructor() {
     // this.db = new AngularIndexedDB('myDb', 1);
   }
 
@@ -34,18 +32,16 @@ export class IndexDBService {
   }
 
   addNotif(data: any) {
-    this.sse.emitNotif(data);
-    console.log(data);
     return this.db.add('notifs', data);
   }
 
-  getAllNotifs() {
-    this.db.getAll('notifs').then((people) => {
-      console.log(people);
-    }, (error) => {
-      console.log(error);
-    });
-  }
+  // getAllNotifs() {
+  //   this.db.getAll('notifs').then((people) => {
+  //     console.log(people);
+  //   }, (error) => {
+  //     console.log(error);
+  //   });
+  // }
 
   addRequest(data: { title: string, data: string }): { success: boolean, message: string } {
     let now = new Date();
@@ -59,6 +55,28 @@ export class IndexDBService {
       });
     return { success: false, message: "Notif not added" };
   }
+
+  getSpecificNotifs(data: string) {
+    let list = [];
+    return new Promise((res, rej) => {
+      this.db.openCursor('notifs', (evt) => {
+        var cursor = (<any>evt.target).result;
+        if (cursor) {
+          console.log(cursor);
+          if (cursor.value.status === data) {
+            console.log(cursor.value)
+            list.push(cursor.value);
+            console.log("matched stuff resolving");
+          }
+          else
+            cursor.continue();
+        } else {
+          res(list);
+        }
+      });
+    });
+  }
+
 
   getAllRequests() {
     return this.db.getAll('requests');

@@ -39,14 +39,14 @@ module.exports = (req, res) => {
 					// Returning response
 					console.log('Template submit transaction added to blockchain');
 					const notifToSend = notificationMessage.RA.ADMIN_SUB_TEMP;
-					notifToSend.data = { templateId: req.body.templateId.toString(), causerId: res.locals.user._id.toString() };
-					notificationsHelper.addNotificationToQueue(ra.locals.ra_id.toString(), notifToSend);
+					notifToSend.data = { templateId: req.body.templateId, causerId: res.locals.user._id.toString() };
+					notificationsHelper.addNotificationToQueue(res.locals.ra_id.toString(), notifToSend);
 					let mailToSend = mailerHelper.mailData(`
 					Hrithik Chauhan <hrithikchauhan@meity.gov.in>`, // Random name & email <- RA
 					'A new template has been assigned to you for approval', '',
 					`Hey <b>Hrithik</b>,<br/>
 					<br/>
-					<p>A new template has been made and assigned to you for approval. Template_Id: <i>${req.body.templateId.toString()}</i></p>
+					<p>A new template has been made and assigned to you for approval. Template_Id: <i>${req.body.templateId}</i></p>
 					<br/>
 					Thanks,<br/>
 					AICS MeitY Team`);

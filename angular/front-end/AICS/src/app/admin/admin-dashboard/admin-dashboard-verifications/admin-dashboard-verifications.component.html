@@ -6,23 +6,44 @@
         <app-admin-verifications-preview [data]="requestToLoad"></app-admin-verifications-preview>
     </div>
     <div class="holder3">
-        Charts
+
     </div>
     <div class="holder4">
-        Actions
-        <div class="sub_grid" *ngIf="requestToLoad.id!=='default'">
-            <div class="sub_holder1">
-                <button class="btn">Create Template</button>
-            </div>
-            <div class="sub_holder2">
-                <button class="btn">Load Template</button>
-            </div>
-            <div class="sub_holder3">
+        <div *ngIf="requestToLoad.id!=='default' && requestToLoad.type=='approve';else othercontent">
+            <div class="sub_grid1">
+                <div class="sub_holder1">
+                    <i class="fa fa-check"></i>
+                    <!-- <button>Create Template</button> -->
+                </div>
+                <div class="sub_holder2">
+                    <i class="fa fa-times"></i>
+                    <!-- <button class="btn">Load Template</button> -->
+                </div>
+                <div class="sub_holder3">
+                    <i class="fa fa-eye"></i>
+                </div>
+                <!-- <div class="sub_holder3">
                 <button class="btn">Find Form</button>
             </div>
             <div class="sub_holder4">
                 <button class="btn">Reject Request</button>
+            </div> -->
             </div>
         </div>
+        <ng-template #othercontent>
+            <div *ngIf="requestToLoad.id!=='default' && requestToLoad.type=='assign'">
+                <div class="sub_grid1">
+                    <div class="sub_holder1">
+                        <i class="fa fa-check"></i>
+                    </div>
+                    <div class="sub_holder2">
+                        <i class="fa fa-times"></i>
+                    </div>
+                    <div class="sub_holder3">
+                        <i class="fa fa-times"></i>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
     </div>
 </div>

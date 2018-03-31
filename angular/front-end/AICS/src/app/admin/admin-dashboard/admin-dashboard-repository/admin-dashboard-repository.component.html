@@ -6,8 +6,14 @@
       <li><a href="#">Form QMT285</a></li>                        
   </ul>
 </div>
+<div class="ocrHolder">
+  <ng4-files-click (filesSelect)="filesSelect($event)">
+    <span style="width: 100%;" class="btn">Upload</span>
+  </ng4-files-click>
+  <span class="fileName" [innerHTML]="selectedFileName"></span>
+  <button (click)="ocr()">Submit for OCR</button>
+</div>
 <div class="actions sub_grid">
   <button class="btn btn1"><i class="fa fa-eye">&nbsp; Preview</i></button>
   <button class="btn btn2"><i class="fa fa-plus">&nbsp;Add to repository</i></button>
-  
 </div>

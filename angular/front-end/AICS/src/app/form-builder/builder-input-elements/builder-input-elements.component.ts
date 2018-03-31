@@ -37,7 +37,7 @@ export class BuilderInputElementsComponent implements OnInit {
     max: new FormControl(),
     min: new FormControl()
   });
-  valueField: FormControl = new FormControl();
+  valueField: FormControl = new FormControl(this.value);
   constructor(
     private formBuild: FormBuildService
   ) { }
@@ -74,7 +74,7 @@ export class BuilderInputElementsComponent implements OnInit {
     form.controls.label.reset();
     form.controls.placeholder.reset();
     let element = this.getElement();
-    this.update.emit(element);
+    this.update.emit({'element': element, 'pos': this.pos});
     this.hiddenForm = false;
   }
   sendElement() {

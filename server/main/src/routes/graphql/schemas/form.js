@@ -33,7 +33,7 @@ formTC.addResolver({
 
 formTC.addResolver({
 	kind: 'query',
-	name: 'findOwnQuery',
+	name: 'formCountQuery',
 	type: 'Json',
 	resolve: require('../resolvers/form/countFormQuery')
 });

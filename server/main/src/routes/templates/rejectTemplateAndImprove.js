@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
 				console.log('Cleared the template data');
 				res.locals.admin_id = result.admin_id;
 				const notifToSend = notificationMessage.ADMIN.RA_REJ_TEMP;
-				notifToSend.data = { templateId: req.body.templateId.toString(), causerId: res.locals.user._id.toString() };
+				notifToSend.data = { templateId: req.body.templateId, causerId: res.locals.user._id.toString() };
 				notificationsHelper.addNotificationToQueue(res.locals.admin_id.toString(), notifToSend);
 				let mailToSend = mailerHelper.mailData(`
 				Rajesh Singhania <rajeshsinghania@meity.gov.in>`, // Random name & email <- Admin

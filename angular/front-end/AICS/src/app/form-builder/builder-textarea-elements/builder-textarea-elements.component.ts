@@ -67,7 +67,7 @@ export class BuilderTextareaElementsComponent implements OnInit {
     form.controls.label.reset();
     form.controls.placeholder.reset();
     let element = this.getElement();
-    this.update.emit(element);
+    this.update.emit({'element': element, 'pos': this.pos});
     this.hiddenForm = false;
   }
   sendElement() {

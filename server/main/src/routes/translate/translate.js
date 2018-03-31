@@ -1,7 +1,7 @@
 const translate = require('google-translate-api');
 
 module.exports = (req, res) => {
-	if (res.body.data && typeof res.body.data === 'object') {
+	if (req.body.data && typeof req.body.data === 'object') {
 		let messageToSend = responseMessage.SUCCESS.SUCCESS;
 		messageToSend.data = {};
 		const getTranslation = (key, resolve, reject) => {
@@ -15,7 +15,7 @@ module.exports = (req, res) => {
 				});
 		};
 
-		const translatePromise = Object.keys(res.body.data).map((key) => {
+		const translatePromise = Object.keys(req.body.data).map((key) => {
 			return new Promise((resolve, reject) => {
 				getTranslation(key, resolve, reject);
 			});
