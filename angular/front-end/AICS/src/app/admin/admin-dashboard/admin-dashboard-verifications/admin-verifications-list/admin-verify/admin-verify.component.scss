@@ -8,11 +8,29 @@
     font-family: 'fira sans';
     text-align: center;
 }
-.color1{
-    background-color: #0d8aee;
-
+.assign{
+    width: 30%;
+    background-color:#2196F3;
+    float: left;
+    height: 50px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    line-height: 50px;
+    font-family: 'fira sans';
+    text-align: center;
 }
 
+.approve{
+    width: 30%;
+    background-color:darkgray;
+    float: left;
+    height: 50px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    line-height: 50px;
+    font-family: 'fira sans';
+    text-align: center;
+}
 
 .inside-left{
     width: 30%;
