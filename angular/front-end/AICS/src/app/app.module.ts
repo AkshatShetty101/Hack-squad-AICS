@@ -70,7 +70,9 @@ import { IssueDetailsComponent } from './issue-tracker/issue-details/issue-detai
 import { GraphQLService } from './shared/services/graphql.service';
 import { HTTPInterceptor } from './shared/services/http.interceptor';
 import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component';
-
+import { TestComponent } from './test/test.component';
+import { ChartServiceService } from './chart-service.service';
+// import "gitgraph";
 @NgModule({
   declarations: [
     AppComponent,
@@ -119,7 +121,9 @@ import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component
     IssueTrackerComponent,
     IssueComponent,
     IssueDetailsComponent,
-    IssueNewComponent
+    IssueNewComponent,
+    TestComponent,
+    // gitgraph
   ],
   imports: [
     BrowserModule,
@@ -148,7 +152,8 @@ import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component
     IndexDBService,
     HttpService,
     AuthService,
-    GraphQLService
+    GraphQLService,
+    ChartServiceService
   ],
   bootstrap: [AppComponent]
 })
