@@ -14,7 +14,7 @@ export class AdminDashboardRepositoryComponent implements OnInit {
   constructor(
     private  http: HttpService
   ) { }
-
+  modalOpen: boolean = false;
   ngOnInit() {
   }
   public filesSelect(selectedFiles: Ng4FilesSelected): void {
@@ -36,6 +36,7 @@ export class AdminDashboardRepositoryComponent implements OnInit {
       .subscribe(
         (response: any) => {
           console.log(response);
+          this.modalOpen = true;
         }
       );
   }

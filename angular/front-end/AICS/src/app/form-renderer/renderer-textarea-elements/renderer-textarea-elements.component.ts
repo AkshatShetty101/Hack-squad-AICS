@@ -22,6 +22,7 @@ export class RendererTextareaElementsComponent implements OnInit {
   @Input() valid;
   @Input() parentSubject: Subject<boolean>;
   @Input() pos;
+  @Input() draggableFlag;
   valueField: FormControl = new FormControl();
   constructor(
     private formRender: FormRenderService

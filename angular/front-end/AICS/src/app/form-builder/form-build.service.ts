@@ -6,6 +6,8 @@ export class FormBuildService {
   formSubject: Subject<boolean> = new Subject();
   table: Table;
   templateId: any;
+  route: string;
+  requestId: any;
   constructor() { }
   updateForm(element, pos){
     let r, c, i;

@@ -184,6 +184,7 @@ export class LoginComponent implements OnInit {
     };
     if (request.password != null) {
       this.myForm.reset();
+<<<<<<< HEAD
       this.auth.empty();
       // this.router.navigateByUrl('/admin');
       this.http.verifyUser(request)
@@ -195,6 +196,23 @@ export class LoginComponent implements OnInit {
               this.sse.establishSSE();
               if (response.designation === 'admin') {
                 this.router.navigateByUrl('/admin');
+=======
+    this.auth.empty();
+    // this.router.navigateByUrl('/admin');
+    this.http.verifyUser(request)
+      .subscribe(
+        (response: any) => {
+          console.log(response.token);
+          if (response.status === 'LOGIN') {
+            // console.log('Here!');
+            this.auth.storeStatus(response.token, response.designation);
+            this.sse.establishSSE();
+            if (response.designation === 'admin') {
+              this.router.navigateByUrl('/admin');
+            } else
+              if (response.designation === 'gc') {
+                this.router.navigateByUrl('/gc');
+>>>>>>> 08f47d556db08a6ceb2551837f2fb82fa8bb4ef7
               } else
                 if (response.designation === 'gc') {
                   this.router.navigateByUrl('/gc');

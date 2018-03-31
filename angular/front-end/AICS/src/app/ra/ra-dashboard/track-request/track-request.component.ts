@@ -17,7 +17,8 @@ export class TrackRequestComponent implements OnInit {
     private graphql: GraphQLService,
     private idb : IndexDBService
   ) { }
-  requestToLoad: { id: string, title: string, data: string } = { id: "default", title: "default", data: "default" };
+  // requestToLoad: { id: string, title: string, data: string } = { id: "default", title: "default", data: "default" };
+  requestToLoad:any  = { id: "default", title: "default", data: "default" };
   ngOnInit() {
   }
   previewIt(request: { id: string, title: string, data: string, type: string }) {
