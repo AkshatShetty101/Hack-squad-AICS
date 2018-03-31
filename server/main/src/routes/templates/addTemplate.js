@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
 				// Adding required parameters
 				res.locals.templateId = result._id;
 				// Passing control to addForm to DB
-				ReqForm.updateOne({ _id: req.body.requestId }, { $set: { template: { templateId: result._id } } }, (err, doc) => {
+				ReqForm.updateOne({ _id: req.body.requestId }, { $set: { 'template.template_id': result._id } }, (err, doc) => {
 					if (err) {
 						console.error(err);
 						res.status(400).json(responseMessage.FAIL.SOMETHING_WRONG);
