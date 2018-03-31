@@ -50,8 +50,11 @@ export class AdminDashboardRequestsComponent implements OnInit, AfterViewInit {
   }
 
   // Pie
-  public pieChartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
-  public pieChartData: number[] = [300, 500, 100];
+  public pieChartLabels: string[] = ['Beyond Deadline', 'Within a week', 'Beyond a week'];
+  public pieChartColors: any[] = [
+    { backgroundColor: ['#d50303', '#ffd52b', '#023611'] }
+  ];
+  public pieChartData: number[] = [300, 500, 300];
   public pieChartType: string = 'pie';
 
   // events
