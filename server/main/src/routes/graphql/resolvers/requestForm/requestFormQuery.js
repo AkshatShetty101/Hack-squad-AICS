@@ -19,7 +19,7 @@ module.exports = ({ args, context }) => {
 					console.error(err);
 					reject(err);
 				} else {
-					console.log(data);
+					// console.log(data);
 					resolve(data);
 				}
 			});

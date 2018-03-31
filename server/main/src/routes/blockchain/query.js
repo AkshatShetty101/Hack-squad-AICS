@@ -39,29 +39,51 @@ exports.getMyForms = (req, res) => {
 		});
 };
 
+const ReqForm = require('../../models/request_form');
 exports.getTemplateRequestId = (req, res, next) => {
-	this.bizNetworkConnection = new BusinessNetworkConnection();
-	this.cardName = config.get('cardName');
+	// this.bizNetworkConnection = new BusinessNetworkConnection();
+	// this.cardName = config.get('cardName');
+	// if (req.body.templateId) {
+	// 	return this.bizNetworkConnection.connect(this.cardName)
+	// 		.then((result) => {
+	// 			this.businessNetworkDefinition = result;
+	// 			// Getting factory definitions
+	// 			console.log(req.body.templateId);
+	// 			var query = this.bizNetworkConnection.buildQuery(
+	// 				'SELECT ' + NS_T + ' WHERE (templateId == _$inputValue)');
+	// 			return this.bizNetworkConnection.query(query, { inputValue: req.body.templateId });
+	// 		})
+	// 		.then((asset) => {
+	// 			console.log('[QUERY getTemplateRequestId]', asset);
+	// 			res.locals.requestId = asset[0].requestId;
+	// 			next();
+	// 		})
+	// 		.catch((err) => {
+	// 			console.error(err.message);
+	// 			res.status(500).json(responseMessage.FAIL.TEMPLATE.NOT_EXISTS);
+	// 			// Add optional error handling here.
+	// 		});
+	// } else {
+	// 	console.error(err.message);
+	// 	res.status(500).json(responseMessage.FAIL.INC_INV_DATA);
+	// }
 	if (req.body.templateId) {
-		return this.bizNetworkConnection.connect(this.cardName)
-			.then((result) => {
-				this.businessNetworkDefinition = result;
-				// Getting factory definitions
-				console.log(req.body.templateId);
-				var query = this.bizNetworkConnection.buildQuery(
-					'SELECT ' + NS_T + ' WHERE (templateId == _$inputValue)');
-				return this.bizNetworkConnection.query(query, { inputValue: req.body.templateId });
-			})
-			.then((asset) => {
-				console.log('[QUERY getTemplateRequestId]', asset);
-				res.locals.requestId = asset[0].requestId;
-				next();
-			})
-			.catch((err) => {
-				console.error(err.message);
-				res.status(500).json(responseMessage.FAIL.TEMPLATE.NOT_EXISTS);
-				// Add optional error handling here.
-			});
+		ReqForm.findOne({ 'template.template_id': req.body.templateId }, { _id: 1 }, (err, doc) => {
+			if (err) {
+				console.error(err);
+				res.status(500).json(responseMessage.FAIL.SOMETHING_WRONG);	
+			} else {
+				console.log(doc);
+				if (doc) {
+					res.locals.requestId = doc._id;
+					console.log('getTemplateRequestId reached!');
+					next();
+				} else {
+					// console.error(err.message);
+					res.status(500).json(responseMessage.FAIL.TEMPLATE.NOT_EXISTS);
+				}
+			}
+		});
 	} else {
 		console.error(err.message);
 		res.status(500).json(responseMessage.FAIL.INC_INV_DATA);

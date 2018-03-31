@@ -6,7 +6,9 @@
     <div class="desc">
       <textarea class="form-control" formControlName="data" placeholder="Enter Description here"></textarea>
     </div>
-    <button type="button" [disabled]="!myForm.valid" (click)="save(myForm.value)" class="btns1 blue waves-effect waves-light btn">Save</button>
-    <button type="submit" [disabled]="!myForm.valid" class="btns2 blue waves-effect waves-light btn">Send Request</button>
+    <button mat-raised-button class="btns1" [disabled]="!myForm.valid" color="primary" (click)="save(myForm.value)">SAVE</button>
+    <button mat-raised-button class="btns2" [disabled]="!myForm.valid" color="primary" (click)="save(myForm.value)">SEND REQUEST</button>
+    <!-- <button type="button" [disabled]="!myForm.valid" (click)="save(myForm.value)" class="btns1 blue waves-effect waves-light btn">Save</button>
+    <button type="submit" [disabled]="!myForm.valid" class="btns2 blue waves-effect waves-light btn">Send Request</button> -->
   </div>
 </form>
