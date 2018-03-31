@@ -2,7 +2,7 @@ const ReqForm = require('../../models/request_form');
 const Template = require('../../models/template');
 
 module.exports = (req, res, next) => {
-	if (req.body.templateId && res.locals.requestId) {
+	if (req.body.templateId) {
 		ReqForm.findOneAndRemove({ _id: res.locals.requestId }, { select: ['admin_id', 'ra_id'] },(err, result) => {
 			if(err) {
 				console.error(err);
