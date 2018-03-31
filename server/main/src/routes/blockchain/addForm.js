@@ -70,7 +70,7 @@ module.exports = (req, res) => {
 												'A new form has to be assigned', '',
 												`Hey <b>Rajesh</b>,<br/>
 												<br/>
-												<p>A new form has been created which has to be assigned. Form_Id: <i>${req.locals.formId.toString()}</i></p>
+												<p>A new form has been created which has to be assigned. Form_Id: <i>${res.locals.formId.toString()}</i></p>
 												<br/>
 												Thanks,<br/>
 												AICS MeitY Team`);
