@@ -1,7 +1,7 @@
 <div id="particles-js" class="particles-js-bg"></div>
 <form [formGroup]="myForm" (ngSubmit)="submitCredentials(myForm.value)">
   <div class="text">
-    <div class="main_grid"></div>
+    <div class="main_grid background2"></div>
     <div class="logo">
       <svg width="100px" height="100px" viewBox="0 0 137 137" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <defs>
@@ -66,34 +66,20 @@
       </div>
     </div>
     <div class="submit">
-      <button type="submit" class="btn btn-1 ">{{htmlPageText.SUBMIT}}</button>
+      <button type="submit " class="btn buttonbg ">{{htmlPageText.SUBMIT}}</button>
     </div>
   </div>
 
 
   <div class="lang">
-    <div class="rows icon1">
-      <span>
-        <i class="fa fa-plus"></i>
-      </span>
-    </div>
-    <div class="rows icon2">
-      <span>
-        <i class="fa fa-minus"></i>
-      </span>
-    </div>
-    <div class="rows icon3">
-      <span>
-        <i class="fa fa-font"></i>
-      </span>
-    </div>
+    
     <div class="rows icon4" (click)="toggleLanguage()">
       
       <span *ngIf="currentLanguageIsEnglish"> हिन्दी</span>
       <span *ngIf="!currentLanguageIsEnglish"> Eng</span>
 
     </div>
-    <div class="rows icon5" (click)='toggleTheme()'>
+    <div class="rows icon5" (click)='auth.toggleTheme()'>
       <span>
         <i class="fa fa-square"></i>
       </span>
