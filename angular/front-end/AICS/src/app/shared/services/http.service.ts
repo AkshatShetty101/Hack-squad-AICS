@@ -4,6 +4,7 @@ import { Response } from '@angular/http';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class HttpService {
@@ -16,125 +17,125 @@ export class HttpService {
   // User related requests
   verifyUser(request: any) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/users/login', body);
+    return this.http.post(environment.serverUrl + '/users/login', body);
   }
 
   ocr(request: any) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/ocr', body);
+    return this.http.post(environment.serverUrl + '/ocr', body);
   }
 
   deleteUser(request: any, token) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/users/delete', body);
+    return this.http.post(environment.serverUrl + '/users/delete', body);
   }
 
   // Template related requests - can pass metadata in all requests
   addTemplates(request: any) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/templates/add', body);
+    return this.http.post(environment.serverUrl + '/templates/add', body);
   }// body - format, title, tags
 
   editTemplates(request: any) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/templates/edit', body);
+    return this.http.post(environment.serverUrl + '/templates/edit', body);
   }// body - format, title, tags
 
   deleteTemplates(request: any) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/templates/delete', body);
+    return this.http.post(environment.serverUrl + '/templates/delete', body);
   }// body - templateId
 
   submitTemplates(request: any, token: any) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/templates/submit', body);
+    return this.http.post(environment.serverUrl + '/templates/submit', body);
   }// body - templateId
 
   approveTemplates(request: any, token: any) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/templates/approve', body);
+    return this.http.post(environment.serverUrl + '/templates/approve', body);
   }// body - templateId
 
   rejectAndImproveTemplates(request: any, token: any) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/templates/rejectAndImprove', body);
+    return this.http.post(environment.serverUrl + '/templates/rejectAndImprove', body);
   }// body - templateId
 
   rejectAndDeleteTemplates(request: any, token: any) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/templates/rejectAndDelete', body);
+    return this.http.post(environment.serverUrl + '/templates/rejectAndDelete', body);
   }// body - templateId
 
   // Form based requests - can send metadata in all requests
   editForm(request: any, files: any[], token) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/forms/edit', body);
+    return this.http.post(environment.serverUrl + '/forms/edit', body);
   }// body - formId, data; files
 
   deleteForm(request: any, token) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/forms/delete', body);
+    return this.http.post(environment.serverUrl + '/forms/delete', body);
   }// body - formId
 
   assignFormUser(request: any, token) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/forms/assignUser', body);
+    return this.http.post(environment.serverUrl + '/forms/assignUser', body);
   }// body - formId, assigneeId, deadline
 
   assignGC(request: any, token) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/forms/assignGC', body);
+    return this.http.post(environment.serverUrl + '/forms/assignGC', body);
   }// body - formId, assigneeId, deadline
 
   forfeitForm(request: any, token) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/forms/forfeit', body);
+    return this.http.post(environment.serverUrl + '/forms/forfeit', body);
   }// body - formId
 
   submitFormToGC(request: any, token) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/forms/submitToGC', body);
+    return this.http.post(environment.serverUrl + '/forms/submitToGC', body);
   }// body - formId
 
   approveFormByGC(request: any, token) {
     const body = request
-    return this.http.post(this.auth.baseURI + '/forms/approveGC', body);
+    return this.http.post(environment.serverUrl + '/forms/approveGC', body);
   }// body - formId
 
   approveFormByAdmin(request: any, token) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/forms/approveAdmin', body);
+    return this.http.post(environment.serverUrl + '/forms/approveAdmin', body);
   }// body - formId
 
   // Requesting Authority requests
   addReqAuth(request: any, token: any) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/reqAuth/add', body);
+    return this.http.post(environment.serverUrl + '/reqAuth/add', body);
   }// body - email, password
 
   removeReqAuth(request: any, token: any) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/reqAuth/remove', body);
+    return this.http.post(environment.serverUrl + '/reqAuth/remove', body);
   }// body - ra_id
 
   makeRequestReqAuth(request: any, token: any) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/reqAuth/makeRequest', body);
+    return this.http.post(environment.serverUrl + '/reqAuth/makeRequest', body);
   }// body - data
 
   // division, group, organization requests
   addDivisionUser(request: any, token: any) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/division/add', body);
+    return this.http.post(environment.serverUrl + '/division/add', body);
   }// body - name, type
 
   addIssueComment(request: any, token: any) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/issueTracker/update', body);
+    return this.http.post(environment.serverUrl + '/issueTracker/update', body);
   }// body - name, type
   addIssue(request: any, token: any) {
     const body = request;
-    return this.http.post(this.auth.baseURI + '/issueTracker/add', body);
+    return this.http.post(environment.serverUrl + '/issueTracker/add', body);
   }// body - name, type
 
 

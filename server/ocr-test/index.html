@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Tesseract test</title>
+</head>
+<body>
+	<div id="main"></div>
+	<div id="text"></div>
+		<script	src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'></script>
+	<script>
+		// var Scanner = Tesseract.create({
+		// 	workerPath: '/node_modules/tesseract.js/dist/worker.js',
+		// 	langPath: '/eng.traineddata.gz',
+		// 	corePath: '/node_modules/tesseract.js-core/index.js'
+		// });
+		Tesseract.recognize('./sample6.jpg')
+		.progress((msg) => {
+			console.log("PROGRESS:");
+			console.log(msg);
+		})
+		.then((result) => {
+			console.log("COMPLETED:\n");
+			console.log(result);
+			$('#main').append(result.html);
+			$('#text').html(result.text);
+		})
+		.catch((err) => {
+			console.log("ERROR:\n");
+			console.log(err);
+		});;
+	</script>
+</body>
+</html>

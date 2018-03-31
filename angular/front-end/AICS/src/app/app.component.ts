@@ -12,6 +12,7 @@ import { IndexDBService } from './shared/services/indexdb.service';
 })
 export class AppComponent implements OnInit {
   logged: boolean;
+  themeName = 'theme-one';
 
   constructor(
     private auth: AuthService,
@@ -23,6 +24,10 @@ export class AppComponent implements OnInit {
     }).catch((err)=>{
       console.log(err);
     });
+    this.auth.themeChange.subscribe(
+      (val) => {
+      this.themeName = val;
+    })
     // auth.statusEmitted$.subscribe(
     //   (status) => {
     //    this.logged = status;

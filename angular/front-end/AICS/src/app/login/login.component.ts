@@ -18,6 +18,8 @@ declare var particlesJS: any;
 export class LoginComponent implements OnInit {
   myForm: FormGroup;
   private htmlPageText: Array<Object>;
+
+  private currentLanguageIsEnglish: boolean;
   constructor(
     private fb: FormBuilder,
     private http: HttpService,
@@ -32,12 +34,11 @@ export class LoginComponent implements OnInit {
       password: new FormControl()
     });
 
-
+    this.currentLanguageIsEnglish = true;
     this.htmlPageText = [];
-
-    PageTextWords.forEach((el: any) => {
-        this.htmlPageText[el.key] = el.value;
-      });
+    PageTextWords['ENGLISH'].forEach((el: any) => {
+      this.htmlPageText[el.key] = el.value;
+    });
   }
 
   ngOnInit() {
@@ -148,16 +149,31 @@ export class LoginComponent implements OnInit {
       'retina_detect': true
     });
 
-    PageTextWords.forEach((el: any) => {
-      this.translateService.translate(el.value).subscribe((response: any) => {
-        console.log("response", response);
-        el.value = response.data.key;
+
+  }
+  openSnackBar(message: string) {
+    this.snackBar.open(message, "Close", { duration: 1000 });
+  }
+
+  toggleLanguage() {
+
+    this.currentLanguageIsEnglish = !this.currentLanguageIsEnglish;
+    console.log("changed to", this.currentLanguageIsEnglish)
+    if (!this.currentLanguageIsEnglish) {
+      console.log('translating to hindi');
+      PageTextWords['HINDI'].forEach((el: any) => {
         this.htmlPageText[el.key] = el.value;
       });
-    });
-  }
-  openSnackBar(message:string) {
-    this.snackBar.open(message,"Close",{duration:1000});
+    }
+    else {
+      console.log("shoukd change to English", this.currentLanguageIsEnglish)
+      PageTextWords['ENGLISH'].forEach((el: any) => {
+        this.htmlPageText[el.key] = el.value;
+      });
+
+    }
+
+
   }
 
   submitCredentials(data) {
@@ -166,45 +182,43 @@ export class LoginComponent implements OnInit {
       email: data.username,
       password: data.password
     };
-    if(request.password != null)
-    {
+    if (request.password != null) {
       this.myForm.reset();
-    this.auth.empty();
-    // this.router.navigateByUrl('/admin');
-    this.http.verifyUser(request)
-      .subscribe(
-        (response: any) => {
-          console.log(response.token);
-          if (response.status === 'LOGIN') {
-            // console.log('Here!');
-            this.auth.storeStatus(response.token, response.designation);
-            this.sse.establishSSE();
-            if (response.designation === 'admin') {
-              this.router.navigateByUrl('/admin');
-            } else
-              if (response.designation === 'gc') {
+      this.auth.empty();
+      // this.router.navigateByUrl('/admin');
+      this.http.verifyUser(request)
+        .subscribe(
+          (response: any) => {
+            console.log(response.token);
+            if (response.status === 'LOGIN') {
+              // console.log('Here!');
+              this.auth.storeStatus(response.token, response.designation);
+              this.sse.establishSSE();
+              if (response.designation === 'admin') {
+                this.router.navigateByUrl('/admin');
+              } else if (response.designation === 'gc') {
                 this.router.navigateByUrl('/gc');
-              } else
-                if (response.designation === 'ra') {
-                  this.router.navigateByUrl('/requesting_authority');
-                }
-                else {
-                  this.router.navigateByUrl('/user');
-                }
-          }
-        },
-        (error) => {
-          console.log("Error");
-          this.openSnackBar("Wrong Credentials!");
-          if (error.status === 'INVALID_CRED') {
-           
-          }
-          // this.router.navigateByUrl('/admin');
-        });
-    }else{
+              } else if (response.designation === 'gc') {
+                this.router.navigateByUrl('/gc');
+              } else if (response.designation === 'ra') {
+                this.router.navigateByUrl('/requesting_authority');
+              } else {
+                this.router.navigateByUrl('/user');
+              }
+            }
+          },
+          (error) => {
+            console.log("Error");
+            this.openSnackBar("Wrong Credentials!");
+            if (error.status === 'INVALID_CRED') {
+
+            }
+            // this.router.navigateByUrl('/admin');
+          });
+    } else {
       this.openSnackBar("Please enter credentials!");
     }
-    
+
   }
 
 }

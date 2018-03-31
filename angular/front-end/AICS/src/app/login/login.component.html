@@ -1,4 +1,4 @@
-<div id="particles-js"></div>
+<div id="particles-js" class="particles-js-bg"></div>
 <form [formGroup]="myForm" (ngSubmit)="submitCredentials(myForm.value)">
   <div class="text">
     <div class="main_grid"></div>
@@ -87,10 +87,13 @@
         <i class="fa fa-font"></i>
       </span>
     </div>
-    <div class="rows icon4">
-      <span>हिन्दी</span>
+    <div class="rows icon4" (click)="toggleLanguage()">
+      
+      <span *ngIf="currentLanguageIsEnglish"> हिन्दी</span>
+      <span *ngIf="!currentLanguageIsEnglish"> Eng</span>
+
     </div>
-    <div class="rows icon5">
+    <div class="rows icon5" (click)='toggleTheme()'>
       <span>
         <i class="fa fa-square"></i>
       </span>

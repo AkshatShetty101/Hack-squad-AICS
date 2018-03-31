@@ -18,7 +18,8 @@ export class AdminVerificationsListComponent implements OnInit {
       (event: any) => {
         console.log(JSON.parse(event.data).status);
         switch (JSON.parse(event.data).status) {
-          case 'GC.ADMIN_ASS_FORM':
+          case 'RA_APP_TEMP':
+          case 'ADMIN_ASS_FORM':
             this.getFreshData();
             break;
         }
