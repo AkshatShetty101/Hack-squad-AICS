@@ -15,6 +15,7 @@ module.exports = (req, res, next) => {
 		} else {
 			// Added to DB successfully
 			// Now passing control to blockchain
+			console.log(result);
 			console.log('Added templateId to requestForm');
 			res.locals.ra_id = result.ra_id;
 			next();

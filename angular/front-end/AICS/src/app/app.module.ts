@@ -64,14 +64,18 @@ import { RaRequestComponent } from './ra/ra-dashboard/track-request/ra-request-l
 import { RaRequestPreviewComponent } from './ra/ra-dashboard/track-request/ra-request-preview/ra-request-preview.component';
 import { AdminFormComponent } from './admin/admin-view-repository/admin-form/admin-form.component';
 import { MatIconModule, MatTabsModule } from '@angular/material';
-import { MatButtonModule, MatRadioModule, MatCheckboxModule} from '@angular/material';
+import { MatButtonModule, MatRadioModule, MatCheckboxModule } from '@angular/material';
 import { IssueTrackerComponent } from './issue-tracker/issue-tracker.component';
 import { IssueComponent } from './issue-tracker/issue/issue.component';
 import { IssueDetailsComponent } from './issue-tracker/issue-details/issue-details.component';
 import { GraphQLService } from './shared/services/graphql.service';
 import { HTTPInterceptor } from './shared/services/http.interceptor';
 import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component';
+import { ChartsModule } from 'ng2-charts';
 
+import { TestComponent } from './test/test.component';
+import { ChartServiceService } from './chart-service.service';
+// import "gitgraph";
 @NgModule({
   declarations: [
     AppComponent,
@@ -120,7 +124,9 @@ import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component
     IssueTrackerComponent,
     IssueComponent,
     IssueDetailsComponent,
-    IssueNewComponent
+    IssueNewComponent,
+    TestComponent,
+    // gitgraph
   ],
   imports: [
     BrowserModule,
@@ -135,8 +141,7 @@ import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component
     MatButtonModule,
     MatRadioModule,
     MatCheckboxModule,
-    // AngularIndexedDB,
-    HttpModule,
+    ChartsModule,
     LocalStorageModule.withConfig({
       prefix: 'app',
       storageType: 'localStorage'
@@ -150,6 +155,7 @@ import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component
     HttpService,
     AuthService,
     GraphQLService,
+    ChartServiceService,
     SSEService
   ],
   bootstrap: [AppComponent]

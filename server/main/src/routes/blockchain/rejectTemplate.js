@@ -11,7 +11,7 @@ this.NS = config.get('NS');
 this.NS_T = config.get('NS_T');
 this.NS_P = config.get('NS_P');
 
-module.exports = (req, res) => {
+module.exports = (req, res, next) => {
 	// Establishing connection
 	this.bizNetworkConnection.connect(this.cardName)
 		.then((result) => {
@@ -25,10 +25,11 @@ module.exports = (req, res) => {
 			transaction.person = asignee;
 			transaction.newHolder = admin;
 			transaction.type = 'template_reject';
-			if (req.body.metadata)
+			if (req.body.metadata) {
 				transaction.metadata = JSON.stringify(req.body.metadata);
-			else
+			} else {
 				transaction.metadata = '{}';
+			}
 			transaction.template = factory.newRelationship(this.NS, 'Template', req.body.templateId);
 			// Submitting the transaction
 			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
