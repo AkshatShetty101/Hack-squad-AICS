@@ -4,6 +4,10 @@ import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthService {
+<<<<<<< HEAD
+=======
+  public baseURI = 'http://localhost:3000/api';
+>>>>>>> 4e72468d04e488de4241f632991f074aa4087aef
 
   constructor(
   ) { }

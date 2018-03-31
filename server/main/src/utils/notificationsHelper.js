@@ -31,4 +31,5 @@ exports.removeNotificationFromQueue = (id) => {
 			return reply;
 		}
 	});
+	// console.log('remove!');
 };

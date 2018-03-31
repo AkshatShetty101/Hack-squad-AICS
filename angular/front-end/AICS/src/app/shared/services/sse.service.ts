@@ -17,7 +17,16 @@ export class SSEService {
   ) { }
 
   establishSSE() {
-    return new EventSource(environment.serverUrl + '/notification?token=' + this.auth.getToken());
+    this.sse$ = new EventSource(environment.serverUrl + '/notification?token=' + this.auth.getToken());
+    this.sse$.onmessage = (event) => {
+      console.log('sse');
+      this.idb.addNotif(JSON.parse(event.data)).then(() => {
+        console.log('success!');
+      }).catch((error) => {
+        console.log(error);
+      });
+      this.emitNotif(event);
+    }
   }
 
   emitNotif(data: any) {
