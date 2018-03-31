@@ -176,7 +176,7 @@ export class LoginComponent implements OnInit {
         (response: any) => {
           console.log(response.token);
           if (response.status === 'LOGIN') {
-            //console.log('Here!');
+            // console.log('Here!');
             this.auth.storeStatus(response.token, response.designation);
             this.sse.establishSSE();
             if (response.designation === 'admin') {
