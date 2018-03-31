@@ -16,12 +16,13 @@ import { RaDashboardComponent } from './ra/ra-dashboard/ra-dashboard.component';
 import { RaMakeRequestComponent } from './ra/ra-dashboard/ra-make-request/ra-make-request.component';
 import { FormBuilderComponent } from './form-builder/form-builder.component';
 import { FormRendererComponent } from './form-renderer/form-renderer.component';
+import { TestComponent } from './test/test.component';
 import { IssueNewComponent } from './issue-tracker/issue-new/issue-new.component';
 import { TrackRequestComponent } from './ra/ra-dashboard/track-request/track-request.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  // { path: 'login', component: LoginComponent },
+  { path: 'test', component: TestComponent },
   { path: 'formBuilder', component: FormBuilderComponent },
   { path: 'formRenderer', component: FormRendererComponent },
   { path: 'admin', component: AdminComponent, children: [
@@ -45,13 +46,13 @@ const routes: Routes = [
     path: 'user', component: UserComponent, children: []
   },
   {
-    path:'issue_tracker', component: IssueNewComponent
+    path: 'issue_tracker', component: IssueNewComponent
   },
   {
-    path:'issue_details', component: IssueNewComponent
+    path: 'issue_details', component: IssueNewComponent
   },
   {
-    path:'new-issue', component: IssueNewComponent
+    path: 'new-issue', component: IssueNewComponent
   },
   {
     path: 'requesting_authority', component: AdminComponent, children: [

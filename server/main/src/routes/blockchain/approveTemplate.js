@@ -11,7 +11,7 @@ this.NS = config.get('NS');
 this.NS_T = config.get('NS_T');
 this.NS_P = config.get('NS_P');
 
-module.exports = (req, res) => {
+module.exports = (req, res, next) => {
 	// Establishing connection
 	this.bizNetworkConnection.connect(this.cardName)
 		.then((result) => {
@@ -35,7 +35,8 @@ module.exports = (req, res) => {
 			this.bizNetworkConnection.submitTransaction(transaction).then(() => {
                 // Returning response
                 console.log('Template approve transaction added to blockchain');
-				res.status(200).json(responseMessage.SUCCESS.SUCCESS);
+				// res.status(200).json(responseMessage.SUCCESS.SUCCESS);
+				next();
 			}).catch((err) => {
 				// Catching errors
 				console.error(err.message);
