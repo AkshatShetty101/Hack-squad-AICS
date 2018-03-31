@@ -1,6 +1,7 @@
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class GraphQLService {
@@ -12,7 +13,7 @@ export class GraphQLService {
 
   profileDetails() {
     const body = { query: '{ userOne {name { firstName middleName lastName } designation } }' };
-    this.http.post(this.auth.baseURI + '/users', body);
+    this.http.post(environment.serverUrl + '/users', body);
   }
 
   loadIssueDetails(id: string) {
@@ -21,28 +22,28 @@ export class GraphQLService {
     };
     console.log(body);
     console.log('finding data!!!');
-    return this.http.post(this.auth.baseURI + '/issueTracker', body);
+    return this.http.post(environment.serverUrl + '/issueTracker', body);
   }
 
   loadDbRequestList() {
     const body = {
       query: '{ reqFormMany { _id data } }'
     };
-    return this.http.post(this.auth.baseURI + '/reqForm', body);
+    return this.http.post(environment.serverUrl + '/reqForm', body);
   }
   
   loadRequestedFormData() {
     const body = {
       query: '{ reqFormOwn { _id data } }'
     };
-    return this.http.post(this.auth.baseURI + '/reqForm', body);
+    return this.http.post(environment.serverUrl + '/reqForm', body);
   }
 
   loadTemplateIdFromRequestId(id) {
     const body = {
       query: "{  reqFormById (_id:\"" + id + "\"){ template{ template_id} } }"
     };
-    return this.http.post(this.auth.baseURI + '/reqForm', body);
+    return this.http.post(environment.serverUrl + '/reqForm', body);
   }
 
 
