@@ -32,6 +32,10 @@ export class LoginComponent implements OnInit {
 
 
     this.htmlPageText = [];
+
+    PageTextWords.forEach((el: any) => {
+        this.htmlPageText[el.key] = el.value;
+      });
   }
 
   ngOnInit() {
