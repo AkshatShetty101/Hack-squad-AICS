@@ -8,28 +8,22 @@
     <br>
     <span class="form_num value">{{ form.divison }}</span>
   </div>
-  <div [class]="cl">
+  <div [class]="'tracking ' + cl">
     <span>
       <i class="fa fa-line-chart fa_dark" aria-hidden="true"></i>
     </span>
     <br/>
     <span class="form_num bottom_left form_links">TRACKING</span>
   </div>
-  <div [class]="cl">
+  <div [class]="'view ' +cl">
     <span>
       <i class="fa fa-file-text fa_dark" aria-hidden="true"></i>
     </span>
     <br>
     <span class="form_num  form_links">VIEW</span>
   </div>
-  <div [class]="cl">
-    <span>
-      <i class="fa fa-list fa_dark" aria-hidden="true"></i>
-    </span>
-    <br>
-    <span class="form_num  form_links" (click)="modalOpen=true">PREVIEW</span>
-  </div>
-  <div [class]="cl">
+ 
+  <div [class]="'issues ' + cl">
     <span>
       <i class="fa fa-exclamation fa_dark" aria-hidden="true"></i>
     </span>

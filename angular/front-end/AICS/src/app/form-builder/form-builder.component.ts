@@ -559,6 +559,7 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
         tags = this.formTag.value.split(' ');
       }
       let request = {
+        requestId: this.formBuild.requestId,
         format: form,
         title: this.formTitle.value,
         tags: tags
@@ -570,7 +571,7 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
           console.log(response);
           if(response.status === "SUCCESS"){
             this.formBuild.templateId = response.templateId;
-            this.router.navigateByUrl('/admin')
+            this.router.navigateByUrl(this.formBuild.route);
           }
         }
         );
