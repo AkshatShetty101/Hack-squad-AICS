@@ -12,10 +12,14 @@
         background-color: mat-color($primary);
     }
 
-    .background {
-        background-color: mat-color($primary);
+    .background2 {
+        background-color: mat-color($back);
     }
 
+    .buttonbg{
+        background-color: mat-color($warn);
+
+    }
     
 }
 body {

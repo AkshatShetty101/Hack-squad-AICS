@@ -10,14 +10,14 @@
     $theme: mat-light-theme($primary, $accent, $warn);
     // Extra Colors
     $shadow: mat-palette($mat-blue);
-    $background: mat-palette($mat-red);
+    $background1: mat-palette($mat-red);
  
 
-    @mixin set-theme($theme, $shadow, $background) {
-        @include global-theme($theme, $shadow, $background);
+    @mixin set-theme($theme, $shadow, $background1) {
+        @include global-theme($theme, $shadow, $background1);
     }
     @include angular-material-theme($theme);
-    @include set-theme($theme, $shadow, $background);
+    @include set-theme($theme, $shadow, $background1);
 
     .particles-js-bg{
         background: linear-gradient(to bottom right, #375E8B, #407CAD, #3F7DAD, #318BA5, #3983AA, #94989C, #9C9A9B) no-repeat;
@@ -27,20 +27,20 @@
 
 .theme-two{
     // Material Colors
-    $primary: #ffffff;
-    $accent: #008080;
-    $warn: #38393a;
+    $primary: mat-palette($mat-blue, 500);
+    $accent: mat-palette($mat-blue);
+    $warn: mat-palette($mat-teal, 500);
     $theme: mat-light-theme($primary, $accent, $warn);
     // Extra Colors
-    $shadow: mat-palette($mat-grey, 900);
-    $background: #191d21;
+    $shadow: mat-palette($mat-grey, 800);
+    $background1: mat-palette($mat-grey, 900);
  
 
-    @mixin set-theme($theme, $shadow, $background) {
-        @include global-theme($theme, $shadow, $background);
+    @mixin set-theme($theme, $shadow, $background1) {
+        @include global-theme($theme, $shadow, $background1);
     }
     @include angular-material-theme($theme);
-    @include set-theme($theme, $shadow, $background);
+    @include set-theme($theme, $shadow, $background1);
     .particles-js-bg{
             background: linear-gradient(to bottom right, #003434, #004e4e, #006767, #008181, #009b9b, #00b4b4, #9C9A9B) no-repeat;
     }
