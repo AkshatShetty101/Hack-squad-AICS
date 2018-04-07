@@ -51,6 +51,7 @@ export class FormBuilderComponent implements OnInit, AfterViewInit, AfterViewChe
     { 'id': 'group_chk', 'message': 'Add Checkbox Group', 'fn': this.addGroup, 'params': ['checkbox', ''] },
     { 'id': 'select', 'message': 'Add Select Group', 'fn': this.addSelect, 'params': ['', ''] }
   ];
+  addOnBlur;
   @ViewChildren('tools', { read: ElementRef }) toolRefs: any;
   @ViewChild('tableRef', { read: ElementRef }) tableRef: any;
 

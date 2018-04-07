@@ -4,7 +4,7 @@ const url = require('url')
 
 let win
 
-const dist_to_be_used = '../front-end/AICS/dist'
+const dist_to_be_used = './dist'
 
 function createWindow() {
     win = new BrowserWindow({ width: 800, height: 600 })

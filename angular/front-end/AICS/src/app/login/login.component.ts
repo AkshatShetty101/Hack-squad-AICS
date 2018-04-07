@@ -17,17 +17,17 @@ declare var particlesJS: any;
 })
 export class LoginComponent implements OnInit {
   myForm: FormGroup;
-  private htmlPageText: Array<Object>;
+  public htmlPageText: any;
 
-  private currentLanguageIsEnglish: boolean;
+  public currentLanguageIsEnglish: boolean;
   constructor(
-    private fb: FormBuilder,
-    private http: HttpService,
-    private auth: AuthService,
-    private sse: SSEService,
-    private router: Router,
-    private translateService: TranslateService,
-    private snackBar: MatSnackBar
+    public fb: FormBuilder,
+    public http: HttpService,
+    public auth: AuthService,
+    public sse: SSEService,
+    public router: Router,
+    public translateService: TranslateService,
+    public snackBar: MatSnackBar
   ) {
     this.myForm = new FormGroup({
       username: new FormControl(),
