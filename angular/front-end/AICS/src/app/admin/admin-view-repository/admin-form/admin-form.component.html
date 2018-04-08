@@ -1,0 +1,27 @@
+<div class="overlay">
+  <div class="form_no  grey">
+      <span class="form_num  title ">FORM NO</span>
+      <span class="form_num value" [innerHTML]="id"></span>
+  </div>
+  <div class="form2 grey">
+          <span class="form_num  title ">TITLE</span><br>
+          <span class="form_num value" [innerHTML]="title"></span>
+  </div>
+  <div class="one blue">
+    <span><i class="fa fa-file-text fa_dark" aria-hidden="true"></i></span><br>
+    <span class="form_num  form_links" (click)="modalOpen=true">VIEW</span>
+  </div>
+  <div class="two blue">
+    <span><i class="fa fa-paper-plane fa_dark" aria-hidden="true"></i></span><br>
+    <span class="form_num  form_links">SEND</span>
+  </div>
+</div>
+<!-- The Modal -->
+<div *ngIf="modalOpen" id="myModal" class="modal">
+  <!-- Modal content -->
+  asdasdasdsa
+  <div class="modal-content">
+    <span class="close" (click)="modalOpen=false">&times;</span>
+    <app-form-renderer></app-form-renderer>
+  </div>
+</div>

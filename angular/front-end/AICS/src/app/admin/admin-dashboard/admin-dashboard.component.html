@@ -1,0 +1,17 @@
+<div class="container1">
+    <div class="due_req" [routerLink]="'./request'" routerLinkActive="active">
+        <a class="tab">Request</a>
+    </div>
+    <div class="due_ver" [routerLink]="'./verification'" routerLinkActive="active">
+        <a class="tab">Verifications</a>
+    </div>
+    <div class="add_rep" [routerLink]="'./repository'" routerLinkActive="active">
+        <a class="tab">Repository</a>
+    </div>
+    <div class="bgbody"></div>
+    <div class="offsetbg">
+        <!-- <app-admin-dashboard-requests></app-admin-dashboard-requests> -->
+        <!-- <app-admin-dashboard-verifications></app-admin-dashboard-verifications> -->
+        <router-outlet></router-outlet>
+    </div>
+</div>

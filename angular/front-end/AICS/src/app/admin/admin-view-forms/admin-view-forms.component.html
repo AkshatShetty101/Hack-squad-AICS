@@ -1,0 +1,36 @@
+<div class="filter_grid">
+        <div class="status">
+                Deadline Status :
+        </div>
+        <button mat-raised-button color="primary" class="departmenta" (click)="findSpecific(1)">
+                <span>
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                </span>
+                <span class="value">Beyond the deadline</span>
+        </button>
+        <button mat-raised-button color="primary" class="departmentb" (click)="findSpecific(2)">
+                <span>
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                </span>
+                <span class="value">Within a week</span>
+        </button>
+        <button mat-raised-button color="primary" class="departmentc" (click)="findSpecific(3)">
+                <span>
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                </span>
+                <span class="value">Beyond a week</span>
+        </button>
+        <button mat-raised-button color="primary" class="departmentd" (click)="findSpecific(0)">
+                <span>
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                </span>
+                <span class="value">Clear selection</span>
+        </button>
+</div>
+<div class="wrapper">
+        <div *ngFor="let form of getFormList();">
+                <app-admin-view-box [form]="form" [cl]="'lb'+(form.deadline).toString()"></app-admin-view-box>
+        </div>
+</div>
+
+<button class="btn-1 btn">SEARCH</button>

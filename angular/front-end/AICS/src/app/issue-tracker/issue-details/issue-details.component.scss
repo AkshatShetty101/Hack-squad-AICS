@@ -1,0 +1,95 @@
+
+        .container1{
+            display:grid;
+            grid-template-columns: 10% 80% 10%;
+            grid-template-rows:9vh 90%;
+            height:92vh;
+            width:100%;
+            /* padding-left:4%; */
+        }
+        .form_det{
+            grid-column:2;
+            grid-row:1;
+            display:flex;
+            align-items:center;
+        }
+        .new_issue{
+            grid-row:1;
+            grid-column:2;
+            display:flex;
+            align-items:center;
+            justify-self:end;
+        }
+        .issuebox{
+            grid-column:2;
+            grid-row:2;
+            padding-left:1%;
+            padding-right:1%;
+            
+        }
+        .issue_grid{
+            display:grid;
+            grid-template-rows: auto;
+            grid-template-columns:1fr ;
+            grid-row-gap:0.5%;
+            box-shadow:1px 1px 2px #7fc0f5; 
+            border:1px solid #0d8aee;           
+        }
+        .heading{
+            /* grid-row:1;  */
+            border-bottom: 1.25px solid silver;   
+            padding:1%;  
+        }
+        .bolder{            
+            font-size:19px;
+            font-weight:bold;   
+        }
+        .comment{
+            display: grid;
+            grid-template-columns: 85% 15%;
+        }
+        .replies{
+            display:grid;
+            grid-template-rows:25% 17% 58%;
+            grid-template-columns: 5% 95%;
+            padding:0.5%;
+            /* border-bottom: 0.5px solid silver; */
+        }
+        .u_pic{
+            grid-row:1/3;
+            grid-column:1;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-size:18px;
+            background-color:rgb(238, 238, 238);
+
+        }
+        .uname{
+            grid-row:1;
+            grid-column:2;
+            display:flex;
+            justify-content:start;
+            align-items:center;
+            font-size:95%;
+            background-color:rgb(238, 238, 238);
+        }
+        .timestamp{  
+            grid-row:2;
+            grid-column:2;          
+            font-size:12px;
+            color:rgb(81, 81, 82);
+            display:flex;
+            justify-content:start;
+            align-items:center;
+            background-color:rgb(238, 238, 238);
+
+        }
+        .answer{
+            
+            grid-row:3;
+            grid-column:1/3;
+            border:1px solid silver;
+            padding: 10px 10px 10px 10px;
+            font-size:16px;
+        }

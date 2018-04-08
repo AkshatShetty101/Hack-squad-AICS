@@ -1,0 +1,39 @@
+<div class="vers">
+  <ul>
+    <li>
+      <a href="#">Form ANG429</a>
+    </li>
+    <li>
+      <a href="#">Form IRM340</a>
+    </li>
+    <li>
+      <a href="#">Form DUR287</a>
+    </li>
+    <li>
+      <a href="#">Form QMT285</a>
+    </li>
+  </ul>
+</div>
+<div class="ocrHolder">
+  <ng4-files-click (filesSelect)="filesSelect($event)">
+    <span style="width: 100%;" class="btn">Upload</span>
+  </ng4-files-click>
+  <span class="fileName" [innerHTML]="selectedFileName"></span>
+  <button (click)="ocr()">Submit for OCR</button>
+</div>
+<div class="actions sub_grid">
+  <button class="btn btn1">
+    <i class="fa fa-eye">&nbsp; Preview</i>
+  </button>
+  <button class="btn btn2">
+    <i class="fa fa-plus">&nbsp;Add to repository</i>
+  </button>
+</div>
+<!-- The Modal -->
+<div *ngIf="modalOpen" id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" (click)="modalOpen=false">&times;</span>
+    <app-form-renderer></app-form-renderer>
+  </div>
+</div>

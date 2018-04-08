@@ -1,0 +1,12 @@
+<div class="elementHolder">
+  <div class="label_transition">
+    <div class="select_size">
+      <label>Type&nbsp;:&nbsp;</label>
+      <select [formControl]="valueField" [name]="'valueField'" [required]="required">
+        <option *ngFor="let option of options; let i = index" [value]="option.value" [selected]="option.value===value?true:false"
+          [class]="class" [innerHTML]="option.label" (click)="updateFieldValue(i)">
+        </option>
+      </select>
+    </div>
+  </div>
+</div>

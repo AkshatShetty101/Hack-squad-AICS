@@ -1,0 +1,27 @@
+
+<div class="issue_grid" *ngIf="isDataLoaded">
+	<div class="heading">
+		<div class="bolder">{{ heading.title }}</div>
+		<div>Issue Description - {{ heading.description }}</div>
+	</div>
+	<div class="replies" *ngFor="let d of data;">
+		<div class="u_pic">
+			<i class="fa fa-user"></i>
+		</div>
+		<div class="uname">
+			{{d.by}}
+		</div>
+		<div class="timestamp">
+			{{d.timestamp}}
+		</div>
+		<div class="answer">
+			{{ d.message }}
+		</div>
+	</div>
+	<form class="h-100" [formGroup]="myForm" (ngSubmit)="addComment(myForm.value)">
+		<div class="comment">
+			<input type="search" class="form-control" placeholder="Enter title here" formControlName="data">
+			<button type="submit" [disabled]="!myForm.valid" class="btn btn-outline-success">Submit</button>
+		</div>
+	</form>
+</div>

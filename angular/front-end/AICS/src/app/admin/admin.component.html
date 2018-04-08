@@ -1,0 +1,23 @@
+<nav class="container">
+  <div class="dashboard">
+      <a class="navlinks" [routerLink]="'./dashboard'" routerLinkActive="active">
+          <i class="fa fa-dashboard">&nbsp;</i>Dashboard</a>
+  </div>
+  <div class="forms">
+      <a class="navlinks right" [routerLink]="'./view_forms'" routerLinkActive="active">
+          <i class="fa fa-server">&nbsp;</i>Forms</a>
+  </div>
+  <div class="view_repo">
+      <a class="navlinks right" [routerLink]="'./view_repository'" routerLinkActive="active">
+          <i class="fa fa-eye">&nbsp;</i>View Repository</a>
+  </div>
+  <div class="profile">
+      <a href="#" class="navlinks right">
+          <i class="fa fa-user">&nbsp;</i>Profile</a>
+  </div>
+</nav>
+<!-- <app-admin-tracking></app-admin-tracking> -->
+<!-- <app-admin-view-forms></app-admin-view-forms> -->
+<!-- <app-admin-view-repository></app-admin-view-repository> -->
+<!-- <app-admin-dashboard></app-admin-dashboard>         -->
+<router-outlet></router-outlet>

@@ -1,0 +1,9 @@
+Steps:
+1.  Switch into dryrun directory
+2.  In the start of the ts file, add:
+    // Separation between execution cycles
+    console.clear();
+    console.log('\n\n');
+3.  Run in sequence, in separate terminals -
+    1.  tsc <filename>.ts -w
+    2.  nodemon -w ./ <filename>.js -q

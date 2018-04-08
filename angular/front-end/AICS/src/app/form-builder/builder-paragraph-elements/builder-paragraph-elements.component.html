@@ -1,0 +1,12 @@
+<div class="elementHolder"  [draggable]="draggableFlag">
+  <div class="icon1"><mat-icon (click)="hiddenForm = !hiddenForm">edit</mat-icon></div>
+  <div class="icon2"><mat-icon (click)="deleteElement()">delete</mat-icon></div>  
+  <p [innerHTML]="content"></p>
+  <form [style.display]="hiddenForm?'grid':'none'" [formGroup]="myForm" class="cont inner_grid" (ngSubmit)="updateValues(myForm)">
+    <div class="para">
+      <label>Content&nbsp;:&nbsp;</label>
+      <textarea formControlName="content"></textarea>
+    </div>
+    <div class="close"><button type="submit" mat-raised-button color="accent">CLOSE</button></div>
+  </form>
+</div>

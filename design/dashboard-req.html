@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dashboard</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Fira Sans' rel='stylesheet'>
+        <style>
+        body {
+            margin: 0;
+            font-family: 'fira sans';
+        }
+        /*styling for the nav bar*/
+        .navigation{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            align-items: center;
+            text-align: center;
+            vertical-align: center;
+            height:6vh;
+            box-shadow: 0px 0.5px 5px #38393A;
+            background: #38393A;
+        }
+
+        .dashboard {
+            grid-column: 1;
+
+        }
+
+        .forms {
+            grid-column: 2;
+        }
+
+        .view_repo {
+            grid-column: 3;
+        }
+
+        .profile {
+            grid-column: 4;
+        }
+
+        .navlinks {
+            font-family: 'fira sans';
+            display: block;
+            text-decoration: none;
+            padding: 5%;
+            color: #979797;
+            text-shadow: 0px 0.05px 0.5px black;
+
+        }
+
+        @media (min-width:600px) {
+            .navlinks {
+                padding: 3.5%;
+                font-size: 110%;
+            }
+        }
+
+        .right {
+            box-shadow: -5px 0 5px -5px black;
+        }
+
+        @media (max-width:599px) {
+            .navlinks {
+                padding: 3.5%;
+                font-size: 80%;
+            }
+        }
+        /*styling for navbar ends here*/
+
+        .container{
+            display:grid;
+            grid-template-columns: 12% repeat(3,minmax(26%,1fr)) 10%;
+            grid-template-rows: 5vh 8% 75vh 8%;            
+            text-align:center;            
+        }
+
+        .due_req{
+            grid-row: 2;
+            grid-column:2;            
+            background-color:#38393A; 
+            padding: 15px;
+            color:#979797;
+            box-shadow: 0.5px 0.5px 5px #38393a;
+            
+        }
+        .due_ver{
+            grid-row: 2;
+            grid-column:3;  
+            background-color: #979797;
+            color:#38393A;
+            padding: 15px;
+            box-shadow: 0px 0.5px 5px #38393A;
+        }
+        .add_rep{
+            grid-row: 2;
+            grid-column:4; 
+            background-color: #979797;
+            color:#38393A;
+            padding: 15px;
+            box-shadow: 0px 0.5px 5px #38393A;
+        }
+        .offsetbg{
+            grid-row:3;
+            grid-column:2/5;
+            background-color: rgb(255, 255, 255);
+            border: 2px solid rgb(67, 147, 228);
+            height: 95%;
+            z-index:2;
+            margin-left: -5%;
+            margin-right: 5%;
+            box-shadow: 0px 0.5px 5px rgb(67, 147, 228);            
+        }
+        
+        .bgbody{
+            grid-row:3;
+            grid-column:2/5;
+            background-color: #38393A;
+            box-shadow: 1px 3px 5px #38393a;
+        }
+        /* styling for the actual data grid */
+        .main_data{
+            display:grid;
+            grid-template-columns: 36% 34% 30%;
+            grid-template-rows: 55% 2% 43%;
+            align-items: center;            
+        }
+        .reqs{
+            grid-row: 1/4;
+            grid-column: 1;
+            align-items:center;
+            justify-self:left;
+            padding-left: 10%;
+            height:100%;
+            width:100%;
+        }
+        .req_text{
+            grid-row:1;
+            grid-column:1;
+            height:10%;
+            align-self:start;
+            padding-top:1%;
+        }
+        .preview{
+            grid-row:1/4;
+            grid-column:2;
+            height:100%;
+            width:100%;
+        }
+        .prev_text{
+            grid-row:1;
+            grid-column:2;
+            height:10%;
+            align-self:start;
+            padding-top:1%;
+        }
+        .diag{
+            grid-column: 3;
+            grid-row: 1;
+            height:100%;
+            width:100%;
+
+        }
+        /* .depts{
+            grid-row: 1;
+            grid-column: 2;
+        } */
+        
+        .actions{
+            grid-row: 3;
+            grid-column: 3;
+            height:100%;
+            width:100%;
+        }
+        .line{
+            grid-row:2;
+            grid-column:1/3;
+        }
+        hr{
+            box-shadow: 0 0.08px 2px #38393A;
+            width:98%;
+            height:0.08px;
+        }
+
+        .sub_grid{
+            display:grid;
+            grid-template-columns: 10% 40% 40% 10%;
+            grid-template-rows: 2vh 40% 40% 2vh;
+            height: 100%;           
+            width: 100%;
+            align-items:center;
+        } 
+
+        /* center aligning  */
+        .cen{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            height:100%;
+        }
+        a{
+            text-decoration: none;
+            font-size:inherit;
+        }
+
+
+        /* defining positions  */
+        /* .dept_1{
+            grid-row: 2;
+            grid-column: 2; 
+            background-color: #49a8f7;
+        }
+        .dept_2{
+            grid-row: 2;
+            grid-column: 3;
+            background-color: #6fbcfc;
+        }
+
+        .dept_3{
+            grid-row: 3;
+            grid-column: 2;
+            background-color: #90cdff;
+        }
+
+        .dept_4{
+            grid-row: 3;
+            grid-column: 3;
+            background-color: #afd8fa;
+        }  */
+        .tab{
+            color:inherit;
+            text-decoration: none;
+        }
+        
+
+        .btn1{
+            grid-row: 2;
+            grid-column: 2;
+        }    
+        .btn2{
+            grid-row: 2;
+            grid-column: 3;
+        }    
+        .btn3{
+            grid-row: 3;
+            grid-column: 2;
+        }    
+        .btn4{
+            grid-row: 3;
+            grid-column: 3;
+        }
+        .btn {
+            padding: 2px;
+            font-size: 15px;
+            justify-self:center;
+            align-self:center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            color: #474747;
+            background-color:#ececec;
+            font-family: 'fira sans';
+            border-radius: 12px;
+            border: 6px solid rgba(168, 168, 168, 0.7);
+            width: 80%;
+            height:60%;
+        }    
+        
+        ul{
+            padding:10px;
+            line-height:25px;            
+        }
+
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav class="navigation">
+                <div class="dashboard">
+                    <a href="#" class="navlinks right">
+                        <i class="fa fa-dashboard">&nbsp;</i>Dashboard</a>
+                </div>
+                <div class="forms">
+                    <a href="#" class="navlinks right">
+                        <i class="fa fa-server">&nbsp;</i>Forms</a>
+                </div>
+                <div class="view_repo">
+                    <a href="#" class="navlinks right">
+                        <i class="fa fa-eye">&nbsp;</i>View Repository</a>
+                </div>
+                <div class="profile">
+                    <a href="#" class="navlinks right">
+                        <i class="fa fa-user">&nbsp;</i>Profile</a>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <div class="due_req"><a class="tab" href="dashboard-req.html">DUE REQUESTS</a></div>
+            <div class="due_ver"><a class="tab" href="dashboard-ver.html">DUE VERIFICATIONS</a></div>
+            <div class="add_rep"><a class="tab" href="dashboard-repo.html">ADD TO REPOSITORY</a></div>
+            <div class="bgbody"></div>
+            <div class="offsetbg main_data">
+                <!-- <div class="diag">   <!--Analysed data goes here -->
+                    <!-- <button style="height:20%;border-radius:50%;background-color:aqua;font-size:14px">data</button>
+                </div>
+                <div class="line "><hr></div>
+                <div class="depts sub_grid">
+                    <div class="dept_1 cen"><span>Dept A</span></div>
+                    <div class="dept_2 cen"><span>Dept B</span></div>
+                    <div class="dept_3 cen"><span>Dept C</span></div>
+                    <div class="dept_4 cen"><span>Dept D</span></div>
+                </div> -->
+                <div class="req_text">Requests</div>
+                <div class="reqs">
+                    <ul>
+                        <li><a href="#">Request from User 1 to Create a form</a></li>
+                        <li><a href="#">Request from User 2 to Create a form</a></li>
+                        <li><a href="#">Request from User 3 to Create a form</a></li>                        
+                        <li><a href="#">Request from User 4 to Create a form</a></li>
+                        <li><a href="#">Request from User 5 to Create a form</a></li>
+                        <li><a href="#">Request from User 6 to Create a form</a></li>
+                    </ul>
+                </div>
+                <div class="preview"></div >
+                <div class="prev_text">Preview</div>
+
+
+                <div class="actions sub_grid">
+                    <button class="btn btn1"><i class="fa fa-eye">&nbsp; Read</i></button>
+                    <button class="btn btn2"><i class="fa fa-search">&nbsp; Find</i></button>
+                    <button class="btn btn3"><i class="fa fa-code-fork">&nbsp; Merge</i></button>
+                    <button class="btn btn4"><i class="fa fa-plus-square">&nbsp; Create</i></button>
+                </div>
+                <div class="diag"></div>
+            </div>
+        </div>
+    </body>
+</html>

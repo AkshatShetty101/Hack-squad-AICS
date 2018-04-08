@@ -1,0 +1,34 @@
+<div class="main_data">
+    <div class="holder1">
+        <app-admin-request-list (lr)="clearIt()" (loadRequest)="previewIt($event)"></app-admin-request-list>
+    </div>
+    <div class="holder2" *ngIf="requestToLoad.id!=='default'">
+        <app-admin-preview [t]="test" [data]="requestToLoad"></app-admin-preview>
+    </div>
+    <div class="holder3">
+            <canvas baseChart 
+            style="width: 200px; height: 200px; padding-top: 5vh;"
+            [data]="pieChartData" 
+            [labels]="pieChartLabels"
+            [colors]="pieChartColors"
+            [chartType]="pieChartType" 
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+    </div>
+    <div class="holder4">
+        <div class="sub_grid">
+            <div class="sub_holder1">
+                <button class="btn" (click)="openBuilder()">Create Template</button>
+            </div>
+            <div class="sub_holder2">
+                <button class="btn">Load Template</button>
+            </div>
+            <div class="sub_holder3">
+                <button class="btn">Find Form</button>
+            </div>
+            <div class="sub_holder4">
+                <button class="btn">Reject Request</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="main_data">
+  <div class="holder1">
+    <app-ra-request-list (loadRequest)="previewIt($event)"></app-ra-request-list>
+  </div>
+  <div class="holder2" *ngIf="requestToLoad.id!=='default'">
+    <app-ra-request-preview [data]="requestToLoad"></app-ra-request-preview>
+  </div>
+  <div class="holder3">
+    Charts
+  </div>
+  <div class="holder4">
+    Actions
+    <div class="sub_grid" *ngIf="requestToLoad.id!=='default' && requestToLoad.type=='incomplete'">
+      <div class="sub_holder1">
+        <button class="btn" (click)="route()">Complete Request</button>
+      </div>
+      <div class="sub_holder2">
+        <button class="btn">Delete Request</button>
+      </div>
+    </div>
+    <div class="sub_grid" *ngIf="requestToLoad.id!=='default' && requestToLoad.type=='submitted'">
+      <div class="sub_holder1">
+        <button class="btn">Preview</button>
+        <button class="btn" (click)="approve()">Approve</button>
+        <button class="btn">Reject</button>
+      </div>
+    </div>
+  </div>
+</div>

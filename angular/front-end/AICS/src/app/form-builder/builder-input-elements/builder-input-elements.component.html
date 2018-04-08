@@ -1,0 +1,50 @@
+<div [draggable]="draggableFlag" class="elementHolder">
+  <div class="icon1" (click)="hiddenForm=!hiddenForm"><mat-icon>edit</mat-icon></div>
+  <div class="icon2" (click)="deleteElement()"><mat-icon>delete</mat-icon></div>
+  <div class="on_transition_label">
+    <label [innerHTML]="label"></label>  
+  </div>
+  <div>
+    <input [formControl]="valueField" [required]="required" [type]="subtype" 
+      [placeholder]="placeholder" />
+  </div>  
+  <form [style.display]="hiddenForm?'grid':'none'" [formGroup]="myForm" class="date inner_grid">
+    <div class="row_inp_label">
+      <label>Required&nbsp;:&nbsp;</label>
+    </div>
+    <div class="row_inp_field">
+      <mat-checkbox formControlName="required"></mat-checkbox>
+    </div>
+    <div class="row_inp_label">
+      <label>Label: </label>
+    </div>
+    <div class="row_inp_field">
+      <input formControlName="label" type="text" />
+    </div>
+    <div class="row_inp_label">
+      <label *ngIf="subtype === 'text' || subtype === 'number'">Placeholder: </label>
+    </div>
+    <div class="row_inp_field">
+      <input *ngIf="subtype === 'text' || subtype === 'number'" formControlName="placeholder" type="text" />
+    </div>
+    <div class="row_inp_label">
+      <label *ngIf="subtype === 'text'">Maxlength: </label>
+    </div>
+    <div class="row_inp_field">
+      <input *ngIf="subtype === 'text'" formControlName="maxlength" type="number" />
+    </div>
+    <div class="row_inp_label">
+      <label *ngIf="subtype === 'number'">Max Value: </label>
+    </div>
+    <div class="row_inp_field">
+      <input *ngIf="subtype === 'number'" formControlName="max" type="number" />
+    </div>
+    <div class="row_inp_label">
+      <label *ngIf="subtype === 'number'">Min Value: </label>
+    </div>
+    <div class="row_inp_field">
+      <input *ngIf="subtype === 'number'" formControlName="min" type="number" />
+    </div>
+    <div class="close_1"><button type="button" (click)="updateValues(myForm)" mat-raised-button color="accent">CLOSE</button></div>
+  </form>
+</div>
